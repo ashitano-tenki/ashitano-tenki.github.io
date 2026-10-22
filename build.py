@@ -243,7 +243,6 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
       <a href="/tenki/">転機から</a>
       <a href="/check/">セルフチェック</a>
       <a href="/report/">観測レポート</a>
-      <a href="/about/">観測所について</a>
     </nav>
     <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
   </div>
