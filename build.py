@@ -226,6 +226,10 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#fbfaf5">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
 </head>
 <body>
@@ -316,7 +320,7 @@ def build_home(listed, ctx):
         news = '<p class="empty">この1週間に追加されたものはありません。</p>'
     body = """
 <section class="hero">
-  <p class="hero-label">Observatory for career transitions</p>
+  <p class="label">Observatory for career transitions</p>
   <h1>{site}</h1>
   <p class="lead">{lead}</p>
   <form class="search-box" action="/search/" method="get" role="search">
@@ -344,12 +348,14 @@ def build_home(listed, ctx):
 </section>
 
 <section class="section">
+  <p class="label">New this week</p>
   <h2 class="section-title">今週の新着</h2>
   {news}
   <p class="more"><a href="/report/">週ごとの観測レポートを見る</a></p>
 </section>
 
 <section class="section">
+  <p class="label">By category</p>
   <h2 class="section-title">種類ごとに見る</h2>
   <p class="note">種類ごとに、観測所の並び順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
@@ -443,7 +449,7 @@ def build_combo(t, s, items, ctx):
     body = """
 {crumbs}
 <header class="page-head">
-  <p class="eyebrow">{tenki} × {stage}</p>
+  <p class="kicker">{tenki} × {stage}</p>
   <h1>{title}</h1>
   <p class="lead">{lead}</p>
   <p class="page-meta">掲載中 {n}件</p>
@@ -518,7 +524,7 @@ def build_item(item, listed, ctx):
     body = """
 {crumbs}
 <article class="detail">
-  <p class="eyebrow"><a href="{kind_url}">{kind}</a></p>
+  <p class="kicker"><a href="{kind_url}">{kind}</a></p>
   <h1>{title}</h1>
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
