@@ -226,6 +226,8 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <script>try{{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}}catch(e){{}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -235,7 +237,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">📡</span>{site}</a>
+    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
     <nav class="global-nav" aria-label="サイト内">
       <a href="/search/">探す</a>
       <a href="/tenki/">転機から</a>

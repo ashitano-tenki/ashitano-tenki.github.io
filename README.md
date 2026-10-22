@@ -27,3 +27,7 @@ https://ashitano-tenki.github.io/
 python3 build.py
 python3 -m http.server 8765 --directory _site
 ```
+
+## 画像の出典
+
+ロゴ・ファビコン・SNS共有用画像の📡は、Google の [Noto Emoji](https://github.com/googlefonts/noto-emoji)（Apache License 2.0）の画像を使っています。
