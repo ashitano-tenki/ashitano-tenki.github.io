@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>転機の段階セルフチェック｜あしたの転機観測所</title>
+<meta name="description" content="18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。">
+<link rel="canonical" href="https://ashitano-tenki.github.io/check/">
+<meta property="og:title" content="転機の段階セルフチェック">
+<meta property="og:description" content="18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。">
+<meta property="og:url" content="https://ashitano-tenki.github.io/check/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="あしたの転機観測所">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<style>
+/* 試作ページ（アーティファクト）の土台と同じ指定 */
+body { margin: 0; }
+[hidden] { display: none !important; }
+</style>
+<style>
+/* 黒田悠介デザインシステム準拠。白地に空色、差し色に黄色、文字は黒。1画面1カラム、質問は1問ずつ */
+:root {
+  --base: #fbfaf5;
+  --base-yellow: #fff3c4;
+  --ink: #1a1d23;
+  --sky: #1874b8;
+  --sky-bright: #2f95d6;
+  --yellow: #f5c518;
+  --text-body: #4a4f57;
+  --text-sub: #5e636b;
+  --text-on-ink: #d6d9de;
+  --line: #e3e6ea;
+  --card: #ffffff;
+  --font-display: "Zen Kaku Gothic New", "Noto Sans JP", "Hiragino Sans", sans-serif;
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px; --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(26, 29, 35, 0.06);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.band { position: fixed; top: 0; bottom: 0; left: 0; width: 8px; background: var(--yellow); }
+@media (max-width: 720px) { .band { display: none; } }
+.label {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--sky); text-transform: uppercase; margin: 0;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; word-break: auto-phrase; margin: 0; }
+h1 { font-size: clamp(30px, 7vw, 40px); line-height: 1.35; font-weight: 900; }
+h2 { font-size: clamp(24px, 5.4vw, 32px); line-height: 1.4; font-weight: 700; }
+h3 { font-size: 20px; line-height: 1.5; font-weight: 700; }
+p { margin: 0; }
+.lead { color: var(--text-body); }
+.small { font-size: 13px; line-height: 1.7; color: var(--text-sub); }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+.stack-lg { display: flex; flex-direction: column; gap: 48px; }
+.card {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+  padding: 24px;
+}
+.btn {
+  appearance: none; border: 0; cursor: pointer;
+  font: 700 16px/1.4 var(--font-sans);
+  border-radius: var(--radius-md); padding: 14px 28px;
+}
+.btn-primary { background: var(--ink); color: var(--base); }
+.btn-primary:hover { background: #2c313a; }
+.btn-ghost { background: transparent; color: var(--sky); padding: 10px 4px; text-decoration: underline; text-underline-offset: 3px; }
+.btn:focus-visible, .opt:focus-visible, a:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+a { color: var(--sky); text-underline-offset: 3px; }
+[tabindex="-1"]:focus { outline: none; }
+
+/* サイクル図 */
+.cycle { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto; }
+.cycle text { font-family: var(--font-display); }
+
+/* 冒頭 */
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  border: 1px solid var(--ink); border-radius: var(--radius-pill); padding: 2px 12px;
+}
+.stage-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.stage-list div { min-width: 0; }
+.stage-list b { font-family: var(--font-display); font-size: 18px; display: block; }
+.stage-list span { font-size: 14px; color: var(--text-body); line-height: 1.6; display: block; }
+@media (max-width: 440px) { .stage-list { grid-template-columns: 1fr; } }
+
+/* 質問 */
+.progress { height: 4px; background: var(--line); border-radius: var(--radius-pill); overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--sky-bright); transition: width .25s ease; }
+.qhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.qcount { font-size: 13px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.qtext { word-break: auto-phrase; font-family: var(--font-display); font-weight: 700; font-size: clamp(21px, 5vw, 26px); line-height: 1.55; text-wrap: balance; min-height: calc(2 * 1.55em); display: flex; align-items: flex-end; }
+@media (max-width: 560px) { .qtext { min-height: calc(3 * 1.55em); } }
+/* 選択肢の文の長さがちがっても、同じ質問のボタンは同じ高さにそろえる */
+.opts { display: grid; grid-auto-rows: 1fr; gap: 10px; }
+.opt {
+  appearance: none; text-align: left; cursor: pointer; width: 100%;
+  font: 500 16px/1.6 var(--font-sans); color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: 14px 18px; box-shadow: var(--shadow-card);
+  transition: border-color .15s ease;
+}
+.opt:hover { border-color: var(--sky-bright); }
+.opt[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); font-weight: 700; }
+.scale { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.scale .opt { text-align: center; padding: 14px 6px; font-size: 14px; line-height: 1.5; }
+@media (max-width: 480px) { .scale { grid-template-columns: 1fr; } .scale .opt { text-align: left; padding: 14px 18px; font-size: 16px; } }
+.qnav { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+
+/* 結果 */
+.result-hero {
+  background: var(--ink); color: var(--base);
+  border-radius: var(--radius-lg); padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.result-hero .label { color: var(--yellow); }
+.result-hero .stage-name { font-family: var(--font-display); font-weight: 900; font-size: clamp(48px, 14vw, 72px); line-height: 1.1; color: var(--yellow); }
+.result-hero p { color: var(--text-on-ink); }
+.bars { display: flex; flex-direction: column; gap: 10px; }
+.bar { display: grid; grid-template-columns: 3.5em minmax(0, 1fr) 2.5em; gap: 12px; align-items: center; font-variant-numeric: tabular-nums; }
+.bar b { font-family: var(--font-display); }
+.bar .track { height: 10px; background: var(--line); border-radius: var(--radius-pill); overflow: hidden; }
+.bar .track i { display: block; height: 100%; background: var(--sky-bright); border-radius: var(--radius-pill); }
+.bar.on .track i { background: var(--ink); }
+.bar span { font-size: 13px; color: var(--text-sub); text-align: right; }
+.steps { margin: 0; padding-left: 1.4em; display: flex; flex-direction: column; gap: 8px; color: var(--text-body); }
+.steps li::marker { color: var(--sky); font-weight: 700; }
+.rule { border: 0; border-top: 2px solid var(--ink); margin: 0; }
+.picks { display: flex; flex-direction: column; gap: 12px; }
+.pick { display: flex; flex-direction: column; gap: 6px; }
+.pick-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pick-type { font-size: 12px; font-weight: 700; color: var(--sky); border: 1px solid var(--sky); border-radius: var(--radius-pill); padding: 0 10px; }
+.pick h3 { font-size: 18px; }
+.pick p { font-size: 15px; color: var(--text-body); line-height: 1.7; }
+.links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 480px) { .links { grid-template-columns: 1fr; } }
+.linkcard { display: flex; flex-direction: column; gap: 4px; text-decoration: none; color: var(--ink); }
+.linkcard:hover { border-color: var(--sky-bright); }
+.linkcard b { font-family: var(--font-display); font-size: 18px; }
+.linkcard span { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+.share { display: flex; flex-wrap: wrap; gap: 10px; }
+.share a, .share button {
+  font: 700 15px/1.4 var(--font-sans); text-decoration: none; cursor: pointer;
+  color: var(--ink); background: var(--card); border: 1px solid var(--ink);
+  border-radius: var(--radius-md); padding: 10px 18px;
+}
+.share-text { white-space: pre-line; overflow-wrap: anywhere; font-size: 14px; color: var(--text-body); background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius-sm); padding: 12px; user-select: all; }
+footer { border-top: 1px solid var(--line); padding-top: 24px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="band" aria-hidden="true"></div>
+<main class="wrap" id="app"></main>
+
+<script>
+(() => {
+  const NOTE_URL = "https://note.com/chlorine0528/m/m206813f097e5";
+  const FB_URL = "https://www.facebook.com/share/g/1JmZs5Et5r";
+  const SHARE_URL = "https://ashitano-tenki.github.io/check/";
+  const HASHTAGS = ["あしたの転機", "転機の段階セルフチェック"];
+
+  const STAGES = ["準備", "遭遇", "順応", "安定"];
+  const STAGE_INFO = {
+    "準備": {
+      short: "転機を考え、備える時期",
+      desc: "気持ちは動き始めているけれど、まだ形にはなっていない段階です。迷いがあるのは、真剣に考えている証拠でもあります。いまは決めることより、材料を集めることを楽しんでみてください。",
+      steps: [
+        "気になっていることを、ひとまず紙に書き出してみる",
+        "その転機を経験した人に、1人だけ話を聞いてみる",
+        "「いつごろまでに何を決めるか」を、ゆるく決めておく"
+      ]
+    },
+    "遭遇": {
+      short: "新しい環境に入った直後",
+      desc: "覚えることが多く、前の環境とのちがいに戸惑いやすい時期です。うまくいかないことがあっても、それは転機のふつうの一場面です。最初は成果より、知ることを優先して大丈夫です。",
+      steps: [
+        "最初の3か月は、成果より「知ること」を優先する",
+        "わからないことを気軽に聞ける人を、1人見つけておく",
+        "前の環境と比べて気づいたことをメモしておく。あとで自分の強みが見えてきます"
+      ]
+    },
+    "順応": {
+      short: "慣れていく時期",
+      desc: "仕事の進め方がわかってきて、自分なりのやり方を試せるようになる時期です。転機に入ってから最初の1年くらいがこの段階にあたります。手応えと違和感の両方を、言葉にしておくと後で役立ちます。",
+      steps: [
+        "うまくいったやり方を、言葉にして残しておく",
+        "社外や別の分野の人とも話してみる",
+        "転機の前に描いていた期待と、いまの実感を見比べてみる"
+      ]
+    },
+    "安定": {
+      short: "落ち着き、次を見すえる時期",
+      desc: "迷わずに動けるようになり、気持ちにも余裕が出てくる時期です。同時に、次の転機の準備が少しずつ始まる時期でもあります。転機はくり返し訪れるものなので、ここが次のサイクルの入口になります。",
+      steps: [
+        "いまの環境で得たものを、一度棚卸ししてみる",
+        "「次にやってみたいこと」を、小さく試してみる",
+        "これから転機を迎える人の話を聞いてみる。あなたの経験が誰かの助けになります"
+      ]
+    }
+  };
+  const NEED_INFO = {
+    "相談": { label: "話せる相手", text: "誰かに話しながら考えると進みやすいタイプかもしれません。答えをもらうより、話すことで考えが整理されていきます。" },
+    "仕事": { label: "小さく試す場", text: "頭で考えるより、小さく試して確かめるのが合っていそうです。いきなり大きく動かず、お試しできる場を探してみてください。" },
+    "学習": { label: "学びの機会", text: "知識や見通しが増えると、動きやすくなるタイプかもしれません。体系立てて学べる場があると心強そうです。" },
+    "内省": { label: "ひとりで考える時間", text: "まずは自分の考えを整理する時間が助けになりそうです。書き出したり、ふりかえったりする時間を少し確保してみてください。" },
+    "交流": { label: "同じ転機の仲間", text: "同じような転機にいる人とのつながりが支えになりそうです。似た経験をした人の話は、何よりのヒントになります。" }
+  };
+
+  // 観測所のおすすめ。サイトを作るたびに観測所の公開用データから書き出す picks.json を読む
+  // rank は観測スコアの高い順の順位（1がいちばん高い）。スコアそのものは載せていない
+  const OBS_TOP = "/";
+  let PICKS = null; // 読めなかったときは null のまま
+  const picksReady = fetch("/check/picks.json", { cache: "no-cache" })
+    .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
+    .then(data => { if (Array.isArray(data.items) && data.items.length) PICKS = data.items; })
+    .catch(() => {});
+
+  const SCALE = [
+    { label: "とてもあてはまる", v: 3 },
+    { label: "ややあてはまる", v: 2 },
+    { label: "あまりあてはまらない", v: 1 },
+    { label: "あてはまらない", v: 0 }
+  ];
+
+  // 質問。kind: choice（選択肢ごとに加点）／scale（4段階、stageに加点）
+  const Q = [
+    { kind: "choice", key: "tenki", text: "いま向き合っている転機に、いちばん近いものはどれですか？",
+      opts: ["転職", "独立（個人事業主）", "起業（法人）", "副業・複業", "退職・休職", "定年", "学び直し", "まだはっきりしない"].map(t => ({ label: t, tenki: t.replace(/（.*）/, "") })) },
+    { kind: "choice", key: "time", text: "その転機のなかで、いまはどのあたりにいますか？",
+      opts: [
+        { label: "まだ動き出していない。考えたり調べたりしている", stage: { "準備": 3 } },
+        { label: "新しい環境に入って、3か月以内", stage: { "遭遇": 3 } },
+        { label: "新しい環境に入って、3か月から1年くらい", stage: { "順応": 3 } },
+        { label: "1年以上たって、落ち着いてきた", stage: { "安定": 3 } }
+      ] },
+    { kind: "scale", stage: "準備", text: "「このままでいいのかな」と考えることが増えた" },
+    { kind: "scale", stage: "遭遇", text: "新しい環境のルールや人間関係を覚えるので手一杯だ" },
+    { kind: "scale", stage: "順応", text: "仕事の進め方が、少しずつわかってきた" },
+    { kind: "scale", stage: "安定", text: "いまの環境では、だいたい迷わずに動ける" },
+    { kind: "scale", stage: "準備", text: "転機について情報を集めたり、人に話を聞いたりしている" },
+    { kind: "scale", stage: "遭遇", text: "前の環境とのちがいに、戸惑うことがある" },
+    { kind: "scale", stage: "順応", text: "自分なりのやり方を試して、手応えを確かめている" },
+    { kind: "scale", stage: "安定", text: "毎日が、少し単調に感じることがある" },
+    { kind: "scale", stage: "準備", text: "動くなら、いつ・何から始めるかを考えている" },
+    { kind: "scale", stage: "遭遇", text: "期待していたことと実際とのちがいを感じている" },
+    { kind: "scale", stage: "順応", text: "周りに、頼れる人や相談できる人ができてきた" },
+    { kind: "scale", stage: "安定", text: "次に挑戦したいことが、頭に浮かぶことがある" },
+    { kind: "choice", key: "need", text: "いま困っていることに、いちばん近いのはどれですか？",
+      opts: [
+        { label: "誰に相談すればいいのかわからない", need: { "相談": 2 } },
+        { label: "収入や仕事の得かたが見えない", need: { "仕事": 2 } },
+        { label: "足りない知識やスキルがある", need: { "学習": 2 } },
+        { label: "自分が何をしたいのか、整理できていない", need: { "内省": 2 } }
+      ] },
+    { kind: "choice", key: "need", text: "いま、あると助かるものはどれですか？",
+      opts: [
+        { label: "話を聞いてくれる人", need: { "相談": 1 } },
+        { label: "仕事や案件の情報", need: { "仕事": 1 } },
+        { label: "学べる講座や教材", need: { "学習": 1 } },
+        { label: "同じ転機にいる仲間", need: { "交流": 2 } }
+      ] },
+    { kind: "choice", key: "need", text: "考えを進めるとき、どのやり方が合っていますか？",
+      opts: [
+        { label: "人に直接話を聞く", need: { "相談": 1 } },
+        { label: "実際に小さく試してみる", need: { "仕事": 1 } },
+        { label: "本や講座で体系立てて学ぶ", need: { "学習": 1 } },
+        { label: "ひとりで書き出して考える", need: { "内省": 1 } }
+      ] },
+    { kind: "choice", key: "need", text: "転機のことを、身近な人に話せていますか？",
+      opts: [
+        { label: "よく話せている", need: {} },
+        { label: "少し話せている", need: {} },
+        { label: "ほとんど話せていない", need: { "相談": 1, "交流": 1 } },
+        { label: "話せる人がいない", need: { "交流": 1, "相談": 1 } }
+      ] }
+  ];
+
+  const answers = new Array(Q.length).fill(null);
+  let idx = -1; // -1: 冒頭、Q.length: 結果
+  const app = document.getElementById("app");
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+
+  function cycleSvg(active) {
+    const pos = { "準備": [180, 52], "遭遇": [308, 180], "順応": [180, 308], "安定": [52, 180] };
+    const nodes = STAGES.map(s => {
+      const [x, y] = pos[s];
+      const on = s === active;
+      return `<g>
+        <circle cx="${x}" cy="${y}" r="38" fill="${on ? "#1a1d23" : "#ffffff"}" stroke="${on ? "#1a1d23" : "#2f95d6"}" stroke-width="2"/>
+        <text x="${x}" y="${y + 7}" text-anchor="middle" font-size="20" font-weight="700" fill="${on ? "#f5c518" : "#1a1d23"}">${s}</text>
+      </g>`;
+    }).join("");
+    return `<svg class="cycle" viewBox="0 0 360 360" role="img" aria-label="転機のサイクル：準備、遭遇、順応、安定をくり返す${active ? "。いまは" + active : ""}">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f95d6"/></marker></defs>
+      <circle cx="180" cy="180" r="128" fill="none" stroke="#e3e6ea" stroke-width="2"/>
+      <path d="M 222 66 A 128 128 0 0 1 294 138" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 294 222 A 128 128 0 0 1 222 294" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 138 294 A 128 128 0 0 1 66 222" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 66 138 A 128 128 0 0 1 138 66" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="180" y="176" text-anchor="middle" font-size="13" fill="#5e636b" font-family="Noto Sans JP, sans-serif">転機は</text>
+      <text x="180" y="196" text-anchor="middle" font-size="13" fill="#5e636b" font-family="Noto Sans JP, sans-serif">くり返し訪れる</text>
+      ${nodes}
+    </svg>`;
+  }
+
+  function renderIntro() {
+    app.innerHTML = `<div class="stack-lg">
+      <section class="stack">
+        <p class="label">Ashita no Tenki</p>
+        <h1>転機の段階<wbr>セルフチェック</h1>
+        <p class="lead">転職、独立、副業、学び直し。キャリアの転機には「段階」があります。いまのあなたがどの段階にいるのかを、18の質問でふりかえってみましょう。</p>
+        <div class="meta"><span class="tag">全18問</span><span class="tag">約5分</span><span class="tag">登録不要</span></div>
+        <div><button class="btn btn-primary" id="start">チェックを始める</button></div>
+      </section>
+      <section class="stack">
+        ${cycleSvg(null)}
+        <div class="stage-list">
+          ${STAGES.map(s => `<div><b>${s}</b><span>${STAGE_INFO[s].short}</span></div>`).join("")}
+        </div>
+        <p class="small">心理学者ナイジェル・ニコルソンの「トランジション・サイクル」をもとにしています。診断ではなく、いまの自分をふりかえるきっかけとして使ってください。回答はこのページの中だけで使い、どこにも送信しません。</p>
+      </section>
+    </div>`;
+    document.getElementById("start").onclick = () => go(0);
+  }
+
+  function renderQuestion() {
+    const q = Q[idx];
+    const pct = Math.round((idx / Q.length) * 100);
+    const a = answers[idx];
+    let body;
+    if (q.kind === "scale") {
+      body = `<div class="scale" role="group" aria-label="あてはまり度">
+        ${SCALE.map((s, i) => `<button class="opt" data-i="${i}" aria-pressed="${a === i}">${s.label}</button>`).join("")}
+      </div>`;
+    } else {
+      body = `<div class="opts" role="group">
+        ${q.opts.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="${a === i}">${esc(o.label)}</button>`).join("")}
+      </div>`;
+    }
+    const section = idx < 2 ? "いまの状況" : idx < 14 ? "気持ちと行動" : "あると助かるもの";
+    app.innerHTML = `<div class="stack" style="gap:24px">
+      <div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>
+      <div class="qhead"><p class="label">${section}</p><span class="qcount">${idx + 1} / ${Q.length}</span></div>
+      <p class="qtext" id="qt">${esc(q.text)}</p>
+      ${body}
+      <div class="qnav">
+        <button class="btn btn-ghost" id="back">${idx === 0 ? "はじめに戻る" : "前の質問へ"}</button>
+        ${a !== null && idx < Q.length - 1 ? `<button class="btn btn-ghost" id="next">次の質問へ</button>` : ""}
+      </div>
+    </div>`;
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+      answers[idx] = Number(b.dataset.i);
+      go(idx + 1);
+    });
+    document.getElementById("back").onclick = () => go(idx - 1);
+    const nx = document.getElementById("next");
+    if (nx) nx.onclick = () => go(idx + 1);
+  }
+
+  function score() {
+    const st = { "準備": 0, "遭遇": 0, "順応": 0, "安定": 0 };
+    const need = { "相談": 0, "仕事": 0, "学習": 0, "内省": 0, "交流": 0 };
+    let tenki = "まだはっきりしない", timeStage = null, firstNeed = null;
+    Q.forEach((q, i) => {
+      const a = answers[i];
+      if (a === null) return;
+      if (q.kind === "scale") { st[q.stage] += SCALE[a].v; return; }
+      const o = q.opts[a];
+      if (o.tenki) tenki = o.tenki;
+      if (o.stage) for (const k in o.stage) { st[k] += o.stage[k]; timeStage = k; }
+      if (o.need) {
+        for (const k in o.need) need[k] += o.need[k];
+        if (firstNeed === null && i === 14) firstNeed = Object.keys(o.need)[0];
+      }
+    });
+    // 同点のときは「いまどのあたりか」の回答を優先し、次にサイクルの順
+    const order = s => (s === timeStage ? -1 : STAGES.indexOf(s));
+    const ranked = [...STAGES].sort((a, b) => st[b] - st[a] || order(a) - order(b));
+    const top = ranked[0];
+    const second = ranked[1];
+    const between = st[top] - st[second] <= 1 ? second : null;
+    const needRanked = Object.keys(need).sort((a, b) => need[b] - need[a] || (a === firstNeed ? -1 : b === firstNeed ? 1 : 0));
+    return { st, top, between, need: needRanked[0], tenki };
+  }
+
+  function pickItems(r) {
+    const scored = PICKS.map(p => {
+      let s = 0;
+      if (p.stage.includes(r.top)) s += 4;
+      if (p.type === r.need) s += 3;
+      if (p.tenki.includes(r.tenki)) s += 2;
+      return { p, s };
+    }).filter(x => x.s > 0);
+    scored.sort((a, b) => b.s - a.s || a.p.rank - b.p.rank);
+    const list = scored.length ? scored : PICKS.map(p => ({ p, s: 0 })).sort((a, b) => a.p.rank - b.p.rank);
+    return list.slice(0, 3).map(x => x.p);
+  }
+
+  // 観測所のおすすめ欄。データが読めなかったときは欄を出さず、観測所のトップへのリンクだけにする
+  function observatoryHtml(r) {
+    if (!PICKS) {
+      return `<p><a href="${OBS_TOP}">あしたの転機観測所で、転機に役立つサービスを探す</a></p>`;
+    }
+    const picks = pickItems(r);
+    return `<section class="stack">
+        <p class="label">From the Observatory</p>
+        <h2>あしたの転機観測所から</h2>
+        <p class="lead">転機に役立つ民間のサービスや情報を集めている「あしたの転機観測所」から、いまの段階に合いそうなものを選びました。</p>
+        <div class="picks">
+          ${picks.map(p => `<article class="card pick">
+            <div class="pick-top"><span class="pick-type">${esc(p.type)}</span><span class="small">${esc(p.cost)}・${esc(p.stage.join("、"))}向け</span></div>
+            <h3>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>` : esc(p.title)}</h3>
+            <p>${esc(p.memo)}</p>
+            ${p.page ? `<p class="small"><a href="${esc(p.page)}">観測所の紹介ページを見る</a></p>` : ""}
+          </article>`).join("")}
+        </div>
+        <p class="small">観測所の情報は、これから少しずつ増えていきます。</p>
+      </section>`;
+  }
+
+  function renderResult() {
+    const r = score();
+    const info = STAGE_INFO[r.top];
+    const need = NEED_INFO[r.need];
+    const max = 12;
+    const tenkiLabel = r.tenki === "まだはっきりしない" ? "転機" : `${r.tenki}の転機`;
+    const shareBody = `「転機の段階セルフチェック」をやってみたら、いまは「${r.top}」の段階でした。`;
+    const tagText = HASHTAGS.map(t => "#" + t).join(" ");
+    const shareText = `${shareBody}\n${SHARE_URL}\n${tagText}`;
+    const xUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareBody) + "&url=" + encodeURIComponent(SHARE_URL) + "&hashtags=" + encodeURIComponent(HASHTAGS.join(","));
+    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SHARE_URL) + "&hashtag=" + encodeURIComponent("#" + HASHTAGS[0]);
+
+    app.innerHTML = `<div class="stack-lg">
+      <section class="result-hero">
+        <p class="label">Your Stage</p>
+        <p>${esc(tenkiLabel)}のなかで、いまのあなたは</p>
+        <p class="stage-name">${r.top}</p>
+        <p>${info.short}にいるようです。${r.between ? `「${r.between}」の要素も強く出ているので、${STAGES.indexOf(r.between) === (STAGES.indexOf(r.top) + 1) % 4 ? "次の段階へ移りつつある" : "ひとつ前の段階から移ってきた"}ところかもしれません。` : ""}</p>
+      </section>
+
+      <section class="stack">
+        ${cycleSvg(r.top)}
+        <div class="bars" aria-label="段階ごとのあてはまり度">
+          ${STAGES.map(s => `<div class="bar${s === r.top ? " on" : ""}"><b>${s}</b><div class="track"><i style="width:${Math.round((r.st[s] / max) * 100)}%"></i></div><span>${r.st[s]}/${max}</span></div>`).join("")}
+        </div>
+      </section>
+
+      <section class="stack">
+        <p class="label">About this stage</p>
+        <h2>「${r.top}」はどんな時期？</h2>
+        <p class="lead">${info.desc}</p>
+        <div class="card stack">
+          <h3>次の一歩のヒント</h3>
+          <ol class="steps">${info.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>
+        </div>
+      </section>
+
+      <section class="stack">
+        <p class="label">What helps you</p>
+        <h2>支えになりそうなのは<wbr>「${need.label}」</h2>
+        <p class="lead">${need.text}</p>
+      </section>
+
+      <hr class="rule">
+
+      <div id="observatory"></div>
+
+      <section class="stack">
+        <p class="label">Community</p>
+        <h2>転機を<wbr>ひとりで抱えこまないために</h2>
+        <p class="lead">「あしたの転機」は、キャリアの転機について考え、語り合うコミュニティです。いろいろな転機を経験した人の話に触れてみてください。</p>
+        <div class="links">
+          <a class="card linkcard" href="${FB_URL}" target="_blank" rel="noopener"><b>Facebookグループ</b><span>転機について語り合う場。気軽にのぞいてみてください</span></a>
+          <a class="card linkcard" href="${NOTE_URL}" target="_blank" rel="noopener"><b>noteマガジン</b><span>転機にまつわる話を、記事で読めます</span></a>
+        </div>
+      </section>
+
+      <section class="stack">
+        <p class="label">Share</p>
+        <h3>結果をシェアする</h3>
+        <p class="share-text" id="sharetext">${esc(shareText)}</p>
+        <div class="share">
+          <a href="${xUrl}" target="_blank" rel="noopener">Xでシェア</a>
+          <a href="${fbUrl}" target="_blank" rel="noopener">Facebookでシェア</a>
+          <button id="copy">文章をコピー</button>
+        </div>
+      </section>
+
+      <div><button class="btn btn-ghost" id="retry">もう一度チェックする</button></div>
+
+      <footer class="stack">
+        <p class="small">このチェックは、心理学者ナイジェル・ニコルソンの「トランジション・サイクル」（準備・遭遇・順応・安定）をもとに、黒田悠介（キャリア研究家）が作りました。医学的・心理学的な診断ではありません。回答はこのページの中だけで使い、どこにも送信しません。</p>
+      </footer>
+    </div>`;
+
+    const obs = document.getElementById("observatory");
+    const fillObs = () => { if (obs.isConnected) obs.innerHTML = observatoryHtml(r); };
+    fillObs();
+    picksReady.then(fillObs);
+
+    document.getElementById("retry").onclick = () => { answers.fill(null); go(-1); };
+    const copyBtn = document.getElementById("copy");
+    copyBtn.onclick = () => {
+      const done = () => { copyBtn.textContent = "コピーしました"; setTimeout(() => copyBtn.textContent = "文章をコピー", 2000); };
+      const fallback = () => {
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById("sharetext"));
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        copyBtn.textContent = "選択しました。コピーしてください";
+      };
+      try { navigator.clipboard.writeText(shareText).then(done, fallback); } catch (e) { fallback(); }
+    };
+  }
+
+  function go(n) {
+    idx = Math.max(-1, Math.min(n, Q.length));
+    if (idx === -1) renderIntro();
+    else if (idx === Q.length) renderResult();
+    else renderQuestion();
+    window.scrollTo({ top: 0 });
+    const focusEl = app.querySelector("#qt, h1, .result-hero");
+    if (focusEl) { focusEl.setAttribute("tabindex", "-1"); focusEl.focus({ preventScroll: true }); }
+  }
+
+  window.__tenki = { Q, answers, score, go }; // 確認用
+  renderIntro();
+})();
+</script>
+
+</body>
+</html>

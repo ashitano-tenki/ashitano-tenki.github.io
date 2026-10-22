@@ -18,6 +18,7 @@ https://ashitano-tenki.github.io/
 | `config/tenki.json` | 転機の種類と段階の名前・URL・ページの文面 |
 | `config/synonyms.json` | 検索の言い換え表 |
 | `build.py` | サイトを作るスクリプト（ページの文面の多くもここにあります） |
+| `check/index.html` | 転機の段階セルフチェック（/check/）。質問・判定・結果の文章はこのファイルにあります。結果画面のおすすめは、サイトを作るたびに書き出す `check/picks.json` から選びます |
 | `assets/` | 見た目（style.css）、検索の動き（search.js）、アイコン、SNS共有用の画像 |
 | `data/meta.json` | 前回公開したときの件数（件数チェックに使います） |
 

@@ -101,6 +101,10 @@ main.wrap { padding-bottom: var(--space-16); }
 .hero::before { content: ""; position: absolute; left: 0; top: var(--space-12); bottom: var(--space-8); width: var(--border-band); background: var(--yellow); }
 .hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
+.check-link { margin: calc(-1 * var(--space-4)) 0 var(--space-6); font-size: 15px; }
+.check-link a { font-weight: 700; }
+.check-link a::after { content: " →"; }
+.check-link span { display: block; font-size: 13px; color: var(--text-sub); }
 .hero-meta { font-size: 13px; color: var(--text-sub); margin: var(--space-2) 0 0; }
 .search-box { display: flex; gap: var(--space-2); }
 .search-box input { flex: 1; min-width: 0; }

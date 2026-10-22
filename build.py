@@ -329,6 +329,7 @@ def build_home(listed, ctx):
   <p class="label">Observatory for career transitions</p>
   <h1>{site}</h1>
   <p class="lead">{lead}</p>
+  <p class="check-link"><a href="/check/">いまの段階をチェックする</a><span>（18の質問で、転機のどの段階にいるかをふりかえる）</span></p>
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -697,6 +698,19 @@ def build_search_json(listed, ctx):
     write("/search.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
 
 
+def build_check(listed, ctx):
+    """転機の段階セルフチェック（check/index.html）と、結果画面のおすすめに使う picks.json を書き出す。"""
+    with open(os.path.join(ROOT, "check", "index.html"), encoding="utf-8") as f:
+        write("/check/", f.read())
+    ctx["sitemap"].append(BASE + "/check/")
+    data = {"items": [{
+        "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
+        "memo": it["memo"], "url": it["url"], "cost": it["cost"], "rank": it["rank"],
+        "page": "/item/%s/" % it["id"],
+    } for it in listed]}
+    write("/check/picks.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+
+
 def build_meta_files(ctx):
     urls = "".join("<url><loc>%s</loc></url>" % e(u) for u in ctx["sitemap"])
     write("/sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -759,6 +773,7 @@ def main():
     build_report(listed, ctx)
     build_about(listed, ctx)
     build_404(ctx)
+    build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_meta_files(ctx)
 
