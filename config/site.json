@@ -1,0 +1,21 @@
+{
+  "site_name": "あしたの転機観測所",
+  "base_url": "https://ashitano-tenki.github.io",
+  "csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJKyhKUJ4ZTf6g4Caao2Mag_eIUThO0VqTXvtqn9n37N10dwQK5YpgDK7T6ROIUx9E42LQd_nZykaF/pub?gid=6&single=true&output=csv",
+  "lead": "キャリアの転機に役立つ民間のサービスや情報を、転機の種類と時期から探せる観測所です。",
+  "description": "転職、独立、起業、副業などキャリアの転機に役立つ民間のサービスや情報を、転機の種類と時期から探せるサイトです。",
+
+  "_report_form_url の説明": "誤り報告フォームのURL。空のあいだは「準備中」と表示します。{id} と {title} を書くと、その掲載情報のIDとタイトルに置き換わります。",
+  "report_form_url": "",
+
+  "note_url": "https://note.com/chlorine0528/m/m206813f097e5",
+  "facebook_url": "https://www.facebook.com/share/g/1JmZs5Et5r",
+
+  "new_days": 7,
+  "min_combo_items": 5,
+  "top_per_kind": 3,
+  "list_page_size": 20,
+  "min_ratio_to_previous": 0.5,
+
+  "kind_order": ["相談", "仕事", "学習", "コミュニティ", "情報", "ツール", "その他"]
+}

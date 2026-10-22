@@ -1,0 +1,61 @@
+name: サイトを更新
+
+on:
+  schedule:
+    - cron: "0 20 * * *"   # 毎日 日本時間の朝5時ごろ（UTCの20時）
+  workflow_dispatch:
+    inputs:
+      allow_decrease:
+        description: "件数が前回の半分未満に減っても公開する（データを意図して減らしたときだけ）"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
+      - name: CSVを読み込んでサイトを作る
+        run: |
+          if [ "${{ inputs.allow_decrease }}" = "true" ]; then
+            python3 build.py --allow-decrease
+          else
+            python3 build.py
+          fi
+
+      # 件数の記録（data/meta.json）を残す。次回の件数チェックに使い、毎日の記録が続くことで自動実行も止まらない
+      - name: 件数の記録を保存する
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/meta.json
+          git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
+          git push
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
