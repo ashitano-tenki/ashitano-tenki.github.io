@@ -58,8 +58,17 @@ body {
   margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 32px 64px;
+  padding-block: 24px 64px;
 }
+.obs-bar {
+  max-width: 680px; margin: 0 auto;
+  padding-top: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.obs-bar a { display: inline-flex; align-items: center; gap: 8px; font: 700 15px/1.4 var(--font-display); color: var(--ink); text-decoration: none; }
+.obs-bar a:hover { color: var(--sky); text-decoration: underline; }
+.obs-bar img { width: 20px; height: 20px; flex: none; }
 .band { position: fixed; top: 0; bottom: 0; left: 0; width: 8px; background: var(--yellow); }
 @media (max-width: 720px) { .band { display: none; } }
 .label {
@@ -176,6 +185,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
 <body>
 
 <div class="band" aria-hidden="true"></div>
+<header class="obs-bar"><a href="/"><img src="/assets/logo.svg" alt="" width="20" height="20">あしたの転機観測所</a></header>
 <main class="wrap" id="app"></main>
 
 <script>
@@ -454,7 +464,8 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
     const tagText = HASHTAGS.map(t => "#" + t).join(" ");
     const shareText = `${shareBody}\n${SHARE_URL}\n${tagText}`;
     const xUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareBody) + "&url=" + encodeURIComponent(SHARE_URL) + "&hashtags=" + encodeURIComponent(HASHTAGS.join(","));
-    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SHARE_URL) + "&hashtag=" + encodeURIComponent("#" + HASHTAGS[0]);
+    // Facebookはシェア画面に投稿文を入れておけないため、Xと同じ投稿文をコピーしてから開き、貼り付けてもらう
+    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SHARE_URL);
 
     app.innerHTML = `<div class="stack-lg">
       <section class="result-hero">
@@ -507,9 +518,10 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
         <p class="share-text" id="sharetext">${esc(shareText)}</p>
         <div class="share">
           <a href="${xUrl}" target="_blank" rel="noopener">Xでシェア</a>
-          <a href="${fbUrl}" target="_blank" rel="noopener">Facebookでシェア</a>
+          <a href="${fbUrl}" target="_blank" rel="noopener" id="fbshare">Facebookでシェア</a>
           <button id="copy">文章をコピー</button>
         </div>
+        <p class="small" id="sharenote" aria-live="polite">Facebookでシェアするときは、上の文章が自動でコピーされます。開いた画面の投稿欄に貼り付けてください。</p>
       </section>
 
       <div><button class="btn btn-ghost" id="retry">もう一度チェックする</button></div>
@@ -535,6 +547,20 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
         copyBtn.textContent = "選択しました。コピーしてください";
       };
       try { navigator.clipboard.writeText(shareText).then(done, fallback); } catch (e) { fallback(); }
+    };
+    const note = document.getElementById("sharenote");
+    document.getElementById("fbshare").onclick = ev => {
+      ev.preventDefault();
+      const selectText = () => {
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById("sharetext"));
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        note.textContent = "上の文章を選択しました。コピーして、Facebookの投稿欄に貼り付けてください。";
+      };
+      let copying;
+      try { copying = navigator.clipboard.writeText(shareText); } catch (e) { copying = Promise.reject(e); }
+      window.open(fbUrl, "_blank", "noopener");
+      copying.then(() => { note.textContent = "投稿文をコピーしました。開いたFacebookの画面で、投稿欄に貼り付けてください。"; }, selectText);
     };
   }
 

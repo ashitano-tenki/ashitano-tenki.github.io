@@ -241,6 +241,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
     <nav class="global-nav" aria-label="サイト内">
       <a href="/search/">探す</a>
       <a href="/tenki/">転機から</a>
+      <a href="/check/">セルフチェック</a>
       <a href="/report/">観測レポート</a>
       <a href="/about/">観測所について</a>
     </nav>
