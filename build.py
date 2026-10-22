@@ -226,7 +226,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#fbfaf5">
+<script>try{{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}}catch(e){{}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
@@ -235,13 +235,14 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="logo" href="/"><span class="logo-mark" aria-hidden="true"></span>{site}</a>
+    <a class="logo" href="/"><span class="logo-mark" aria-hidden="true">📡</span>{site}</a>
     <nav class="global-nav" aria-label="サイト内">
       <a href="/search/">探す</a>
       <a href="/tenki/">転機から</a>
       <a href="/report/">観測レポート</a>
       <a href="/about/">観測所について</a>
     </nav>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
   </div>
 </header>
 <main class="wrap">
@@ -257,15 +258,18 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
         <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
       </p>
     </div>
+    <p class="contact">掲載情報の誤りのお知らせや掲載のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームからお送りください。</p>
     <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
   </div>
 </footer>
+<script src="/assets/theme.js?v={ver}"></script>
 </body>
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
            og_title=e(full_title or title), base=e(BASE), ver=ctx["version"], body=body,
-           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), updated=fmt_date(ctx["today"]))
+           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+           updated=fmt_date(ctx["today"]))
     write(path, html_text)
     if not noindex:
         ctx["sitemap"].append(url)
@@ -488,7 +492,7 @@ def report_link(item):
     if not url:
         return '<p class="report">情報の誤りに気づいたときのお知らせフォームは準備中です。</p>'
     href = url.replace("{id}", quote(item["id"])).replace("{title}", quote(item["title"]))
-    return '<p class="report"><a href="%s" rel="noopener" target="_blank">この情報の誤りを知らせる</a></p>' % e(href)
+    return '<p class="report"><a href="%s" rel="noopener" target="_blank">この情報の誤りを知らせる</a>（フォームが開きます）</p>' % e(href)
 
 
 def build_item(item, listed, ctx):
@@ -632,6 +636,15 @@ def build_about(listed, ctx):
 <p>掲載情報は、AIが公開されている情報をもとに集め、内容を確かめてから載せています。載せたあともAIが定期的に点検し、内容を確かめた日を「最終観測日」として表示しています。</p>
 <p>料金や内容は変わることがあります。利用する前に、公式サイトで最新の情報を確かめてください。</p>
 
+<h2 id="contact">観測所へのご連絡</h2>
+<p>掲載情報の誤りのお知らせや、掲載してほしいサービス・情報のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームから受け付けています。</p>
+<ul>
+  <li>ご提案いただいたものも、ほかの掲載情報と同じ基準で確かめてから掲載するかどうかを決めます。掲載をお約束するものではありません。</li>
+  <li>ご提案によって並び順が変わることはありません。</li>
+  <li>掲載料をいただく掲載や、広告としての掲載は行っていません。</li>
+  <li>個別のご返信はしていません。</li>
+</ul>
+
 <h2>運営者</h2>
 <p>運営は黒田悠介です。キャリア研究家として、これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。</p>
 
@@ -643,7 +656,7 @@ def build_about(listed, ctx):
 </ul>
 </article>
 """.format(crumbs=breadcrumb([("観測所について", None)]), stage_dl=stage_dl,
-           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]))
+           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]))
     page("/about/", "観測所について", "あしたの転機観測所の目的、掲載の基準、並び順の考え方、情報の集め方と運営者について。", body, ctx=ctx)
 
 
