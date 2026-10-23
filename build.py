@@ -234,9 +234,9 @@ def save_button(item):
 
 
 def card(item, today):
-    return ('<li class="card"><a href="/item/%s/"><p class="card-when">%s</p><h3>%s</h3><p class="card-line">%s</p>'
+    return ('<li class="card"><a href="/item/%s/"><p class="card-when" title="%s">%s</p><h3>%s</h3><p class="card-line">%s</p>'
             '<div class="card-foot">%s<span class="card-date">%s</span></div></a>%s</li>'
-            % (e(item["id"]), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item),
+            % (e(item["id"]), e(when_line(item)), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item),
                e(added_label(item["added"], today)), save_button(item)))
 
 

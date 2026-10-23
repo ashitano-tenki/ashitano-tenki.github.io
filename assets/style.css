@@ -215,15 +215,18 @@ button, .button {
 .shelf-arrow { width: 34px; height: 34px; padding: 0; border-radius: 50%; background: var(--card); color: var(--ink); border: var(--border-hairline) solid var(--line); font-size: 15px; font-weight: 400; }
 .shelf-arrow:hover:not(:disabled) { border-color: var(--sky); color: var(--sky); }
 .shelf-arrow:disabled { opacity: 0.35; cursor: default; }
-.cards.shelf { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 80%; gap: var(--space-3);
+.cards.shelf { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 88%; gap: var(--space-3);
   overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
   margin: 0 calc(-1 * var(--space-4)); padding: 2px var(--space-4) var(--space-2); scroll-padding: 0 var(--space-4); }
 .cards.shelf::-webkit-scrollbar { display: none; }
 .cards.shelf > li { scroll-snap-align: start; min-width: 0; }
 .cards.shelf:focus-visible { outline: 2px solid var(--sky); outline-offset: -2px; }
+.cards.shelf .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cards.shelf .card-date { white-space: nowrap; }
 .cards.shelf h3, .cards.shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-@media (min-width: 640px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - 2 * var(--space-3)) / 2.3); } }
-@media (min-width: 900px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - 3 * var(--space-3)) / 3.25); } }
+@media (min-width: 640px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - var(--space-3)) / 1.6); } }
+@media (min-width: 900px) and (max-width: 1023px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - var(--space-3)) / 2.2); } }
+@media (min-width: 1024px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - 2 * var(--space-3)) / 2.6); } }
 .card-more a { align-items: center; justify-content: center; text-align: center; font-weight: 700; color: var(--sky); background: var(--chip-bg); border-style: dashed; }
 .card-more a span { display: block; font-weight: 400; font-size: 13px; color: var(--text-sub); }
 .shelf-foot { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; min-height: 18px; }
