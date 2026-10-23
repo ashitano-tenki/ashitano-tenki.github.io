@@ -301,7 +301,16 @@ def site_footer(ctx):
   </div>
 </footer>
 <script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
-                         updated=fmt_date(ctx["today"]), ver=ctx["version"])
+                         updated=fmt_date(ctx["today"]), ver=ctx["version"]) + analytics_tag(ctx)
+
+
+def analytics_tag(ctx):
+    """アクセス解析（GoatCounter）。Cookieを使わず、見たページと来た元だけを数える。サイト名が空なら何も入れない。"""
+    code = CONF.get("goatcounter_code", "")
+    if not code:
+        return ""
+    return ('\n<script data-goatcounter="https://%s.goatcounter.com/count" async src="/assets/count.js?v=%s"></script>'
+            % (e(code), ctx["version"]))
 
 
 def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None):
@@ -796,6 +805,13 @@ def build_report(listed, ctx):
     page("/report/", "観測レポート", "あしたの転機観測所に新しく加わったサービスと情報を、週ごとにまとめています。", body, ctx=ctx)
 
 
+ANALYTICS_ABOUT = """<h2 id="analytics">アクセス解析について</h2>
+<p>観測所をよりよくするために、アクセス解析の GoatCounter（goatcounter.com）を使っています。Cookie は使わず、閲覧した人を特定する情報も集めません。</p>
+<p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで何も見つからなかったときは、そのとき入力されたキーワードも送ります。言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
+<p>転機の段階セルフチェックは、ページが開かれた回数だけを数えます。回答や結果は送りません。</p>
+"""
+
+
 def build_about(listed, ctx):
     stage_dl = "".join("<div><dt>%s</dt><dd>%s</dd></div>" % (e(s["name"]), e(s["about"])) for s in STAGES)
     body = """
@@ -828,6 +844,7 @@ def build_about(listed, ctx):
   <li>個別のご返信はしていません。</li>
 </ul>
 
+{analytics}
 <h2>運営者</h2>
 <p>運営は黒田悠介です。キャリア研究家として、これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。</p>
 
@@ -839,7 +856,8 @@ def build_about(listed, ctx):
 </ul>
 </article>
 """.format(crumbs=breadcrumb([("観測所について", None)]), stage_dl=stage_dl,
-           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]))
+           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+           analytics=ANALYTICS_ABOUT if CONF.get("goatcounter_code") else "")
     page("/about/", "観測所について", "あしたの転機観測所の目的、掲載の基準、並び順の考え方、情報の集め方と運営者について。", body, ctx=ctx)
 
 

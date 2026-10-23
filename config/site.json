@@ -11,6 +11,8 @@
   "contact_form_url": "https://forms.gle/gMJKkAsVSVBRmwBT6",
   "_google_site_verification の説明": "Google Search Console の所有権の確認に使う文字列（HTMLタグの content の中身）。全ページの head に入る。",
   "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs",
+  "_goatcounter_code の説明": "アクセス解析 GoatCounter のサイト名（https://〇〇.goatcounter.com の〇〇）。空のあいだは計測しない。",
+  "goatcounter_code": "yusukekuroda",
 
   "note_url": "https://note.com/chlorine0528/m/m206813f097e5",
   "facebook_url": "https://www.facebook.com/share/g/1JmZs5Et5r",

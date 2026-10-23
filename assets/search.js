@@ -202,6 +202,19 @@
     if (!moreBtn.hidden) moreBtn.textContent = "もっと見る（残り" + (results.length - shown) + "件）";
   }
 
+  // 何も見つからなかったキーワードを、アクセス解析（GoatCounter）に送る。入力の途中では送らず、同じ言葉は1回だけ
+  var zeroTimer, zeroSent = {};
+  function reportZero(state) {
+    clearTimeout(zeroTimer);
+    var q = (state.q || "").trim();
+    if (results.length || !q || zeroSent[q]) return;
+    zeroTimer = setTimeout(function () {
+      if (!window.goatcounter || !window.goatcounter.count) return;
+      zeroSent[q] = true;
+      window.goatcounter.count({ path: "search-zero/" + q.slice(0, 50), title: "0件：" + q.slice(0, 50), event: true });
+    }, 2000);
+  }
+
   function run() {
     var state = readForm();
     updateUrl(state);
@@ -211,6 +224,7 @@
     renderZeroHelp(state);
     countEl.textContent = countText(state);
     render(true);
+    reportZero(state);
   }
 
   function setPanel(open) {
