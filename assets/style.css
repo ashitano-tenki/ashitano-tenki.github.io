@@ -54,6 +54,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -79,19 +80,27 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 
 /* ヘッダー */
 .site-header { background: var(--base); border-bottom: var(--border-hairline) solid var(--line); }
-.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-4); padding-top: var(--space-3); padding-bottom: var(--space-3); }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-2); padding-top: var(--space-3); padding-bottom: var(--space-3); }
 .logo { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
 .logo-mark { width: 24px; height: 24px; flex: none; }
 .global-nav { display: flex; align-items: center; gap: var(--space-1) var(--space-4); flex-wrap: wrap; font-size: 14px; }
 .theme-toggle { font-size: 13px; font-weight: 400; padding: 2px var(--space-3); background: var(--card); color: var(--text-body); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-pill); }
 .theme-toggle:hover { border-color: var(--sky); color: var(--sky); }
+@media (max-width: 380px) { .theme-toggle { font-size: 12px; padding: 2px var(--space-2); } .header-search-btn { width: 32px; height: 32px; } }
 /* スマホ：1行目にロゴと切り替えボタン、2行目にメニュー。広い画面：ロゴ、メニュー、ボタンの順に1行 */
-.global-nav { order: 3; flex-basis: 100%; }
-.theme-toggle { order: 2; }
+.global-nav { order: 4; flex-basis: 100%; }
+.header-search-btn { order: 2; margin-left: auto; }
+.theme-toggle { order: 3; }
 @media (min-width: 760px) {
   .global-nav { order: 2; flex-basis: auto; margin-left: auto; }
-  .theme-toggle { order: 3; }
+  .header-search-btn { order: 3; margin-left: 0; }
+  .theme-toggle { order: 4; }
 }
+/* ヘッダーの検索：虫めがねを押すと、ヘッダーの下にキーワード欄が開く */
+.header-search-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
+.header-search-btn:hover, .header-search-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
+.header-search { display: flex; gap: var(--space-2); padding-bottom: var(--space-3); }
+.header-search input { flex: 1; min-width: 0; }
 .global-nav a { color: var(--text-body); text-decoration: none; padding: var(--space-1) 0; }
 .global-nav a:hover { color: var(--sky); text-decoration: underline; }
 
@@ -193,6 +202,7 @@ button, .button {
 /* 詳細ページ */
 .detail { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-6); margin-top: var(--space-4); }
 .detail h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.4; margin: 0 0 var(--space-4); }
+.detail-when { margin: calc(-1 * var(--space-2)) 0 var(--space-4); font-size: 15px; font-weight: 700; color: var(--sky); }
 .memo p { margin: 0 0 var(--space-6); }
 .official { margin: 0 0 var(--space-6); }
 .facts { margin: 0 0 var(--space-3); border-top: var(--border-rule) solid var(--ink); }
@@ -210,6 +220,13 @@ button, .button {
 .filter-toggle::after { content: "▾"; margin-left: 4px; font-size: 12px; color: var(--text-sub); }
 .filter-toggle[aria-expanded="true"]::after { content: "▴"; }
 .filter-panel { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); margin-top: var(--space-2); }
+.field-free { grid-column: 1 / -1; }
+.label-like { display: block; font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 2px; }
+.check { display: flex; align-items: center; gap: var(--space-2); font-size: 15px; cursor: pointer; }
+.check input { width: 18px; height: 18px; accent-color: var(--ink); margin: 0; }
+.check span { font-size: 13px; color: var(--text-sub); }
+.zero-help { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); margin: 0 0 var(--space-3); font-size: 14px; }
+.zero-help span { color: var(--text-sub); }
 .filter-note { grid-column: 1 / -1; margin: 0; font-size: 13px; }
 .filter-col { display: flex; flex-direction: column; min-width: 0; }
 .result-col { min-width: 0; }

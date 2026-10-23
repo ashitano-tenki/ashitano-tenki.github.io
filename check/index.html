@@ -432,6 +432,19 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
     return list.slice(0, 3).map(x => x.p);
   }
 
+  // 結果の転機と段階で絞った、観測所の一覧へのリンク
+  function listUrl(r) {
+    const p = new URLSearchParams();
+    if (r.tenki !== "まだはっきりしない") p.set("tenki", r.tenki);
+    p.set("stage", r.top);
+    return "/search/?" + p.toString();
+  }
+  function listLabel(r) {
+    return r.tenki === "まだはっきりしない"
+      ? `「${r.top}」の段階で役立つものを、観測所ですべて見る`
+      : `「${r.tenki}×${r.top}」で役立つものを、観測所ですべて見る`;
+  }
+
   // 観測所のおすすめ欄。データが読めなかったときは欄を出さず、観測所のトップへのリンクだけにする
   function observatoryHtml(r) {
     if (!PICKS) {
@@ -450,6 +463,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
             ${p.page ? `<p class="small"><a href="${esc(p.page)}">観測所の紹介ページを見る</a></p>` : ""}
           </article>`).join("")}
         </div>
+        <p><a href="${esc(listUrl(r))}">${esc(listLabel(r))}</a></p>
         <p class="small">観測所の情報は、これから少しずつ増えていきます。</p>
       </section>`;
   }

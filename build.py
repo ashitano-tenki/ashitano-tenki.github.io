@@ -31,6 +31,8 @@ REQUIRED_COLUMNS = ["ID", "タイトル", "種類", "転機の種類", "段階",
                     "提供元・著者", "費用", "最終観測日", "追加日", "観測スコア", "状態"]
 LISTED_STATES = {"確認済み", "要更新"}
 COST_ORDER = ["無料", "一部無料", "有料"]
+COST_LABELS = {"一部無料": "無料で試せる"}  # 画面での呼び方（スプレッドシートの値はそのまま）
+FREE_COSTS = {"無料", "一部無料"}  # 「無料で試せるものだけ」で残すもの
 COMMON = "共通"
 OTHER = "その他"
 
@@ -178,10 +180,14 @@ def tenki_url(t):
     return "/tenki/%s/" % t["slug"]
 
 
+def cost_label(cost):
+    return COST_LABELS.get(cost, cost)
+
+
 def tag_list(item):
     tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])]
     if item["cost"]:
-        tags.append('<span class="tag tag-cost">%s</span>' % e(item["cost"]))
+        tags.append('<span class="tag tag-cost">%s</span>' % e(cost_label(item["cost"])))
     return '<div class="tags">%s</div>' % "".join(tags)
 
 
@@ -239,6 +245,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <meta property="og:image" content="{base}/assets/ogp.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="{site} 観測レポート" href="/feed.xml">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -258,8 +265,14 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
       <a href="/check/">セルフチェック</a>
       <a href="/report/">観測レポート</a>
     </nav>
+    <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
     <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
   </div>
+  <form class="header-search wrap" id="header-search" action="/search/" method="get" role="search" hidden>
+    <label for="header-q" class="visually-hidden">キーワード</label>
+    <input id="header-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
+    <button type="submit">探す</button>
+  </form>
 </header>
 <main class="wrap">
 {body}
@@ -504,6 +517,18 @@ def similar_items(item, listed, limit=4):
     return [p[3] for p in pool[:limit]]
 
 
+def next_stage(item):
+    """その掲載情報の段階のうち、いちばん後ろの段階の次。安定の次は、次の転機の準備。"""
+    order = [s["name"] for s in STAGES]
+    idx = [order.index(st) for st in item["stages"] if st in order]
+    if not idx:
+        return None
+    last = max(idx)
+    if last == len(order) - 1:
+        return order[0], True
+    return order[last + 1], False
+
+
 def report_link(item):
     url = CONF.get("report_form_url", "")
     if not url:
@@ -523,6 +548,21 @@ def build_item(item, listed, ctx):
     similar_html = ""
     if similar:
         similar_html = '<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>' % cards(similar, ctx)
+
+    next_html = ""
+    nxt = next_stage(item)
+    if item["listed"] and nxt:
+        stage, following = nxt
+        picks = [o for o in listed if o["id"] != item["id"] and stage in o["stages"]
+                 and any(matches_tenki(o, t) for t in item["tenki"])][:3]
+        if picks:
+            heading = ("次の転機の準備に役立つもの" if following else "次の段階（%s）で役立つもの" % stage)
+            tenki_param = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), "")
+            next_html = ('<section class="section"><h2 class="section-title">%s</h2>%s%s</section>'
+                         % (e(heading), cards(picks, ctx),
+                            more_link(search_url(tenki=tenki_param, stage=stage),
+                                      "%s×%sで役立つものをすべて見る" % (tenki_param, stage) if tenki_param
+                                      else "%sで役立つものをすべて見る" % stage)))
 
     crumbs = breadcrumb([("探す", "/search/"), (item["title"], None)])
     if not item["listed"]:
@@ -547,6 +587,7 @@ def build_item(item, listed, ctx):
 <article class="detail">
   <p class="kicker"><a href="{kind_url}">{kind}</a></p>
   <h1>{title}</h1>
+  <p class="detail-when">{when}</p>
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
   <dl class="facts">
@@ -561,10 +602,11 @@ def build_item(item, listed, ctx):
   {report}
 </article>
 {similar}
+{next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(item["cost"] or "―"),
+           when=e(when_line(item)), memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
-           similar=similar_html)
+           similar=similar_html, next=next_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
     page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx)
 
@@ -572,8 +614,6 @@ def build_item(item, listed, ctx):
 def build_search(listed, ctx):
     def options(values):
         return "".join('<option value="%s">%s</option>' % (e(v), e(v)) for v in values)
-    costs = [c for c in COST_ORDER if any(it["cost"] == c for it in listed)]
-    costs += sorted({it["cost"] for it in listed if it["cost"] and it["cost"] not in COST_ORDER})
     body = """
 {crumbs}
 <header class="page-head page-head-tight">
@@ -591,7 +631,7 @@ def build_search(listed, ctx):
         <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
-        <div class="field"><label for="cost">費用</label><select id="cost" name="cost"><option value="">すべて</option>{costs}</select></div>
+        <div class="field field-free"><span class="label-like">費用</span><label class="check"><input type="checkbox" id="free" name="free" value="1">無料で試せるものだけ<span id="free-count"></span></label></div>
         <p class="note filter-note">条件はURLに残るので、そのまま共有できます。</p>
         <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
@@ -612,7 +652,7 @@ def build_search(listed, ctx):
 <script src="/assets/search.js?v={ver}" defer></script>
 """.format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
            tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
-           costs=options(costs), page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
+           page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、タイプ・転機・段階・費用で絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
 
@@ -635,9 +675,10 @@ def build_report(listed, ctx):
 <header class="page-head">
   <h1>観測レポート</h1>
   <p class="lead">観測所に新しく加わったサービスと情報を、週ごとにまとめています（週は月曜日から日曜日まで）。</p>
+  <p class="note">新しく加わったものは<a href="/feed.xml">RSS</a>でも受け取れます。RSSリーダーにこのページのURLか、RSSのURL（{base}/feed.xml）を登録してください。</p>
 </header>
 {sections}
-""".format(crumbs=breadcrumb([("観測レポート", None)]),
+""".format(crumbs=breadcrumb([("観測レポート", None)]), base=e(BASE),
            sections="\n".join(sections) or '<p class="empty">まだ記録がありません。</p>')
     page("/report/", "観測レポート", "あしたの転機観測所に新しく加わったサービスと情報を、週ごとにまとめています。", body, ctx=ctx)
 
@@ -713,7 +754,8 @@ def build_search_json(listed, ctx):
     data = {
         "items": [{
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
-            "tenki": it["tenki"], "stages": it["stages"], "cost": it["cost"],
+            "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
+            "free": it["cost"] in FREE_COSTS,
             "added": it["added"].isoformat() if it["added"] else "",
             "rank": it["rank"], "new": it["id"] in ctx["new_ids"],
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"],
@@ -731,10 +773,27 @@ def build_check(listed, ctx):
     ctx["sitemap"].append(BASE + "/check/")
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
-        "memo": it["memo"], "url": it["url"], "cost": it["cost"], "rank": it["rank"],
+        "memo": it["memo"], "url": it["url"], "cost": cost_label(it["cost"]), "rank": it["rank"],
         "page": "/item/%s/" % it["id"],
     } for it in listed]}
     write("/check/picks.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+
+
+def build_feed(listed, ctx):
+    """観測レポートのRSS。追加日の新しい順に最大50件。"""
+    from email.utils import format_datetime
+    items = sorted([it for it in listed if it["added"]], key=lambda it: (it["added"], -it["rank"]), reverse=True)[:50]
+    def pub(d):
+        return format_datetime(datetime.datetime(d.year, d.month, d.day, 5, 0, tzinfo=JST))
+    entries = "".join(
+        "<item><title>%s</title><link>%s/item/%s/</link><guid isPermaLink=\"true\">%s/item/%s/</guid>"
+        "<description>%s</description><category>%s</category><pubDate>%s</pubDate></item>"
+        % (e(it["title"]), BASE, it["id"], BASE, it["id"], e("%s｜%s" % (when_line(it), it["memo"])), e(it["kind"]), pub(it["added"]))
+        for it in items)
+    write("/feed.xml", '''<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel><title>%s 観測レポート</title><link>%s/report/</link>
+<description>観測所に新しく加わったサービスと情報</description><language>ja</language>%s</channel></rss>
+''' % (e(CONF["site_name"]), BASE, entries))
 
 
 def build_meta_files(ctx):
@@ -811,6 +870,7 @@ def main():
     build_404(ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
+    build_feed(listed, ctx)
     build_meta_files(ctx)
 
     meta = {"built": today.isoformat(), "total": len(items), "listed": len(listed)}

@@ -18,3 +18,18 @@
     try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) {}
   });
 })();
+
+// ヘッダーの検索：虫めがねを押すとキーワード欄を開く（JavaScriptが使えないときは探すページへ移る）
+(function () {
+  var btn = document.getElementById("header-search-btn");
+  var form = document.getElementById("header-search");
+  if (!btn || !form) return;
+  btn.addEventListener("click", function (ev) {
+    ev.preventDefault();
+    var q = document.getElementById("q");
+    if (q) { q.focus(); q.scrollIntoView({ block: "center" }); return; } // 探すページでは、ページのキーワード欄を使う
+    form.hidden = !form.hidden;
+    btn.setAttribute("aria-expanded", form.hidden ? "false" : "true");
+    if (!form.hidden) document.getElementById("header-q").focus();
+  });
+})();

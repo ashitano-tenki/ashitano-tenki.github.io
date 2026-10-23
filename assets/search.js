@@ -3,9 +3,11 @@
   document.documentElement.classList.add("js");
   var PAGE = window.TENKI_PAGE_SIZE || 20;
   var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
-  var FIELDS = ["q", "kind", "tenki", "stage", "cost", "sort"];
-  var FILTERS = ["kind", "tenki", "stage", "cost"]; // 「絞り込む」の中にある条件
-  var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階", cost: "費用" };
+  var FIELDS = ["q", "kind", "tenki", "stage", "free", "sort"];
+  var FILTERS = ["kind", "tenki", "stage", "free"]; // 「絞り込む」の中にある条件
+  var SELECTS = ["kind", "tenki", "stage"];
+  var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階" };
+  var FREE_TEXT = "無料で試せる";
   var COMMON = "共通", OTHER = "その他";
   var form = document.getElementById("filters");
   var list = document.getElementById("results");
@@ -15,6 +17,14 @@
   var toggle = document.getElementById("filter-toggle");
   var panel = document.getElementById("filter-panel");
   var filterCount = document.getElementById("filter-count");
+  var zeroHelp = document.createElement("div");
+  zeroHelp.className = "zero-help";
+  zeroHelp.hidden = true;
+  chipsEl.parentNode.insertBefore(zeroHelp, chipsEl.nextSibling);
+  // 選択肢のもとの名前を覚えておき、件数を付け直せるようにする
+  SELECTS.forEach(function (f) {
+    Array.prototype.forEach.call(form.elements[f].options, function (o) { o.dataset.label = o.textContent; });
+  });
   var data = null, results = [], shown = 0;
 
   function normalize(s) {
@@ -41,6 +51,8 @@
   function readParams() {
     var p = new URLSearchParams(location.search), state = {};
     FIELDS.forEach(function (f) { state[f] = p.get(f) || ""; });
+    // 以前の共有URL（cost=無料 など）も「無料で試せる」として読む
+    if (!state.free && (p.get("cost") === "無料" || p.get("cost") === "一部無料")) state.free = "1";
     return state;
   }
 
@@ -48,6 +60,7 @@
     FIELDS.forEach(function (f) {
       var el = form.elements[f];
       if (!el) return;
+      if (el.type === "checkbox") { el.checked = state[f] === "1"; return; }
       if (el.tagName === "SELECT" && state[f] && !Array.prototype.some.call(el.options, function (o) { return o.value === state[f]; })) {
         el.add(new Option(state[f], state[f]));
       }
@@ -57,7 +70,10 @@
 
   function readForm() {
     var state = {};
-    FIELDS.forEach(function (f) { state[f] = (form.elements[f].value || "").trim(); });
+    FIELDS.forEach(function (f) {
+      var el = form.elements[f];
+      state[f] = el.type === "checkbox" ? (el.checked ? "1" : "") : (el.value || "").trim();
+    });
     return state;
   }
 
@@ -73,17 +89,59 @@
     return name !== COMMON && name !== OTHER && item.tenki.indexOf(COMMON) >= 0;
   }
 
-  function filter(state) {
+  function match(state) {
     var terms = normalize(state.q).split(/\s+/).filter(Boolean).map(alternatives);
-    var out = data.items.filter(function (it) {
+    return data.items.filter(function (it) {
       if (state.kind && it.kind !== state.kind) return false;
       if (state.tenki && !matchTenki(it, state.tenki)) return false;
       if (state.stage && it.stages.indexOf(state.stage) < 0) return false;
-      if (state.cost && it.cost !== state.cost) return false;
+      if (state.free && !it.free) return false;
       return terms.every(function (alts) {
         return alts.some(function (w) { return it.text.indexOf(w) >= 0; });
       });
     });
+  }
+
+  function without(state, field) {
+    var s = {};
+    for (var k in state) s[k] = state[k];
+    s[field] = "";
+    return s;
+  }
+
+  // 選択肢ごとに「それを選んだら何件になるか」を付け、0件になるものは選べなくする
+  function updateCounts(state) {
+    SELECTS.forEach(function (f) {
+      var base = without(state, f);
+      Array.prototype.forEach.call(form.elements[f].options, function (o) {
+        var s = without(base, f);
+        s[f] = o.value;
+        var n = match(s).length;
+        o.textContent = (o.dataset.label || o.value) + "（" + n + "）";
+        o.disabled = n === 0 && o.value !== state[f];
+      });
+    });
+    var sFree = without(state, "free");
+    sFree.free = "1";
+    document.getElementById("free-count").textContent = "（" + match(sFree).length + "）";
+  }
+
+  // 0件のとき、どの条件を外せば見つかるかを示す
+  function renderZeroHelp(state) {
+    var hints = [];
+    if (!results.length) {
+      ["q"].concat(FILTERS).forEach(function (f) {
+        if (!state[f]) return;
+        var n = match(without(state, f)).length;
+        if (n) hints.push('<button type="button" class="link-button" data-field="' + f + '">' + esc(chipText(f, state)) + "を外すと" + n + "件</button>");
+      });
+    }
+    zeroHelp.hidden = !hints.length;
+    zeroHelp.innerHTML = hints.length ? "<span>条件を外すと見つかります：</span>" + hints.join("") : "";
+  }
+
+  function filter(state) {
+    var out = match(state);
     if (state.sort === "new") {
       out.sort(function (a, b) { return a.added < b.added ? 1 : a.added > b.added ? -1 : a.rank - b.rank; });
     } else {
@@ -116,10 +174,15 @@
   }
 
   // 選んでいる条件を「×で外せる札」として並べる
+  function chipText(f, state) {
+    if (f === "q") return "「" + state.q + "」";
+    if (f === "free") return FREE_TEXT;
+    return LABELS[f] + "：" + state[f];
+  }
+
   function renderChips(state) {
     var chips = [];
-    if (state.q) chips.push({ field: "q", text: "「" + state.q + "」" });
-    FILTERS.forEach(function (f) { if (state[f]) chips.push({ field: f, text: LABELS[f] + "：" + state[f] }); });
+    ["q"].concat(FILTERS).forEach(function (f) { if (state[f]) chips.push({ field: f, text: chipText(f, state) }); });
     chipsEl.hidden = !chips.length;
     chipsEl.innerHTML = chips.map(function (c) {
       return '<button type="button" class="active-chip" data-field="' + c.field + '" aria-label="' + esc(c.text) + 'を外す">' +
@@ -132,9 +195,10 @@
   function countText(state) {
     var parts = [];
     if (state.q) parts.push("「" + state.q + "」");
-    FILTERS.forEach(function (f) { if (state[f]) parts.push(state[f]); });
-    if (!results.length) return (parts.length ? parts.join("・") + "では、" : "") + "見つかりませんでした。条件を外すか、別の言葉で探してみてください。";
-    return (parts.length ? parts.join("・") + "で " : "") + results.length + "件";
+    FILTERS.forEach(function (f) { if (state[f]) parts.push(f === "free" ? FREE_TEXT : state[f]); });
+    var cond = parts.length ? "（" + parts.join("・") + "）" : "";
+    if (!results.length) return "見つかりませんでした" + cond + "。条件を外すか、別の言葉で探してみてください。";
+    return results.length + "件" + cond;
   }
 
   function render(reset) {
@@ -151,6 +215,8 @@
     updateUrl(state);
     results = filter(state);
     renderChips(state);
+    updateCounts(state);
+    renderZeroHelp(state);
     countEl.textContent = countText(state);
     render(true);
   }
@@ -166,13 +232,19 @@
   form.addEventListener("submit", function (ev) { ev.preventDefault(); run(); });
   moreBtn.addEventListener("click", function () { render(false); });
   toggle.addEventListener("click", function () { setPanel(!panel.classList.contains("open")); });
-  chipsEl.addEventListener("click", function (ev) {
+  function clearField(k) {
+    var el = form.elements[k];
+    if (el.type === "checkbox") el.checked = false; else el.value = "";
+  }
+  function onRemove(ev) {
     var b = ev.target.closest("button[data-field]");
     if (!b) return;
     var f = b.getAttribute("data-field");
-    (f === "all" ? ["q"].concat(FILTERS) : [f]).forEach(function (k) { form.elements[k].value = ""; });
+    (f === "all" ? ["q"].concat(FILTERS) : [f]).forEach(clearField);
     run();
-  });
+  }
+  chipsEl.addEventListener("click", onRemove);
+  zeroHelp.addEventListener("click", onRemove);
 
   fetch("/search.json")
     .then(function (r) { return r.json(); })
