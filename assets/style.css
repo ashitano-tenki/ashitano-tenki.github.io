@@ -175,6 +175,21 @@ button, .button {
 @media (min-width: 900px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
 .card a { display: flex; flex-direction: column; height: 100%; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); text-decoration: none; color: var(--ink); }
 .card a:hover { border-color: var(--sky); }
+/* あとで見る */
+.card { position: relative; }
+.card .card-when, .card h3 { padding-right: 36px; }
+.save-btn { position: absolute; top: 10px; right: 10px; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; background: var(--card); border: var(--border-hairline) solid var(--line); color: transparent; }
+.save-btn svg path, .save-wide svg path { fill: transparent; stroke: var(--text-sub); }
+.save-btn:hover svg path, .save-wide:hover svg path { stroke: var(--sky); }
+.save-btn[aria-pressed="true"] svg path, .save-wide[aria-pressed="true"] svg path { fill: var(--sky); stroke: var(--sky); }
+.save-btn[aria-pressed="true"] { border-color: var(--sky); }
+.official { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.save-wide { display: inline-flex; align-items: center; gap: var(--space-2); }
+.save-wide[aria-pressed="true"] { border-color: var(--sky); color: var(--sky); }
+.saved-count { font-size: 12px; color: var(--text-sub); }
+.save-inline svg { vertical-align: -3px; }
+.save-inline svg path { fill: transparent; stroke: var(--text-sub); }
+.saved-status { margin: var(--space-4) 0 var(--space-3); }
 .card h3 { font-size: 17px; line-height: 1.5; margin: 0 0 var(--space-1); }
 .card a:hover h3 { color: var(--sky); }
 .card .card-when { font-size: 13px; font-weight: 700; line-height: 1.5; color: var(--sky); margin: 0 0 var(--space-1); }

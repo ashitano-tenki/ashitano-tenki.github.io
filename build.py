@@ -204,15 +204,36 @@ def added_label(d, today):
     return "%d年%d月%d日に追加" % (d.year, d.month, d.day)
 
 
+SAVE_ICON = ('<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">'
+             '<path d="M6 3h12v18l-6-4.5L6 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>')
+
+
+def save_button(item):
+    return ('<button type="button" class="save-btn" data-save="%s" data-title="%s" aria-pressed="false" '
+            'aria-label="「%s」をあとで見る" hidden>%s</button>' % (e(item["id"]), e(item["title"]), e(item["title"]), SAVE_ICON))
+
+
 def card(item, today):
     return ('<li class="card"><a href="/item/%s/"><p class="card-when">%s</p><h3>%s</h3><p class="card-line">%s</p>'
-            '<div class="card-foot">%s<span class="card-date">%s</span></div></a></li>'
+            '<div class="card-foot">%s<span class="card-date">%s</span></div></a>%s</li>'
             % (e(item["id"]), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item),
-               e(added_label(item["added"], today))))
+               e(added_label(item["added"], today)), save_button(item)))
 
 
 def cards(items, ctx):
     return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"]) for it in items)
+
+
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/report/", "観測レポート"), ("/check/", "セルフチェック"), ("/saved/", "あとで見る")]
+
+
+def nav_links(current=None):
+    out = []
+    for href, label in NAV:
+        extra = '<span class="saved-count" id="saved-count"></span>' if href == "/saved/" else ""
+        cur = ' aria-current="page"' if href == current else ""
+        out.append('      <a href="%s"%s>%s%s</a>' % (href, cur, e(label), extra))
+    return "\n".join(out)
 
 
 _CRUMBS = []  # 直前に作ったパンくず。page() が構造化データ（BreadcrumbList）に使う
@@ -286,10 +307,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
   <div class="wrap header-inner">
     <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
     <nav class="global-nav" id="global-nav" aria-label="サイト内">
-      <a href="/search/">探す</a>
-      <a href="/tenki/">転機から</a>
-      <a href="/report/">観測レポート</a>
-      <a href="/check/">セルフチェック</a>
+{nav}
     </nav>
     <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
     <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
@@ -318,12 +336,12 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
     <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
   </div>
 </footer>
-<script src="/assets/theme.js?v={ver}"></script>
+<script src="/assets/site.js?v={ver}"></script>
 </body>
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), nav=nav_links(), image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
@@ -627,8 +645,11 @@ def build_item(item, listed, ctx):
         page("/item/%s/" % item["id"], item["title"], "このサービスは提供を終了したか、掲載を終えました。", body, noindex=True, ctx=ctx)
         return
 
-    official = ('<p class="official"><a class="button" href="%s" rel="noopener" target="_blank">公式サイトを見る</a></p>'
-                % e(item["url"])) if item["url"] else ""
+    official_link = ('<a class="button" href="%s" rel="noopener" target="_blank">公式サイトを見る</a>'
+                     % e(item["url"])) if item["url"] else ""
+    official = ('<p class="official">%s<button type="button" class="button button-ghost save-wide" data-save="%s" '
+                'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button></p>'
+                % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON))
     tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]))
     stage_links = links(item["stages"], STAGE_BY_NAME, lambda n: search_url(stage=n))
     body = """
@@ -787,6 +808,22 @@ def build_about(listed, ctx):
     page("/about/", "観測所について", "あしたの転機観測所の目的、掲載の基準、並び順の考え方、情報の集め方と運営者について。", body, ctx=ctx)
 
 
+def build_saved(ctx):
+    body = """
+{crumbs}
+<header class="page-head">
+  <h1>あとで見る</h1>
+  <p class="lead">カードや紹介ページの<span class="save-inline">{icon}</span>ボタンで残したものです。</p>
+  <p class="note">このブラウザの中だけに保存しています。ほかの端末やブラウザとは共有されず、観測所に送られることもありません。</p>
+</header>
+<p id="saved-status" class="saved-status" aria-live="polite">読み込み中…</p>
+<ul id="saved-list" class="cards"></ul>
+<p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
+<noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
+""".format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)
+    page("/saved/", "あとで見る", "あとで見るために残したサービスと情報の一覧です。", body, noindex=True, ctx=ctx)
+
+
 def build_404(ctx):
     body = """
 <header class="page-head">
@@ -825,7 +862,19 @@ def build_search_json(listed, ctx):
 def build_check(listed, ctx):
     """転機の段階セルフチェック（check/index.html）と、結果画面のおすすめに使う picks.json を書き出す。"""
     with open(os.path.join(ROOT, "check", "index.html"), encoding="utf-8") as f:
-        write("/check/", f.read())
+        text = f.read()
+    # 観測所と共通のヘッダー・フッターを差し込む（メニューは NAV と同じもの）
+    header = """<header class="sc-header"><div class="sc-inner">
+  <a class="sc-logo" href="/"><img src="/assets/logo.svg" alt="" width="22" height="22">%s</a>
+  <nav class="sc-nav" aria-label="サイト内">
+%s
+  </nav>
+</div></header>""" % (e(CONF["site_name"]), nav_links("/check/").replace(' id="saved-count"', ""))
+    footer = """<footer class="sc-footer"><div class="sc-inner">
+  <a href="/">あしたの転機観測所のトップ</a>・<a href="/about/">観測所について</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>
+</div></footer>""".format(contact=e(CONF["contact_form_url"]))
+    assert "<!--SITE_HEADER-->" in text and "<!--SITE_FOOTER-->" in text
+    write("/check/", text.replace("<!--SITE_HEADER-->", header).replace("<!--SITE_FOOTER-->", footer))
     ctx["sitemap"].append(BASE + "/check/")
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
@@ -927,6 +976,7 @@ def main():
     build_report(listed, ctx)
     build_about(listed, ctx)
     build_404(ctx)
+    build_saved(ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_feed(listed, ctx)

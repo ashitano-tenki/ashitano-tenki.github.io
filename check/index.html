@@ -60,15 +60,21 @@ body {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 24px 64px;
 }
-.obs-bar {
-  max-width: 680px; margin: 0 auto;
-  padding-top: 16px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.obs-bar a { display: inline-flex; align-items: center; gap: 8px; font: 700 15px/1.4 var(--font-display); color: var(--ink); text-decoration: none; }
-.obs-bar a:hover { color: var(--sky); text-decoration: underline; }
-.obs-bar img { width: 20px; height: 20px; flex: none; }
+/* 観測所と共通のヘッダー・フッター。質問のあいだはロゴだけにして、回答に集中できるようにする */
+.sc-header, .sc-footer { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.sc-header { border-bottom: 1px solid var(--line); background: var(--base); }
+.sc-inner { max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; padding-block: 12px; }
+.sc-logo { display: inline-flex; align-items: center; gap: 8px; font: 900 17px/1.4 var(--font-display); color: var(--ink); text-decoration: none; }
+.sc-logo img { width: 22px; height: 22px; flex: none; }
+.sc-nav { display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: 14px; }
+.sc-nav a { color: var(--text-body); text-decoration: none; padding: 2px 0; }
+.sc-nav a:hover { color: var(--sky); text-decoration: underline; }
+.sc-nav a[aria-current="page"] { color: var(--ink); font-weight: 700; }
+@media (max-width: 600px) { .sc-nav { flex-wrap: nowrap; overflow-x: auto; width: 100%; gap: 14px; font-size: 13px; scrollbar-width: none; } .sc-nav a { white-space: nowrap; } }
+.sc-footer { background: var(--ink); color: var(--text-on-ink); border-top: 4px solid var(--yellow); }
+.sc-footer .sc-inner { padding-block: 28px 40px; justify-content: flex-start; font-size: 14px; }
+.sc-footer a { color: var(--base); }
+.in-question .sc-nav, .in-question .sc-footer { display: none; }
 .band { position: fixed; top: 0; bottom: 0; left: 0; width: 8px; background: var(--yellow); }
 @media (max-width: 720px) { .band { display: none; } }
 .label {
@@ -185,7 +191,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
 <body>
 
 <div class="band" aria-hidden="true"></div>
-<header class="obs-bar"><a href="/"><img src="/assets/logo.svg" alt="" width="20" height="20">あしたの転機観測所</a></header>
+<!--SITE_HEADER-->
 <main class="wrap" id="app"></main>
 
 <script>
@@ -580,6 +586,7 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
 
   function go(n) {
     idx = Math.max(-1, Math.min(n, Q.length));
+    document.body.classList.toggle("in-question", idx >= 0 && idx < Q.length);
     if (idx === -1) renderIntro();
     else if (idx === Q.length) renderResult();
     else renderQuestion();
@@ -593,5 +600,6 @@ footer { border-top: 1px solid var(--line); padding-top: 24px; }
 })();
 </script>
 
+<!--SITE_FOOTER-->
 </body>
 </html>

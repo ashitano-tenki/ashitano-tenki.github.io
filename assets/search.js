@@ -163,7 +163,7 @@
       "<h3>" + esc(it.title) + "</h3>" +
       '<p class="card-line">' + esc(it.line) + "</p>" +
       '<div class="card-foot"><div class="tags">' + tags + '</div><span class="card-date">' + esc(addedLabel(it.added)) + "</span></div>" +
-      "</a></li>";
+      "</a>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
   }
 
   // 選んでいる条件を「×で外せる札」として並べる
