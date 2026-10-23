@@ -1038,6 +1038,10 @@ def build_meta_files(ctx):
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">%s</urlset>\n' % urls)
     write("/robots.txt", "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE)
     write("/.nojekyll", "")
+    # 毎週のリンク点検の結果（tools/check_links.py が data/linkcheck.json に書く）を、サイトのトップと同じ場所に置く
+    linkcheck = os.path.join(ROOT, "data", "linkcheck.json")
+    if os.path.exists(linkcheck):
+        shutil.copyfile(linkcheck, os.path.join(OUT, "linkcheck.json"))
 
 
 def assets_version():

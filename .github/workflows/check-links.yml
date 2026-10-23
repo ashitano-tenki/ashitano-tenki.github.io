@@ -2,32 +2,54 @@ name: リンク切れの点検
 
 on:
   schedule:
-    - cron: "0 21 * * 0"   # 毎週月曜 日本時間の朝6時ごろ（UTCの日曜21時）
+    - cron: "0 21 * * 0"   # 毎週月曜 日本時間の朝6時（UTCの日曜21時）
   workflow_dispatch:
 
 permissions:
-  contents: read
-  issues: write
+  contents: write   # 結果（data/linkcheck.json）を保存するため
+  issues: write     # 要確認があったときに Issue で知らせるため
+  actions: write    # 結果を公開するために「サイトを更新」を動かすため
+
+concurrency:
+  group: linkcheck
+  cancel-in-progress: false
 
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
 
-      # 掲載中の公式サイトを開いて確かめる。問題があったときだけ report.md ができる
-      - name: 公式サイトを開いて確かめる
+      # 掲載中のURLを開いて確かめ、data/linkcheck.json に書く。要確認があれば report.md もできる
+      - name: 掲載中のURLを開いて確かめる
         run: python3 tools/check_links.py report.md
 
-      # 問題があったときだけ Issue（お知らせ）を作る。Issue ができるとアカウントのメールに通知が届く
-      - name: 問題があれば Issue で知らせる
+      # 結果をリポジトリに保存する（サイトを作るときに linkcheck.json として公開される）
+      - name: 結果を保存する
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/linkcheck.json
+          git diff --cached --quiet || git commit -m "リンク点検の結果 $(TZ=Asia/Tokyo date +%F)"
+          git pull --rebase -q
+          git push
+
+      # サイトを作り直して、linkcheck.json を公開する（掲載内容や見た目は変わらない）
+      - name: 結果を公開する
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build.yml --repo "${{ github.repository }}" --ref main
+
+      # 要確認があったときだけ Issue（お知らせ）を作る。Issue ができるとアカウントのメールに通知が届く
+      - name: 要確認があれば Issue で知らせる
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if [ -f report.md ]; then
             gh issue create --repo "${{ github.repository }}" \
-              --title "公式サイトのリンク点検 $(TZ=Asia/Tokyo date +%Y-%m-%d)" \
+              --title "リンク点検で要確認のURLがありました $(TZ=Asia/Tokyo date +%Y-%m-%d)" \
               --body-file report.md
           else
-            echo "問題は見つかりませんでした"
+            echo "要確認のURLはありませんでした"
           fi
