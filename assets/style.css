@@ -84,18 +84,25 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .logo { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
 .logo-mark { width: 24px; height: 24px; flex: none; }
 .global-nav { display: flex; align-items: center; gap: var(--space-1) var(--space-4); flex-wrap: wrap; font-size: 14px; }
-.theme-toggle { font-size: 13px; font-weight: 400; padding: 2px var(--space-3); background: var(--card); color: var(--text-body); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-pill); }
-.theme-toggle:hover { border-color: var(--sky); color: var(--sky); }
-@media (max-width: 380px) { .theme-toggle { font-size: 12px; padding: 2px var(--space-2); } .header-search-btn { width: 32px; height: 32px; } }
-/* スマホ：1行目にロゴと切り替えボタン、2行目にメニュー。広い画面：ロゴ、メニュー、ボタンの順に1行 */
+/* ヘッダーは1段。スマホ：ロゴ・虫めがね・メニューボタン（メニューは押すと下に開く）。広い画面：ロゴ・メニュー・虫めがね */
 .global-nav { order: 4; flex-basis: 100%; }
 .header-search-btn { order: 2; margin-left: auto; }
-.theme-toggle { order: 3; }
+.menu-btn { order: 3; }
+.js .global-nav:not(.open) { display: none; }
+.global-nav.open { padding-top: var(--space-2); border-top: var(--border-hairline) solid var(--line); margin-top: var(--space-2); }
+.global-nav.open a { padding: var(--space-2) 0; }
+@media (max-width: 759px) { .global-nav.open { flex-direction: column; align-items: flex-start; gap: 0; } }
 @media (min-width: 760px) {
-  .global-nav { order: 2; flex-basis: auto; margin-left: auto; }
+  .global-nav, .js .global-nav:not(.open) { display: flex; order: 2; flex-basis: auto; margin-left: auto; }
   .header-search-btn { order: 3; margin-left: 0; }
-  .theme-toggle { order: 4; }
+  .header-inner .menu-btn { display: none; }
 }
+.menu-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
+.menu-btn:hover, .menu-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
+/* フッターの表示切り替え */
+.footer-theme { margin: var(--space-6) 0 0; }
+.theme-toggle { font-size: 13px; font-weight: 400; padding: 4px var(--space-3); background: transparent; color: var(--footer-text); border: var(--border-hairline) solid var(--footer-sub); border-radius: var(--radius-pill); }
+.theme-toggle:hover { color: var(--footer-strong); border-color: var(--footer-strong); }
 /* ヘッダーの検索：虫めがねを押すと、ヘッダーの下にキーワード欄が開く */
 .header-search-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .header-search-btn:hover, .header-search-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }

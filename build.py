@@ -248,7 +248,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<script>try{{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}}catch(e){{}}</script>
+<script>document.documentElement.classList.add("js");try{{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}}catch(e){{}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
@@ -258,14 +258,14 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
-    <nav class="global-nav" aria-label="サイト内">
+    <nav class="global-nav" id="global-nav" aria-label="サイト内">
       <a href="/search/">探す</a>
       <a href="/tenki/">転機から</a>
       <a href="/report/">観測レポート</a>
       <a href="/check/">セルフチェック</a>
     </nav>
     <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
-    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
   <form class="header-search wrap" id="header-search" action="/search/" method="get" role="search" hidden>
     <label for="header-q" class="visually-hidden">キーワード</label>
@@ -287,6 +287,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
       </p>
     </div>
     <p class="contact">掲載情報の誤りのお知らせや掲載のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームからお送りください。</p>
+    <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
     <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
   </div>
 </footer>

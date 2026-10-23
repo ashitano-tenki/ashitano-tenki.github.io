@@ -33,3 +33,15 @@
     if (!form.hidden) document.getElementById("header-q").focus();
   });
 })();
+
+// スマホのメニュー：ボタンを押すとヘッダーの下にメニューを開く（JavaScriptが使えないときは最初から表示）
+(function () {
+  var btn = document.getElementById("menu-btn");
+  var nav = document.getElementById("global-nav");
+  if (!btn || !nav) return;
+  btn.addEventListener("click", function () {
+    var open = !nav.classList.contains("open");
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+})();
