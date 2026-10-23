@@ -220,11 +220,6 @@ button, .button {
 .filter-toggle::after { content: "▾"; margin-left: 4px; font-size: 12px; color: var(--text-sub); }
 .filter-toggle[aria-expanded="true"]::after { content: "▴"; }
 .filter-panel { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); margin-top: var(--space-2); }
-.field-free { grid-column: 1 / -1; }
-.label-like { display: block; font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 2px; }
-.check { display: flex; align-items: center; gap: var(--space-2); font-size: 15px; cursor: pointer; }
-.check input { width: 18px; height: 18px; accent-color: var(--ink); margin: 0; }
-.check span { font-size: 13px; color: var(--text-sub); }
 .zero-help { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); margin: 0 0 var(--space-3); font-size: 14px; }
 .zero-help span { color: var(--text-sub); }
 .filter-note { grid-column: 1 / -1; margin: 0; font-size: 13px; }

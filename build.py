@@ -32,7 +32,6 @@ REQUIRED_COLUMNS = ["ID", "タイトル", "種類", "転機の種類", "段階",
 LISTED_STATES = {"確認済み", "要更新"}
 COST_ORDER = ["無料", "一部無料", "有料"]
 COST_LABELS = {"一部無料": "無料で試せる"}  # 画面での呼び方（スプレッドシートの値はそのまま）
-FREE_COSTS = {"無料", "一部無料"}  # 「無料で試せるものだけ」で残すもの
 COMMON = "共通"
 OTHER = "その他"
 
@@ -631,7 +630,6 @@ def build_search(listed, ctx):
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
         <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
-        <div class="field field-free"><span class="label-like">費用</span><label class="check"><input type="checkbox" id="free" name="free" value="1">無料で試せるものだけ<span id="free-count"></span></label></div>
         <p class="note filter-note">条件はURLに残るので、そのまま共有できます。</p>
         <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
@@ -653,7 +651,7 @@ def build_search(listed, ctx):
 """.format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
            tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
            page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
-    page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、タイプ・転機・段階・費用で絞り込み、キーワードで検索できます。", body, ctx=ctx)
+    page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
 
 def build_report(listed, ctx):
@@ -755,7 +753,6 @@ def build_search_json(listed, ctx):
         "items": [{
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
-            "free": it["cost"] in FREE_COSTS,
             "added": it["added"].isoformat() if it["added"] else "",
             "rank": it["rank"], "new": it["id"] in ctx["new_ids"],
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"],

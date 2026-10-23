@@ -3,11 +3,10 @@
   document.documentElement.classList.add("js");
   var PAGE = window.TENKI_PAGE_SIZE || 20;
   var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
-  var FIELDS = ["q", "kind", "tenki", "stage", "free", "sort"];
-  var FILTERS = ["tenki", "stage", "kind", "free"]; // 「絞り込む」の中にある条件
+  var FIELDS = ["q", "tenki", "stage", "kind", "sort"];
+  var FILTERS = ["tenki", "stage", "kind"]; // 「絞り込む」の中にある条件
   var SELECTS = ["tenki", "stage", "kind"];
   var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階" };
-  var FREE_TEXT = "無料で試せる";
   var COMMON = "共通", OTHER = "その他";
   var form = document.getElementById("filters");
   var list = document.getElementById("results");
@@ -51,8 +50,6 @@
   function readParams() {
     var p = new URLSearchParams(location.search), state = {};
     FIELDS.forEach(function (f) { state[f] = p.get(f) || ""; });
-    // 以前の共有URL（cost=無料 など）も「無料で試せる」として読む
-    if (!state.free && (p.get("cost") === "無料" || p.get("cost") === "一部無料")) state.free = "1";
     return state;
   }
 
@@ -95,7 +92,6 @@
       if (state.kind && it.kind !== state.kind) return false;
       if (state.tenki && !matchTenki(it, state.tenki)) return false;
       if (state.stage && it.stages.indexOf(state.stage) < 0) return false;
-      if (state.free && !it.free) return false;
       return terms.every(function (alts) {
         return alts.some(function (w) { return it.text.indexOf(w) >= 0; });
       });
@@ -121,9 +117,6 @@
         o.disabled = n === 0 && o.value !== state[f];
       });
     });
-    var sFree = without(state, "free");
-    sFree.free = "1";
-    document.getElementById("free-count").textContent = "（" + match(sFree).length + "）";
   }
 
   // 0件のとき、どの条件を外せば見つかるかを示す
@@ -176,7 +169,6 @@
   // 選んでいる条件を「×で外せる札」として並べる
   function chipText(f, state) {
     if (f === "q") return "「" + state.q + "」";
-    if (f === "free") return FREE_TEXT;
     return LABELS[f] + "：" + state[f];
   }
 
@@ -195,7 +187,7 @@
   function countText(state) {
     var parts = [];
     if (state.q) parts.push("「" + state.q + "」");
-    FILTERS.forEach(function (f) { if (state[f]) parts.push(f === "free" ? FREE_TEXT : state[f]); });
+    FILTERS.forEach(function (f) { if (state[f]) parts.push(state[f]); });
     var cond = parts.length ? "（" + parts.join("・") + "）" : "";
     if (!results.length) return "見つかりませんでした" + cond + "。条件を外すか、別の言葉で探してみてください。";
     return results.length + "件" + cond;
