@@ -317,6 +317,9 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
             for i, (label, href) in enumerate(trail)]})
         _CRUMBS[:] = []
     ld = "".join(jsonld_tag(d) for d in structured)
+    gsv = CONF.get("google_site_verification", "")
+    if gsv:
+        robots += '<meta name="google-site-verification" content="%s">\n' % e(gsv)
     html_text = """<!doctype html>
 <html lang="ja">
 <head>
