@@ -162,6 +162,7 @@ button, .button {
 .page-head { padding: var(--space-6) 0 var(--space-2); }
 .page-head h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.4; margin: 0 0 var(--space-2); }
 .page-head .lead { color: var(--text-body); margin: 0; }
+.page-note { margin: var(--space-3) 0 0; max-width: 46em; color: var(--ink); }
 .page-meta { font-size: 13px; color: var(--text-sub); margin: 6px 0 0; }
 .note { font-size: 14px; color: var(--text-body); }
 .empty { color: var(--text-body); }

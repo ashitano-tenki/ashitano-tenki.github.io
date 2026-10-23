@@ -47,6 +47,7 @@ def load_json(name):
 
 CONF = load_json("site.json")
 TENKI_CONF = load_json("tenki.json")
+NOTES = load_json("tenki_notes.json")  # 転機別・転機×段階のページに載せる解説文
 TENKI = TENKI_CONF["tenki"]
 STAGES = TENKI_CONF["stages"]
 TENKI_BY_NAME = {t["name"]: t for t in TENKI}
@@ -477,6 +478,10 @@ def build_home(listed, ctx):
          full_title="%s｜転機の種類と時期から探す、キャリアの転機に役立つサービス" % CONF["site_name"], ctx=ctx)
 
 
+def note_html(text):
+    return '  <p class="page-note">%s</p>' % e(text) if text else ""
+
+
 def tenki_heading(t):
     if t["name"] == COMMON:
         return "どの転機にも役立つサービスと情報"
@@ -520,6 +525,7 @@ def build_tenki(listed, ctx):
 <header class="page-head">
   <h1>{heading}</h1>
   <p class="lead">{about}</p>
+{note}
   <p class="page-meta">掲載中 {n}件</p>
 </header>
 {stage_nav}
@@ -529,7 +535,7 @@ def build_tenki(listed, ctx):
   {kinds}
   {more}
 </section>
-""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading), about=e(t["about"]),
+""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading), about=e(t["about"]), note=note_html(NOTES.get("tenki", {}).get(t["name"], "")),
            n=len(items), stage_nav=stage_nav, common_note=common_note,
            kinds=kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=3),
            more=more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
@@ -578,6 +584,7 @@ def build_combo(t, s, items, ctx):
   <p class="kicker">{tenki} × {stage}</p>
   <h1>{title}</h1>
   <p class="lead">{lead}</p>
+{note}
   <p class="page-meta">掲載中 {n}件</p>
 </header>
 <section class="section">
@@ -586,6 +593,7 @@ def build_combo(t, s, items, ctx):
 </section>
 """.format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], tenki_url(t)), (s["name"], None)]),
            tenki=e(t["name"]), stage=e(s["name"]), title=e(title), lead=e(combo_lead(t, s)), n=len(items),
+           note=note_html(NOTES.get("combos", {}).get(t["name"], {}).get(s["name"], "")),
            kinds=kind_sections(items, {"tenki": t["name"], "stage": s["name"]}, ctx, heading_level=2),
            more=more_link(search_url(tenki=t["name"], stage=s["name"]), "この条件の掲載情報をすべて見る"))
     path = "/tenki/%s/%s/" % (t["slug"], s["slug"])
