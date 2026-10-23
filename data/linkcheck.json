@@ -1,0 +1,137 @@
+{
+  "checked_at": "2026-10-23T18:33:18+09:00",
+  "summary": {
+    "正常": 84,
+    "移転": 0,
+    "拒否": 6,
+    "要確認": 8
+  },
+  "items": [
+    {
+      "id": "R0020",
+      "title": "マイナビミドルシニア",
+      "url": "https://mynavi-ms.jp/",
+      "status": "要確認",
+      "http_status": 404,
+      "final_url": "",
+      "note": "ページが見つかりません"
+    },
+    {
+      "id": "R0030",
+      "title": "科学的な適職",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295403746",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0041",
+      "title": "定年後――50歳からの生き方、終わり方",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121024312",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0044",
+      "title": "ライフピボット――縦横無尽に未来を描く 人生100年時代の転身術",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295010883",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0045",
+      "title": "Waris",
+      "url": "https://waris.co.jp/",
+      "status": "要確認",
+      "http_status": 503,
+      "final_url": "",
+      "note": "サーバーの不具合"
+    },
+    {
+      "id": "R0049",
+      "title": "会社人生「55歳の壁」突破策",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1562501",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0062",
+      "title": "幸せな転職―迷わず進める「キャリア設計」の教科書",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866633336",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0074",
+      "title": "転職・退職を考えたら知りたいことが全部のってる本",
+      "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784074621507",
+      "status": "要確認",
+      "http_status": null,
+      "final_url": "",
+      "note": "応答がありません"
+    },
+    {
+      "id": "R0005",
+      "title": "ランサーズ",
+      "url": "https://www.lancers.jp/",
+      "status": "拒否",
+      "http_status": 405,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    },
+    {
+      "id": "R0039",
+      "title": "新しい働き方LAB",
+      "url": "https://www.lancers.jp/lab",
+      "status": "拒否",
+      "http_status": 405,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    },
+    {
+      "id": "R0040",
+      "title": "仕事旅行",
+      "url": "https://www.shigoto-ryokou.com/",
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    },
+    {
+      "id": "R0046",
+      "title": "StockSunサロン",
+      "url": "https://stock-sun.com/salon/",
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    },
+    {
+      "id": "R0097",
+      "title": "マネーフォワード クラウド確定申告",
+      "url": "https://biz.moneyforward.com/tax_return/price",
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    },
+    {
+      "id": "R0098",
+      "title": "マネーフォワード クラウド契約書 テンプレート集",
+      "url": "https://biz.moneyforward.com/contract/templates/",
+      "status": "拒否",
+      "http_status": 403,
+      "final_url": "",
+      "note": "自動アクセスを断られました（壊れているとは限りません）"
+    }
+  ]
+}
