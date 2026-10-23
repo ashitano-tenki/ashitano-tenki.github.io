@@ -25,28 +25,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
       - name: CSVを読み込んでサイトを作る
         run: |
           if [ "${{ inputs.allow_decrease }}" = "true" ]; then
-            python3 build.py --allow-decrease
+            python3 build.py --save-data --allow-decrease
           else
-            python3 build.py
+            python3 build.py --save-data
           fi
 
-      # 件数の記録（data/meta.json）を残す。次回の件数チェックに使い、毎日の記録が続くことで自動実行も止まらない
-      - name: 件数の記録を保存する
+      # 件数の記録（data/meta.json）と、読み込んだデータそのもの（data/latest.csv）を残す。
+      # meta.json は次回の件数チェックに、latest.csv は何がいつ変わったかの履歴に使う。毎日の記録が続くことで自動実行も止まらない
+      - name: 件数とデータの記録を保存する
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/meta.json
+          git add data/meta.json data/latest.csv
           git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
           git push
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -58,4 +59,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

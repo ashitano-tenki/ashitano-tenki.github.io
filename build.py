@@ -946,6 +946,19 @@ def assets_version():
     return h.hexdigest()[:10]
 
 
+def save_snapshot(text):
+    """読み込んだCSVを data/latest.csv に残す（毎日の記録で、何がいつ変わったかの履歴になる）。
+    リポジトリは公開されているので、画面に出さない「観測スコア」の列は外して残す。"""
+    rows = list(csv.reader(io.StringIO(text)))
+    if not rows:
+        return
+    drop = [i for i, h in enumerate(rows[0]) if h.strip() == "観測スコア"]
+    with open(os.path.join(ROOT, "data", "latest.csv"), "w", encoding="utf-8", newline="") as f:
+        w = csv.writer(f, lineterminator="\n")
+        for r in rows:
+            w.writerow([v for i, v in enumerate(r) if i not in drop])
+
+
 def check_counts(items, listed, allow_decrease):
     """データの一時的な不具合でサイトが空になるのを防ぐ。"""
     if not listed:
@@ -964,6 +977,8 @@ def main():
     ap.add_argument("--csv", help="手元のCSVファイルを使う")
     ap.add_argument("--allow-decrease", action="store_true", help="件数が大きく減っても公開する")
     ap.add_argument("--today", help="今日の日付（確認用。例: 2026-10-22）")
+    ap.add_argument("--save-data", action="store_true",
+                    help="読み込んだCSVを data/latest.csv に残す（毎日の自動更新で使い、変更の履歴にする）")
     args = ap.parse_args()
 
     if args.csv:
@@ -1011,6 +1026,8 @@ def main():
     with open(os.path.join(ROOT, "data", "meta.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
         f.write("\n")
+    if args.save_data:
+        save_snapshot(text)
     print("作成しました: 全%d件（掲載中%d件、今週の新着%d件、ページ%d枚）"
           % (len(items), len(listed), len(new_items), len(ctx["sitemap"])))
 

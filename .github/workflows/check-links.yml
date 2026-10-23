@@ -1,0 +1,33 @@
+name: リンク切れの点検
+
+on:
+  schedule:
+    - cron: "0 21 * * 0"   # 毎週月曜 日本時間の朝6時ごろ（UTCの日曜21時）
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # 掲載中の公式サイトを開いて確かめる。問題があったときだけ report.md ができる
+      - name: 公式サイトを開いて確かめる
+        run: python3 tools/check_links.py report.md
+
+      # 問題があったときだけ Issue（お知らせ）を作る。Issue ができるとアカウントのメールに通知が届く
+      - name: 問題があれば Issue で知らせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f report.md ]; then
+            gh issue create --repo "${{ github.repository }}" \
+              --title "公式サイトのリンク点検 $(TZ=Asia/Tokyo date +%Y-%m-%d)" \
+              --body-file report.md
+          else
+            echo "問題は見つかりませんでした"
+          fi
