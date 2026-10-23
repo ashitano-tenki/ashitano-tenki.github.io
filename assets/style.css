@@ -206,8 +206,11 @@ button, .button {
 .kind-block { margin-top: var(--space-6); }
 .kind-about { margin: calc(-1 * var(--space-2)) 0 var(--space-3); font-size: 14px; color: var(--text-sub); }
 /* トップの「タイプごとに見る」の棚（横にスワイプ。自動では動かない。次のカードが少し見える） */
-.shelf-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); }
-.shelf-head h3 { margin-bottom: var(--space-2); }
+/* 見出しと説明は左、矢印と「すべて見る」はカードのすぐ上の行（右下）にそろえる */
+.shelf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-2) var(--space-4); margin-bottom: var(--space-3); }
+.shelf-title { min-width: 0; }
+.shelf-head h3 { margin-bottom: var(--space-1); }
+.shelf-head .kind-about { margin: 0; }
 .shelf-tools { display: flex; align-items: center; gap: var(--space-3); flex: none; }
 .shelf-all { font-size: 14px; white-space: nowrap; }
 .shelf-arrows { display: inline-flex; gap: 6px; }
