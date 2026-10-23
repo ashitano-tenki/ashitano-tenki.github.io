@@ -177,36 +177,23 @@ def tenki_url(t):
     return "/tenki/%s/" % t["slug"]
 
 
-def tag_list(item):
+def tag_list(item, with_tenki=True):
     tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])]
     if item["cost"]:
         tags.append('<span class="tag tag-cost">%s</span>' % e(item["cost"]))
+    if with_tenki:
+        tags += ['<span class="tag">%s</span>' % e(t) for t in item["tenki"]]
     return '<div class="tags">%s</div>' % "".join(tags)
 
 
-def when_line(item):
-    """カードの「誰の・いつの」一行。例：起業、独立｜準備"""
-    tenki = "どの転機にも" if COMMON in item["tenki"] else "、".join(item["tenki"])
-    return "｜".join(x for x in [tenki, "、".join(item["stages"])] if x)
+def card(item, new=False):
+    badge = '<span class="new">新着</span>' if new else ""
+    return ('<li class="card"><a href="/item/%s/"><h3>%s%s</h3><p>%s</p>%s</a></li>'
+            % (e(item["id"]), badge, e(item["title"]), e(item["line"]), tag_list(item)))
 
 
-def added_label(d, today):
-    if not d:
-        return ""
-    if d.year == today.year:
-        return "%d月%d日に追加" % (d.month, d.day)
-    return "%d年%d月%d日に追加" % (d.year, d.month, d.day)
-
-
-def card(item, today):
-    return ('<li class="card"><a href="/item/%s/"><p class="card-when">%s</p><h3>%s</h3><p class="card-line">%s</p>'
-            '<div class="card-foot">%s<span class="card-date">%s</span></div></a></li>'
-            % (e(item["id"]), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item),
-               e(added_label(item["added"], today))))
-
-
-def cards(items, ctx):
-    return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"]) for it in items)
+def cards(items, new_ids=()):
+    return '<ul class="cards">%s</ul>' % "".join(card(it, it["id"] in new_ids) for it in items)
 
 
 def breadcrumb(parts):
@@ -310,7 +297,7 @@ def kind_sections(items, params, ctx, heading_level=2):
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
         sec = ['<section class="kind-block"><%s>%s <span class="count">%d件</span></%s>' % (h, e(kind), len(group), h)]
-        sec.append(cards(group[:n], ctx))
+        sec.append(cards(group[:n], ctx["new_ids"]))
         if len(group) > n:
             sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る（全%d件）" % (kind, len(group))))
         sec.append("</section>")
@@ -332,7 +319,7 @@ def build_home(listed, ctx):
         '<li><a href="%s">%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), e(k), len(g))
         for k, g in by_kind(listed))
     if new_items:
-        news = cards(new_items[:12], ctx)
+        news = cards(new_items[:12], ctx["new_ids"])
         if len(new_items) > 12:
             news += more_link(search_url(sort="new"), "今週の新着をすべて見る（%d件）" % len(new_items))
     else:
@@ -353,7 +340,7 @@ def build_home(listed, ctx):
 
 <section class="entrances">
   <div class="entrance">
-    <h2>転機から探す</h2>
+    <h2>転機の種類から探す</h2>
     <ul class="chips">{tenki_links}</ul>
   </div>
   <div class="entrance">
@@ -361,8 +348,8 @@ def build_home(listed, ctx):
     <ul class="stages">{stage_links}</ul>
   </div>
   <div class="entrance">
-    <h2>タイプから探す</h2>
-    <p class="note">相談・仕事・学習など、サービスのタイプで探せます。</p>
+    <h2>種類から探す</h2>
+    <p class="note">相談・仕事・学習など、サービスの種類で探せます。</p>
     <ul class="chips">{kind_links}</ul>
   </div>
 </section>
@@ -376,8 +363,8 @@ def build_home(listed, ctx):
 
 <section class="section">
   <p class="label">By category</p>
-  <h2 class="section-title">タイプごとに見る</h2>
-  <p class="note">タイプごとに、観測所の並び順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
+  <h2 class="section-title">種類ごとに見る</h2>
+  <p class="note">種類ごとに、観測所の並び順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
 """.format(site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
@@ -427,7 +414,7 @@ def build_tenki(listed, ctx):
 </header>
 {stage_nav}
 <section class="section">
-  <h2 class="section-title">タイプごとに見る</h2>
+  <h2 class="section-title">種類ごとに見る</h2>
   {common_note}
   {kinds}
   {more}
@@ -451,7 +438,7 @@ def build_tenki(listed, ctx):
     body = """
 {crumbs}
 <header class="page-head">
-  <h1>転機から探す</h1>
+  <h1>転機の種類から探す</h1>
   <p class="lead">転職、独立、起業など、迎えている転機を選んでください。転機ごとのページでは、段階に分けて探すこともできます。</p>
 </header>
 <ul class="tenki-list">{rows}</ul>
@@ -461,7 +448,7 @@ def build_tenki(listed, ctx):
   <dl class="stage-dl">{stage_dl}</dl>
 </section>
 """.format(crumbs=breadcrumb([("転機から探す", None)]), rows="".join(rows), stage_dl=stage_dl)
-    page("/tenki/", "転機から探す", "転職、独立、起業、副業、退職・休職、定年、学び直し。迎えている転機から、役立つサービスと情報を探せます。", body, ctx=ctx)
+    page("/tenki/", "転機の種類から探す", "転職、独立、起業、副業、退職・休職、定年、学び直し。迎えている転機から、役立つサービスと情報を探せます。", body, ctx=ctx)
 
 
 def build_combo(t, s, items, ctx):
@@ -521,7 +508,7 @@ def build_item(item, listed, ctx):
     similar = similar_items(item, listed)
     similar_html = ""
     if similar:
-        similar_html = '<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>' % cards(similar, ctx)
+        similar_html = '<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>' % cards(similar, ctx["new_ids"])
 
     crumbs = breadcrumb([("探す", "/search/"), (item["title"], None)])
     if not item["listed"]:
@@ -549,8 +536,8 @@ def build_item(item, listed, ctx):
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
   <dl class="facts">
-    <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
-    <div><dt>転機</dt><dd>{tenki}</dd></div>
+    <div><dt>種類</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
+    <div><dt>転機の種類</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
     <div><dt>費用</dt><dd>{cost}</dd></div>
     <div><dt>提供元</dt><dd>{provider}</dd></div>
@@ -575,44 +562,32 @@ def build_search(listed, ctx):
     costs += sorted({it["cost"] for it in listed if it["cost"] and it["cost"] not in COST_ORDER})
     body = """
 {crumbs}
-<header class="page-head page-head-tight">
+<header class="page-head">
   <h1>探す</h1>
+  <p class="lead">種類、転機、段階、費用で絞り込み、キーワードで検索できます。条件はURLに残るので、そのまま共有できます。</p>
 </header>
 <form id="filters" class="filters" action="/search/" method="get" role="search">
-  <div class="search-q">
-    <label for="q" class="visually-hidden">キーワード</label>
-    <input id="q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
+  <div class="field field-q">
+    <label for="q">キーワード</label>
+    <input id="q" type="search" name="q" placeholder="例：フリーランス、確定申告、エンジニア">
   </div>
-  <div class="search-layout">
-    <div class="filter-col">
-      <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">絞り込む<span id="filter-count"></span></button>
-      <div id="filter-panel" class="filter-panel">
-        <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
-        <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
-        <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
-        <div class="field"><label for="cost">費用</label><select id="cost" name="cost"><option value="">すべて</option>{costs}</select></div>
-        <p class="note filter-note">条件はURLに残るので、そのまま共有できます。</p>
-        <noscript><button type="submit">この条件で探す</button></noscript>
-      </div>
-    </div>
-    <div class="result-col">
-      <div class="result-bar">
-        <p id="result-count" aria-live="polite">読み込み中…</p>
-        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">観測所の並び順</option><option value="new">新着順</option></select></div>
-      </div>
-      <div id="active-chips" class="active-chips" hidden></div>
-      <ul id="results" class="cards"></ul>
-      <p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
-    </div>
-  </div>
+  <div class="field"><label for="kind">種類</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
+  <div class="field"><label for="tenki">転機の種類</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
+  <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
+  <div class="field"><label for="cost">費用</label><select id="cost" name="cost"><option value="">すべて</option>{costs}</select></div>
+  <div class="field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">観測所の並び順</option><option value="new">新着順</option></select></div>
+  <noscript><button type="submit">この条件で探す</button></noscript>
 </form>
-<noscript><p class="note">検索にはJavaScriptを使います。使えない場合は<a href="/tenki/">転機から探す</a>をご利用ください。</p></noscript>
-<script>window.TENKI_PAGE_SIZE = {page_size}; window.TENKI_THIS_YEAR = {year};</script>
+<div class="result-bar"><p id="result-count" aria-live="polite">読み込み中…</p><button type="button" id="reset" class="link-button">条件をクリア</button></div>
+<ul id="results" class="cards"></ul>
+<p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
+<noscript><p class="note">検索にはJavaScriptを使います。使えない場合は<a href="/tenki/">転機の種類から探す</a>をご利用ください。</p></noscript>
+<script>window.TENKI_PAGE_SIZE = {page_size};</script>
 <script src="/assets/search.js?v={ver}" defer></script>
 """.format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
            tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
-           costs=options(costs), page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
-    page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、タイプ・転機・段階・費用で絞り込み、キーワードで検索できます。", body, ctx=ctx)
+           costs=options(costs), page_size=int(CONF["list_page_size"]), ver=ctx["version"])
+    page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、種類・転機・段階・費用で絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
 
 def build_report(listed, ctx):
@@ -628,7 +603,7 @@ def build_report(listed, ctx):
         group = sorted(weeks[start], key=lambda it: (it["added"], -it["rank"]), reverse=True)
         heading = "%d年%d月%d日〜%d月%d日" % (start.year, start.month, start.day, end.month, end.day)
         sections.append('<section class="week" id="w%s"><h2>%s <span class="count">%d件</span></h2>%s</section>'
-                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(group, ctx)))
+                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(group, ctx["new_ids"])))
     body = """
 {crumbs}
 <header class="page-head">

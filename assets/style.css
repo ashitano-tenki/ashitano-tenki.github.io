@@ -15,7 +15,6 @@
   --text-on-ink-sub: #9aa0a8;
   --line: #e3e6ea;
   --card: #ffffff;
-  --chip-bg: #e8eef5;
   /* 文字 */
   --font-display: "Zen Kaku Gothic New", "Noto Sans JP", "Hiragino Sans", sans-serif;
   --font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
@@ -47,7 +46,6 @@
   --text-sub: #a3a9b1;
   --line: #313640;
   --card: #1f232a;
-  --chip-bg: #233042;
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
   --footer-bg: #0e1013;
   color-scheme: dark;
@@ -67,7 +65,7 @@ a { color: var(--sky); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 img { max-width: 100%; }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--ink); word-break: auto-phrase; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--ink); }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 var(--space-4); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
@@ -156,14 +154,11 @@ button, .button {
 .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
 @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 900px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
-.card a { display: flex; flex-direction: column; height: 100%; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); text-decoration: none; color: var(--ink); }
+.card a { display: block; height: 100%; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); text-decoration: none; color: var(--ink); }
 .card a:hover { border-color: var(--sky); }
 .card h3 { font-size: 17px; line-height: 1.5; margin: 0 0 var(--space-1); }
 .card a:hover h3 { color: var(--sky); }
-.card .card-when { font-size: 13px; font-weight: 700; line-height: 1.5; color: var(--sky); margin: 0 0 var(--space-1); }
-.card .card-line { font-size: 14px; line-height: 1.7; color: var(--text-body); margin: 0 0 var(--space-3); }
-.card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
-.card-date { font-size: 12px; color: var(--text-sub); }
+.card p { font-size: 14px; line-height: 1.7; color: var(--text-body); margin: 0 0 var(--space-3); }
 .new { display: inline-block; font-family: var(--font-sans); font-size: 11px; font-weight: 700; line-height: 1.6; letter-spacing: 0.04em; color: var(--sky); border: var(--border-hairline) solid var(--sky); border-radius: var(--radius-sm); padding: 0 5px; margin-right: 6px; vertical-align: 2px; }
 .tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 .tag { font-size: 12px; line-height: 1.6; padding: 1px 10px; border-radius: var(--radius-pill); background: var(--base); border: var(--border-hairline) solid var(--line); color: var(--text-body); }
@@ -203,33 +198,11 @@ button, .button {
 .ended-note { padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--base-yellow); font-weight: 700; }
 
 /* 一覧ページ */
-.page-head-tight { padding-bottom: 0; }
-.search-q { margin-top: var(--space-3); }
-.search-layout { display: grid; gap: var(--space-3); margin-top: var(--space-3); }
-.filter-toggle { align-self: flex-start; display: inline-flex; align-items: center; gap: 2px; background: var(--card); color: var(--ink); border: var(--border-hairline) solid var(--text-sub); border-radius: var(--radius-pill); padding: 6px var(--space-4); font-size: 14px; }
-.filter-toggle::after { content: "▾"; margin-left: 4px; font-size: 12px; color: var(--text-sub); }
-.filter-toggle[aria-expanded="true"]::after { content: "▴"; }
-.filter-panel { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); margin-top: var(--space-2); }
-.filter-note { grid-column: 1 / -1; margin: 0; font-size: 13px; }
-.filter-col { display: flex; flex-direction: column; min-width: 0; }
-.result-col { min-width: 0; }
-/* スマホ：条件は「絞り込む」を押したときだけ開く（JavaScriptが使えないときは開いたまま） */
-.js .filter-panel:not(.open) { display: none; }
-@media (min-width: 900px) {
-  .search-layout { grid-template-columns: 240px minmax(0, 1fr); gap: var(--space-8); align-items: start; }
-  .filter-toggle { display: none; }
-  .js .filter-panel:not(.open), .filter-panel { display: grid; grid-template-columns: 1fr; margin-top: 0; position: sticky; top: var(--space-4); }
-  .result-col .cards { grid-template-columns: 1fr 1fr; }
-}
+.filters { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); margin-top: var(--space-3); }
+.filters .field-q { grid-column: 1 / -1; }
+@media (min-width: 760px) { .filters { grid-template-columns: repeat(5, 1fr); } }
 .field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 2px; }
-.result-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); font-size: 15px; }
-.sort-field { display: flex; align-items: center; gap: var(--space-2); }
-.sort-field label { font-size: 13px; color: var(--text-sub); white-space: nowrap; }
-.sort-field select { width: auto; padding: 6px var(--space-3); font-size: 14px; }
-.active-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); }
-.active-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 4px 6px 4px 12px; border-radius: var(--radius-pill); background: var(--chip-bg); color: var(--ink); border: var(--border-hairline) solid var(--line); }
-.active-chip span { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--card); color: var(--text-sub); font-weight: 400; }
-.active-chip:hover span { color: var(--ink); }
+.result-bar { display: flex; justify-content: space-between; align-items: center; margin: var(--space-4) 0 var(--space-2); font-size: 15px; }
 .result-bar p { margin: 0; }
 .more-wrap { text-align: center; margin-top: var(--space-4); }
 
