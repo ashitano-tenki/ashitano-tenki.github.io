@@ -259,6 +259,50 @@ def jsonld_tag(data):
     return '<script type="application/ld+json">%s</script>\n' % text
 
 
+HEAD_SCRIPT = ('<script>document.documentElement.classList.add("js");'
+               'try{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>\n')
+
+
+def site_header(current=None):
+    """全ページ共通のヘッダー（セルフチェックにも同じものを差し込む）。"""
+    return """<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
+    <nav class="global-nav" id="global-nav" aria-label="サイト内">
+{nav}
+    </nav>
+    <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <form class="header-search wrap" id="header-search" action="/search/" method="get" role="search" hidden>
+    <label for="header-q" class="visually-hidden">キーワード</label>
+    <input id="header-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
+    <button type="submit">探す</button>
+  </form>
+</header>""".format(site=e(CONF["site_name"]), nav=nav_links(current))
+
+
+def site_footer(ctx):
+    """全ページ共通のフッターと、サイト全体の動き（site.js）。"""
+    return """<footer class="site-footer">
+  <div class="wrap">
+    <p class="ai-note">掲載情報はAIが収集・確認し、定期的に点検しています。</p>
+    <div class="community">
+      <p>この観測所は、黒田悠介が運営する「あしたの転機」の一部です。転機について考える記事はnoteマガジン「あしたの転機」で、同じように転機を迎えている人との交流はFacebookグループ「あしたの転機」で続けています。</p>
+      <p class="community-links">
+        <a href="{note}" rel="noopener" target="_blank">noteマガジン「あしたの転機」</a>
+        <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
+      </p>
+    </div>
+    <p class="contact">掲載情報の誤りのお知らせや掲載のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームからお送りください。</p>
+    <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
+    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
+  </div>
+</footer>
+<script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+                         updated=fmt_date(ctx["today"]), ver=ctx["version"])
+
+
 def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None):
     """1ページ分のHTMLを書き出す。path はサイト内のパス（例: /tenki/dokuritsu/）。"""
     site = CONF["site_name"]
@@ -296,52 +340,22 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<script>document.documentElement.classList.add("js");try{{if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}}catch(e){{}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+{head_script}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
 {ld}</head>
 <body>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
-    <nav class="global-nav" id="global-nav" aria-label="サイト内">
-{nav}
-    </nav>
-    <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
-    <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-  </div>
-  <form class="header-search wrap" id="header-search" action="/search/" method="get" role="search" hidden>
-    <label for="header-q" class="visually-hidden">キーワード</label>
-    <input id="header-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
-    <button type="submit">探す</button>
-  </form>
-</header>
+{header}
 <main class="wrap">
 {body}
 </main>
-<footer class="site-footer">
-  <div class="wrap">
-    <p class="ai-note">掲載情報はAIが収集・確認し、定期的に点検しています。</p>
-    <div class="community">
-      <p>この観測所は、黒田悠介が運営する「あしたの転機」の一部です。転機について考える記事はnoteマガジン「あしたの転機」で、同じように転機を迎えている人との交流はFacebookグループ「あしたの転機」で続けています。</p>
-      <p class="community-links">
-        <a href="{note}" rel="noopener" target="_blank">noteマガジン「あしたの転機」</a>
-        <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
-      </p>
-    </div>
-    <p class="contact">掲載情報の誤りのお知らせや掲載のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームからお送りください。</p>
-    <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
-    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
-  </div>
-</footer>
-<script src="/assets/site.js?v={ver}"></script>
+{footer}
 </body>
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), nav=nav_links(), image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
@@ -863,18 +877,15 @@ def build_check(listed, ctx):
     """転機の段階セルフチェック（check/index.html）と、結果画面のおすすめに使う picks.json を書き出す。"""
     with open(os.path.join(ROOT, "check", "index.html"), encoding="utf-8") as f:
         text = f.read()
-    # 観測所と共通のヘッダー・フッターを差し込む（メニューは NAV と同じもの）
-    header = """<header class="sc-header"><div class="sc-inner">
-  <a class="sc-logo" href="/"><img src="/assets/logo.svg" alt="" width="22" height="22">%s</a>
-  <nav class="sc-nav" aria-label="サイト内">
-%s
-  </nav>
-</div></header>""" % (e(CONF["site_name"]), nav_links("/check/").replace(' id="saved-count"', ""))
-    footer = """<footer class="sc-footer"><div class="sc-inner">
-  <a href="/">あしたの転機観測所のトップ</a>・<a href="/about/">観測所について</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>
-</div></footer>""".format(contact=e(CONF["contact_form_url"]))
-    assert "<!--SITE_HEADER-->" in text and "<!--SITE_FOOTER-->" in text
-    write("/check/", text.replace("<!--SITE_HEADER-->", header).replace("<!--SITE_FOOTER-->", footer))
+    # ほかのページとまったく同じヘッダー・フッターを差し込む（観測所の style.css と site.js も読み込む）
+    for mark in ("<!--SITE_HEAD-->", "<!--SITE_HEADER-->", "<!--SITE_FOOTER-->"):
+        assert mark in text, mark
+    head = (HEAD_SCRIPT + '<link rel="alternate" type="application/rss+xml" title="%s 観測レポート" href="/feed.xml">\n'
+            '<link rel="stylesheet" href="/assets/style.css?v=%s">' % (e(CONF["site_name"]), ctx["version"]))
+    text = (text.replace("<!--SITE_HEAD-->", head)
+                .replace("<!--SITE_HEADER-->", site_header("/check/"))
+                .replace("<!--SITE_FOOTER-->", site_footer(ctx)))
+    write("/check/", text)
     ctx["sitemap"].append(BASE + "/check/")
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
