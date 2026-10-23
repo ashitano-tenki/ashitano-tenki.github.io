@@ -376,13 +376,22 @@ def more_link(href, label):
     return '<p class="more"><a href="%s">%s</a></p>' % (e(href), e(label))
 
 
+def emoji(char):
+    """見出しやボタンの頭に付ける絵文字。読み上げでは読まないようにする。"""
+    return '<span class="emoji" aria-hidden="true">%s</span>' % e(char) if char else ""
+
+
+def kind_emoji(kind):
+    return emoji(CONF.get("kind_emoji", {}).get(kind, ""))
+
+
 def kind_sections(items, params, ctx, heading_level=2):
     """種類ごとに上位数件を並べ、残りは一覧ページの該当条件へつなぐ。"""
     n = CONF["top_per_kind"]
     out = []
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
-        sec = ['<section class="kind-block"><%s>%s <span class="count">%d件</span></%s>' % (h, e(kind), len(group), h)]
+        sec = ['<section class="kind-block"><%s>%s%s <span class="count">%d件</span></%s>' % (h, kind_emoji(kind), e(kind), len(group), h)]
         sec.append(cards(group[:n], ctx))
         if len(group) > n:
             sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る（全%d件）" % (kind, len(group))))
@@ -402,7 +411,7 @@ def build_home(listed, ctx):
         '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s["about"]))
         for s in STAGES)
     kind_links = "".join(
-        '<li><a href="%s">%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), e(k), len(g))
+        '<li><a href="%s">%s%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), len(g))
         for k, g in by_kind(listed))
     if new_items:
         news = cards(new_items[:12], ctx)
@@ -426,15 +435,15 @@ def build_home(listed, ctx):
 
 <section class="entrances">
   <div class="entrance">
-    <h2>転機から探す</h2>
+    <h2>{e_tenki}転機から探す</h2>
     <ul class="chips">{tenki_links}</ul>
   </div>
   <div class="entrance">
-    <h2>今の段階から探す</h2>
+    <h2>{e_stage}今の段階から探す</h2>
     <ul class="stages">{stage_links}</ul>
   </div>
   <div class="entrance">
-    <h2>タイプから探す</h2>
+    <h2>{e_kind}タイプから探す</h2>
     <p class="note">相談・仕事・学習など、サービスのタイプで探せます。</p>
     <ul class="chips">{kind_links}</ul>
   </div>
@@ -453,7 +462,8 @@ def build_home(listed, ctx):
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
+""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
+           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
            kinds=kind_sections(listed, {}, ctx, heading_level=3))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
