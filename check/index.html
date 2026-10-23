@@ -43,7 +43,30 @@ body { margin: 0; }
   --ck-font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --ck-radius-sm: 4px; --ck-radius-md: 8px; --ck-radius-lg: 16px; --ck-radius-pill: 999px;
   --ck-shadow-card: 0 1px 2px rgba(26, 29, 35, 0.06);
+  --ck-primary-hover: #2c313a;
+  --ck-hero-bg: #1a1d23;      /* 結果の帯（明るい表示でも暗い表示でも暗い地に黄色） */
+  --ck-hero-fg: #fbfaf5;
+  --ck-node-on-bg: #1a1d23;   /* サイクル図のいまの段階 */
+  --ck-node-on-fg: #f5c518;
   color-scheme: light;
+}
+/* ダーク表示（フッターのボタンで切り替え）。観測所のほかのページと同じ配色 */
+:root[data-theme="dark"] {
+  --ck-base: #15181d;
+  --ck-base-yellow: #3a3320;
+  --ck-ink: #f3f1ea;
+  --ck-sky: #7cc0ee;
+  --ck-sky-bright: #4aa8e4;
+  --ck-text-body: #c9cdd3;
+  --ck-text-sub: #a3a9b1;
+  --ck-line: #313640;
+  --ck-card: #1f232a;
+  --ck-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ck-primary-hover: #ffffff;
+  --ck-hero-bg: #0e1013;
+  --ck-node-on-bg: #f5c518;
+  --ck-node-on-fg: #15181d;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -87,7 +110,7 @@ p { margin: 0; }
   border-radius: var(--ck-radius-md); padding: 14px 28px;
 }
 .btn-primary { background: var(--ck-ink); color: var(--ck-base); }
-.btn-primary:hover { background: #2c313a; }
+.btn-primary:hover { background: var(--ck-primary-hover); }
 .btn-ghost { background: transparent; color: var(--ck-sky); padding: 10px 4px; text-decoration: underline; text-underline-offset: 3px; }
 .btn:focus-visible, .opt:focus-visible, a:focus-visible { outline: 2px solid var(--ck-sky); outline-offset: 2px; }
 a { color: var(--ck-sky); text-underline-offset: 3px; }
@@ -134,7 +157,7 @@ a { color: var(--ck-sky); text-underline-offset: 3px; }
 
 /* 結果 */
 .result-hero {
-  background: var(--ck-ink); color: var(--ck-base);
+  background: var(--ck-hero-bg); color: var(--ck-hero-fg);
   border-radius: var(--ck-radius-lg); padding: 32px 24px;
   display: flex; flex-direction: column; gap: 12px;
 }
@@ -324,19 +347,19 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
       const [x, y] = pos[s];
       const on = s === active;
       return `<g>
-        <circle cx="${x}" cy="${y}" r="38" fill="${on ? "#1a1d23" : "#ffffff"}" stroke="${on ? "#1a1d23" : "#2f95d6"}" stroke-width="2"/>
-        <text x="${x}" y="${y + 7}" text-anchor="middle" font-size="20" font-weight="700" fill="${on ? "#f5c518" : "#1a1d23"}">${s}</text>
+        <circle cx="${x}" cy="${y}" r="38" style="fill:var(${on ? "--ck-node-on-bg" : "--ck-card"});stroke:var(${on ? "--ck-node-on-bg" : "--ck-sky-bright"})" stroke-width="2"/>
+        <text x="${x}" y="${y + 7}" text-anchor="middle" font-size="20" font-weight="700" style="fill:var(${on ? "--ck-node-on-fg" : "--ck-ink"})">${s}</text>
       </g>`;
     }).join("");
     return `<svg class="cycle" viewBox="0 0 360 360" role="img" aria-label="転機のサイクル：準備、遭遇、順応、安定をくり返す${active ? "。いまは" + active : ""}">
-      <defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2f95d6"/></marker></defs>
-      <circle cx="180" cy="180" r="128" fill="none" stroke="#e3e6ea" stroke-width="2"/>
-      <path d="M 222 66 A 128 128 0 0 1 294 138" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 294 222 A 128 128 0 0 1 222 294" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 138 294 A 128 128 0 0 1 66 222" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 66 138 A 128 128 0 0 1 138 66" fill="none" stroke="#2f95d6" stroke-width="2" marker-end="url(#ah)"/>
-      <text x="180" y="176" text-anchor="middle" font-size="13" fill="#5e636b" font-family="Noto Sans JP, sans-serif">転機は</text>
-      <text x="180" y="196" text-anchor="middle" font-size="13" fill="#5e636b" font-family="Noto Sans JP, sans-serif">くり返し訪れる</text>
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ck-sky-bright)"/></marker></defs>
+      <circle cx="180" cy="180" r="128" fill="none" style="stroke:var(--ck-line)" stroke-width="2"/>
+      <path d="M 222 66 A 128 128 0 0 1 294 138" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 294 222 A 128 128 0 0 1 222 294" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 138 294 A 128 128 0 0 1 66 222" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
+      <path d="M 66 138 A 128 128 0 0 1 138 66" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
+      <text x="180" y="176" text-anchor="middle" font-size="13" style="fill:var(--ck-text-sub)" font-family="Noto Sans JP, sans-serif">転機は</text>
+      <text x="180" y="196" text-anchor="middle" font-size="13" style="fill:var(--ck-text-sub)" font-family="Noto Sans JP, sans-serif">くり返し訪れる</text>
       ${nodes}
     </svg>`;
   }
