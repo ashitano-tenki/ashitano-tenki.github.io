@@ -215,19 +215,43 @@ def cards(items, ctx):
     return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"]) for it in items)
 
 
+_CRUMBS = []  # 直前に作ったパンくず。page() が構造化データ（BreadcrumbList）に使う
+
+
 def breadcrumb(parts):
+    _CRUMBS[:] = parts
     links = ['<a href="/">トップ</a>']
     for label, href in parts:
         links.append('<a href="%s">%s</a>' % (e(href), e(label)) if href else '<span>%s</span>' % e(label))
     return '<nav class="crumbs" aria-label="現在地">%s</nav>' % ' <span aria-hidden="true">›</span> '.join(links)
 
 
-def page(path, title, description, body, *, full_title=None, noindex=False, ctx):
+def og_image(name):
+    """assets/og/ に専用の共有画像があればそれを、なければサイト共通の画像を使う。"""
+    if name and os.path.exists(os.path.join(ROOT, "assets", "og", name + ".png")):
+        return "/assets/og/%s.png" % name
+    return "/assets/ogp.png"
+
+
+def jsonld_tag(data):
+    text = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return '<script type="application/ld+json">%s</script>\n' % text
+
+
+def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None):
     """1ページ分のHTMLを書き出す。path はサイト内のパス（例: /tenki/dokuritsu/）。"""
     site = CONF["site_name"]
     doc_title = full_title or ("%s｜%s" % (title, site))
     url = BASE + path
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
+    structured = list(jsonld or [])
+    if _CRUMBS:
+        trail = [("トップ", "/")] + [(label, href or path) for label, href in _CRUMBS]
+        structured.append({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": label, "item": BASE + href}
+            for i, (label, href) in enumerate(trail)]})
+        _CRUMBS[:] = []
+    ld = "".join(jsonld_tag(d) for d in structured)
     html_text = """<!doctype html>
 <html lang="ja">
 <head>
@@ -241,7 +265,10 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <meta property="og:title" content="{og_title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{base}/assets/ogp.png">
+<meta property="og:image" content="{base}{image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{og_title}">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="{site} 観測レポート" href="/feed.xml">
@@ -253,7 +280,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
-</head>
+{ld}</head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
@@ -296,7 +323,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
@@ -397,8 +424,20 @@ def build_home(listed, ctx):
 """.format(site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
            kinds=kind_sections(listed, {}, ctx, heading_level=3))
-    page("/", CONF["site_name"], CONF["description"], body,
+    website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
+               "description": CONF["description"], "inLanguage": "ja",
+               "potentialAction": {"@type": "SearchAction", "target": BASE + "/search/?q={search_term_string}",
+                                   "query-input": "required name=search_term_string"}}
+    page("/", CONF["site_name"], CONF["description"], body, jsonld=[website],
          full_title="%s｜転機の種類と時期から探す、キャリアの転機に役立つサービス" % CONF["site_name"], ctx=ctx)
+
+
+def tenki_heading(t):
+    if t["name"] == COMMON:
+        return "どの転機にも役立つサービスと情報"
+    if t["name"] == OTHER:
+        return "そのほかの転機に役立つサービスと情報"
+    return "%sに役立つサービスと情報" % t["name"]
 
 
 def combo_title(t, s):
@@ -430,8 +469,7 @@ def build_tenki(listed, ctx):
         common_note = ""
         if t["name"] not in (COMMON, OTHER):
             common_note = '<p class="note">どの転機にも役立つもの（共通）も含めています。</p>'
-        heading = "%sに役立つサービスと情報" % t["name"] if t["name"] not in (COMMON, OTHER) else (
-            "どの転機にも役立つサービスと情報" if t["name"] == COMMON else "そのほかの転機に役立つサービスと情報")
+        heading = tenki_heading(t)
         body = """
 {crumbs}
 <header class="page-head">
@@ -450,7 +488,8 @@ def build_tenki(listed, ctx):
            n=len(items), stage_nav=stage_nav, common_note=common_note,
            kinds=kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=3),
            more=more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
-        page(tenki_url(t), heading, t["about"], body, ctx=ctx)
+        page(tenki_url(t), heading, t["about"], body, ctx=ctx, image=og_image(t["slug"]),
+             jsonld=[collection_ld(heading, t["about"], tenki_url(t), items)])
         index_rows.append((t, items, combos))
 
     rows = []
@@ -478,6 +517,14 @@ def build_tenki(listed, ctx):
     page("/tenki/", "転機から探す", "転職、独立、起業、副業、退職・休職、定年、学び直し。迎えている転機から、役立つサービスと情報を探せます。", body, ctx=ctx)
 
 
+def collection_ld(name, description, path, items):
+    return {"@context": "https://schema.org", "@type": "CollectionPage", "name": name, "description": description,
+            "url": BASE + path, "inLanguage": "ja",
+            "mainEntity": {"@type": "ItemList", "numberOfItems": len(items), "itemListElement": [
+                {"@type": "ListItem", "position": i + 1, "url": "%s/item/%s/" % (BASE, it["id"]), "name": it["title"]}
+                for i, it in enumerate(items[:50])]}}
+
+
 def build_combo(t, s, items, ctx):
     title = combo_title(t, s)
     body = """
@@ -496,7 +543,9 @@ def build_combo(t, s, items, ctx):
            tenki=e(t["name"]), stage=e(s["name"]), title=e(title), lead=e(combo_lead(t, s)), n=len(items),
            kinds=kind_sections(items, {"tenki": t["name"], "stage": s["name"]}, ctx, heading_level=2),
            more=more_link(search_url(tenki=t["name"], stage=s["name"]), "この条件の掲載情報をすべて見る"))
-    page("/tenki/%s/%s/" % (t["slug"], s["slug"]), title, combo_lead(t, s), body, ctx=ctx)
+    path = "/tenki/%s/%s/" % (t["slug"], s["slug"])
+    page(path, title, combo_lead(t, s), body, ctx=ctx, image=og_image("%s-%s" % (t["slug"], s["slug"])),
+         jsonld=[collection_ld(title, combo_lead(t, s), path, items)])
 
 
 def similar_items(item, listed, limit=4):
@@ -608,7 +657,16 @@ def build_item(item, listed, ctx):
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            similar=similar_html, next=next_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
-    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx)
+    about = {"@type": "Service", "name": item["title"], "description": item["memo"], "category": item["kind"]}
+    if item["url"]:
+        about["url"] = item["url"]
+    if item["provider"]:
+        about["provider"] = {"@type": "Organization", "name": item["provider"]}
+    webpage = {"@context": "https://schema.org", "@type": "WebPage", "name": item["title"], "description": desc,
+               "url": "%s/item/%s/" % (BASE, item["id"]), "inLanguage": "ja", "about": about}
+    if item["observed"]:
+        webpage["dateModified"] = item["observed"].isoformat()
+    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage])
 
 
 def build_search(listed, ctx):
@@ -806,9 +864,12 @@ def assets_version():
     """assets/ の中身から作る短い印。中身が変わると印が変わり、ブラウザが古い見た目や動きを使い続けないようにする。"""
     h = hashlib.sha1()
     folder = os.path.join(ROOT, "assets")
-    for name in sorted(os.listdir(folder)):
-        with open(os.path.join(folder, name), "rb") as f:
-            h.update(name.encode("utf-8") + f.read())
+    for dirpath, dirnames, filenames in sorted(os.walk(folder)):
+        dirnames.sort()
+        for name in sorted(filenames):
+            full = os.path.join(dirpath, name)
+            with open(full, "rb") as f:
+                h.update(os.path.relpath(full, folder).encode("utf-8") + f.read())
     return h.hexdigest()[:10]
 
 

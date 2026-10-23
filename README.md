@@ -20,6 +20,7 @@ https://ashitano-tenki.github.io/
 | `build.py` | サイトを作るスクリプト（ページの文面の多くもここにあります） |
 | `check/index.html` | 転機の段階セルフチェック（/check/）。質問・判定・結果の文章はこのファイルにあります。結果画面のおすすめは、サイトを作るたびに書き出す `check/picks.json` から選びます |
 | `assets/` | 見た目（style.css）、検索の動き（search.js）、アイコン、SNS共有用の画像 |
+| `assets/og/` | 転機別ページと掛け合わせページのSNS共有用画像。`config/tenki.json` の名前や見出しを変えたら、Macで `python3 tools/make_og_images.py` を実行して作り直す |
 | `data/meta.json` | 前回公開したときの件数（件数チェックに使います） |
 
 ## 手元で試す
