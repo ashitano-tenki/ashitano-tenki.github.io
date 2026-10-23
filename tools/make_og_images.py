@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""転機別ページと掛け合わせページの共有画像（1200×630）を assets/og/ に作るスクリプト。
+"""共有画像（1200×630）を assets/og/ に作るスクリプト。
+転機別ページ・掛け合わせページの画像と、セルフチェックの画像（全体用1枚と、結果の段階ごとの4枚）を作る。
 
-Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの文面は config/tenki.json から作るので、
-tenki.json の名前や見出しを変えたときにだけ実行し直して、できた画像をリポジトリに入れる。
+Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの文面は config/tenki.json と check/index.html（段階のひとこと説明）から作るので、
+それらの名前や文面を変えたときにだけ実行し直して、できた画像をリポジトリに入れる。
 
   python3 tools/make_og_images.py
 
@@ -141,6 +142,49 @@ def crop_top(png_path, out_path, height=630):
                 + chunk(b"IDAT", zlib.compress(b"".join(rows), 9)) + chunk(b"IEND", b""))
 
 
+def check_stage_texts():
+    """セルフチェックの段階ごとのひとこと説明（check/index.html の STAGE_INFO の short）を読む。"""
+    import re
+    src = open(os.path.join(ROOT, "check", "index.html"), encoding="utf-8").read()
+    return dict(re.findall(r'"(準備|遭遇|順応|安定)": \{\s*short: "([^"]+)"', src))
+
+
+CHECK_HEAD = """<svg xmlns="http://www.w3.org/2000/svg" width="750" height="393.75" viewBox="0 0 1200 630">
+<style>
+@font-face{{font-family:ZK;font-weight:900;src:url(data:font/ttf;base64,{black}) format("truetype");}}
+@font-face{{font-family:ZK;font-weight:700;src:url(data:font/ttf;base64,{bold}) format("truetype");}}
+</style>
+<rect width="1200" height="630" fill="#1a1d23"/>
+<rect x="0" y="0" width="28" height="630" fill="#f5c518"/>
+<text x="106" y="96" font-family="Hiragino Sans" font-weight="700" font-size="22" letter-spacing="2.6" fill="#f5c518">SELF CHECK</text>
+<text x="106" y="560" font-family="ZK" font-weight="700" font-size="30" fill="#fbfaf5">あしたの転機観測所</text>
+<text x="400" y="560" font-family="Hiragino Sans" font-size="22" fill="#9aa0a8">ashitano-tenki.github.io</text>
+<g transform="translate(1000 420) scale(1.25)">{antenna}</g>
+"""
+
+
+def svg_check_result(stage, short, fonts, antenna):
+    """結果画面のヒーローと同じ、黒地に黄色の大きな段階名。"""
+    return (CHECK_HEAD.format(black=fonts[0], bold=fonts[1], antenna=antenna) + """
+<text x="106" y="168" font-family="ZK" font-weight="700" font-size="36" fill="#d6d9de">転機の段階セルフチェックの結果、いまは</text>
+<text x="100" y="360" font-family="ZK" font-weight="900" font-size="190" fill="#f5c518">{stage}</text>
+<text x="505" y="360" font-family="ZK" font-weight="700" font-size="40" fill="#d6d9de">の段階でした</text>
+<text x="106" y="450" font-family="ZK" font-weight="700" font-size="34" fill="#9aa0a8">{short}</text>
+</svg>""".format(stage=esc(stage), short=esc(short)))
+
+
+def svg_check_general(fonts, antenna):
+    stages = "".join('<text x="%d" y="400" font-family="ZK" font-weight="900" font-size="56" fill="%s">%s</text>'
+                     % (106 + i * 190, "#f5c518" if i == 0 else "#fbfaf5", s) for i, s in enumerate(["準備", "遭遇", "順応", "安定"]))
+    arrows = "".join('<text x="%d" y="396" font-family="Hiragino Sans" font-size="36" fill="#9aa0a8">→</text>' % (232 + i * 190)
+                     for i in range(3))
+    return (CHECK_HEAD.format(black=fonts[0], bold=fonts[1], antenna=antenna) + """
+<text x="106" y="200" font-family="ZK" font-weight="900" font-size="68" fill="#fbfaf5">転機の段階セルフチェック</text>
+<text x="106" y="270" font-family="ZK" font-weight="700" font-size="34" fill="#d6d9de">18の質問で、いまどの段階にいるかをふりかえる</text>
+{stages}{arrows}
+</svg>""".format(stages=stages, arrows=arrows))
+
+
 def antenna_svg():
     import re
     src = open(os.path.join(ROOT, "assets", "logo.svg"), encoding="utf-8").read()
@@ -156,12 +200,19 @@ def main():
         if t["past"]:
             for s in build.STAGES:
                 jobs.append(("%s-%s" % (t["slug"], s["slug"]), "%s × %s" % (t["name"], s["name"]), build.combo_title(t, s)))
+    pages = [(name, title, svg(kicker, title, fonts, antenna)) for name, kicker, title in jobs]
+    # セルフチェック：全体用と、結果の段階ごと
+    pages.append(("check", "転機の段階セルフチェック", svg_check_general(fonts, antenna)))
+    texts = check_stage_texts()
+    for st in build.STAGES:
+        pages.append(("check-%s" % st["slug"], "いまは「%s」の段階" % st["name"],
+                      svg_check_result(st["name"], texts[st["name"]], fonts, antenna)))
     os.makedirs(OUT, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
-        for name, kicker, title in jobs:
+        for name, title, body in pages:
             src = os.path.join(tmp, name + ".svg")
             with open(src, "w", encoding="utf-8") as f:
-                f.write(svg(kicker, title, fonts, antenna))
+                f.write(body)
             subprocess.run(["qlmanage", "-t", "-s", "1200", "-o", tmp, src], check=True,
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             crop_top(src + ".png", os.path.join(OUT, name + ".png"))

@@ -906,6 +906,38 @@ def build_check(listed, ctx):
         "page": "/item/%s/" % it["id"],
     } for it in listed]}
     write("/check/picks.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    # 結果ごとのシェア用ページ（/check/sogu/ など）。SNSには段階ごとの画像を見せ、開いた人はセルフチェックへ移る
+    for st in STAGES:
+        title = "いまは「%s」の段階でした｜転機の段階セルフチェック" % st["name"]
+        desc = "18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。"
+        write("/check/%s/" % st["slug"], """<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{base}/check/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{site}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{base}/check/{slug}/">
+<meta property="og:image" content="{base}/assets/og/check-{slug}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="refresh" content="0; url=/check/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<p><a href="/check/">転機の段階セルフチェックへ</a></p>
+<script>location.replace("/check/");</script>
+</body>
+</html>
+""".format(title=e(title), desc=e(desc), base=e(BASE), site=e(CONF["site_name"]), slug=st["slug"]))
 
 
 def build_feed(listed, ctx):

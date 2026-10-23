@@ -12,7 +12,10 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="あしたの転機観測所">
 <meta property="og:locale" content="ja_JP">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://ashitano-tenki.github.io/assets/og/check.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -218,6 +221,8 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
   const NOTE_URL = "https://note.com/chlorine0528/m/m206813f097e5";
   const FB_URL = "https://www.facebook.com/share/g/1JmZs5Et5r";
   const SHARE_URL = "https://ashitano-tenki.github.io/check/";
+  // 結果ごとのシェア用URL（/check/sogu/ など）。SNSで段階ごとの画像が出て、開くとこのページに移る
+  const STAGE_SLUG = { "準備": "junbi", "遭遇": "sogu", "順応": "junno", "安定": "antei" };
   const HASHTAGS = ["あしたの転機", "転機の段階セルフチェック"];
 
   const STAGES = ["準備", "遭遇", "順応", "安定"];
@@ -501,10 +506,11 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
     const tenkiLabel = r.tenki === "まだはっきりしない" ? "転機" : `${r.tenki}の転機`;
     const shareBody = `「転機の段階セルフチェック」をやってみたら、いまは「${r.top}」の段階でした。`;
     const tagText = HASHTAGS.map(t => "#" + t).join(" ");
-    const shareText = `${shareBody}\n${SHARE_URL}\n${tagText}`;
-    const xUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareBody) + "&url=" + encodeURIComponent(SHARE_URL) + "&hashtags=" + encodeURIComponent(HASHTAGS.join(","));
+    const shareUrl = SHARE_URL + STAGE_SLUG[r.top] + "/";
+    const shareText = `${shareBody}\n${shareUrl}\n${tagText}`;
+    const xUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareBody) + "&url=" + encodeURIComponent(shareUrl) + "&hashtags=" + encodeURIComponent(HASHTAGS.join(","));
     // Facebookはシェア画面に投稿文を入れておけないため、Xと同じ投稿文をコピーしてから開き、貼り付けてもらう
-    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(SHARE_URL);
+    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
 
     app.innerHTML = `<div class="stack-lg">
       <section class="result-hero">
