@@ -53,6 +53,8 @@ STAGES = TENKI_CONF["stages"]
 TENKI_BY_NAME = {t["name"]: t for t in TENKI}
 STAGE_BY_NAME = {s["name"]: s for s in STAGES}
 BASE = CONF["base_url"].rstrip("/")
+KINDS = CONF["kinds"]  # 種類（タイプ）の一覧と表示順
+KIND_BY_NAME = {k["name"]: k for k in KINDS}
 
 
 # ---------------------------------------------------------------- データ
@@ -84,6 +86,18 @@ def parse_date(value):
         return None
 
 
+def parse_month(value):
+    """「2026/07」「2026/7」「2026-07」を (2026, 7) にする。読めなければ None。"""
+    m = re.match(r"\s*(\d{4})\s*[/\-.年]\s*(\d{1,2})", unicodedata.normalize("NFKC", value or ""))
+    if not m or not 1 <= int(m.group(2)) <= 12:
+        return None
+    return int(m.group(1)), int(m.group(2))
+
+
+def month_label(ym):
+    return "%d年%d月" % ym if ym else ""
+
+
 def parse_score(value):
     try:
         return float(unicodedata.normalize("NFKC", value or "").strip())
@@ -108,7 +122,7 @@ def parse_rows(text):
     missing = [c for c in REQUIRED_COLUMNS if c not in header]
     if missing:
         raise BuildError("CSVに必要な列がありません: %s" % "、".join(missing))
-    items, seen = [], set()
+    items, seen, skipped = [], set(), []
     for raw in reader:
         row = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
         item_id = row["ID"]
@@ -117,10 +131,13 @@ def parse_rows(text):
         if item_id in seen:
             continue
         seen.add(item_id)
+        if row["種類"] not in KIND_BY_NAME:
+            skipped.append("%s（%s）" % (item_id, row["種類"] or "種類なし"))
+            continue
         items.append({
             "id": item_id,
             "title": row["タイトル"],
-            "kind": row["種類"] or OTHER,
+            "kind": row["種類"],
             "tenki": split_list(row["転機の種類"]),
             "stages": split_list(row["段階"]),
             "memo": row["観測メモ"],
@@ -132,7 +149,10 @@ def parse_rows(text):
             "score": parse_score(row["観測スコア"]),
             "listed": row["状態"] in LISTED_STATES,
             "line": one_line(row["観測メモ"]),
+            "published": parse_month(row.get("発表・更新時期", "")),
         })
+    if skipped:
+        print("設定にない種類のため表示から外しました: %s" % "、".join(skipped))
     # 並び順は観測スコアの高い順。スコアは並べ替えにだけ使い、出力には rank（順位）だけを残す
     items.sort(key=lambda it: (-it["score"], -(it["added"] or datetime.date.min).toordinal(), it["id"]))
     for i, it in enumerate(items):
@@ -148,10 +168,9 @@ def matches_tenki(item, name):
 
 
 def kinds_of(items):
-    order = CONF.get("kind_order", [])
-    found = sorted({it["kind"] for it in items},
-                   key=lambda k: (order.index(k) if k in order else len(order), k))
-    return found
+    """データに1件以上ある種類だけを、設定の順に返す（0件の種類は出さない）。"""
+    present = {it["kind"] for it in items}
+    return [k["name"] for k in KINDS if k["name"] in present]
 
 
 def by_kind(items):
@@ -395,7 +414,7 @@ def emoji(char):
 
 
 def kind_emoji(kind):
-    return emoji(CONF.get("kind_emoji", {}).get(kind, ""))
+    return emoji(KIND_BY_NAME.get(kind, {}).get("emoji", ""))
 
 
 def kind_sections(items, params, ctx, heading_level=2):
@@ -405,6 +424,9 @@ def kind_sections(items, params, ctx, heading_level=2):
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
         sec = ['<section class="kind-block"><%s>%s%s <span class="count">%d件</span></%s>' % (h, kind_emoji(kind), e(kind), len(group), h)]
+        about = KIND_BY_NAME.get(kind, {}).get("about", "")
+        if about:
+            sec.append('<p class="kind-about">%s</p>' % e(about))
         sec.append(cards(group[:n], ctx))
         if len(group) > n:
             sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る（全%d件）" % (kind, len(group))))
@@ -457,7 +479,7 @@ def build_home(listed, ctx):
   </div>
   <div class="entrance">
     <h2>{e_kind}タイプから探す</h2>
-    <p class="note">相談・仕事・学習など、サービスのタイプで探せます。</p>
+    <p class="note">{kind_note}</p>
     <ul class="chips">{kind_links}</ul>
   </div>
 </section>
@@ -475,7 +497,7 @@ def build_home(listed, ctx):
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
+""".format(kind_note=e("%s など、サービスのタイプで探せます。" % "・".join(kinds_of(listed)[:4])), e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
            kinds=kind_sections(listed, {}, ctx, heading_level=3))
@@ -640,6 +662,23 @@ def next_stage(item):
     return order[last + 1], False
 
 
+def published_row(item):
+    """「発表・更新時期」の行。調査は「2026年7月発表」、ほかは「2026年8月」。空欄なら行ごと出さない。"""
+    if not item["published"]:
+        return ""
+    if item["kind"] == "調査":
+        return '    <div><dt>発表時期</dt><dd>%s発表</dd></div>\n' % e(month_label(item["published"]))
+    return '    <div><dt>発表・更新</dt><dd>%s</dd></div>\n' % e(month_label(item["published"]))
+
+
+def caution_text(item):
+    if item["kind"] == "調査":
+        return "調査の数字は発表した時点のものです。くわしい内容は発表元のレポートで確かめてください。"
+    if item["kind"] == "書籍":
+        return "価格や在庫は変わることがあります。購入ページで確かめてください。"
+    return "料金や内容は変わることがあります。利用する前に公式サイトで確かめてください。"
+
+
 def report_link(item):
     url = CONF.get("report_form_url", "")
     if not url:
@@ -689,8 +728,10 @@ def build_item(item, listed, ctx):
         page("/item/%s/" % item["id"], item["title"], "このサービスは提供を終了したか、掲載を終えました。", body, noindex=True, ctx=ctx)
         return
 
-    official_link = ('<a class="button" href="%s" rel="noopener" target="_blank">公式サイトを見る</a>'
-                     % e(item["url"])) if item["url"] else ""
+    # リンクの文言は種類ごと（調査は「レポートを読む」、書籍は「購入ページを見る」など。config/site.json の kinds）
+    link_label = KIND_BY_NAME.get(item["kind"], {}).get("link", "公式サイトを見る")
+    official_link = ('<a class="button" href="%s" rel="noopener" target="_blank">%s</a>'
+                     % (e(item["url"]), e(link_label))) if item["url"] else ""
     official = ('<p class="official">%s<button type="button" class="button button-ghost save-wide" data-save="%s" '
                 'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button></p>'
                 % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON))
@@ -709,10 +750,10 @@ def build_item(item, listed, ctx):
     <div><dt>転機</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
     <div><dt>費用</dt><dd>{cost}</dd></div>
-    <div><dt>提供元</dt><dd>{provider}</dd></div>
-    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
+    <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
+{published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
-  <p class="note">料金や内容は変わることがあります。利用する前に公式サイトで確かめてください。</p>
+  <p class="note">{caution}</p>
   {report}
 </article>
 {similar}
@@ -720,13 +761,21 @@ def build_item(item, listed, ctx):
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            when=e(when_line(item)), memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
+           provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
+           published=published_row(item), caution=e(caution_text(item)),
            similar=similar_html, next=next_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
-    about = {"@type": "Service", "name": item["title"], "description": item["memo"], "category": item["kind"]}
+    ld_type = {"書籍": "Book", "調査": "Report"}.get(item["kind"], "Service")
+    about = {"@type": ld_type, "name": item["title"], "description": item["memo"]}
+    if ld_type == "Service":
+        about["category"] = item["kind"]
     if item["url"]:
         about["url"] = item["url"]
     if item["provider"]:
-        about["provider"] = {"@type": "Organization", "name": item["provider"]}
+        key = {"Book": "author", "Report": "publisher"}.get(ld_type, "provider")
+        about[key] = {"@type": "Organization" if ld_type != "Book" else "Person", "name": item["provider"]}
+    if ld_type == "Report" and item["published"]:
+        about["datePublished"] = "%04d-%02d" % item["published"]
     webpage = {"@context": "https://schema.org", "@type": "WebPage", "name": item["title"], "description": desc,
                "url": "%s/item/%s/" % (BASE, item["id"]), "inLanguage": "ja", "about": about}
     if item["observed"]:
