@@ -1,12 +1,20 @@
 // 一覧ページ：search.json を読み込み、ブラウザの中で絞り込みと検索をする
 (function () {
+  document.documentElement.classList.add("js");
   var PAGE = window.TENKI_PAGE_SIZE || 20;
+  var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
   var FIELDS = ["q", "kind", "tenki", "stage", "cost", "sort"];
+  var FILTERS = ["kind", "tenki", "stage", "cost"]; // 「絞り込む」の中にある条件
+  var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階", cost: "費用" };
   var COMMON = "共通", OTHER = "その他";
   var form = document.getElementById("filters");
   var list = document.getElementById("results");
   var countEl = document.getElementById("result-count");
   var moreBtn = document.getElementById("more");
+  var chipsEl = document.getElementById("active-chips");
+  var toggle = document.getElementById("filter-toggle");
+  var panel = document.getElementById("filter-panel");
+  var filterCount = document.getElementById("filter-count");
   var data = null, results = [], shown = 0;
 
   function normalize(s) {
@@ -84,13 +92,49 @@
     return out;
   }
 
+  function whenLine(it) {
+    var tenki = it.tenki.indexOf(COMMON) >= 0 ? "どの転機にも" : it.tenki.join("、");
+    return [tenki, it.stages.join("、")].filter(Boolean).join("｜");
+  }
+
+  function addedLabel(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+    if (!m) return "";
+    var y = +m[1], mo = +m[2], d = +m[3];
+    return (y === THIS_YEAR ? "" : y + "年") + mo + "月" + d + "日に追加";
+  }
+
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
     if (it.cost) tags += '<span class="tag tag-cost">' + esc(it.cost) + "</span>";
-    it.tenki.forEach(function (t) { tags += '<span class="tag">' + esc(t) + "</span>"; });
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/"><h3>' +
-      (it["new"] ? '<span class="new">新着</span>' : "") + esc(it.title) + "</h3><p>" + esc(it.line) +
-      '</p><div class="tags">' + tags + "</div></a></li>";
+    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/">' +
+      '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
+      "<h3>" + esc(it.title) + "</h3>" +
+      '<p class="card-line">' + esc(it.line) + "</p>" +
+      '<div class="card-foot"><div class="tags">' + tags + '</div><span class="card-date">' + esc(addedLabel(it.added)) + "</span></div>" +
+      "</a></li>";
+  }
+
+  // 選んでいる条件を「×で外せる札」として並べる
+  function renderChips(state) {
+    var chips = [];
+    if (state.q) chips.push({ field: "q", text: "「" + state.q + "」" });
+    FILTERS.forEach(function (f) { if (state[f]) chips.push({ field: f, text: LABELS[f] + "：" + state[f] }); });
+    chipsEl.hidden = !chips.length;
+    chipsEl.innerHTML = chips.map(function (c) {
+      return '<button type="button" class="active-chip" data-field="' + c.field + '" aria-label="' + esc(c.text) + 'を外す">' +
+        esc(c.text) + '<span aria-hidden="true">×</span></button>';
+    }).join("") + (chips.length > 1 ? '<button type="button" class="link-button" data-field="all">すべて外す</button>' : "");
+    var n = FILTERS.filter(function (f) { return state[f]; }).length;
+    filterCount.textContent = n ? "（" + n + "）" : "";
+  }
+
+  function countText(state) {
+    var parts = [];
+    if (state.q) parts.push("「" + state.q + "」");
+    FILTERS.forEach(function (f) { if (state[f]) parts.push(state[f]); });
+    if (!results.length) return (parts.length ? parts.join("・") + "では、" : "") + "見つかりませんでした。条件を外すか、別の言葉で探してみてください。";
+    return (parts.length ? parts.join("・") + "で " : "") + results.length + "件";
   }
 
   function render(reset) {
@@ -98,7 +142,6 @@
     var next = results.slice(shown, shown + PAGE);
     list.insertAdjacentHTML("beforeend", next.map(cardHtml).join(""));
     shown += next.length;
-    countEl.textContent = results.length ? results.length + "件見つかりました" : "条件に合うものが見つかりませんでした。条件を減らすか、別の言葉で探してみてください。";
     moreBtn.hidden = shown >= results.length;
     if (!moreBtn.hidden) moreBtn.textContent = "もっと見る（残り" + (results.length - shown) + "件）";
   }
@@ -107,7 +150,14 @@
     var state = readForm();
     updateUrl(state);
     results = filter(state);
+    renderChips(state);
+    countEl.textContent = countText(state);
     render(true);
+  }
+
+  function setPanel(open) {
+    panel.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
   }
 
   var timer;
@@ -115,8 +165,12 @@
   form.addEventListener("change", run);
   form.addEventListener("submit", function (ev) { ev.preventDefault(); run(); });
   moreBtn.addEventListener("click", function () { render(false); });
-  document.getElementById("reset").addEventListener("click", function () {
-    FIELDS.forEach(function (f) { form.elements[f].value = ""; });
+  toggle.addEventListener("click", function () { setPanel(!panel.classList.contains("open")); });
+  chipsEl.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-field]");
+    if (!b) return;
+    var f = b.getAttribute("data-field");
+    (f === "all" ? ["q"].concat(FILTERS) : [f]).forEach(function (k) { form.elements[k].value = ""; });
     run();
   });
 
@@ -125,8 +179,7 @@
     .then(function (json) {
       data = json;
       writeForm(readParams());
-      results = filter(readForm());
-      render(true);
+      run();
     })
     .catch(function () { countEl.textContent = "データを読み込めませんでした。時間をおいて開き直してください。"; });
 })();
