@@ -238,6 +238,12 @@ button, .button {
 .shelf-dots i.on { background: var(--sky); width: 14px; border-radius: 3px; }
 .shelf-block.no-scroll .shelf-foot { visibility: hidden; }
 @media (prefers-reduced-motion: reduce) { .shelf-dots i { transition: none; } }
+/* 1タイプずつ薄い空色の箱に入れて、タイプの境目をわかりやすくする（カードは白のまま）。
+   箱の左右の余白は棚のはみ出し幅（space-4）と同じにして、カードを箱の端まで流す */
+.kind-block.shelf-block { margin-top: var(--space-4); background: var(--chip-bg); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+.shelf-block .card-more a { background: var(--card); }
+.shelf-block .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
+.shelf-block .shelf-dots i.on { background: var(--sky); opacity: 1; }
 .kind-block h2, .kind-block h3 { font-size: 20px; margin: 0 0 var(--space-3); }
 
 /* 転機ページ */
