@@ -235,7 +235,8 @@ button, .button {
 }
 .field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 2px; }
 .result-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); font-size: 15px; }
-.sort-field { display: flex; align-items: center; gap: var(--space-2); }
+.sort-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
+.sort-help { font-size: 13px; white-space: nowrap; }
 .sort-field label { font-size: 13px; color: var(--text-sub); white-space: nowrap; }
 .sort-field select { width: auto; padding: 6px var(--space-3); font-size: 14px; }
 .active-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); }

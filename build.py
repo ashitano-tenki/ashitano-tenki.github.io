@@ -390,7 +390,7 @@ def build_home(listed, ctx):
 <section class="section">
   <p class="label">By category</p>
   <h2 class="section-title">タイプごとに見る</h2>
-  <p class="note">タイプごとに、観測所の並び順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
+  <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
 """.format(site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
@@ -637,7 +637,7 @@ def build_search(listed, ctx):
     <div class="result-col">
       <div class="result-bar">
         <p id="result-count" aria-live="polite">読み込み中…</p>
-        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">観測所の並び順</option><option value="new">新着順</option></select></div>
+        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>
       <ul id="results" class="cards"></ul>
