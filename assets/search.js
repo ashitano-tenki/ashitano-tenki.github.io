@@ -4,8 +4,8 @@
   var PAGE = window.TENKI_PAGE_SIZE || 20;
   var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
   var FIELDS = ["q", "kind", "tenki", "stage", "free", "sort"];
-  var FILTERS = ["kind", "tenki", "stage", "free"]; // 「絞り込む」の中にある条件
-  var SELECTS = ["kind", "tenki", "stage"];
+  var FILTERS = ["tenki", "stage", "kind", "free"]; // 「絞り込む」の中にある条件
+  var SELECTS = ["tenki", "stage", "kind"];
   var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階" };
   var FREE_TEXT = "無料で試せる";
   var COMMON = "共通", OTHER = "その他";

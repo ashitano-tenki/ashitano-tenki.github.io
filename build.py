@@ -262,8 +262,8 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx)
     <nav class="global-nav" aria-label="サイト内">
       <a href="/search/">探す</a>
       <a href="/tenki/">転機から</a>
-      <a href="/check/">セルフチェック</a>
       <a href="/report/">観測レポート</a>
+      <a href="/check/">セルフチェック</a>
     </nav>
     <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
     <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
@@ -628,9 +628,9 @@ def build_search(listed, ctx):
     <div class="filter-col">
       <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">絞り込む<span id="filter-count"></span></button>
       <div id="filter-panel" class="filter-panel">
-        <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
+        <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
         <div class="field field-free"><span class="label-like">費用</span><label class="check"><input type="checkbox" id="free" name="free" value="1">無料で試せるものだけ<span id="free-count"></span></label></div>
         <p class="note filter-note">条件はURLに残るので、そのまま共有できます。</p>
         <noscript><button type="submit">この条件で探す</button></noscript>
