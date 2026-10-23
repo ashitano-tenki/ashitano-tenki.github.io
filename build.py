@@ -11,6 +11,7 @@ Python の標準ライブラリだけで動く。
 import argparse
 import csv
 import datetime
+import hashlib
 import html
 import io
 import json
@@ -744,6 +745,16 @@ def build_meta_files(ctx):
     write("/.nojekyll", "")
 
 
+def assets_version():
+    """assets/ の中身から作る短い印。中身が変わると印が変わり、ブラウザが古い見た目や動きを使い続けないようにする。"""
+    h = hashlib.sha1()
+    folder = os.path.join(ROOT, "assets")
+    for name in sorted(os.listdir(folder)):
+        with open(os.path.join(folder, name), "rb") as f:
+            h.update(name.encode("utf-8") + f.read())
+    return h.hexdigest()[:10]
+
+
 def check_counts(items, listed, allow_decrease):
     """データの一時的な不具合でサイトが空になるのを防ぐ。"""
     if not listed:
@@ -779,7 +790,7 @@ def main():
     new_items = [it for it in listed if it["added"] and since <= it["added"] <= today]
     ctx = {
         "today": today,
-        "version": today.strftime("%Y%m%d"),
+        "version": assets_version(),
         "sitemap": [],
         "new_items": new_items,
         "new_ids": {it["id"] for it in new_items},
