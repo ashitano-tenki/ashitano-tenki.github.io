@@ -417,6 +417,35 @@ def kind_emoji(kind):
     return emoji(KIND_BY_NAME.get(kind, {}).get("emoji", ""))
 
 
+def kind_shelves(items, ctx):
+    """トップの「タイプごとに見る」。タイプごとに、おすすめ順で最大8件を横にスワイプできる棚にする（自動では動かない）。"""
+    n = CONF.get("shelf_size", 8)
+    out = []
+    for i, (kind, group) in enumerate(by_kind(items)):
+        shown = group[:n]
+        shelf_id = "shelf-%d" % i
+        url = search_url(kind=kind)
+        about = KIND_BY_NAME.get(kind, {}).get("about", "")
+        more = ('<li class="card card-more"><a href="%s">%sをすべて見る<span>（%d件）</span></a></li>'
+                % (e(url), e(kind), len(group))) if len(group) > len(shown) else ""
+        out.append("""<section class="kind-block shelf-block">
+  <div class="shelf-head">
+    <h3>%s%s <span class="count">%d件</span></h3>
+    <div class="shelf-tools">
+      <span class="shelf-arrows" hidden><button type="button" class="shelf-arrow" data-dir="-1" aria-controls="%s" aria-label="%sの前へ">←</button><button type="button" class="shelf-arrow" data-dir="1" aria-controls="%s" aria-label="%sの次へ">→</button></span>
+      <a class="shelf-all" href="%s">すべて見る</a>
+    </div>
+  </div>
+  %s
+  <ul class="cards shelf" id="%s" tabindex="0" aria-label="%sの一覧（%d件中%d件を表示）">%s%s</ul>
+  <div class="shelf-foot" aria-hidden="true"><span class="shelf-pos">1 / %d</span><span class="shelf-dots">%s</span></div>
+</section>""" % (kind_emoji(kind), e(kind), len(group), shelf_id, e(kind), shelf_id, e(kind), e(url),
+                 '<p class="kind-about">%s</p>' % e(about) if about else "",
+                 shelf_id, e(kind), len(group), len(shown), "".join(card(it, ctx["today"]) for it in shown), more,
+                 len(shown), "".join("<i></i>" for _ in shown)))
+    return "\n".join(out)
+
+
 def kind_sections(items, params, ctx, heading_level=2):
     """種類ごとに上位数件を並べ、残りは一覧ページの該当条件へつなぐ。"""
     n = CONF["top_per_kind"]
@@ -500,7 +529,7 @@ def build_home(listed, ctx):
 """.format(kind_note=e("%s など、サービスのタイプで探せます。" % "・".join(kinds_of(listed)[:4])), e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
-           kinds=kind_sections(listed, {}, ctx, heading_level=3))
+           kinds=kind_shelves(listed, ctx))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
                "description": CONF["description"], "inLanguage": "ja",
                "potentialAction": {"@type": "SearchAction", "target": BASE + "/search/?q={search_term_string}",

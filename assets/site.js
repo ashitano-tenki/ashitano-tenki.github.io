@@ -141,3 +141,52 @@
     }).catch(function () { statusEl.textContent = "データを読み込めませんでした。時間をおいて開き直してください。"; });
   }
 })();
+
+// トップの「タイプごとに見る」の棚：いまの位置（1 / 8）、パソコンの矢印、キーボードの左右キー。自動では動かさない
+(function () {
+  var blocks = document.querySelectorAll(".shelf-block");
+  if (!blocks.length) return;
+  Array.prototype.forEach.call(blocks, function (block) {
+    var shelf = block.querySelector(".shelf");
+    var cards = shelf.querySelectorAll("li.card:not(.card-more)");
+    var pos = block.querySelector(".shelf-pos");
+    var dots = block.querySelectorAll(".shelf-dots i");
+    var arrows = block.querySelector(".shelf-arrows");
+    var prev = block.querySelector('.shelf-arrow[data-dir="-1"]');
+    var next = block.querySelector('.shelf-arrow[data-dir="1"]');
+    function step() {
+      var first = shelf.querySelector("li");
+      var gap = parseFloat(getComputedStyle(shelf).columnGap) || 0;
+      return first ? first.getBoundingClientRect().width + gap : shelf.clientWidth;
+    }
+    function update() {
+      var scrollable = shelf.scrollWidth > shelf.clientWidth + 4;
+      block.classList.toggle("no-scroll", !scrollable);
+      arrows.hidden = !scrollable;
+      var i = Math.min(cards.length - 1, Math.round(shelf.scrollLeft / step()));
+      if (pos) pos.textContent = (i + 1) + " / " + cards.length;
+      Array.prototype.forEach.call(dots, function (d, j) { d.classList.toggle("on", j === i); });
+      prev.disabled = shelf.scrollLeft < 4;
+      next.disabled = shelf.scrollLeft + shelf.clientWidth >= shelf.scrollWidth - 4;
+    }
+    function move(dir, page) {
+      var amount = page ? Math.max(step(), Math.floor(shelf.clientWidth / step()) * step()) : step();
+      shelf.scrollBy({ left: dir * amount, behavior: "smooth" });
+    }
+    prev.addEventListener("click", function () { move(-1, true); });
+    next.addEventListener("click", function () { move(1, true); });
+    shelf.addEventListener("keydown", function (ev) {
+      if (ev.target !== shelf || (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft")) return;
+      ev.preventDefault();
+      move(ev.key === "ArrowRight" ? 1 : -1, false);
+    });
+    var ticking = false;
+    shelf.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      setTimeout(function () { ticking = false; update(); }, 60);
+    }, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  });
+})();
