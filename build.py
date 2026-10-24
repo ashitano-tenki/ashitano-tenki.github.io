@@ -262,9 +262,10 @@ def save_button(item):
 def card(item, today, kind=True, date=False):
     """カード1枚。kind=False はタイプのまとまりの中（タイプは見出しでわかる）、date=True は新着の一覧で使う。"""
     added = '<span class="card-date">%s</span>' % e(added_label(item["added"], today)) if date else ""
-    return ('<li class="card"><a href="/item/%s/">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
+    # 読み上げではタイトルから聞こえるように、リンクの名前を「タイトル（転機｜段階）」にする
+    return ('<li class="card"><a href="/item/%s/" aria-label="%s（%s）">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
             '<h3>%s</h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></a>%s</li>'
-            % (e(item["id"]), item_media(item, "card-media", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
+            % (e(item["id"]), e(item["title"]), e(when_line(item)), item_media(item, "card-media", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
                e(item["line"]), tag_list(item, kind), added, save_button(item)))
 
 
@@ -477,7 +478,7 @@ def item_media(item, cls, small):
     if small:
         return ('<div class="%s media-%s" aria-hidden="true"><img src="/images/items/%s-s.webp?v=%s" alt="" loading="lazy" decoding="async"></div>'
                 % (cls, fit, e(item["id"]), ver))
-    return ('<div class="%s media-%s"><img src="/images/items/%s.webp?v=%s" alt="" width="%d" height="%d" decoding="async"></div>'
+    return ('<div class="%s media-%s"><img src="/images/items/%s.webp?v=%s" alt="" width="%d" height="%d" fetchpriority="high"></div>'
             % (cls, fit, e(item["id"]), ver, w, h))
 
 

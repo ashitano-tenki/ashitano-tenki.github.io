@@ -120,17 +120,27 @@
   }
 
   // 0件のとき、どの条件を外せば見つかるかを示す
+  var POPULAR = ["転職", "副業", "フリーランス", "起業", "確定申告", "コーチング", "学び直し", "50代"];
+
   function renderZeroHelp(state) {
     var hints = [];
     if (!results.length) {
+      var onlyQ = state.q && !FILTERS.some(function (f) { return state[f]; });
       ["q"].concat(FILTERS).forEach(function (f) {
-        if (!state[f]) return;
+        if (!state[f] || (f === "q" && onlyQ)) return;  // キーワードだけのときは「外すと全件」は出さない
         var n = match(without(state, f)).length;
         if (n) hints.push('<button type="button" class="link-button" data-field="' + f + '">' + esc(chipText(f, state)) + "を外すと" + n + "件</button>");
       });
     }
-    zeroHelp.hidden = !hints.length;
-    zeroHelp.innerHTML = hints.length ? "<span>条件を外すと見つかります：</span>" + hints.join("") : "";
+    var html = hints.length ? "<span>条件を外すと見つかります：</span>" + hints.join("") : "";
+    // キーワードだけで0件のときは、よく探される言葉と「転機から探す」を出して、すぐに探し直せるようにする
+    if (!results.length && state.q) {
+      html += (html ? '<span class="zero-break"></span>' : "") + "<span>こんな言葉で探せます：</span>" + POPULAR.map(function (w) {
+        return '<a class="zero-word" href="?q=' + encodeURIComponent(w) + '">' + esc(w) + "</a>";
+      }).join("") + '<a class="zero-word" href="/tenki/">転機から探す</a>';
+    }
+    zeroHelp.hidden = !html;
+    zeroHelp.innerHTML = html;
   }
 
   function filter(state) {
@@ -174,7 +184,7 @@
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
     if (it.cost) tags += '<span class="tag tag-cost">' + esc(it.cost) + "</span>";
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/">' + mediaHtml(it.img) + '<div class="card-body">' +
+    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mediaHtml(it.img) + '<div class="card-body">' +
       '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
       "<h3>" + esc(it.title) + "</h3>" +
       '<p class="card-line">' + esc(it.line) + "</p>" +

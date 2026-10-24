@@ -124,7 +124,7 @@
   }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>" + (it.cost ? '<span class="tag tag-cost">' + esc(it.cost) + "</span>" : "");
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when">' +
+    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when">' +
       esc(whenLine(it)) + "</p><h3>" + esc(it.title) + '</h3><p class="card-line">' + esc(it.line) + '</p><div class="card-foot"><div class="tags">' + tags +
       "</div></div></div></a>" +
       window.TenkiSaved.button(it.id, it.title) + "</li>";
