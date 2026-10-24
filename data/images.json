@@ -1325,6 +1325,10 @@
  "R0167": {
   "page": "https://inou.life/",
   "checked": "2026-10-24",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0167.jpg",
+  "w": 960,
+  "h": 464
  }
 }
