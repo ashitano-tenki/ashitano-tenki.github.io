@@ -229,9 +229,8 @@ def cost_label(cost):
 
 
 def tag_list(item, kind=True):
+    # 有料・無料はカードに出さない（すっきりさせるため。紹介ページの表の「費用」には出す）
     tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])] if kind else []
-    if item["cost"]:
-        tags.append('<span class="tag tag-cost">%s</span>' % e(cost_label(item["cost"])))
     return '<div class="tags">%s</div>' % "".join(tags)
 
 
@@ -1155,7 +1154,7 @@ def build_search_json(listed, ctx):
     data = {
         "items": [{
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
-            "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
+            "tenki": it["tenki"], "stages": it["stages"],
             "added": it["added"].isoformat() if it["added"] else "",
             "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
@@ -1186,7 +1185,7 @@ def build_check(listed, ctx):
     ctx["sitemap"].append((BASE + "/check/", ctx["today"]))
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
-        "memo": it["memo"], "url": it["url"], "cost": cost_label(it["cost"]), "rank": it["rank"],
+        "memo": it["memo"], "url": it["url"], "rank": it["rank"],
         "page": "/item/%s/" % it["id"], "img": image_ref(it),
     } for it in listed]}
     write("/check/picks.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))

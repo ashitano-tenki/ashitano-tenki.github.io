@@ -187,7 +187,6 @@
   }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
-    if (it.cost) tags += '<span class="tag tag-cost">' + esc(it.cost) + "</span>";
     return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mediaHtml(it.img) + '<div class="card-body">' +
       '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
       "<h3>" + esc(it.title) + "</h3>" +
