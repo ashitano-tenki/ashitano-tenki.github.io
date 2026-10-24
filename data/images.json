@@ -1649,5 +1649,69 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47981/4798195383.jpg",
   "w": 705,
   "h": 1000
+ },
+ "R0206": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784334044039",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43340/4334044034.jpg",
+  "w": 620,
+  "h": 1000
+ },
+ "R0207": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2224241",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0208": {
+  "page": "https://digitalpr.jp/r/127291",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://digitalpr.jp/simg/2693/127291/715_400_20260129092225697aa84121dae.png",
+  "w": 960,
+  "h": 537
+ },
+ "R0209": {
+  "page": "https://open.spotify.com/show/2nr5tFrD05firH7McYEnkY",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1ff2c2af79151713c1a15e7d66",
+  "w": 256,
+  "h": 256
+ },
+ "R0210": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784829211090",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48292/4829211091.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0211": {
+  "page": "https://www.amazon.co.jp/dp/4868450484",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0212": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784802135863",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48021/4802135866.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0213": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784539732014",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45397/4539732013.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0214": {
+  "page": "https://amzn.asia/d/0c0ggN5v",
+  "checked": "2026-10-24",
+  "status": "none"
  }
 }
