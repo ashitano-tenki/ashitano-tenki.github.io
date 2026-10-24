@@ -6,6 +6,7 @@
 - 毎朝の「サイトを更新」で、サイトを作る前に動く。画像の縮小に Pillow を使う（ワークフローで入れる）。
 - 取得するのは、まだ画像を確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけ。
   相手のサイトに負担をかけないよう、1回に確かめる数を MAX_PER_RUN までにし、同じドメインには間をあける。
+- 紀伊國屋書店・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
 - 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
   `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
@@ -77,9 +78,40 @@ def fetch(url, limit):
         return res.read(limit), res.geturl(), res.headers
 
 
+def isbn10_from_13(isbn13):
+    core = isbn13[3:12]
+    check = (11 - sum((10 - i) * int(d) for i, d in enumerate(core)) % 11) % 11
+    return core + ("X" if check == 10 else str(check))
+
+
+def derived_image_url(page_url):
+    """ページを読まなくても画像の場所がわかるサイトは、ここで画像のURLを決める。わからなければ空文字。
+    - 紀伊國屋書店（/f/dsg-01-ISBN13）：表紙画像はISBN-10から場所が決まる（ページは自動の取得を断るが、画像は取れる）
+    - Spotify の番組・エピソードなど：公式の oEmbed が返すカバー画像
+    - YouTube の動画：動画のサムネイル（チャンネルのページは og:image があるので通常どおり）"""
+    parts = urllib.parse.urlsplit(page_url)
+    host = host_of(page_url)
+    if host == "kinokuniya.co.jp":
+        m = re.search(r"/dsg-01-(978\d{10})", parts.path)
+        if m:
+            isbn10 = isbn10_from_13(m.group(1))
+            return "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10)
+    if host == "open.spotify.com" and re.match(r"/(show|episode|album|playlist|track|artist)/", parts.path):
+        body, _, _ = fetch("https://open.spotify.com/oembed?url=" + urllib.parse.quote(page_url, safe=""), 200_000)
+        return json.loads(body.decode("utf-8")).get("thumbnail_url", "")
+    if host in ("youtube.com", "m.youtube.com") and parts.path == "/watch":
+        vid = urllib.parse.parse_qs(parts.query).get("v", [""])[0]
+        if re.fullmatch(r"[\w-]{6,20}", vid):
+            return "https://i.ytimg.com/vi/%s/hqdefault.jpg" % vid
+    if host == "youtu.be" and re.fullmatch(r"/[\w-]{6,20}", parts.path):
+        return "https://i.ytimg.com/vi/%s/hqdefault.jpg" % parts.path[1:]
+    return ""
+
+
 def og_image_url(page_url):
-    """ページの og:image（なければ twitter:image）のURLを返す。見つからなければ空文字。"""
-    body, final, headers = fetch(page_url, 600_000)
+    """ページの og:image（なければ twitter:image）のURLを返す。見つからなければ空文字。
+    YouTube のように og:image がページの後ろのほうにあるサイトもあるので、2MBまで読む。"""
+    body, final, headers = fetch(page_url, 2_000_000)
     text = body.decode(headers.get_content_charset() or "utf-8", "replace")
     found = {}
     for tag in re.findall(r"<meta\b[^>]*>", text, re.I):
@@ -138,7 +170,13 @@ def check(row, today, override=""):
     if override:
         rec["manual"] = True
     try:
-        src = override or og_image_url(row["URL"])
+        src = override
+        if not src:
+            try:
+                src = derived_image_url(row["URL"])
+            except Exception:  # 決まった場所から取れなければ、ふつうにページを読む
+                src = ""
+        src = src or og_image_url(row["URL"])
         if not src:
             remove_files(row["ID"])
             return dict(rec, status="none")

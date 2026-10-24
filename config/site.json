@@ -21,7 +21,7 @@
   "min_combo_items": 5,
   "top_per_kind": 3,
   "shelf_size": 8,
-  "image_exclude": [],
+  "image_exclude": ["R0025", "R0081"],
   "list_page_size": 20,
   "min_ratio_to_previous": 0.5,
 
