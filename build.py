@@ -170,6 +170,8 @@ def parse_rows(text):
             "listed": row["状態"] in LISTED_STATES,
             "line": one_line(row["観測メモ"]),
             "published": parse_month(row.get("発表・更新時期", "")),
+            # 向いている人（任意の列。「40代、女性」のように区切って書く。列がなければ空）
+            "for": [x.strip() for x in re.split(r"[、,，/／]", row.get("向いている人", "")) if x.strip()],
         })
     if skipped:
         print("設定にない種類のため表示から外しました: %s" % "、".join(skipped))
@@ -354,7 +356,7 @@ def site_footer(ctx):
       </p>
     </div>
     <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
-    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
+    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
   </div>
 </footer>
 <script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
@@ -841,16 +843,22 @@ def build_item(item, listed, ctx):
     <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
     <div><dt>転機</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
-    <div><dt>費用</dt><dd>{cost}</dd></div>
+{audience}    <div><dt>費用</dt><dd>{cost}</dd></div>
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
 {published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
+  <div class="helpful" data-id="{id}" data-title="{title}" hidden>
+    <p class="helpful-q">この紹介は役に立ちましたか？</p>
+    <div class="helpful-btns"><button type="button" class="button button-ghost" data-helpful="yes">👍 役に立った</button><button type="button" class="button button-ghost" data-helpful="no">👎 いまひとつ</button></div>
+    <p class="helpful-thanks" hidden>ありがとうございます。観測所の見直しに使います。</p>
+  </div>
   {report}
 </article>
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           memo=e(item["memo"]), id=e(item["id"]),
+           audience=('    <div><dt>向いている人</dt><dd>%s</dd></div>\n' % "、".join('<a href="%s">%s</a>' % (e(search_url(**{"for": a})), e(a)) for a in item["for"])) if item["for"] else "", hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            published=published_row(item),
@@ -879,6 +887,18 @@ def build_item(item, listed, ctx):
     page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"])
 
 
+def audience_field(listed, options):
+    """探すページの「向いている人」の絞り込み。データに「向いている人」が入っている掲載があるときだけ出す。
+    並びは config/site.json の audience の順、そのあとに一覧にない言葉。"""
+    found = {a for it in listed for a in it["for"]}
+    if not found:
+        return ""
+    order = CONF.get("audience", [])
+    values = [a for a in order if a in found] + sorted(found - set(order))
+    return ('        <div class="field"><label for="for">向いている人</label><select id="for" name="for"><option value="">すべて</option>%s</select></div>\n'
+            % options(values))
+
+
 def build_search(listed, ctx):
     def options(values):
         return "".join('<option value="%s">%s</option>' % (e(v), e(v)) for v in values)
@@ -899,7 +919,7 @@ def build_search(listed, ctx):
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
         <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
-        <noscript><button type="submit">この条件で探す</button></noscript>
+{audience}        <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
     </div>
     <div class="result-col">
@@ -917,7 +937,7 @@ def build_search(listed, ctx):
 <noscript><p class="note">検索にはJavaScriptを使います。使えない場合は<a href="/tenki/">転機から探す</a>をご利用ください。</p></noscript>
 <script>window.TENKI_PAGE_SIZE = {page_size}; window.TENKI_THIS_YEAR = {year};</script>
 <script src="/assets/search.js?v={ver}" defer></script>
-""".format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
+""".format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)), audience=audience_field(listed, options),
            tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
            page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
@@ -956,7 +976,7 @@ def build_report(listed, ctx):
 ANALYTICS_ABOUT = """<h2 id="analytics">アクセス解析について</h2>
 <p>観測所をよりよくするために、アクセス解析の GoatCounter（goatcounter.com）を使っています。Cookie は使わず、閲覧した人を特定する情報も集めません。</p>
 <p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで何も見つからなかったときは、そのとき入力されたキーワードも送ります。言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
-<p>紹介ページで「公式サイトを見る」「あとで見る」「共有」が押されたときは、どの掲載で押されたか（掲載のIDとタイトル）を数えます。役に立った掲載を知り、掲載するものや並び順を見直すのに使います。</p>
+<p>紹介ページで「公式サイトを見る」「あとで見る」「共有」と、「この紹介は役に立ちましたか？」のボタンが押されたときは、どの掲載で押されたか（掲載のIDとタイトル）を数えます。役に立った掲載を知り、掲載するものや並び順を見直すのに使います。</p>
 <p>転機の段階セルフチェックは、ページが開かれた回数と、結果に出たおすすめが押された回数だけを数えます。回答や結果は送りません。</p>
 """
 
@@ -972,6 +992,7 @@ def build_about(listed, ctx):
 <p>あしたの転機観測所は、転職、独立、起業、副業など、キャリアの転機を迎えた人が、その時期に使えるサービスや情報を探せるようにしたサイトです。</p>
 <p>同じ転機でも、考え始めた時期と、迎えた直後と、慣れてきた時期とでは、必要なものが変わります。そこで、転機の種類と、今どの段階にいるかの二つから探せるようにしています。</p>
 <dl class="stage-dl">{stage_dl}</dl>
+<p>キャリアコンサルタントや人事など、相談に乗る立場の方に向けた使い方は、<a href="/guide/">キャリア支援者の方へ</a>にまとめています。</p>
 
 <h2>掲載の基準</h2>
 <p>掲載しているのは、民間の企業や団体、個人が提供しているサービスと情報だけです。国や自治体の制度、公的な窓口は載せていません。</p>
@@ -1030,6 +1051,40 @@ def build_saved(ctx):
 <noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
 """.format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)
     page("/saved/", "あとで見る", "あとで見るために残したサービスと情報の一覧です。", body, noindex=True, ctx=ctx)
+
+
+def build_guide(listed, ctx):
+    """キャリア支援者（キャリアコンサルタント・人事・コーチなど）向けの使い方。"""
+    body = """
+{crumbs}
+<article class="prose">
+<h1>キャリア支援者の方へ</h1>
+<p>キャリアコンサルタント、人事、コーチ、学校の先生など、転機を迎えた人を支える方に向けた、観測所の使い方です。相談の場で、相談者に合いそうなサービスや情報を一緒に探したり、あとで見てもらうためにまとめて送ったりできます。</p>
+
+<h2>相談者の転機と時期から絞り込む</h2>
+<p>観測所の掲載は、転機の種類（転職・独立・起業・副業・退職や休職・定年・学び直し）と、その転機のどの時期か（準備・遭遇・順応・安定）で整理しています。</p>
+<ul>
+<li><a href="/tenki/">転機から探す</a>で転機を選ぶと、時期ごとのページに進めます。</li>
+<li><a href="/search/">探す</a>では、転機・段階・タイプ（相談・仕事・学習など）を組み合わせて絞り込めます。絞り込んだ状態のページのURLを、そのまま相談者に送ることもできます。</li>
+</ul>
+
+<h2>候補をリストにして送る</h2>
+<p>気になる掲載のカードや紹介ページで「あとで見る」を押すと、<a href="/saved/">あとで見る</a>にたまります。たまったら「このリストを送る」で、リストのURLを相談者に送れます。</p>
+<p>受け取った人がURLを開くと、同じリストが表示され、「自分の『あとで見る』に入れる」で取り込めます。リストはそれぞれのブラウザの中にだけ保存され、観測所に送られることはありません。</p>
+
+<h2>いまの段階を一緒にふりかえる</h2>
+<p><a href="/check/">転機の段階セルフチェック</a>は、18の質問で、転機のどの段階にいるかをふりかえるものです。結果には、その段階の説明と次の一歩のヒント、観測所からのおすすめが出ます。相談の入口や、面談の前の宿題として使えます。回答や結果は送信されません。</p>
+
+<h2>紹介するときに知っておいてほしいこと</h2>
+<ul>
+<li>掲載しているのは、民間の企業・団体・個人が提供しているサービスと情報です。国や自治体の制度、公的な窓口は載せていません。</li>
+<li>掲載料をいただく掲載や、広告としての掲載はしていません。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</li>
+<li>掲載情報はAIが集めて確かめ、定期的に点検していますが、料金や内容は変わることがあります。利用する前に、公式サイトで最新の情報を確かめるよう伝えてください。</li>
+<li>掲載情報の誤りに気づいたときや、紹介したいサービスがあるときは、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>からお知らせください。</li>
+</ul>
+</article>
+""".format(crumbs=breadcrumb([("支援者の方へ", None)]), contact=e(CONF["contact_form_url"]))
+    page("/guide/", "キャリア支援者の方へ", "キャリアコンサルタント・人事・コーチなど、転機を迎えた人を支える方に向けた、あしたの転機観測所の使い方です。", body, ctx=ctx)
 
 
 def build_404(ctx):
@@ -1106,8 +1161,8 @@ def build_search_json(listed, ctx):
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
             "added": it["added"].isoformat() if it["added"] else "",
-            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
-            "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"],
+            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it), "for": it["for"],
+            "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
                                         " ".join(it["tenki"]), " ".join(it["stages"])]))
                     + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])),
         } for it in listed],
@@ -1301,6 +1356,7 @@ def main():
     build_about(listed, ctx)
     build_404(ctx)
     build_saved(ctx)
+    build_guide(listed, ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_feed(listed, ctx)

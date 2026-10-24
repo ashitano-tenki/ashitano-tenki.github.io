@@ -290,3 +290,26 @@
     if (share) count("share/" + location.pathname.split("/")[2], share.getAttribute("data-share-title") || "");
   });
 })();
+
+// 紹介ページの「この紹介は役に立ちましたか？」：押した結果をアクセス解析に記録する（人を特定する情報は送らない）。
+// 同じ掲載に何度も押されないよう、押したことだけをこのブラウザに残す
+(function () {
+  var box = document.querySelector(".helpful");
+  if (!box) return;
+  var id = box.getAttribute("data-id"), key = "tenki-helpful", done = {};
+  try { done = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch (e) { done = {}; }
+  var thanks = box.querySelector(".helpful-thanks"), btns = box.querySelector(".helpful-btns");
+  function finish() { btns.hidden = true; box.querySelector(".helpful-q").hidden = true; thanks.hidden = false; }
+  box.hidden = false;
+  if (done[id]) finish();
+  box.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-helpful]");
+    if (!b) return;
+    var v = b.getAttribute("data-helpful");
+    if (window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({ path: "helpful/" + v + "/" + id, title: (v === "yes" ? "役に立った：" : "いまひとつ：") + box.getAttribute("data-title"), event: true });
+    done[id] = v;
+    try { localStorage.setItem(key, JSON.stringify(done)); } catch (e) {}
+    finish();
+  });
+})();
