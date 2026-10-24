@@ -1414,8 +1414,11 @@
  "R0176": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1304857",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0176.jpg",
+  "w": 960,
+  "h": 1460
  },
  "R0177": {
   "page": "https://www.diamond.co.jp/book/9784478123478.html",
@@ -1436,8 +1439,11 @@
  "R0179": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-08-9989260796",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0179.jpg",
+  "w": 960,
+  "h": 1331
  },
  "R0180": {
   "page": "https://open.spotify.com/show/0xEK8A8MRQ8YAYAYMRGl3K",
@@ -1470,5 +1476,13 @@
   "src": "https://yt3.googleusercontent.com/a4UBH8LgeRsEM8W49wqOVuN36yn9GI0e1f5a3hjd6_SgOHUx0hV2SQixtQuznhv6jyFfk2ir4o4=s900-c-k-c0x00ffffff-no-rj",
   "w": 900,
   "h": 900
+ },
+ "R0184": {
+  "page": "https://globis.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://globis.jp/lp_assets/images/common/OGP.jpg",
+  "w": 960,
+  "h": 504
  }
 }
