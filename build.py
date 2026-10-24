@@ -31,7 +31,6 @@ REQUIRED_COLUMNS = ["ID", "タイトル", "種類", "転機の種類", "段階",
                     "提供元・著者", "費用", "最終観測日", "追加日", "観測スコア", "状態"]
 LISTED_STATES = {"確認済み", "要更新"}
 COST_ORDER = ["無料", "一部無料", "有料"]
-COST_LABELS = {"一部無料": "無料で試せる"}  # 画面での呼び方（スプレッドシートの値はそのまま）
 COMMON = "共通"
 OTHER = "その他"
 
@@ -163,7 +162,6 @@ def parse_rows(text):
             "memo": row["観測メモ"],
             "url": row["URL"] if re.match(r"^https?://", row["URL"]) else "",
             "provider": row["提供元・著者"],
-            "cost": row["費用"],
             "observed": parse_date(row["最終観測日"]),
             "added": parse_date(row["追加日"]),
             "score": parse_score(row["観測スコア"]),
@@ -224,12 +222,8 @@ def tenki_url(t):
     return "/tenki/%s/" % t["slug"]
 
 
-def cost_label(cost):
-    return COST_LABELS.get(cost, cost)
-
-
 def tag_list(item, kind=True):
-    # 有料・無料はカードに出さない（すっきりさせるため。紹介ページの表の「費用」には出す）
+    # 有料・無料は出さない（すっきりさせるため。カードにも紹介ページの表にも出さない）
     tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])] if kind else []
     return '<div class="tags">%s</div>' % "".join(tags)
 
@@ -847,7 +841,6 @@ def build_item(item, listed, ctx):
     <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
     <div><dt>転機</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
-    <div><dt>費用</dt><dd>{cost}</dd></div>
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
 {published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
@@ -862,7 +855,7 @@ def build_item(item, listed, ctx):
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
-           hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            published=published_row(item),
