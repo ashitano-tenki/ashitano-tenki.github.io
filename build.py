@@ -527,7 +527,13 @@ def build_home(listed, ctx):
         '<li><a href="%s">%s%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), len(g))
         for k, g in by_kind(listed))
     if new_items:
-        news = cards(new_items[:12], ctx, date=True)
+        # パソコンはカードを並べ、スマホでは横にスワイプする棚にする（縦に12枚並ぶと長すぎるため）
+        shown = new_items[:12]
+        more_card = ('<li class="card card-more sm-only"><a href="%s">今週の新着をすべて見る<span>（%d件）</span></a></li>'
+                     % (e(search_url(sort="new")), len(new_items))) if len(new_items) > len(shown) else ""
+        news = ('<div class="new-block"><ul class="cards news-list" tabindex="0" aria-label="今週の新着">%s%s</ul>'
+                '<div class="shelf-foot sm-only" aria-hidden="true"><span class="shelf-dots">%s</span></div></div>'
+                % ("".join(card(it, ctx["today"], date=True) for it in shown), more_card, "".join("<i></i>" for _ in shown)))
         if len(new_items) > 12:
             news += more_link(search_url(sort="new"), "今週の新着をすべて見る（%d件）" % len(new_items))
     else:

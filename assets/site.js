@@ -151,10 +151,10 @@
 
 // トップの「タイプごとに見る」の棚：いまの位置（1 / 8）、パソコンの矢印、キーボードの左右キー。自動では動かさない
 (function () {
-  var blocks = document.querySelectorAll(".shelf-block");
+  var blocks = document.querySelectorAll(".shelf-block, .new-block");
   if (!blocks.length) return;
   Array.prototype.forEach.call(blocks, function (block) {
-    var shelf = block.querySelector(".shelf");
+    var shelf = block.querySelector(".shelf, .news-list");
     var cards = shelf.querySelectorAll("li.card:not(.card-more)");
     var dots = block.querySelectorAll(".shelf-dots i");
     var arrows = block.querySelector(".shelf-arrows");
@@ -168,18 +168,18 @@
     function update() {
       var scrollable = shelf.scrollWidth > shelf.clientWidth + 4;
       block.classList.toggle("no-scroll", !scrollable);
-      arrows.hidden = !scrollable;
+      if (arrows) arrows.hidden = !scrollable;
       var i = Math.min(cards.length - 1, Math.round(shelf.scrollLeft / step()));
       Array.prototype.forEach.call(dots, function (d, j) { d.classList.toggle("on", j === i); });
-      prev.disabled = shelf.scrollLeft < 4;
-      next.disabled = shelf.scrollLeft + shelf.clientWidth >= shelf.scrollWidth - 4;
+      if (prev) prev.disabled = shelf.scrollLeft < 4;
+      if (next) next.disabled = shelf.scrollLeft + shelf.clientWidth >= shelf.scrollWidth - 4;
     }
     function move(dir, page) {
       var amount = page ? Math.max(step(), Math.floor(shelf.clientWidth / step()) * step()) : step();
       shelf.scrollBy({ left: dir * amount, behavior: "smooth" });
     }
-    prev.addEventListener("click", function () { move(-1, true); });
-    next.addEventListener("click", function () { move(1, true); });
+    if (prev) prev.addEventListener("click", function () { move(-1, true); });
+    if (next) next.addEventListener("click", function () { move(1, true); });
     shelf.addEventListener("keydown", function (ev) {
       if (ev.target !== shelf || (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft")) return;
       ev.preventDefault();

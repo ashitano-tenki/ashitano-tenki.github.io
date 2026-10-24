@@ -245,6 +245,21 @@ button, .button {
 .shelf-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .2s; }
 .shelf-dots i.on { background: var(--sky); width: 14px; border-radius: 3px; }
 .shelf-block.no-scroll .shelf-foot { visibility: hidden; }
+/* トップの「今週の新着」：パソコンはカードを並べ、スマホ（639px以下）はタイプごとの棚と同じ横スワイプ */
+.sm-only { display: none !important; }
+@media (max-width: 639px) {
+  .sm-only { display: revert !important; }
+  .new-block .shelf-foot { display: flex !important; justify-content: flex-end; }
+  .cards.news-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 88%; gap: var(--space-3);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: 0 calc(-1 * var(--space-4)); padding: 2px var(--space-4) var(--space-2); scroll-padding: 0 var(--space-4); }
+  .cards.news-list::-webkit-scrollbar { display: none; }
+  .cards.news-list > li { scroll-snap-align: start; min-width: 0; }
+  .cards.news-list .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cards.news-list h3, .cards.news-list .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cards.news-list .card-more { display: block !important; }
+  .new-block + .more { margin-top: var(--space-2); }
+}
 @media (prefers-reduced-motion: reduce) { .shelf-dots i { transition: none; } }
 /* 1タイプずつ薄い空色の箱に入れて、タイプの境目をわかりやすくする（カードは白のまま）。
    箱の左右の余白は棚のはみ出し幅（space-4）と同じにして、カードを箱の端まで流す */
