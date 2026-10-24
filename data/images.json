@@ -1449,5 +1449,21 @@
   "checked": "2026-10-24",
   "status": "error",
   "note": "HTTPError: HTTP Error 429: Too Many Requests"
+ },
+ "R0182": {
+  "page": "https://career-research.mynavi.jp/reserch/20261015_116238/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/10/9fdca34e9e2f36701b9571219272f223.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0183": {
+  "page": "https://www.youtube.com/channel/UC96jiVMyHT-JsEMF0EOtnbQ",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://yt3.googleusercontent.com/a4UBH8LgeRsEM8W49wqOVuN36yn9GI0e1f5a3hjd6_SgOHUx0hV2SQixtQuznhv6jyFfk2ir4o4=s900-c-k-c0x00ffffff-no-rj",
+  "w": 900,
+  "h": 900
  }
 }
