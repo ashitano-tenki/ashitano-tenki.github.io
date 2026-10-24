@@ -345,7 +345,7 @@ def site_footer(ctx):
     return """<footer class="site-footer">
   <div class="wrap">
     <div class="community">
-      <p>この観測所は、黒田悠介が運営する「あしたの転機」の一部です。転機について考える記事はnoteマガジン「あしたの転機」で、同じように転機を迎えている人との交流はFacebookグループ「あしたの転機」で続けています。</p>
+      <p>この観測所は、黒田悠介が運営する「あしたの転機プロジェクト」の一部です。転機について考える記事はnoteマガジンで発信、転機を迎えている人同士の交流はFacebookグループで開催しています。</p>
       <p class="community-links">
         <a href="{note}" rel="noopener" target="_blank">noteマガジン「あしたの転機」</a>
         <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
@@ -815,8 +815,8 @@ def build_item(item, listed, ctx):
 
     # リンクの文言は種類ごと（調査は「レポートを読む」、書籍は「購入ページを見る」など。config/site.json の kinds）
     link_label = KIND_BY_NAME.get(item["kind"], {}).get("link", "公式サイトを見る")
-    official_link = ('<a class="button" href="%s" rel="noopener" target="_blank">%s</a>'
-                     % (e(item["url"]), e(link_label))) if item["url"] else ""
+    official_link = ('<a class="button" href="%s" rel="noopener" target="_blank" data-goatcounter-click="official/%s" data-goatcounter-title="%s">%s</a>'
+                     % (e(item["url"]), e(item["id"]), e(item["title"]), e(link_label))) if item["url"] else ""
     official = ('<p class="official">%s<button type="button" class="button button-ghost save-wide" data-save="%s" '
                 'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button>'
                 '<button type="button" class="button button-ghost share-btn" data-share-title="%s" hidden>%s<span>共有</span></button></p>'
@@ -826,7 +826,7 @@ def build_item(item, listed, ctx):
     body = """
 {crumbs}
 <article class="detail">
-  {hero}
+  {hero}{credit}
   <h1>{title}</h1>
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
@@ -843,7 +843,7 @@ def build_item(item, listed, ctx):
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            published=published_row(item),
@@ -864,7 +864,9 @@ def build_item(item, listed, ctx):
                "url": "%s/item/%s/" % (BASE, item["id"]), "inLanguage": "ja", "about": about}
     if item["observed"]:
         webpage["dateModified"] = item["observed"].isoformat()
-    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage])
+    # 共有画像：tools/make_item_og.py が作った掲載ごとの画像があればそれを、なければ観測所共通の画像
+    og = "/images/og/%s.png" % item["id"] if os.path.exists(os.path.join(ROOT, "og-items", item["id"] + ".png")) else None
+    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og)
 
 
 def build_search(listed, ctx):
@@ -944,7 +946,8 @@ def build_report(listed, ctx):
 ANALYTICS_ABOUT = """<h2 id="analytics">アクセス解析について</h2>
 <p>観測所をよりよくするために、アクセス解析の GoatCounter（goatcounter.com）を使っています。Cookie は使わず、閲覧した人を特定する情報も集めません。</p>
 <p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで何も見つからなかったときは、そのとき入力されたキーワードも送ります。言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
-<p>転機の段階セルフチェックは、ページが開かれた回数だけを数えます。回答や結果は送りません。</p>
+<p>紹介ページで「公式サイトを見る」「あとで見る」「共有」が押されたときは、どの掲載で押されたか（掲載のIDとタイトル）を数えます。役に立った掲載を知り、掲載するものや並び順を見直すのに使います。</p>
+<p>転機の段階セルフチェックは、ページが開かれた回数と、結果に出たおすすめが押された回数だけを数えます。回答や結果は送りません。</p>
 """
 
 
@@ -970,6 +973,10 @@ def build_about(listed, ctx):
 <h2>情報の集め方と点検</h2>
 <p>掲載情報は、AIが公開されている情報をもとに集め、内容を確かめてから載せています。載せたあともAIが定期的に点検し、内容を確かめた日を「最終観測日」として表示しています。</p>
 <p>料金や内容は変わることがあります。利用する前に、公式サイトで最新の情報を確かめてください。</p>
+
+<h2 id="images">掲載している画像について</h2>
+<p>紹介ページと一覧の画像は、各サービスが公式サイトでシェア用に公開している画像や、出版社・書店が公開している書影です。どんなサービス・本かがわかりやすいように、紹介ページへのリンクと一緒に縮小して表示しています。</p>
+<p>掲載先の方で、画像を外したい・差し替えたい場合は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>からお知らせください。確認のうえ対応します。</p>
 
 <h2 id="contact">観測所へのご連絡</h2>
 <p>掲載情報の誤りのお知らせや、掲載してほしいサービス・情報のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームから受け付けています。</p>
@@ -1030,6 +1037,14 @@ def normalize(s):
     s = unicodedata.normalize("NFKC", s or "").lower()
     # ひらがなをカタカナにそろえる（「ふりーらんす」でも見つかるように）
     return "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in s)
+
+
+def image_credit(item):
+    """紹介ページの画像の下の出典。本は出版社・書店の書影、それ以外は公式サイトの画像。画像がなければ何も出さない。"""
+    if not image_info(item):
+        return ""
+    text = "書影：出版社・書店の公開画像より" if item["kind"] == "書籍" else "画像：公式サイトより"
+    return '<p class="hero-credit">%s</p>' % text
 
 
 def image_ref(item):
@@ -1212,6 +1227,10 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(OUT, "assets"))
+    # 紹介ページごとの共有画像（tools/make_item_og.py が og-items/ に作る。なければ作らない）
+    og_dir = os.path.join(ROOT, "og-items")
+    if os.path.isdir(og_dir):
+        shutil.copytree(og_dir, os.path.join(OUT, "images", "og"))
     # 掲載先の画像（画像が取れて、除外していないものだけ）
     os.makedirs(os.path.join(OUT, "images", "items"))
     for item_id in IMAGES:

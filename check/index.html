@@ -484,6 +484,14 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
     return `<div class="card-media media-none" aria-hidden="true"><span>${esc(img.emoji || "")}</span></div>`;
   }
 
+  // アクセス解析：結果に出たおすすめが押されたら、どの掲載かを数える（回答や結果は送らない）
+  document.addEventListener("click", ev => {
+    const a = ev.target.closest(".pick a");
+    if (!a || !window.goatcounter || !window.goatcounter.count) return;
+    const card = a.closest(".pick");
+    window.goatcounter.count({ path: "check-pick/" + card.dataset.pick, title: card.dataset.pickTitle, event: true });
+  });
+
   function observatoryHtml(r) {
     if (!PICKS) {
       return `<p><a href="${OBS_TOP}">あしたの転機観測所で、転機に役立つサービスを探す</a></p>`;
@@ -493,7 +501,7 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
         <h2>あしたの転機観測所から</h2>
         <p class="lead">転機に役立つ民間のサービスや情報を集めている「あしたの転機観測所」から、いまの段階に合いそうなものを選びました。</p>
         <div class="picks">
-          ${picks.map(p => `<article class="card pick">
+          ${picks.map(p => `<article class="card pick" data-pick="${esc(p.id)}" data-pick-title="${esc(p.title)}">
             ${mediaHtml(p.img)}
             <div class="pick-body">
             <div class="pick-top"><span class="pick-type">${esc(p.type)}</span><span class="small">${esc(p.cost)}・${esc(p.stage.join("、"))}向け</span></div>

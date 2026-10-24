@@ -36,6 +36,11 @@ jobs:
           .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0"
           .venv/bin/python tools/fetch_images.py
 
+      # 紹介ページごとの共有画像（タイトル・タイプ・転機を載せた 1200×630）を作る。失敗しても観測所共通の画像のまま更新は続ける
+      - name: 紹介ページの共有画像を作る
+        continue-on-error: true
+        run: .venv/bin/python tools/make_item_og.py
+
       # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
       - name: CSVを読み込んでサイトを作る
         run: |
