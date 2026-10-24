@@ -380,6 +380,19 @@ button, .button {
 .detail h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.4; margin: 0 0 var(--space-4); }
 .detail-when { margin: calc(-1 * var(--space-2)) 0 var(--space-4); font-size: 15px; font-weight: 700; color: var(--sky); }
 .memo p { margin: 0 0 var(--space-6); }
+/* パソコン：タイトルは横いっぱい、その下で左に画像、右に説明とボタン（スマホは縦に1列のまま） */
+@media (min-width: 760px) {
+  .detail { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: var(--space-8); align-items: start; }
+  .detail > * { grid-column: 1 / -1; }
+  .detail h1 { grid-row: 1; }
+  .detail-hero { grid-column: 1; grid-row: 2; max-width: none; margin: 0; }
+  .hero-credit { grid-column: 1; grid-row: 3; margin: var(--space-2) 0 0; }
+  .detail-side { grid-column: 2; grid-row: 2 / 4; }
+  .detail-side .memo p { margin: 0; }
+  .detail-side .official { max-width: none; margin: 20px 0 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .detail-side .official > .button:first-child { grid-column: 1 / -1; }
+  .detail .facts { margin-top: var(--space-6); }
+}
 .official { margin: 0 0 var(--space-6); }
 .facts { margin: 0 0 var(--space-3); border-top: var(--border-rule) solid var(--ink); }
 .facts div { display: flex; gap: var(--space-3); padding: 10px 0; border-bottom: var(--border-hairline) solid var(--line); }

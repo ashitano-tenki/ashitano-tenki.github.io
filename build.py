@@ -840,8 +840,10 @@ def build_item(item, listed, ctx):
 <article class="detail">
   {hero}{credit}
   <h1>{title}</h1>
+  <div class="detail-side">
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
+  </div>
   <dl class="facts">
     <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
     <div><dt>転機</dt><dd>{tenki}</dd></div>
