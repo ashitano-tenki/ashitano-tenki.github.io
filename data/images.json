@@ -1777,5 +1777,171 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48026/4802615434.jpg",
   "w": 702,
   "h": 1000
+ },
+ "R0223": {
+  "page": "https://famitasu.com/lp/famitasu-tree/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://famitasu.com/wp-content/uploads/2025/06/TREE_KV3-scaled.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0224": {
+  "page": "https://podcasts.apple.com/jp/podcast/おとなのしごおわクラブ/id1803007652",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 16-26: ordinal not in range(128)"
+ },
+ "R0225": {
+  "page": "https://lp.mikata-ins.co.jp/m21/index.php?dcd=efgm5BIP&acd=ctv45GIO",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://lp.mikata-ins.co.jp/m21/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0226": {
+  "page": "https://www.diamond.co.jp/book/9784478039335.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44780/447803933X.jpg",
+  "w": 692,
+  "h": 1000
+ },
+ "R0227": {
+  "page": "https://www.diamond.co.jp/book/9784478118139.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478118132.jpg",
+  "w": 696,
+  "h": 1000
+ },
+ "R0228": {
+  "page": "https://prtimes.jp/main/html/rd/p/000002426.000002955.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/2955/2426/2955-2426-25b731a5a160127d43334db3b6538237-1280x720.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R0229": {
+  "page": "https://prtimes.jp/main/html/rd/p/000001044.000001455.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/1455/1044/1455-1044-aed57342d296a73dad25ffac64843afb-1200x730.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 584
+ },
+ "R0230": {
+  "page": "https://booklive.jp/product/index/title_id/2141118/vol_no/001",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48379/4837940714.jpg",
+  "w": 674,
+  "h": 1000
+ },
+ "R0231": {
+  "page": "https://www.kadokawa.co.jp/product/322007000261/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40460/4046049820.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0232": {
+  "page": "https://www.amazon.co.jp/dp/B0FMHTH7WN",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0233": {
+  "page": "https://www.amazon.co.jp/dp/B0FN7FJGHC",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0234": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784816379338",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48163/4816379339.jpg",
+  "w": 708,
+  "h": 1000
+ },
+ "R0235": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1276061423",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/b5/ec/f4/b5ecf42b-f4de-fb2e-712d-2a94cf342051/mza_12065713813906894911.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0236": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784754734619",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47547/4754734610.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0237": {
+  "page": "https://maruzenjunkudo.co.jp/products/9784802135931",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48021/4802135939.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0238": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784802216999",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48022/4802216998.jpg",
+  "w": 816,
+  "h": 1000
+ },
+ "R0239": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569845586",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45698/4569845584.jpg",
+  "w": 616,
+  "h": 1000
+ },
+ "R0240": {
+  "page": "https://www.proz.com/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0241": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569849751",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45698/456984975X.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0242": {
+  "page": "https://career-research.mynavi.jp/reserch/20260831_114548/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/08/ece9044c2c22aec8585ccda33a140730.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0243": {
+  "page": "https://view.ceros.com/manpower-apme/meos-q1-2026-jp",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://media.ceros.com/manpower-apme/page-thumbnails/2025/12/04/33c245bbc2f9f07979c3167eacc08ed0/page-thumbnail.jpg?imageOpt=1&crop=870,489,x0,y0",
+  "w": 870,
+  "h": 489
+ },
+ "R0244": {
+  "page": "https://www.massmedian.co.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.massmedian.co.jp/img/ogp_img.jpg",
+  "w": 851,
+  "h": 315
  }
 }
