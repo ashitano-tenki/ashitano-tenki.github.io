@@ -24,7 +24,7 @@
   SELECTS.forEach(function (f) {
     Array.prototype.forEach.call(form.elements[f].options, function (o) { o.dataset.label = o.textContent; });
   });
-  var data = null, results = [], shown = 0;
+  var data = null, results = [], shown = 0, byNew = false;  // byNew: 新着順のときだけカードに追加日を出す
 
   function normalize(s) {
     s = (s || "").normalize("NFKC").toLowerCase();
@@ -162,7 +162,7 @@
       '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
       "<h3>" + esc(it.title) + "</h3>" +
       '<p class="card-line">' + esc(it.line) + "</p>" +
-      '<div class="card-foot"><div class="tags">' + tags + '</div><span class="card-date">' + esc(addedLabel(it.added)) + "</span></div>" +
+      '<div class="card-foot"><div class="tags">' + tags + "</div>" + (byNew ? '<span class="card-date">' + esc(addedLabel(it.added)) + "</span>" : "") + "</div>" +
       "</a>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
   }
 
@@ -219,6 +219,7 @@
     var state = readForm();
     updateUrl(state);
     results = filter(state);
+    byNew = state.sort === "new";
     renderChips(state);
     updateCounts(state);
     renderZeroHelp(state);

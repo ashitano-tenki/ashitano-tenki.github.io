@@ -74,11 +74,6 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-weight: 400; margin-right: 0.35em; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* 英字ラベル（大文字・字間0.12em・空色） */
-.label { margin: 0 0 var(--space-2); font-size: 13px; line-height: 1.4; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky); }
-/* 日本語の小見出し（字間は足さない） */
-.kicker { margin: 0 0 var(--space-1); font-size: 13px; font-weight: 700; color: var(--sky); }
-.kicker a { color: inherit; }
 
 /* ヘッダー */
 .site-header { background: var(--base); border-bottom: var(--border-hairline) solid var(--line); }
@@ -232,7 +227,7 @@ button, .button {
 @media (min-width: 1024px) { .cards.shelf { grid-auto-columns: calc((100% - 2 * var(--space-4) - 2 * var(--space-3)) / 2.6); } }
 .card-more a { align-items: center; justify-content: center; text-align: center; font-weight: 700; color: var(--sky); background: var(--chip-bg); border-style: dashed; }
 .card-more a span { display: block; font-weight: 400; font-size: 13px; color: var(--text-sub); }
-.shelf-foot { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; min-height: 18px; }
+.shelf-foot { display: flex; justify-content: flex-end; align-items: center; font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; min-height: 18px; }
 .shelf-dots { display: flex; gap: 4px; }
 .shelf-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .2s; }
 .shelf-dots i.on { background: var(--sky); width: 14px; border-radius: 3px; }
@@ -259,7 +254,7 @@ button, .button {
 .tenki-row { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4) var(--space-6); }
 .tenki-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
 .tenki-row p { margin: var(--space-1) 0 0; font-size: 14px; color: var(--text-body); }
-.sub-links { margin: var(--space-2) 0 0; padding-left: 1.2em; font-size: 14px; }
+.tenki-row .stage-chips { margin-top: var(--space-3); }
 .stage-dl { margin: var(--space-3) 0; display: grid; gap: 6px; }
 .stage-dl div { display: flex; gap: var(--space-3); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); }
 .stage-dl dt { font-weight: 700; color: var(--sky); flex: none; width: 3em; }
@@ -288,7 +283,6 @@ button, .button {
 .filter-panel { display: grid; gap: var(--space-3); grid-template-columns: 1fr 1fr; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4); margin-top: var(--space-2); }
 .zero-help { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); margin: 0 0 var(--space-3); font-size: 14px; }
 .zero-help span { color: var(--text-sub); }
-.filter-note { grid-column: 1 / -1; margin: 0; font-size: 13px; }
 .filter-col { display: flex; flex-direction: column; min-width: 0; }
 .result-col { min-width: 0; }
 /* スマホ：条件は「絞り込む」を押したときだけ開く（JavaScriptが使えないときは開いたまま） */
@@ -321,14 +315,14 @@ button, .button {
 
 /* 観測レポート */
 .week { margin-top: var(--space-8); }
+.with-rss { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3); }
+.rss-link { font-family: var(--font-sans); font-size: 14px; font-weight: 400; }
 .week h2 { font-size: 20px; margin: 0 0 var(--space-3); }
 
 /* フッター：強調ページと同じ ink 地。黄色は区切り線の1本だけ */
 .site-footer { background: var(--footer-bg); color: var(--footer-text); padding: var(--space-8) 0 var(--space-12); font-size: 15px; border-top: 4px solid var(--yellow); }
 .site-footer a { color: var(--footer-strong); }
 .site-footer :focus-visible { outline-color: var(--footer-strong); }
-.contact { margin: var(--space-6) 0 0; }
-.ai-note { margin: 0 0 var(--space-6); font-weight: 700; color: var(--footer-strong); }
 .community p { margin: 0 0 var(--space-3); }
 .community-links { display: flex; flex-direction: column; gap: 6px; }
 @media (min-width: 640px) { .community-links { flex-direction: row; gap: var(--space-6); } }

@@ -149,7 +149,6 @@
   Array.prototype.forEach.call(blocks, function (block) {
     var shelf = block.querySelector(".shelf");
     var cards = shelf.querySelectorAll("li.card:not(.card-more)");
-    var pos = block.querySelector(".shelf-pos");
     var dots = block.querySelectorAll(".shelf-dots i");
     var arrows = block.querySelector(".shelf-arrows");
     var prev = block.querySelector('.shelf-arrow[data-dir="-1"]');
@@ -164,7 +163,6 @@
       block.classList.toggle("no-scroll", !scrollable);
       arrows.hidden = !scrollable;
       var i = Math.min(cards.length - 1, Math.round(shelf.scrollLeft / step()));
-      if (pos) pos.textContent = (i + 1) + " / " + cards.length;
       Array.prototype.forEach.call(dots, function (d, j) { d.classList.toggle("on", j === i); });
       prev.disabled = shelf.scrollLeft < 4;
       next.disabled = shelf.scrollLeft + shelf.clientWidth >= shelf.scrollWidth - 4;

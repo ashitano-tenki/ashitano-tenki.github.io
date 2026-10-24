@@ -372,7 +372,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
   function renderIntro() {
     app.innerHTML = `<div class="stack-lg">
       <section class="stack">
-        <p class="label">Ashita no Tenki</p>
         <h1>転機の段階<wbr>セルフチェック</h1>
         <p class="lead">転職、独立、副業、学び直し。キャリアの転機には「段階」があります。いまのあなたがどの段階にいるのかを、18の質問でふりかえってみましょう。</p>
         <div class="meta"><span class="tag">全18問</span><span class="tag">約5分</span><span class="tag">登録不要</span></div>
@@ -482,7 +481,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
     }
     const picks = pickItems(r);
     return `<section class="stack">
-        <p class="label">From the Observatory</p>
         <h2>あしたの転機観測所から</h2>
         <p class="lead">転機に役立つ民間のサービスや情報を集めている「あしたの転機観測所」から、いまの段階に合いそうなものを選びました。</p>
         <div class="picks">
@@ -514,7 +512,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
 
     app.innerHTML = `<div class="stack-lg">
       <section class="result-hero">
-        <p class="label">Your Stage</p>
         <p>${esc(tenkiLabel)}のなかで、いまのあなたは</p>
         <p class="stage-name">${r.top}</p>
         <p>${info.short}にいるようです。${r.between ? `「${r.between}」の要素も強く出ているので、${STAGES.indexOf(r.between) === (STAGES.indexOf(r.top) + 1) % 4 ? "次の段階へ移りつつある" : "ひとつ前の段階から移ってきた"}ところかもしれません。` : ""}</p>
@@ -528,7 +525,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
       </section>
 
       <section class="stack">
-        <p class="label">About this stage</p>
         <h2>「${r.top}」はどんな時期？</h2>
         <p class="lead">${info.desc}</p>
         <div class="card stack">
@@ -538,7 +534,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
       </section>
 
       <section class="stack">
-        <p class="label">What helps you</p>
         <h2>支えになりそうなのは<wbr>「${need.label}」</h2>
         <p class="lead">${need.text}</p>
       </section>
@@ -548,7 +543,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
       <div id="observatory"></div>
 
       <section class="stack">
-        <p class="label">Community</p>
         <h2>転機を<wbr>ひとりで抱えこまないために</h2>
         <p class="lead">「あしたの転機」は、キャリアの転機について考え、語り合うコミュニティです。いろいろな転機を経験した人の話に触れてみてください。</p>
         <div class="links">
@@ -558,7 +552,6 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
       </section>
 
       <section class="stack">
-        <p class="label">Share</p>
         <h3>結果をシェアする</h3>
         <p class="share-text" id="sharetext">${esc(shareText)}</p>
         <div class="share">

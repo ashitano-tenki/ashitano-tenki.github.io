@@ -203,8 +203,8 @@ def cost_label(cost):
     return COST_LABELS.get(cost, cost)
 
 
-def tag_list(item):
-    tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])]
+def tag_list(item, kind=True):
+    tags = ['<span class="tag tag-kind">%s</span>' % e(item["kind"])] if kind else []
     if item["cost"]:
         tags.append('<span class="tag tag-cost">%s</span>' % e(cost_label(item["cost"])))
     return '<div class="tags">%s</div>' % "".join(tags)
@@ -233,15 +233,17 @@ def save_button(item):
             'aria-label="「%s」をあとで見る" hidden>%s</button>' % (e(item["id"]), e(item["title"]), e(item["title"]), SAVE_ICON))
 
 
-def card(item, today):
+def card(item, today, kind=True, date=False):
+    """カード1枚。kind=False はタイプのまとまりの中（タイプは見出しでわかる）、date=True は新着の一覧で使う。"""
+    added = '<span class="card-date">%s</span>' % e(added_label(item["added"], today)) if date else ""
     return ('<li class="card"><a href="/item/%s/"><p class="card-when" title="%s">%s</p><h3>%s</h3><p class="card-line">%s</p>'
-            '<div class="card-foot">%s<span class="card-date">%s</span></div></a>%s</li>'
-            % (e(item["id"]), e(when_line(item)), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item),
-               e(added_label(item["added"], today)), save_button(item)))
+            '<div class="card-foot">%s%s</div></a>%s</li>'
+            % (e(item["id"]), e(when_line(item)), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item, kind),
+               added, save_button(item)))
 
 
-def cards(items, ctx):
-    return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"]) for it in items)
+def cards(items, ctx, kind=True, date=False):
+    return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"], kind, date) for it in items)
 
 
 NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/report/", "観測レポート"), ("/check/", "セルフチェック"), ("/saved/", "あとで見る")]
@@ -306,7 +308,6 @@ def site_footer(ctx):
     """全ページ共通のフッターと、サイト全体の動き（site.js）。"""
     return """<footer class="site-footer">
   <div class="wrap">
-    <p class="ai-note">掲載情報はAIが収集・確認し、定期的に点検しています。</p>
     <div class="community">
       <p>この観測所は、黒田悠介が運営する「あしたの転機」の一部です。転機について考える記事はnoteマガジン「あしたの転機」で、同じように転機を迎えている人との交流はFacebookグループ「あしたの転機」で続けています。</p>
       <p class="community-links">
@@ -314,9 +315,8 @@ def site_footer(ctx):
         <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
       </p>
     </div>
-    <p class="contact">掲載情報の誤りのお知らせや掲載のご提案は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>のフォームからお送りください。</p>
     <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
-    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・最終更新 {updated}</p>
+    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
   </div>
 </footer>
 <script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
@@ -437,11 +437,11 @@ def kind_shelves(items, ctx):
     </div>
   </div>
   <ul class="cards shelf" id="%s" tabindex="0" aria-label="%sの一覧（%d件中%d件を表示）">%s%s</ul>
-  <div class="shelf-foot" aria-hidden="true"><span class="shelf-pos">1 / %d</span><span class="shelf-dots">%s</span></div>
+  <div class="shelf-foot" aria-hidden="true"><span class="shelf-dots">%s</span></div>
 </section>""" % (kind_emoji(kind), e(kind), len(group), '<p class="kind-about">%s</p>' % e(about) if about else "",
                  shelf_id, e(kind), shelf_id, e(kind), e(url),
-                 shelf_id, e(kind), len(group), len(shown), "".join(card(it, ctx["today"]) for it in shown), more,
-                 len(shown), "".join("<i></i>" for _ in shown)))
+                 shelf_id, e(kind), len(group), len(shown), "".join(card(it, ctx["today"], kind=False) for it in shown), more,
+                 "".join("<i></i>" for _ in shown)))
     return "\n".join(out)
 
 
@@ -455,9 +455,9 @@ def kind_sections(items, params, ctx, heading_level=2):
         about = KIND_BY_NAME.get(kind, {}).get("about", "")
         if about:
             sec.append('<p class="kind-about">%s</p>' % e(about))
-        sec.append(cards(group[:n], ctx))
+        sec.append(cards(group[:n], ctx, kind=False))
         if len(group) > n:
-            sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る（全%d件）" % (kind, len(group))))
+            sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る" % kind))
         sec.append("</section>")
         out.append("".join(sec))
     return "\n".join(out)
@@ -477,17 +477,16 @@ def build_home(listed, ctx):
         '<li><a href="%s">%s%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), len(g))
         for k, g in by_kind(listed))
     if new_items:
-        news = cards(new_items[:12], ctx)
+        news = cards(new_items[:12], ctx, date=True)
         if len(new_items) > 12:
             news += more_link(search_url(sort="new"), "今週の新着をすべて見る（%d件）" % len(new_items))
     else:
         news = '<p class="empty">この1週間に追加されたものはありません。</p>'
     body = """
 <section class="hero">
-  <p class="label">Observatory for career transitions</p>
   <h1>{site}</h1>
   <p class="lead">{lead}</p>
-  <p class="check-link"><a href="/check/">いまの段階をチェックする</a><span>（18の質問で、転機のどの段階にいるかをふりかえる）</span></p>
+  <p class="check-link"><a href="/check/">転機の段階をセルフチェックする</a></p>
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -507,25 +506,22 @@ def build_home(listed, ctx):
   </div>
   <div class="entrance">
     <h2>{e_kind}タイプから探す</h2>
-    <p class="note">{kind_note}</p>
     <ul class="chips">{kind_links}</ul>
   </div>
 </section>
 
 <section class="section">
-  <p class="label">New this week</p>
   <h2 class="section-title">今週の新着</h2>
   {news}
   <p class="more"><a href="/report/">週ごとの観測レポートを見る</a></p>
 </section>
 
 <section class="section">
-  <p class="label">By category</p>
   <h2 class="section-title">タイプごとに見る</h2>
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(kind_note=e("%s など、サービスのタイプで探せます。" % "・".join(kinds_of(listed)[:4])), e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
+""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
            kinds=kind_shelves(listed, ctx))
@@ -537,8 +533,11 @@ def build_home(listed, ctx):
          full_title="%s｜転機の種類と時期から探す、キャリアの転機に役立つサービス" % CONF["site_name"], ctx=ctx)
 
 
-def note_html(text):
-    return '  <p class="page-note">%s</p>' % e(text) if text else ""
+def intro_html(lead, note):
+    """ページ冒頭の説明は1段落だけ。くわしい解説（config/tenki_notes.json）があればそれを、なければ短い説明を出す。"""
+    if note:
+        return '  <p class="page-note">%s</p>' % e(note)
+    return '  <p class="lead">%s</p>' % e(lead)
 
 
 def tenki_heading(t):
@@ -575,27 +574,22 @@ def build_tenki(listed, ctx):
             stage_nav = '<nav class="stage-nav" aria-label="段階で絞る"><h2>段階から探す</h2><ul>%s</ul></nav>' % "".join(
                 '<li><a href="/tenki/%s/%s/"><strong>%s</strong><span>%s</span></a></li>'
                 % (t["slug"], s["slug"], e(s["name"]), e(combo_title(t, s))) for s, sub in combos)
-        common_note = ""
-        if t["name"] not in (COMMON, OTHER):
-            common_note = '<p class="note">どの転機にも役立つもの（共通）も含めています。</p>'
         heading = tenki_heading(t)
         body = """
 {crumbs}
 <header class="page-head">
   <h1>{heading}</h1>
-  <p class="lead">{about}</p>
-{note}
+{intro}
   <p class="page-meta">掲載中 {n}件</p>
 </header>
 {stage_nav}
 <section class="section">
   <h2 class="section-title">タイプごとに見る</h2>
-  {common_note}
   {kinds}
   {more}
 </section>
-""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading), about=e(t["about"]), note=note_html(NOTES.get("tenki", {}).get(t["name"], "")),
-           n=len(items), stage_nav=stage_nav, common_note=common_note,
+""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading), intro=intro_html(t["about"], NOTES.get("tenki", {}).get(t["name"], "")),
+           n=len(items), stage_nav=stage_nav,
            kinds=kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=3),
            more=more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
         page(tenki_url(t), heading, t["about"], body, ctx=ctx, image=og_image(t["slug"]),
@@ -606,8 +600,8 @@ def build_tenki(listed, ctx):
     for t, items, combos in index_rows:
         combo_html = ""
         if combos:
-            combo_html = "<ul class=\"sub-links\">%s</ul>" % "".join(
-                '<li><a href="/tenki/%s/%s/">%s</a></li>' % (t["slug"], s["slug"], e(combo_title(t, s))) for s, sub in combos)
+            combo_html = '<ul class="chips stage-chips" aria-label="%sの段階">%s</ul>' % (e(t["name"]), "".join(
+                '<li><a href="/tenki/%s/%s/" title="%s">%s</a></li>' % (t["slug"], s["slug"], e(combo_title(t, s)), e(s["name"])) for s, sub in combos))
         rows.append('<li class="tenki-row"><a class="tenki-name" href="%s">%s <span class="count">%d件</span></a><p>%s</p>%s</li>'
                     % (tenki_url(t), e(t["name"]), len(items), e(t["about"]), combo_html))
     stage_dl = "".join("<div><dt>%s</dt><dd>%s</dd></div>" % (e(s["name"]), e(s["about"])) for s in STAGES)
@@ -640,10 +634,8 @@ def build_combo(t, s, items, ctx):
     body = """
 {crumbs}
 <header class="page-head">
-  <p class="kicker">{tenki} × {stage}</p>
   <h1>{title}</h1>
-  <p class="lead">{lead}</p>
-{note}
+{intro}
   <p class="page-meta">掲載中 {n}件</p>
 </header>
 <section class="section">
@@ -651,8 +643,8 @@ def build_combo(t, s, items, ctx):
   {more}
 </section>
 """.format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], tenki_url(t)), (s["name"], None)]),
-           tenki=e(t["name"]), stage=e(s["name"]), title=e(title), lead=e(combo_lead(t, s)), n=len(items),
-           note=note_html(NOTES.get("combos", {}).get(t["name"], {}).get(s["name"], "")),
+           title=e(title), n=len(items),
+           intro=intro_html(combo_lead(t, s), NOTES.get("combos", {}).get(t["name"], {}).get(s["name"], "")),
            kinds=kind_sections(items, {"tenki": t["name"], "stage": s["name"]}, ctx, heading_level=2),
            more=more_link(search_url(tenki=t["name"], stage=s["name"]), "この条件の掲載情報をすべて見る"))
     path = "/tenki/%s/%s/" % (t["slug"], s["slug"])
@@ -699,20 +691,12 @@ def published_row(item):
     return '    <div><dt>発表・更新</dt><dd>%s</dd></div>\n' % e(month_label(item["published"]))
 
 
-def caution_text(item):
-    if item["kind"] == "調査":
-        return "調査の数字は発表した時点のものです。くわしい内容は発表元のレポートで確かめてください。"
-    if item["kind"] == "書籍":
-        return "価格や在庫は変わることがあります。購入ページで確かめてください。"
-    return "料金や内容は変わることがあります。利用する前に公式サイトで確かめてください。"
-
-
 def report_link(item):
     url = CONF.get("report_form_url", "")
     if not url:
         return '<p class="report">情報の誤りに気づいたときのお知らせフォームは準備中です。</p>'
     href = url.replace("{id}", quote(item["id"])).replace("{title}", quote(item["title"]))
-    return '<p class="report"><a href="%s" rel="noopener" target="_blank">この情報の誤りを知らせる</a>（フォームが開きます）</p>' % e(href)
+    return '<p class="report"><a href="%s" rel="noopener" target="_blank">この情報の誤りを知らせる</a></p>' % e(href)
 
 
 def build_item(item, listed, ctx):
@@ -768,9 +752,7 @@ def build_item(item, listed, ctx):
     body = """
 {crumbs}
 <article class="detail">
-  <p class="kicker"><a href="{kind_url}">{kind}</a></p>
   <h1>{title}</h1>
-  <p class="detail-when">{when}</p>
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
   <dl class="facts">
@@ -781,16 +763,15 @@ def build_item(item, listed, ctx):
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
 {published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
-  <p class="note">{caution}</p>
   {report}
 </article>
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           when=e(when_line(item)), memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
-           published=published_row(item), caution=e(caution_text(item)),
+           published=published_row(item),
            similar=similar_html, next=next_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
     ld_type = {"書籍": "Book", "調査": "Report"}.get(item["kind"], "Service")
@@ -831,7 +812,6 @@ def build_search(listed, ctx):
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
         <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
-        <p class="note filter-note">条件はURLに残るので、そのまま共有できます。</p>
         <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
     </div>
@@ -868,16 +848,15 @@ def build_report(listed, ctx):
         group = sorted(weeks[start], key=lambda it: (it["added"], -it["rank"]), reverse=True)
         heading = "%d年%d月%d日〜%d月%d日" % (start.year, start.month, start.day, end.month, end.day)
         sections.append('<section class="week" id="w%s"><h2>%s <span class="count">%d件</span></h2>%s</section>'
-                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(group, ctx)))
+                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(group, ctx, date=True)))
     body = """
 {crumbs}
 <header class="page-head">
-  <h1>観測レポート</h1>
-  <p class="lead">観測所に新しく加わったサービスと情報を、週ごとにまとめています（週は月曜日から日曜日まで）。</p>
-  <p class="note">新しく加わったものは<a href="/feed.xml">RSS</a>でも受け取れます。RSSリーダーにこのページのURLか、RSSのURL（{base}/feed.xml）を登録してください。</p>
+  <h1 class="with-rss">観測レポート <a class="rss-link" href="/feed.xml">RSS</a></h1>
+  <p class="lead">観測所に新しく加わったサービスと情報を、週ごとにまとめています。</p>
 </header>
 {sections}
-""".format(crumbs=breadcrumb([("観測レポート", None)]), base=e(BASE),
+""".format(crumbs=breadcrumb([("観測レポート", None)]),
            sections="\n".join(sections) or '<p class="empty">まだ記録がありません。</p>')
     page("/report/", "観測レポート", "あしたの転機観測所に新しく加わったサービスと情報を、週ごとにまとめています。", body, ctx=ctx)
 
