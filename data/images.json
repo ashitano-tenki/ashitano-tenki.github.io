@@ -499,8 +499,11 @@
  "R0067": {
   "page": "https://kango-oshigoto.jp/",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x10a748e00>"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0067.jpg",
+  "w": 960,
+  "h": 648
  },
  "R0068": {
   "page": "https://www.kaigojob.com/",
@@ -699,8 +702,11 @@
  "R0092": {
   "page": "https://next.rikunabi.com/good_point_start/",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 308: Permanent Redirect"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0092.jpg",
+  "w": 960,
+  "h": 262
  },
  "R0093": {
   "page": "https://www.16personalities.com/ja",
@@ -810,8 +816,11 @@
  "R0106": {
   "page": "https://doda.jp/guide/kyujin_bairitsu/2026/07.html",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "timeout: The read operation timed out"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0106.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0107": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569856209",
