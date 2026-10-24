@@ -1713,5 +1713,37 @@
   "page": "https://amzn.asia/d/0c0ggN5v",
   "checked": "2026-10-24",
   "status": "none"
+ },
+ "R0215": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784866367484",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48663/4866367482.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0216": {
+  "page": "https://open.spotify.com/show/6YZQkSf2FygjXaoTpfUmku",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://image-cdn-ak.spotifycdn.com/image/ab6772ab000015be6cb23ad9a9c06df4008982f1",
+  "w": 640,
+  "h": 360
+ },
+ "R0217": {
+  "page": "https://open.spotify.com/show/0TKrkefoV5MgtSv6b7Mjmw",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1fe3f4603096a1ec3e05465c21",
+  "w": 300,
+  "h": 300
+ },
+ "R0218": {
+  "page": "https://booklive.jp/product/index/title_id/20021729/vol_no/001",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48007/4800721539.jpg",
+  "w": 690,
+  "h": 1000
  }
 }
