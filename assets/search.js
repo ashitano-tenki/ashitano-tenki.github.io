@@ -42,6 +42,8 @@
   function alternatives(term) {
     var alts = [term];
     data.synonyms.forEach(function (group) {
+      // 前の形（言葉の並びだけ）の search.json がブラウザに残っていても動くように
+      if (Array.isArray(group)) group = { words: group, readings: [] };
       var hit = group.words.concat(group.readings).some(function (w) { return w === term || (term.length >= 2 && w.indexOf(term) >= 0); });
       if (hit) group.words.forEach(function (w) { if (alts.indexOf(w) < 0) alts.push(w); });
     });
