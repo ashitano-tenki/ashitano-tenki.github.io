@@ -1117,5 +1117,13 @@
   "checked": "2026-10-24",
   "status": "error",
   "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0166": {
+  "page": "https://www.yayoi-kk.co.jp/seikyusho/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.yayoi-kk.co.jp/content/dam/yayoi-corp/seikyusho/common/img/acq/og.png",
+  "w": 960,
+  "h": 504
  }
 }
