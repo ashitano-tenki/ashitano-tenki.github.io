@@ -1345,5 +1345,39 @@
   "src": "file:images/manual/R0167.jpg",
   "w": 960,
   "h": 464
+ },
+ "R0168": {
+  "page": "https://shopping.yahoo.co.jp/products/438a434613",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://shpcatalog-pctr.c.yimg.jp/dk/ex-cooperation/image/provider/2/book/34464246.JPG?nf_img=1&nf_src=dk&nf_path=ex-cooperation/image/provider/2/notfound.png&nf_st=200",
+  "w": 346,
+  "h": 500
+ },
+ "R0169": {
+  "page": "https://item.rakuten.co.jp/book/18538585/?variantId=18538585",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0170": {
+  "page": "https://item.rakuten.co.jp/book/18686993/?variantId=18686993",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0171": {
+  "page": "https://www.diamond.co.jp/book/9784478123614.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478123616.jpg",
+  "w": 692,
+  "h": 1000
+ },
+ "R0172": {
+  "page": "https://career-research.mynavi.jp/reserch/20251021_103453/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2025/10/34514a5e0772d476d73d15dfc1133f2a.jpg",
+  "w": 960,
+  "h": 540
  }
 }
