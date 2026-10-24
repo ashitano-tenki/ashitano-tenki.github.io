@@ -79,7 +79,7 @@
     btn.hidden = false;
     btn.setAttribute("aria-pressed", on ? "true" : "false");
     var label = btn.querySelector("span");
-    if (label) label.textContent = on ? "あとで見るに入れました" : "あとで見る";
+    if (label) label.textContent = on ? "保存済み" : "あとで見る";  // 押した状態は短く（ボタンの幅をそろえているため）
     else btn.setAttribute("aria-label", "「" + btn.getAttribute("data-title") + "」を" + (on ? "あとで見るから外す" : "あとで見る"));
   }
   function paintAll() {

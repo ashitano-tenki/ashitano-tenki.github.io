@@ -186,8 +186,15 @@ button, .button {
 .save-btn:hover svg path, .save-wide:hover svg path { stroke: var(--sky); }
 .save-btn[aria-pressed="true"] svg path, .save-wide[aria-pressed="true"] svg path { fill: var(--sky); stroke: var(--sky); }
 .save-btn[aria-pressed="true"] { border-color: var(--sky); }
-.official { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+/* 紹介ページのボタン：同じ幅にそろえる。スマホは「公式サイトを見る」を1段目いっぱいに、2段目に「あとで見る」「共有」を半分ずつ */
+.official { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); max-width: 600px; }
+.official .button { justify-content: center; text-align: center; white-space: nowrap; }
 .share-btn { display: inline-flex; align-items: center; gap: var(--space-2); }
+@media (max-width: 639px) {
+  .official { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
+  .official > .button:first-child { grid-column: 1 / -1; }
+  .official .button { padding-left: var(--space-2); padding-right: var(--space-2); }
+}
 /* スマホ：小さな文字のリンクも、見た目はそのままで押せる範囲を上下に広げる */
 @media (max-width: 759px) {
   .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .sort-help, .rss-link, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
