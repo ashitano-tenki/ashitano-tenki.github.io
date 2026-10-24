@@ -237,3 +237,18 @@
     toggle.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 })();
+
+// 紹介ページの「共有」：スマホは端末の共有メニュー、使えないときはURLをコピーする
+(function () {
+  var btn = document.querySelector(".share-btn");
+  if (!btn) return;
+  btn.hidden = false;
+  var label = btn.querySelector("span");
+  btn.addEventListener("click", function () {
+    var data = { title: btn.getAttribute("data-share-title"), url: location.href.split("#")[0] };
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    var done = function (ok) { label.textContent = ok ? "URLをコピーしました" : "コピーできませんでした"; setTimeout(function () { label.textContent = "共有"; }, 2000); };
+    if (navigator.clipboard) navigator.clipboard.writeText(data.url).then(function () { done(true); }, function () { done(false); });
+    else done(false);
+  });
+})();

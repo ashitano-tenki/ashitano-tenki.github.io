@@ -250,6 +250,10 @@ SAVE_ICON = ('<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"
              '<path d="M6 3h12v18l-6-4.5L6 21z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>')
 
 
+SHARE_ICON = ('<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" '
+              'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
 def save_button(item):
     return ('<button type="button" class="save-btn" data-save="%s" data-title="%s" aria-pressed="false" '
             'aria-label="「%s」をあとで見る" hidden>%s</button>' % (e(item["id"]), e(item["title"]), e(item["title"]), SAVE_ICON))
@@ -814,8 +818,9 @@ def build_item(item, listed, ctx):
     official_link = ('<a class="button" href="%s" rel="noopener" target="_blank">%s</a>'
                      % (e(item["url"]), e(link_label))) if item["url"] else ""
     official = ('<p class="official">%s<button type="button" class="button button-ghost save-wide" data-save="%s" '
-                'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button></p>'
-                % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON))
+                'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button>'
+                '<button type="button" class="button button-ghost share-btn" data-share-title="%s" hidden>%s<span>共有</span></button></p>'
+                % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON, e(item["title"] + "｜" + CONF["site_name"]), SHARE_ICON))
     tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]))
     stage_links = links(item["stages"], STAGE_BY_NAME, lambda n: search_url(stage=n))
     body = """
