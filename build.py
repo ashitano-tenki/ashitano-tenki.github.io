@@ -492,7 +492,7 @@ def build_home(listed, ctx):
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
     <button type="submit">探す</button>
   </form>
-  <p class="hero-meta">掲載中 {total}件・毎朝更新</p>
+  <p class="hero-meta">掲載中 {total}件</p>
 </section>
 
 <section class="entrances">
