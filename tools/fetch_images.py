@@ -11,6 +11,7 @@
   `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
 - config/image_overrides.json に「ID: 画像のURL」を書いたものは、公式ページを読まずにそのURLの画像を使う
   （自動で取れない掲載に、黒田さんが手で見つけた画像を渡すとき。URLが変わったら次の回で取り直す）。
+  「file:images/manual/R0019.png」のように書いたものは、リポジトリに置いた画像（黒田さんがアップロードしたキャプチャなど）を使う。
 - config/site.json の image_exclude に書いたIDは取得せず、保存してある画像も消す（掲載先から申し出があったときなど）。
 - 掲載が終わってCSVから消えたIDの画像も消す。スプレッドシートは変えない。
 """
@@ -141,7 +142,14 @@ def check(row, today, override=""):
         if not src:
             remove_files(row["ID"])
             return dict(rec, status="none")
-        data, _, _ = fetch(src, MAX_BYTES + 1)
+        if src.startswith("file:"):
+            path = os.path.normpath(os.path.join(ROOT, src[5:]))
+            if not path.startswith(os.path.join(ROOT, "images", "manual") + os.sep):
+                raise ValueError("images/manual/ の外のファイルは使えません")
+            with open(path, "rb") as f:
+                data = f.read(MAX_BYTES + 1)
+        else:
+            data, _, _ = fetch(src, MAX_BYTES + 1)
         if len(data) > MAX_BYTES:
             raise ValueError("画像が大きすぎます")
         w, h = save_images(row["ID"], data)
@@ -168,7 +176,7 @@ def main():
     overrides = {}
     if os.path.exists(OVERRIDES):
         with open(OVERRIDES, encoding="utf-8") as f:
-            overrides = {k: v.strip() for k, v in json.load(f).items() if isinstance(v, str) and v.strip().startswith(("http://", "https://"))}
+            overrides = {k: v.strip() for k, v in json.load(f).items() if isinstance(v, str) and v.strip().startswith(("http://", "https://", "file:images/manual/"))}
 
     reader = csv.DictReader(io.StringIO(build.fetch_csv(build.CONF["csv_url"])))
     rows, all_ids = [], set()
