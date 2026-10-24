@@ -22,7 +22,7 @@
   "top_per_kind": 3,
   "shelf_size": 8,
   "image_exclude": ["R0025", "R0081"],
-  "image_keep": [],
+  "image_keep": ["R0012", "R0039", "R0109"],
   "list_page_size": 20,
   "min_ratio_to_previous": 0.5,
 

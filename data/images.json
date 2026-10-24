@@ -53,8 +53,7 @@
   "status": "ok",
   "src": "https://posiwill.jp/ogp.jpg",
   "w": 960,
-  "h": 504,
-  "suspect": true
+  "h": 504
  },
  "R0013": {
   "page": "https://www.meetcareer.net",
@@ -269,8 +268,7 @@
   "status": "ok",
   "src": "https://static.lancers.jp/renewal/img/lab/ogp/default.png?v=1.0",
   "w": 960,
-  "h": 504,
-  "suspect": true
+  "h": 504
  },
  "R0040": {
   "page": "https://www.shigoto-ryokou.com/",
@@ -854,8 +852,7 @@
   "status": "ok",
   "src": "https://atsoho.com/og-default-20261008.png",
   "w": 960,
-  "h": 504,
-  "suspect": true
+  "h": 504
  },
  "R0110": {
   "page": "https://www.yayoi-kk.co.jp/kigyo/zeirishi-shoukai/",
