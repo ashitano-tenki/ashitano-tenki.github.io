@@ -1937,8 +1937,11 @@
  "R0240": {
   "page": "https://www.proz.com/",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0240.jpg",
+  "w": 960,
+  "h": 761
  },
  "R0241": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569849751",
@@ -2013,5 +2016,21 @@
   "src": "https://www.yamatogokorocareer.jp/img/ogp-img.jpg",
   "w": 960,
   "h": 540
+ },
+ "R0250": {
+  "page": "https://smout.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://smout.jp/static/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0251": {
+  "page": "https://shigoto100.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://shigoto100.com/wp-content/themes/tokyo/img/common/logo_ogp_600px.jpg",
+  "w": 600,
+  "h": 600
  }
 }
