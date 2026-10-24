@@ -201,8 +201,12 @@ button, .button {
 .official { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); max-width: 600px; }
 .official .button { justify-content: center; text-align: center; white-space: nowrap; }
 .share-btn { display: inline-flex; align-items: center; gap: var(--space-2); }
-.saved-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: 0 0 var(--space-3); }
-.saved-actions .note { margin: 0; }
+/* あとで見る：件数とリストを送るボタンを、一覧の上に1行で並べる */
+.saved-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); margin: var(--space-4) 0 var(--space-3); }
+.saved-bar .saved-status { margin: 0; }
+.saved-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: 0; }
+.saved-note { margin: 0 0 var(--space-3); }
+.saved-note:empty { display: none; }
 @media (max-width: 639px) {
   .official { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
   .official > .button:first-child { grid-column: 1 / -1; }

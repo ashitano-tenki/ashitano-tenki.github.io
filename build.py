@@ -1033,9 +1033,12 @@ def build_saved(ctx):
   <p class="lead">カードや紹介ページの<span class="save-inline">{icon}</span>ボタンで残したものです。</p>
   <p class="note">このブラウザの中だけに保存しています。ほかの端末やブラウザとは共有されず、観測所に送られることもありません。</p>
 </header>
+<div class="saved-bar">
 <p id="saved-status" class="saved-status" aria-live="polite">読み込み中…</p>
+<p class="saved-actions"><button type="button" id="saved-import" class="button" hidden>自分の「あとで見る」に入れる</button><button type="button" id="saved-share" class="button button-ghost share-list" hidden>このリストを送る</button></p>
+</div>
+<p id="saved-share-note" class="note saved-note" aria-live="polite"></p>
 <ul id="saved-list" class="cards list-compact"></ul>
-<p class="saved-actions"><button type="button" id="saved-import" class="button" hidden>自分の「あとで見る」に入れる</button><button type="button" id="saved-share" class="button button-ghost share-list" hidden>このリストを送る</button><span id="saved-share-note" class="note" aria-live="polite"></span></p>
 <p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
 <noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
 """.format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)
