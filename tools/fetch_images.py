@@ -6,7 +6,7 @@
 - 毎朝の「サイトを更新」で、サイトを作る前に動く。画像の縮小に Pillow を使う（ワークフローで入れる）。
 - 取得するのは、まだ画像を確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけ。
   相手のサイトに負担をかけないよう、1回に確かめる数を MAX_PER_RUN までにし、同じドメインには間をあける。
-- 本の表紙（ISBN）・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。取れなければページを読む。
+- 本の表紙（URLのISBN、なければ書名から国立国会図書館サーチで引いたISBN）・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。取れなければページを読む。
 - 自動の取得を断るページは、同じものを載せた別のページに読み替えて画像を探す（page_for_image。楽天市場の本→楽天ブックス）。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
 - 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
@@ -30,6 +30,7 @@ import sys
 import threading
 import time
 import urllib.parse
+import unicodedata
 import urllib.request
 
 from PIL import Image
@@ -85,7 +86,38 @@ def isbn10_from_13(isbn13):
     return core + ("X" if check == 10 else str(check))
 
 
-def derived_image_url(page_url, kind=""):
+def norm_title(t):
+    return re.sub(r"[\s　・、。,.!！?？「」『』（）()［］\[\]〈〉<>:：/／\-－—―~〜]", "", unicodedata.normalize("NFKC", t or "")).lower()
+
+
+def isbn_from_title(title):
+    """本のURLにISBNがないとき（電子書籍のページなど）、国立国会図書館サーチの公開検索で書名からISBNを引く。
+    国会図書館の書名は「本題 : 副題」の形で、掲載の書名と順番がちがうことがある。本題・副題のどれもが
+    掲載の書名に含まれるものだけを使う（ちがう本の表紙を出さないため）。見つからなければ空文字。
+    （2026年10月、紀伊國屋の電子書籍2冊で、黒田さんが書名で探して表紙を渡してくれたのを自動にしたもの）"""
+    if not title:
+        return ""
+    body, _, _ = fetch("https://ndlsearch.ndl.go.jp/api/opensearch?cnt=5&title=" + urllib.parse.quote(title), 500_000)
+    text = body.decode("utf-8", "replace")
+    want = norm_title(title)
+    for item in re.findall(r"<item>(.*?)</item>", text, re.S):
+        t = re.search(r"<title>([^<]*)</title>", item)
+        isbn = re.search(r'<dc:identifier xsi:type="dcndl:ISBN(?:13)?">([\dX-]+)</dc:identifier>', item)
+        parts = [norm_title(x) for x in re.split(r"\s[:：]\s", html.unescape(t.group(1)))] if t else []
+        parts = [x for x in parts if len(x) >= 2]
+        if isbn and parts and want and all(x in want for x in parts) and len("".join(parts)) >= len(want) * 0.6:
+            digits = isbn.group(1).replace("-", "")
+            if len(digits) == 13 and digits.startswith("978"):
+                return digits
+    return ""
+
+
+def kinokuniya_cover(isbn13):
+    isbn10 = isbn10_from_13(isbn13)
+    return "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10)
+
+
+def derived_image_url(page_url, kind="", title=""):
     """ページを読まなくても画像の場所がわかるものは、ここで画像のURLを決める。わからなければ空文字。
     - 本（タイプが「書籍」で、URLにISBN-13がある）：どの書店のページでも、紀伊國屋書店の表紙画像を使う。
       表紙画像はISBN-10から場所が決まる。書店のページの og:image は店のロゴのことが多いので、本は先にこちらを見る
@@ -97,8 +129,11 @@ def derived_image_url(page_url, kind=""):
     if kind == "書籍" or host == "kinokuniya.co.jp":
         m = re.search(r"(?<!\d)(978\d{10})(?!\d)", parts.path + "?" + parts.query)
         if m:
-            isbn10 = isbn10_from_13(m.group(1))
-            return "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10)
+            return kinokuniya_cover(m.group(1))
+    if kind == "書籍":
+        isbn = isbn_from_title(title)  # URLにISBNがない本は、書名からISBNを引く
+        if isbn:
+            return kinokuniya_cover(isbn)
     if host == "open.spotify.com" and re.match(r"/(show|episode|album|playlist|track|artist)/", parts.path):
         body, _, _ = fetch("https://open.spotify.com/oembed?url=" + urllib.parse.quote(page_url, safe=""), 200_000)
         return json.loads(body.decode("utf-8")).get("thumbnail_url", "")
@@ -189,7 +224,7 @@ def check(row, today, override=""):
             # 決まった場所の画像（本の表紙など）を先に試し、取れなければふつうにページを読む
             # （ISBNがあっても紀伊國屋に表紙がない本もある）
             try:
-                src = derived_image_url(row["URL"], row.get("種類", ""))
+                src = derived_image_url(row["URL"], row.get("種類", ""), row.get("タイトル", ""))
                 if src:
                     data, _, _ = fetch(src, MAX_BYTES + 1)
                     Image.open(io.BytesIO(data)).verify()
