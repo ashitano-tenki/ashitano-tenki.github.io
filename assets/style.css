@@ -58,6 +58,12 @@
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
+/* キーボードで Tab を押したときだけ出る「本文へ移動」 */
+.skip-link { position: absolute; left: var(--space-2); top: -60px; z-index: 50; padding: var(--space-2) var(--space-4); background: var(--ink); color: var(--base); border-radius: var(--radius-md); text-decoration: none; font-weight: 700; }
+.skip-link:focus { top: var(--space-2); }
+main:focus { outline: none; }
+/* 観測所の外のページ（別のタブで開く）へのリンクに小さな印を付ける */
+a[target="_blank"]:not(.card):not(.linkcard)::after { content: "↗"; display: inline-block; margin-left: 0.2em; font-size: 0.85em; font-weight: 400; text-decoration: none; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;

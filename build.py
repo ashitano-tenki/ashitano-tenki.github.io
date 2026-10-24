@@ -323,7 +323,8 @@ HEAD_SCRIPT = ('<script>document.documentElement.classList.add("js");'
 
 def site_header(current=None):
     """全ページ共通のヘッダー（セルフチェックにも同じものを差し込む）。"""
-    return """<header class="site-header">
+    return """<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header">
   <div class="wrap header-inner">
     <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" alt="" width="24" height="24">{site}</a>
     <nav class="global-nav" id="global-nav" aria-label="サイト内">
@@ -416,7 +417,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 {ld}</head>
 <body>
 {header}
-<main class="wrap">
+<main class="wrap" id="main" tabindex="-1">
 {body}
 </main>
 {footer}
@@ -511,8 +512,13 @@ def kind_shelves(items, ctx):
 
 
 def kind_sections(items, params, ctx, heading_level=2):
-    """種類ごとに上位数件を並べ、残りは一覧ページの該当条件へつなぐ。"""
+    """種類ごとに上位数件を並べ、残りは一覧ページの該当条件へつなぐ。
+    転機のページでは、その転機ならではの掲載を先に、「どの転機にも」の共通の掲載を後に並べる
+    （共通の掲載は全体の4割あり、おすすめ順のままだと上位を占めてしまうため）。"""
     n = CONF["top_per_kind"]
+    tenki = params.get("tenki", "")
+    if tenki and tenki not in (COMMON, OTHER):
+        items = sorted(items, key=lambda it: (COMMON in it["tenki"] and tenki not in it["tenki"], it["rank"]))
     out = []
     for kind, group in by_kind(items):
         h = "h%d" % heading_level

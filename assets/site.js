@@ -32,6 +32,12 @@
     btn.setAttribute("aria-expanded", form.hidden ? "false" : "true");
     if (!form.hidden) document.getElementById("header-q").focus();
   });
+  document.addEventListener("keydown", function (ev) {  // Esc で検索欄を閉じて、虫めがねに戻る
+    if (ev.key !== "Escape" || form.hidden) return;
+    form.hidden = true;
+    btn.setAttribute("aria-expanded", "false");
+    btn.focus();
+  });
 })();
 
 // スマホのメニュー：ボタンを押すとヘッダーの下にメニューを開く（JavaScriptが使えないときは最初から表示）
@@ -43,6 +49,12 @@
     var open = !nav.classList.contains("open");
     nav.classList.toggle("open", open);
     btn.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  document.addEventListener("keydown", function (ev) {  // Esc でメニューを閉じて、メニューボタンに戻る
+    if (ev.key !== "Escape" || !nav.classList.contains("open")) return;
+    nav.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+    btn.focus();
   });
 })();
 

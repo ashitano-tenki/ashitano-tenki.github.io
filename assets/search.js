@@ -236,6 +236,8 @@
     clearTimeout(zeroTimer);
     var q = (state.q || "").trim();
     if (results.length || !q || zeroSent[q]) return;
+    // メールアドレス・電話番号・URLのような、個人につながりうる言葉は記録しない
+    if (/@|https?:|www\.|\d{2,4}[-‐－ー\s]?\d{2,4}[-‐－ー\s]?\d{3,4}|\d{7,}/.test(q.normalize("NFKC"))) return;
     zeroTimer = setTimeout(function () {
       if (!window.goatcounter || !window.goatcounter.count) return;
       zeroSent[q] = true;
