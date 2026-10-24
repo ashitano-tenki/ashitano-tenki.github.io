@@ -40,7 +40,7 @@ https://ashitano-tenki.github.io/
 | `config/site.json` | サイト名、説明文、CSVのURL、誤り報告フォームのURL、noteとFacebookグループのURL、新着の日数、掛け合わせページを作る最低件数、種類（タイプ）の一覧（表示順・説明文・絵文字・リンクの文言）など。ここにない種類のデータは表示しない |
 | `config/tenki.json` | 転機の種類と段階の名前・URL・ページの文面 |
 | `config/tenki_notes.json` | 転機別ページと、転機×段階のページに載せる解説文 |
-| `config/synonyms.json` | 検索の言い換え表 |
+| `config/synonyms.json` | 検索の言い換え表（毎朝の更新で、言葉と掲載に漢字の読みを足すので、ひらがなでも探せる） |
 | `build.py` | サイトを作るスクリプト（ページの文面の多くもここにあります） |
 | `check/index.html` | 転機の段階セルフチェック（/check/）。質問・判定・結果の文章はこのファイルにあります。結果画面のおすすめは、サイトを作るたびに書き出す `check/picks.json` から選びます |
 | `assets/` | 見た目（style.css）、検索の動き（search.js）、アイコン、SNS共有用の画像 |

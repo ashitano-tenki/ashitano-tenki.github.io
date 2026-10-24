@@ -1075,6 +1075,24 @@ def image_ref(item):
     return {"src": "/images/items/%s-s.webp?v=%s" % (item["id"], info[0]), "fit": info[1]}
 
 
+def reading(text):
+    """漢字の読み（カタカナ）。ひらがなだけでも探せるように検索用のデータに入れる。
+    pykakasi が入っているとき（毎朝の更新では入れる）だけ作り、なければ空文字（ひらがな検索はできないが、ほかは変わらない）。"""
+    global _KAKASI
+    if _KAKASI is None:
+        try:
+            import pykakasi
+            _KAKASI = pykakasi.kakasi()
+        except ImportError:
+            _KAKASI = False
+    if not _KAKASI or not text:
+        return ""
+    return normalize("".join(part["kana"] for part in _KAKASI.convert(text)))
+
+
+_KAKASI = None
+
+
 def build_search_json(listed, ctx):
     synonyms = load_json("synonyms.json").get("groups", [])
     data = {
@@ -1084,9 +1102,11 @@ def build_search_json(listed, ctx):
             "added": it["added"].isoformat() if it["added"] else "",
             "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"],
-                                        " ".join(it["tenki"]), " ".join(it["stages"])])),
+                                        " ".join(it["tenki"]), " ".join(it["stages"])]))
+                    + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])),
         } for it in listed],
-        "synonyms": [[normalize(w) for w in g if w.strip()] for g in synonyms if isinstance(g, list)],
+        # 言い換え表の言葉にも読みを足す（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）
+        "synonyms": [sorted({x for w in g if w.strip() for x in (normalize(w), reading(w)) if x}) for g in synonyms if isinstance(g, list)],
     }
     write("/search.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
 

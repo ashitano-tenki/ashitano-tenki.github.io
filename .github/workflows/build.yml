@@ -33,7 +33,7 @@ jobs:
         continue-on-error: true
         run: |
           python3 -m venv .venv
-          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0"
+          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0"
           .venv/bin/python tools/fetch_images.py
 
       # 紹介ページごとの共有画像（タイトル・タイプ・転機を載せた 1200×630）を作る。失敗しても観測所共通の画像のまま更新は続ける
@@ -41,13 +41,17 @@ jobs:
         continue-on-error: true
         run: .venv/bin/python tools/make_item_og.py
 
+      # 検索用のデータに漢字の読みを入れる（ひらがなでも探せるように）ため、pykakasi の入った .venv の Python で作る。
+      # .venv が作れなかったときは、ふつうの python3 で作る（ひらがな検索ができないだけで、サイトの更新は続く）
       # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
       - name: CSVを読み込んでサイトを作る
         run: |
+          PY=python3
+          if [ -x .venv/bin/python ]; then PY=.venv/bin/python; fi
           if [ "${{ inputs.allow_decrease }}" = "true" ]; then
-            python3 build.py --save-data --allow-decrease
+            $PY build.py --save-data --allow-decrease
           else
-            python3 build.py --save-data
+            $PY build.py --save-data
           fi
 
       # 件数の記録（data/meta.json）と、読み込んだデータそのもの（data/latest.csv）を残す。
