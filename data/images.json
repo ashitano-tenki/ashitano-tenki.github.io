@@ -53,7 +53,8 @@
   "status": "ok",
   "src": "https://posiwill.jp/ogp.jpg",
   "w": 960,
-  "h": 504
+  "h": 504,
+  "suspect": true
  },
  "R0013": {
   "page": "https://www.meetcareer.net",
@@ -268,7 +269,8 @@
   "status": "ok",
   "src": "https://static.lancers.jp/renewal/img/lab/ogp/default.png?v=1.0",
   "w": 960,
-  "h": 504
+  "h": 504,
+  "suspect": true
  },
  "R0040": {
   "page": "https://www.shigoto-ryokou.com/",
@@ -290,10 +292,11 @@
  "R0042": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784594082727",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "src": "file:images/manual/R0042.jpg",
   "w": 960,
-  "h": 502
+  "h": 1409
  },
  "R0043": {
   "page": "https://kidzukutensyoku.com/",
@@ -360,10 +363,11 @@
  "R0050": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784911287064",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "src": "file:images/manual/R0050.jpg",
   "w": 960,
-  "h": 502
+  "h": 1423
  },
  "R0051": {
   "page": "https://www.diamond.co.jp/book/9784478113899.html",
@@ -449,10 +453,11 @@
  "R0061": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784779519550",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "src": "file:images/manual/R0061.jpg",
   "w": 960,
-  "h": 502
+  "h": 1433
  },
  "R0062": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866633336",
@@ -525,10 +530,11 @@
  "R0070": {
   "page": "https://www.businessinsider.jp/careerinsider/",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.businessinsider.jp/images/ogp.png",
+  "src": "file:images/manual/R0070.jpg",
   "w": 960,
-  "h": 504
+  "h": 503
  },
  "R0071": {
   "page": "https://www.forkwell.com/",
@@ -566,10 +572,11 @@
  "R0075": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784413114004",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "src": "file:images/manual/R0075.jpg",
   "w": 960,
-  "h": 502
+  "h": 1362
  },
  "R0076": {
   "page": "https://worx.jp/",
@@ -799,10 +806,11 @@
  "R0104": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784478122167",
   "checked": "2026-10-24",
+  "manual": true,
   "status": "ok",
-  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "src": "file:images/manual/R0104.jpg",
   "w": 960,
-  "h": 502
+  "h": 1356
  },
  "R0105": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784101284514",
@@ -846,7 +854,8 @@
   "status": "ok",
   "src": "https://atsoho.com/og-default-20261008.png",
   "w": 960,
-  "h": 504
+  "h": 504,
+  "suspect": true
  },
  "R0110": {
   "page": "https://www.yayoi-kk.co.jp/kigyo/zeirishi-shoukai/",

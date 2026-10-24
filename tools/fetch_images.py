@@ -84,15 +84,17 @@ def isbn10_from_13(isbn13):
     return core + ("X" if check == 10 else str(check))
 
 
-def derived_image_url(page_url):
-    """ページを読まなくても画像の場所がわかるサイトは、ここで画像のURLを決める。わからなければ空文字。
-    - 紀伊國屋書店（/f/dsg-01-ISBN13）：表紙画像はISBN-10から場所が決まる（ページは自動の取得を断るが、画像は取れる）
+def derived_image_url(page_url, kind=""):
+    """ページを読まなくても画像の場所がわかるものは、ここで画像のURLを決める。わからなければ空文字。
+    - 本（タイプが「書籍」で、URLにISBN-13がある）：どの書店のページでも、紀伊國屋書店の表紙画像を使う。
+      表紙画像はISBN-10から場所が決まる。書店のページの og:image は店のロゴのことが多いので、本は先にこちらを見る
+      （2026年10月、丸善ジュンク堂の5冊が店のロゴになっていた）
     - Spotify の番組・エピソードなど：公式の oEmbed が返すカバー画像
     - YouTube の動画：動画のサムネイル（チャンネルのページは og:image があるので通常どおり）"""
     parts = urllib.parse.urlsplit(page_url)
     host = host_of(page_url)
-    if host == "kinokuniya.co.jp":
-        m = re.search(r"/dsg-01-(978\d{10})", parts.path)
+    if kind == "書籍" or host == "kinokuniya.co.jp":
+        m = re.search(r"(?<!\d)(978\d{10})(?!\d)", parts.path + "?" + parts.query)
         if m:
             isbn10 = isbn10_from_13(m.group(1))
             return "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10)
@@ -173,7 +175,7 @@ def check(row, today, override=""):
         src = override
         if not src:
             try:
-                src = derived_image_url(row["URL"])
+                src = derived_image_url(row["URL"], row.get("種類", ""))
             except Exception:  # 決まった場所から取れなければ、ふつうにページを読む
                 src = ""
         src = src or og_image_url(row["URL"])
@@ -196,6 +198,56 @@ def check(row, today, override=""):
         return dict(rec, status="error", note=("%s: %s" % (type(ex).__name__, ex))[:120])
 
 
+def norm_src(src):
+    return re.sub(r"\?.*$", "", src.replace("http://", "https://", 1))
+
+
+GENERIC_NAME = re.compile(r"(ogp|og[-_.]|ogimage|default|logo|share|common)", re.I)
+
+
+def is_suspect(page, src):
+    """サイト共通の画像かもしれないもの：トップ以外のページなのに、画像がサイトの浅い場所にある ogp・logo・default などの名前。
+    （2026年10月、Business Insider の「キャリアインサイダー」がサイト全体の /images/ogp.png になっていた）"""
+    page_path = urllib.parse.urlsplit(page).path
+    if page_path in ("", "/") or not src or src.startswith("file:"):
+        return False
+    src_path = urllib.parse.urlsplit(src).path
+    name = src_path.rsplit("/", 1)[-1]
+    if not GENERIC_NAME.search(name):
+        return False
+    if "default" in name.lower():
+        return True
+    # 画像の場所や名前にページの部分（/soudan/ など）が入っていれば、そのページ用の画像とみなす
+    words = [w for w in page_path.strip("/").split("/") if len(w) >= 3]
+    if any(w.lower() in src_path.lower() for w in words):
+        return False
+    return src_path.count("/") <= 2
+
+
+def mark_generic(manifest, keep):
+    """取得し終えた記録を見直す。
+    - ちがうページなのに同じ画像になっているものは、サイト共通の画像（店のロゴなど）とみなして使わない（status "generic"）。
+      作業ページ「観測所の画像あつめ」で黒田さんに画像を頼む対象になる。
+    - サイト共通の画像かもしれないものには suspect を付ける（画像は使い続け、作業ページで確かめてもらう）。
+      config/site.json の image_keep に入れたIDは、確かめずみとして付けない。"""
+    groups = collections.defaultdict(set)
+    for item_id, rec in manifest.items():
+        if rec.get("status") == "ok" and not rec.get("manual"):
+            groups[norm_src(rec["src"])].add(item_id)
+    for src, ids in groups.items():
+        if len({manifest[i]["page"] for i in ids}) >= 2:
+            for item_id in ids:
+                remove_files(item_id)
+                manifest[item_id] = {k: v for k, v in manifest[item_id].items() if k not in ("w", "h", "suspect")}
+                manifest[item_id].update(status="generic", note="ほかの掲載と同じ画像（サイト共通の画像）")
+    for item_id, rec in manifest.items():
+        suspect = rec.get("status") == "ok" and not rec.get("manual") and item_id not in keep and is_suspect(rec.get("page", ""), rec.get("src", ""))
+        if suspect:
+            rec["suspect"] = True
+        else:
+            rec.pop("suspect", None)
+
+
 def resize_only():
     for name in sorted(os.listdir(IMG_DIR)):
         if name.endswith(".jpg") and not name.endswith("-s.jpg"):
@@ -211,6 +263,7 @@ def main():
         with open(MANIFEST, encoding="utf-8") as f:
             manifest = json.load(f)
     exclude = set(build.CONF.get("image_exclude", []))
+    keep = set(build.CONF.get("image_keep", []))
     overrides = {}
     if os.path.exists(OVERRIDES):
         with open(OVERRIDES, encoding="utf-8") as f:
@@ -262,13 +315,15 @@ def main():
                     rec = dict(old, checked=rec["checked"], note=rec["note"])  # 前の画像を使い続ける
                 manifest[item_id] = rec
 
+    mark_generic(manifest, keep)
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     with open(MANIFEST, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(manifest.items())), f, ensure_ascii=False, indent=1)
         f.write("\n")
     counts = collections.Counter(manifest[r["ID"]]["status"] for r in rows if r["ID"] in manifest)
-    print("画像：今回確かめた %d件／掲載 %d件のうち 画像あり %d件・画像なし %d件・取得できず %d件・未確認 %d件"
-          % (len(todo), len(rows), counts["ok"], counts["none"], counts["error"], len(rows) - sum(counts.values())))
+    suspects = sum(1 for r in rows if manifest.get(r["ID"], {}).get("suspect"))
+    print("画像：今回確かめた %d件／掲載 %d件のうち 画像あり %d件（うち確認したいもの %d件）・画像なし %d件・サイト共通の画像 %d件・取得できず %d件・未確認 %d件"
+          % (len(todo), len(rows), counts["ok"], suspects, counts["none"], counts["generic"], counts["error"], len(rows) - sum(counts.values())))
 
 
 if __name__ == "__main__":

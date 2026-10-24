@@ -2,8 +2,9 @@
 
   python tools/apply_manual_images.py 作業フォルダ アセットのフォルダ
 
-- 作業フォルダの entries.json（{ID: {image, asset, skip}}）を読み、画像を images/manual/{ID}.jpg に保存して
-  config/image_overrides.json に "file:images/manual/{ID}.jpg" を書く。skip は config/site.json の image_exclude へ。
+- 作業フォルダの entries.json（{ID: {image, asset, skip, keep}}）を読み、画像を images/manual/{ID}.jpg に保存して
+  config/image_overrides.json に "file:images/manual/{ID}.jpg" を書く。skip は config/site.json の image_exclude へ、
+  keep（サイト共通の画像かもと出たが、いまの画像で合っていた）は image_keep へ。
 - アップロード画像は、作業ページのアセットを取り出したフォルダ（ファイル名がアセットIDで始まる）から読む。
 - 結果は作業フォルダの results.json（作業ページに書き戻す result・resultFor・resultNote）。
 - このあと tools/fetch_images.py を動かすと、紹介ページ用・カード用の画像ができる。"""
@@ -19,10 +20,15 @@ conf_path = site + "/config/site.json"
 conf_text = open(conf_path, encoding="utf-8").read()
 conf = json.loads(conf_text)
 exclude = list(conf.get("image_exclude", []))
+keep = list(conf.get("image_keep", []))
 os.makedirs(site + "/images/manual", exist_ok=True)
 results = {}
 for i, en in sorted(entries.items()):
     try:
+        if en.get("keep"):  # 「サイト共通の画像かも」と出たが、いまの画像で合っていた
+            if i not in keep: keep.append(i)
+            results[i] = {"result": "keep", "resultFor": "keep"}
+            continue
         if en.get("skip"):
             if i not in exclude: exclude.append(i)
             overrides.pop(i, None)
@@ -57,6 +63,7 @@ for i, en in sorted(entries.items()):
         results[i] = {"result": "failed", "resultFor": en.get("image") if not en.get("asset") else "asset:" + en["asset"], "resultNote": msg}
 json.dump(dict(sorted(overrides.items())), open(ov_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 conf_text = re.sub(r'"image_exclude": \[[^\]]*\]', '"image_exclude": ' + json.dumps(sorted(exclude)), conf_text)
+conf_text = re.sub(r'"image_keep": \[[^\]]*\]', '"image_keep": ' + json.dumps(sorted(keep)), conf_text)
 json.loads(conf_text); open(conf_path, "w", encoding="utf-8").write(conf_text)
 json.dump(results, open(S + "/results.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 from collections import Counter
