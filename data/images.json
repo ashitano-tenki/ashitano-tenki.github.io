@@ -1357,12 +1357,18 @@
  "R0169": {
   "page": "https://item.rakuten.co.jp/book/18538585/?variantId=18538585",
   "checked": "2026-10-24",
-  "status": "none"
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/1279/9784492261279_1_64.jpg?downsize=600:*",
+  "w": 600,
+  "h": 881
  },
  "R0170": {
   "page": "https://item.rakuten.co.jp/book/18686993/?variantId=18686993",
   "checked": "2026-10-24",
-  "status": "none"
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/2496/9784295412496_1_2.jpg?downsize=600:*",
+  "w": 346,
+  "h": 500
  },
  "R0171": {
   "page": "https://www.diamond.co.jp/book/9784478123614.html",

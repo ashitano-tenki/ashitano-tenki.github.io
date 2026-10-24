@@ -6,7 +6,8 @@
 - 毎朝の「サイトを更新」で、サイトを作る前に動く。画像の縮小に Pillow を使う（ワークフローで入れる）。
 - 取得するのは、まだ画像を確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけ。
   相手のサイトに負担をかけないよう、1回に確かめる数を MAX_PER_RUN までにし、同じドメインには間をあける。
-- 紀伊國屋書店・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。
+- 本の表紙（ISBN）・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。取れなければページを読む。
+- 自動の取得を断るページは、同じものを載せた別のページに読み替えて画像を探す（page_for_image。楽天市場の本→楽天ブックス）。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
 - 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
   `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
@@ -110,6 +111,17 @@ def derived_image_url(page_url, kind=""):
     return ""
 
 
+def page_for_image(page_url):
+    """画像を探すときに読むページ。自動の取得を断るページは、同じものを載せた別のページに読み替える。
+    - 楽天市場の本（item.rakuten.co.jp/book/番号）→ 楽天ブックス（books.rakuten.co.jp/rb/番号）。
+      楽天市場は断るが、楽天ブックスは開けて、その本の表紙が og:image にある（2026年10月、R0169・R0170 で確認）"""
+    parts = urllib.parse.urlsplit(page_url)
+    m = re.fullmatch(r"/book/(\d+)/?", parts.path)
+    if host_of(page_url) == "item.rakuten.co.jp" and m:
+        return "https://books.rakuten.co.jp/rb/%s/" % m.group(1)
+    return page_url
+
+
 def og_image_url(page_url):
     """ページの og:image（なければ twitter:image）のURLを返す。見つからなければ空文字。
     YouTube のように og:image がページの後ろのほうにあるサイトもあるので、2MBまで読む。"""
@@ -172,23 +184,29 @@ def check(row, today, override=""):
     if override:
         rec["manual"] = True
     try:
-        src = override
+        src, data = override, None
         if not src:
+            # 決まった場所の画像（本の表紙など）を先に試し、取れなければふつうにページを読む
+            # （ISBNがあっても紀伊國屋に表紙がない本もある）
             try:
                 src = derived_image_url(row["URL"], row.get("種類", ""))
-            except Exception:  # 決まった場所から取れなければ、ふつうにページを読む
-                src = ""
-        src = src or og_image_url(row["URL"])
+                if src:
+                    data, _, _ = fetch(src, MAX_BYTES + 1)
+                    Image.open(io.BytesIO(data)).verify()
+            except Exception:
+                src, data = "", None
+        if not src:
+            src = og_image_url(page_for_image(row["URL"]))
         if not src:
             remove_files(row["ID"])
             return dict(rec, status="none")
-        if src.startswith("file:"):
+        if data is None and src.startswith("file:"):
             path = os.path.normpath(os.path.join(ROOT, src[5:]))
             if not path.startswith(os.path.join(ROOT, "images", "manual") + os.sep):
                 raise ValueError("images/manual/ の外のファイルは使えません")
             with open(path, "rb") as f:
                 data = f.read(MAX_BYTES + 1)
-        else:
+        elif data is None:
             data, _, _ = fetch(src, MAX_BYTES + 1)
         if len(data) > MAX_BYTES:
             raise ValueError("画像が大きすぎます")
