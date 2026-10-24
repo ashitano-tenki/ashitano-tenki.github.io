@@ -1943,5 +1943,40 @@
   "src": "https://www.massmedian.co.jp/img/ogp_img.jpg",
   "w": 851,
   "h": 315
+ },
+ "R0245": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784534062970",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534062974.jpg",
+  "w": 676,
+  "h": 1000
+ },
+ "R0246": {
+  "page": "https://takken-job.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://takken-job.com/wp-content/uploads/2020/04/ogp-768x403.png",
+  "w": 768,
+  "h": 403
+ },
+ "R0247": {
+  "page": "https://www.ielove.co.jp/career/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0248": {
+  "page": "https://www.m-next.jp/",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0249": {
+  "page": "https://www.yamatogokorocareer.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.yamatogokorocareer.jp/img/ogp-img.jpg",
+  "w": 960,
+  "h": 540
  }
 }
