@@ -1553,7 +1553,8 @@
   "src": "https://www.netoff.co.jp/images/logo_fb.gif",
   "w": 164,
   "h": 164,
-  "suspect": true
+  "suspect": true,
+  "small": true
  },
  "R0194": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784091231802",

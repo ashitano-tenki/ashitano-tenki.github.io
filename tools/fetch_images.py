@@ -9,8 +9,8 @@
 - 本の表紙（URLのISBN、なければ書名から国立国会図書館サーチで引いたISBN）・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。取れなければページを読む。
 - 自動の取得を断るページは、同じものを載せた別のページに読み替えて画像を探す（page_for_image。楽天市場の本→楽天ブックス）。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
-- 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
-  `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
+- 画像は2つ、軽い WebP 形式で書き出す：{ID}.webp（紹介ページ用、幅960まで）と {ID}-s.webp（カードの上の画像用、幅600ほど）。
+  `--resize-only` を付けると取得はせず、保存してある {ID}.webp からカード用の画像だけを作り直す（大きさを変えたとき用）。
 - config/image_overrides.json に「ID: 画像のURL」を書いたものは、公式ページを読まずにそのURLの画像を使う
   （自動で取れない掲載に、黒田さんが手で見つけた画像を渡すとき。URLが変わったら次の回で取り直す）。
   「file:images/manual/R0019.png」のように書いたものは、リポジトリに置いた画像（黒田さんがアップロードしたキャプチャなど）を使う。
@@ -51,6 +51,7 @@ MAX_PER_RUN = int(os.environ.get("IMAGES_MAX", "60"))  # 1回に確かめる掲�
 REFRESH_DAYS = 30         # 取れた画像を取り直すまでの日数（画像の差し替えに追いつくため）
 RETRY_DAYS = 7            # 取れなかったものを試し直すまでの日数
 MAX_BYTES = 8_000_000     # これより大きい画像は使わない
+SMALL_MIN_SIDE = 200      # 短い辺がこれより小さい画像は「小さい」として差し替えを頼む
 LARGE_W = 960             # 紹介ページ用の幅
 CARD_W, CARD_H = 600, 314  # カードの上の画像枠（1.91:1）を高精細の画面でも粗くなく埋められる大きさ
 
@@ -193,7 +194,7 @@ def save_images(item_id, data):
     if w > LARGE_W:
         large = large.resize((LARGE_W, round(h * LARGE_W / w)), Image.LANCZOS)
     os.makedirs(IMG_DIR, exist_ok=True)
-    large.save(os.path.join(IMG_DIR, item_id + ".jpg"), "JPEG", quality=78, optimize=True, progressive=True)
+    large.save(os.path.join(IMG_DIR, item_id + ".webp"), "WEBP", quality=80, method=6)
     save_card(item_id, im)
     return large.size
 
@@ -203,11 +204,11 @@ def save_card(item_id, im):
     w, h = im.size
     scale = max(CARD_W / w, CARD_H / h) if w / h >= 1.6 else CARD_H / h
     small = im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS) if scale < 1 else im.copy()
-    small.save(os.path.join(IMG_DIR, item_id + "-s.jpg"), "JPEG", quality=78, optimize=True)
+    small.save(os.path.join(IMG_DIR, item_id + "-s.webp"), "WEBP", quality=80, method=6)
 
 
 def remove_files(item_id):
-    for name in (item_id + ".jpg", item_id + "-s.jpg"):
+    for name in (item_id + ".webp", item_id + "-s.webp", item_id + ".jpg", item_id + "-s.jpg"):
         path = os.path.join(IMG_DIR, name)
         if os.path.exists(path):
             os.remove(path)
@@ -299,13 +300,21 @@ def mark_generic(manifest, keep):
             rec["suspect"] = True
         else:
             rec.pop("suspect", None)
+        # 小さすぎる画像（短い辺が200px未満）は、大きく出すとぼやけるので、画像あつめで大きな画像を頼む
+        # （w・h は縮小後の大きさ。幅960まで縮めた横長の帯（YouTube のバナーなど）は小さいとは見なさない）
+        w, h = rec.get("w", 999), rec.get("h", 999)
+        small = rec.get("status") == "ok" and item_id not in keep and w < 960 and min(w, h) < SMALL_MIN_SIDE
+        if small:
+            rec["small"] = True
+        else:
+            rec.pop("small", None)
 
 
 def resize_only():
     for name in sorted(os.listdir(IMG_DIR)):
-        if name.endswith(".jpg") and not name.endswith("-s.jpg"):
+        if name.endswith(".webp") and not name.endswith("-s.webp"):
             with Image.open(os.path.join(IMG_DIR, name)) as im:
-                save_card(name[:-4], im.convert("RGB"))
+                save_card(name[:-5], im.convert("RGB"))
     print("カード用の画像を作り直しました")
 
 
@@ -374,7 +383,7 @@ def main():
         json.dump(dict(sorted(manifest.items())), f, ensure_ascii=False, indent=1)
         f.write("\n")
     counts = collections.Counter(manifest[r["ID"]]["status"] for r in rows if r["ID"] in manifest)
-    suspects = sum(1 for r in rows if manifest.get(r["ID"], {}).get("suspect"))
+    suspects = sum(1 for r in rows if manifest.get(r["ID"], {}).get("suspect") or manifest.get(r["ID"], {}).get("small"))
     print("画像：今回確かめた %d件／掲載 %d件のうち 画像あり %d件（うち確認したいもの %d件）・画像なし %d件・サイト共通の画像 %d件・取得できず %d件・未確認 %d件"
           % (len(todo), len(rows), counts["ok"], suspects, counts["none"], counts["generic"], counts["error"], len(rows) - sum(counts.values())))
 

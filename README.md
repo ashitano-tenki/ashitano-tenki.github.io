@@ -27,6 +27,8 @@ https://ashitano-tenki.github.io/
 - ちがう掲載なのに同じ画像になったものは「サイト共通の画像」として使わず、作業ページで画像を頼みます。トップ以外のページなのにサイト共通らしい画像（ogp・logo・default などの名前）は「確認したいもの」として作業ページに出し、合っていれば `config/site.json` の `image_keep` に入ります。
 - 紀伊國屋書店の本（ISBNから表紙の場所が決まる）、Spotify の番組（公式の oEmbed）、YouTube の動画（サムネイル）は、ページを読まずに画像を取ります。
 - 画像がないものは、タイプの絵文字を同じ枠に出します。
+- 短い辺が200px未満の小さな画像は「small」として、画像あつめで大きな画像をお願いします。
+- 紹介ページごとの共有画像（SNSでシェアしたときの画像）は、毎朝 `tools/make_item_og.py` がタイトル・タイプ・転機から作ります（`og-items/`、リポジトリには入れない）。
 - 自動で取れないものは、作業ページ「観測所の画像あつめ」（https://claude.ai/artifact/JjtpaqzyTvauJNwfQvZdXx ）で画像のURLを入れ、Claude Code に渡します。渡したURLは `config/image_overrides.json`（`{"ID": "画像のURL"}`）に入り、公式ページを読まずにその画像を使います。作業ページでアップロードした画像（キャプチャなど）は `images/manual/` に置き、`{"ID": "file:images/manual/ID.png"}` の形で同じように使います。
 - おすすめ順は、画像があるものを先に、そのなかで観測スコアの高い順です（「観測所について」の並び順の考え方にも書いています）。
 - 掲載先から申し出があったときなど、画像を使いたくない掲載は `config/site.json` の `image_exclude` にIDを書きます（例：`["R0007"]`）。次の更新で画像が消えます。
@@ -45,7 +47,7 @@ https://ashitano-tenki.github.io/
 | `assets/og/` | 転機別ページと掛け合わせページのSNS共有用画像。`config/tenki.json` の名前や見出しを変えたら、Macで `python3 tools/make_og_images.py` を実行して作り直す |
 | `data/meta.json` | 前回公開したときの件数（件数チェックに使います） |
 | `data/linkcheck.json` | 毎週のリンク点検の結果（サイトでは /linkcheck.json として公開） |
-| `data/images.json`・`images/items/` | 掲載先の画像の取得結果と、縮小した画像（`{ID}.jpg` は紹介ページ用、`{ID}-s.jpg` はカードの上の画像用） |
+| `data/images.json`・`images/items/` | 掲載先の画像の取得結果と、縮小した画像（`{ID}.webp` は紹介ページ用、`{ID}-s.webp` はカードの上の画像用（軽い WebP 形式）） |
 | `data/latest.csv` | 毎日読み込んだデータの写し（観測スコアの列は除く）。履歴から、何がいつ変わったかを確かめられます |
 
 ## 手元で試す

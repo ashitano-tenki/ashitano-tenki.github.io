@@ -68,8 +68,8 @@ def load_images():
     out = {}
     for item_id, rec in data.items():
         if (rec.get("status") == "ok" and item_id not in exclude
-                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + ".jpg"))
-                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + "-s.jpg"))):
+                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + ".webp"))
+                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + "-s.webp"))):
             out[item_id] = rec
     return out
 
@@ -368,7 +368,7 @@ def analytics_tag(ctx):
             % (e(code), ctx["version"]))
 
 
-def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None):
+def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None, lastmod=None):
     """1ページ分のHTMLを書き出す。path はサイト内のパス（例: /tenki/dokuritsu/）。"""
     site = CONF["site_name"]
     doc_title = full_title or ("%s｜%s" % (title, site))
@@ -428,7 +428,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
     if not noindex:
-        ctx["sitemap"].append(url)
+        ctx["sitemap"].append((url, lastmod or ctx["today"]))  # サイトマップの更新日（紹介ページは最終観測日、ほかは作った日）
 
 
 def write(path, text):
@@ -462,7 +462,7 @@ def image_info(item):
     w, h = rec["w"], rec["h"]
     # URLの末尾の版は画像の中身から作る（差し替えた日にすぐ新しい画像が出るように）
     if "ver" not in rec:
-        with open(os.path.join(ROOT, "images", "items", item["id"] + ".jpg"), "rb") as f:
+        with open(os.path.join(ROOT, "images", "items", item["id"] + ".webp"), "rb") as f:
             rec["ver"] = hashlib.md5(f.read()).hexdigest()[:8]
     return rec["ver"], ("wide" if w / h >= 1.6 else "fit"), w, h
 
@@ -475,9 +475,9 @@ def item_media(item, cls, small):
             cls, e(KIND_BY_NAME.get(item["kind"], {}).get("emoji", "")))
     ver, fit, w, h = info
     if small:
-        return ('<div class="%s media-%s" aria-hidden="true"><img src="/images/items/%s-s.jpg?v=%s" alt="" loading="lazy" decoding="async"></div>'
+        return ('<div class="%s media-%s" aria-hidden="true"><img src="/images/items/%s-s.webp?v=%s" alt="" loading="lazy" decoding="async"></div>'
                 % (cls, fit, e(item["id"]), ver))
-    return ('<div class="%s media-%s"><img src="/images/items/%s.jpg?v=%s" alt="" width="%d" height="%d" decoding="async"></div>'
+    return ('<div class="%s media-%s"><img src="/images/items/%s.webp?v=%s" alt="" width="%d" height="%d" decoding="async"></div>'
             % (cls, fit, e(item["id"]), ver, w, h))
 
 
@@ -866,7 +866,10 @@ def build_item(item, listed, ctx):
         webpage["dateModified"] = item["observed"].isoformat()
     # 共有画像：tools/make_item_og.py が作った掲載ごとの画像があればそれを、なければ観測所共通の画像
     og = "/images/og/%s.png" % item["id"] if os.path.exists(os.path.join(ROOT, "og-items", item["id"] + ".png")) else None
-    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og)
+    info = image_info(item)
+    if info:  # 構造化データにも画像（掲載先の画像）を入れる
+        about["image"] = "%s/images/items/%s.webp" % (BASE, item["id"])
+    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"])
 
 
 def build_search(listed, ctx):
@@ -1052,7 +1055,7 @@ def image_ref(item):
     info = image_info(item)
     if not info:
         return {"emoji": KIND_BY_NAME.get(item["kind"], {}).get("emoji", "")}
-    return {"src": "/images/items/%s-s.jpg?v=%s" % (item["id"], info[0]), "fit": info[1]}
+    return {"src": "/images/items/%s-s.webp?v=%s" % (item["id"], info[0]), "fit": info[1]}
 
 
 def build_search_json(listed, ctx):
@@ -1084,7 +1087,7 @@ def build_check(listed, ctx):
                 .replace("<!--SITE_HEADER-->", site_header("/check/"))
                 .replace("<!--SITE_FOOTER-->", site_footer(ctx)))
     write("/check/", text)
-    ctx["sitemap"].append(BASE + "/check/")
+    ctx["sitemap"].append((BASE + "/check/", ctx["today"]))
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
         "memo": it["memo"], "url": it["url"], "cost": cost_label(it["cost"]), "rank": it["rank"],
@@ -1143,7 +1146,7 @@ def build_feed(listed, ctx):
 
 
 def build_meta_files(ctx):
-    urls = "".join("<url><loc>%s</loc></url>" % e(u) for u in ctx["sitemap"])
+    urls = "".join("<url><loc>%s</loc><lastmod>%s</lastmod></url>" % (e(u), d.isoformat()) for u, d in ctx["sitemap"])
     write("/sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">%s</urlset>\n' % urls)
     write("/robots.txt", "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE)
@@ -1234,7 +1237,7 @@ def main():
     # 掲載先の画像（画像が取れて、除外していないものだけ）
     os.makedirs(os.path.join(OUT, "images", "items"))
     for item_id in IMAGES:
-        for name in (item_id + ".jpg", item_id + "-s.jpg"):
+        for name in (item_id + ".webp", item_id + "-s.webp"):
             shutil.copy2(os.path.join(ROOT, "images", "items", name), os.path.join(OUT, "images", "items", name))
 
     build_home(listed, ctx)

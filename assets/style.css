@@ -252,6 +252,8 @@ button, .button {
 .cards.shelf::-webkit-scrollbar { display: none; }
 .cards.shelf > li { scroll-snap-align: start; min-width: 0; }
 .cards.shelf:focus-visible { outline: 2px solid var(--sky); outline-offset: -2px; }
+/* キーボードで選んだカードの枠は内側に出す（箱や横スワイプの棚の端で切れないように） */
+.card a:focus-visible, .card .save-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: -3px; }
 .cards.shelf .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cards.shelf .card-date { white-space: nowrap; }
 .cards.shelf h3, .cards.shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
