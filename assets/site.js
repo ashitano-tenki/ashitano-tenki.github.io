@@ -115,17 +115,17 @@
     var tenki = it.tenki.indexOf("共通") >= 0 ? "どの転機にも" : it.tenki.join("、");
     return [tenki, it.stages.join("、")].filter(Boolean).join("｜");
   }
-  // カードの左の小さな画像（掲載先のシェア用画像）。画像がなければタイプの絵文字（build.py の item_media と同じ形）
+  // カードの上の画像（掲載先のシェア用画像）。画像がなければタイプの絵文字（build.py の item_media と同じ形）
   function mediaHtml(img) {
     img = img || {};
-    if (img.src) return '<div class="card-thumb media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
-    return '<div class="card-thumb media-none" aria-hidden="true"><span>' + esc(img.emoji || "") + "</span></div>";
+    if (img.src) return '<div class="card-media media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
+    return '<div class="card-media media-none" aria-hidden="true"><span>' + esc(img.emoji || "") + "</span></div>";
   }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>" + (it.cost ? '<span class="tag tag-cost">' + esc(it.cost) + "</span>" : "");
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/"><div class="card-row">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when">' +
+    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when">' +
       esc(whenLine(it)) + "</p><h3>" + esc(it.title) + '</h3><p class="card-line">' + esc(it.line) + '</p><div class="card-foot"><div class="tags">' + tags +
-      "</div></div></div></div></a>" +
+      "</div></div></div></a>" +
       window.TenkiSaved.button(it.id, it.title) + "</li>";
   }
   function endedHtml(id) {

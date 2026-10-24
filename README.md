@@ -19,7 +19,7 @@ https://ashitano-tenki.github.io/
 
 ## 掲載先の画像
 
-- 毎朝の「サイトを更新」で、サイトを作る前に `tools/fetch_images.py` が、掲載先の公式ページに設定されているシェア用の画像（OGP画像）を取得します。縮小して `images/items/` に保存し、紹介ページ（タイトルの上）とカード（左の小さな四角）に出します。
+- 毎朝の「サイトを更新」で、サイトを作る前に `tools/fetch_images.py` が、掲載先の公式ページに設定されているシェア用の画像（OGP画像）を取得します。縮小して `images/items/` に保存し、紹介ページ（タイトルの上）とカード（上の横長の枠）に出します。
 - 取得するのは、まだ確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけです（1回60件まで、同じサイトには間をあけます）。結果は `data/images.json` に残ります。
 - 画像がないものは、タイプの絵文字を同じ枠に出します。
 - 掲載先から申し出があったときなど、画像を使いたくない掲載は `config/site.json` の `image_exclude` にIDを書きます（例：`["R0007"]`）。次の更新で画像が消えます。
@@ -38,7 +38,7 @@ https://ashitano-tenki.github.io/
 | `assets/og/` | 転機別ページと掛け合わせページのSNS共有用画像。`config/tenki.json` の名前や見出しを変えたら、Macで `python3 tools/make_og_images.py` を実行して作り直す |
 | `data/meta.json` | 前回公開したときの件数（件数チェックに使います） |
 | `data/linkcheck.json` | 毎週のリンク点検の結果（サイトでは /linkcheck.json として公開） |
-| `data/images.json`・`images/items/` | 掲載先の画像の取得結果と、縮小した画像（`{ID}.jpg` は紹介ページ用、`{ID}-s.jpg` はカード用） |
+| `data/images.json`・`images/items/` | 掲載先の画像の取得結果と、縮小した画像（`{ID}.jpg` は紹介ページ用、`{ID}-s.jpg` はカードの上の画像用） |
 | `data/latest.csv` | 毎日読み込んだデータの写し（観測スコアの列は除く）。履歴から、何がいつ変わったかを確かめられます |
 
 ## 手元で試す

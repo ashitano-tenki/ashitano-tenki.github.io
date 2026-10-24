@@ -7,7 +7,8 @@
 - 取得するのは、まだ画像を確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけ。
   相手のサイトに負担をかけないよう、1回に確かめる数を MAX_PER_RUN までにし、同じドメインには間をあける。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
-- 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カード用の小さい画像）。
+- 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
+  `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
 - config/site.json の image_exclude に書いたIDは取得せず、保存してある画像も消す（掲載先から申し出があったときなど）。
 - 掲載が終わってCSVから消えたIDの画像も消す。スプレッドシートは変えない。
 """
@@ -44,7 +45,7 @@ REFRESH_DAYS = 30         # 取れた画像を取り直すまでの日数（画�
 RETRY_DAYS = 7            # 取れなかったものを試し直すまでの日数
 MAX_BYTES = 8_000_000     # これより大きい画像は使わない
 LARGE_W = 960             # 紹介ページ用の幅
-SMALL_MIN = 160           # カード用は短い辺をこの大きさに（四角い枠で切り抜いても粗くならない大きさ）
+CARD_W, CARD_H = 600, 314  # カードの上の画像枠（1.91:1）を高精細の画面でも粗くなく埋められる大きさ
 
 _last = {}
 _lock = threading.Lock()
@@ -106,12 +107,18 @@ def save_images(item_id, data):
     large = im.copy()
     if w > LARGE_W:
         large = large.resize((LARGE_W, round(h * LARGE_W / w)), Image.LANCZOS)
-    scale = SMALL_MIN / min(w, h)
-    small = im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS) if scale < 1 else im.copy()
     os.makedirs(IMG_DIR, exist_ok=True)
     large.save(os.path.join(IMG_DIR, item_id + ".jpg"), "JPEG", quality=78, optimize=True, progressive=True)
-    small.save(os.path.join(IMG_DIR, item_id + "-s.jpg"), "JPEG", quality=80, optimize=True)
+    save_card(item_id, im)
     return large.size
+
+
+def save_card(item_id, im):
+    """カード用。横長は枠いっぱいに切り抜くので枠を覆う大きさに、正方形・縦長は枠の高さに収まる大きさにする。"""
+    w, h = im.size
+    scale = max(CARD_W / w, CARD_H / h) if w / h >= 1.6 else CARD_H / h
+    small = im.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS) if scale < 1 else im.copy()
+    small.save(os.path.join(IMG_DIR, item_id + "-s.jpg"), "JPEG", quality=78, optimize=True)
 
 
 def remove_files(item_id):
@@ -136,6 +143,14 @@ def check(row, today):
         return dict(rec, status="ok", src=src, w=w, h=h)
     except Exception as ex:  # 取れなかったときは前の画像を残す（一時的な失敗で消さない）
         return dict(rec, status="error", note=("%s: %s" % (type(ex).__name__, ex))[:120])
+
+
+def resize_only():
+    for name in sorted(os.listdir(IMG_DIR)):
+        if name.endswith(".jpg") and not name.endswith("-s.jpg"):
+            with Image.open(os.path.join(IMG_DIR, name)) as im:
+                save_card(name[:-4], im.convert("RGB"))
+    print("カード用の画像を作り直しました")
 
 
 def main():
@@ -200,4 +215,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    resize_only() if "--resize-only" in sys.argv else main()

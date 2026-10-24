@@ -256,9 +256,9 @@ def save_button(item):
 def card(item, today, kind=True, date=False):
     """カード1枚。kind=False はタイプのまとまりの中（タイプは見出しでわかる）、date=True は新着の一覧で使う。"""
     added = '<span class="card-date">%s</span>' % e(added_label(item["added"], today)) if date else ""
-    return ('<li class="card"><a href="/item/%s/"><div class="card-row">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
-            '<h3>%s</h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></div></a>%s</li>'
-            % (e(item["id"]), item_media(item, "card-thumb", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
+    return ('<li class="card"><a href="/item/%s/">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
+            '<h3>%s</h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></a>%s</li>'
+            % (e(item["id"]), item_media(item, "card-media", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
                e(item["line"]), tag_list(item, kind), added, save_button(item)))
 
 
@@ -448,7 +448,7 @@ def image_info(item):
 
 
 def item_media(item, cls, small):
-    """カードの小さな画像（small=True）か、紹介ページの大きな画像。画像がなければタイプの絵文字を同じ枠に出す。"""
+    """カードの上の画像（small=True）か、紹介ページの大きな画像。画像がなければタイプの絵文字を同じ枠に出す。"""
     info = image_info(item)
     if not info:
         return '<div class="%s media-none" aria-hidden="true"><span>%s</span></div>' % (
@@ -998,7 +998,7 @@ def normalize(s):
 
 
 def image_ref(item):
-    """JSで描くカード（探す・あとで見る・セルフチェック）用。小さな画像のURLと収め方。画像がなければタイプの絵文字。"""
+    """JSで描くカード（探す・あとで見る・セルフチェック）用。カードの上の画像のURLと収め方。画像がなければタイプの絵文字。"""
     info = image_info(item)
     if not info:
         return {"emoji": KIND_BY_NAME.get(item["kind"], {}).get("emoji", "")}
