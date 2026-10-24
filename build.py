@@ -446,7 +446,11 @@ def image_info(item):
     if not rec:
         return None
     w, h = rec["w"], rec["h"]
-    return rec["checked"].replace("-", ""), ("wide" if w / h >= 1.6 else "fit"), w, h
+    # URLの末尾の版は画像の中身から作る（差し替えた日にすぐ新しい画像が出るように）
+    if "ver" not in rec:
+        with open(os.path.join(ROOT, "images", "items", item["id"] + ".jpg"), "rb") as f:
+            rec["ver"] = hashlib.md5(f.read()).hexdigest()[:8]
+    return rec["ver"], ("wide" if w / h >= 1.6 else "fit"), w, h
 
 
 def item_media(item, cls, small):
