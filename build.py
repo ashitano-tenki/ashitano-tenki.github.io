@@ -170,7 +170,8 @@ def parse_rows(text):
             "listed": row["状態"] in LISTED_STATES,
             "line": one_line(row["観測メモ"]),
             "published": parse_month(row.get("発表・更新時期", "")),
-            # 向いている人（任意の列。「40代、女性」のように区切って書く。列がなければ空）
+            # 向いている人（任意の列。「40代、女性」のように区切って書く。列がなければ空）。
+            # 画面には出さず、キーワード検索の対象にだけ入れる（自分の属性が書かれていない人に疎外感を与えないため）
             "for": [x.strip() for x in re.split(r"[、,，/／]", row.get("向いている人", "")) if x.strip()],
         })
     if skipped:
@@ -843,7 +844,7 @@ def build_item(item, listed, ctx):
     <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
     <div><dt>転機</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
-{audience}    <div><dt>費用</dt><dd>{cost}</dd></div>
+    <div><dt>費用</dt><dd>{cost}</dd></div>
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
 {published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
@@ -858,7 +859,7 @@ def build_item(item, listed, ctx):
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
-           audience=('    <div><dt>向いている人</dt><dd>%s</dd></div>\n' % "、".join('<a href="%s">%s</a>' % (e(search_url(**{"for": a})), e(a)) for a in item["for"])) if item["for"] else "", hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            published=published_row(item),
@@ -887,18 +888,6 @@ def build_item(item, listed, ctx):
     page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"])
 
 
-def audience_field(listed, options):
-    """探すページの「向いている人」の絞り込み。データに「向いている人」が入っている掲載があるときだけ出す。
-    並びは config/site.json の audience の順、そのあとに一覧にない言葉。"""
-    found = {a for it in listed for a in it["for"]}
-    if not found:
-        return ""
-    order = CONF.get("audience", [])
-    values = [a for a in order if a in found] + sorted(found - set(order))
-    return ('        <div class="field"><label for="for">向いている人</label><select id="for" name="for"><option value="">すべて</option>%s</select></div>\n'
-            % options(values))
-
-
 def build_search(listed, ctx):
     def options(values):
         return "".join('<option value="%s">%s</option>' % (e(v), e(v)) for v in values)
@@ -919,7 +908,7 @@ def build_search(listed, ctx):
         <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
         <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
         <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
-{audience}        <noscript><button type="submit">この条件で探す</button></noscript>
+        <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
     </div>
     <div class="result-col">
@@ -937,7 +926,7 @@ def build_search(listed, ctx):
 <noscript><p class="note">検索にはJavaScriptを使います。使えない場合は<a href="/tenki/">転機から探す</a>をご利用ください。</p></noscript>
 <script>window.TENKI_PAGE_SIZE = {page_size}; window.TENKI_THIS_YEAR = {year};</script>
 <script src="/assets/search.js?v={ver}" defer></script>
-""".format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)), audience=audience_field(listed, options),
+""".format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
            tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
            page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
@@ -1161,7 +1150,7 @@ def build_search_json(listed, ctx):
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
             "added": it["added"].isoformat() if it["added"] else "",
-            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it), "for": it["for"],
+            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
                                         " ".join(it["tenki"]), " ".join(it["stages"])]))
                     + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])),

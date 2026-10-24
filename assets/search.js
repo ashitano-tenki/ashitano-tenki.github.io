@@ -3,11 +3,11 @@
   document.documentElement.classList.add("js");
   var PAGE = window.TENKI_PAGE_SIZE || 20;
   var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
-  var FIELDS = ["q", "tenki", "stage", "kind", "for", "sort"];
-  // 「絞り込む」の中にある条件。「向いている人」はデータに入っているときだけページにある
-  var FILTERS = ["tenki", "stage", "kind", "for"].filter(function (f) { return document.getElementById(f); });
+  var FIELDS = ["q", "tenki", "stage", "kind", "sort"];
+  // 「絞り込む」の中にある条件
+  var FILTERS = ["tenki", "stage", "kind"].filter(function (f) { return document.getElementById(f); });
   var SELECTS = FILTERS.slice();
-  var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階", "for": "向いている人" };
+  var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階" };
   var COMMON = "共通", OTHER = "その他";
   var form = document.getElementById("filters");
   var list = document.getElementById("results");
@@ -70,7 +70,7 @@
     var state = {};
     FIELDS.forEach(function (f) {
       var el = form.elements[f];
-      if (!el) { state[f] = ""; return; }  // データにない条件（向いている人など）は空
+      if (!el) { state[f] = ""; return; }  // ページにない条件は空
       state[f] = el.type === "checkbox" ? (el.checked ? "1" : "") : (el.value || "").trim();
     });
     return state;
@@ -94,7 +94,6 @@
       if (state.kind && it.kind !== state.kind) return false;
       if (state.tenki && !matchTenki(it, state.tenki)) return false;
       if (state.stage && it.stages.indexOf(state.stage) < 0) return false;
-      if (state["for"] && (it["for"] || []).indexOf(state["for"]) < 0) return false;
       return terms.every(function (alts) {
         return alts.some(function (w) { return it.text.indexOf(w) >= 0; });
       });
