@@ -275,7 +275,7 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
   };
 
   // 観測所のおすすめ。サイトを作るたびに観測所の公開用データから書き出す picks.json を読む
-  // rank は観測スコアの高い順の順位（1がいちばん高い）。スコアそのものは載せていない
+  // rank はおすすめ順の順位（1が先頭。画像があるものが先、そのなかで観測スコアの高い順）。スコアそのものは載せていない
   const OBS_TOP = "/";
   let PICKS = null; // 読めなかったときは null のまま
   const picksReady = fetch("/check/picks.json", { cache: "no-cache" })

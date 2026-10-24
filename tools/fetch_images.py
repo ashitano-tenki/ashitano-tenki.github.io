@@ -9,6 +9,8 @@
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
 - 画像は2つ書き出す：{ID}.jpg（紹介ページ用、幅960まで）と {ID}-s.jpg（カードの上の画像用、幅600ほど）。
   `--resize-only` を付けると取得はせず、保存してある {ID}.jpg からカード用の画像だけを作り直す（大きさを変えたとき用）。
+- config/image_overrides.json に「ID: 画像のURL」を書いたものは、公式ページを読まずにそのURLの画像を使う
+  （自動で取れない掲載に、黒田さんが手で見つけた画像を渡すとき。URLが変わったら次の回で取り直す）。
 - config/site.json の image_exclude に書いたIDは取得せず、保存してある画像も消す（掲載先から申し出があったときなど）。
 - 掲載が終わってCSVから消えたIDの画像も消す。スプレッドシートは変えない。
 """
@@ -34,6 +36,7 @@ sys.path.insert(0, ROOT)
 import build  # noqa: E402  CSVの取得と設定は build.py と同じものを使う
 
 MANIFEST = os.path.join(ROOT, "data", "images.json")
+OVERRIDES = os.path.join(ROOT, "config", "image_overrides.json")
 IMG_DIR = os.path.join(ROOT, "images", "items")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/126.0.0.0 Safari/537.36")
@@ -128,11 +131,13 @@ def remove_files(item_id):
             os.remove(path)
 
 
-def check(row, today):
-    """1件を確かめて、manifest に入れる記録を返す。"""
+def check(row, today, override=""):
+    """1件を確かめて、manifest に入れる記録を返す。override があれば公式ページを読まずにその画像を使う。"""
     rec = {"page": row["URL"], "checked": today.isoformat()}
+    if override:
+        rec["manual"] = True
     try:
-        src = og_image_url(row["URL"])
+        src = override or og_image_url(row["URL"])
         if not src:
             remove_files(row["ID"])
             return dict(rec, status="none")
@@ -160,6 +165,10 @@ def main():
         with open(MANIFEST, encoding="utf-8") as f:
             manifest = json.load(f)
     exclude = set(build.CONF.get("image_exclude", []))
+    overrides = {}
+    if os.path.exists(OVERRIDES):
+        with open(OVERRIDES, encoding="utf-8") as f:
+            overrides = {k: v.strip() for k, v in json.load(f).items() if isinstance(v, str) and v.strip().startswith(("http://", "https://"))}
 
     reader = csv.DictReader(io.StringIO(build.fetch_csv(build.CONF["csv_url"])))
     rows, all_ids = [], set()
@@ -187,18 +196,20 @@ def main():
             return False
         if not rec or rec.get("page") != row["URL"]:
             return True
+        if row["ID"] in overrides and rec.get("src") != overrides[row["ID"]]:
+            return True  # 手で渡した画像が新しく入った・変わった
         age = (today - datetime.date.fromisoformat(rec["checked"])).days
         return age >= (REFRESH_DAYS if rec["status"] == "ok" else RETRY_DAYS)
 
     todo = [r for r in rows if due(r)]
-    todo.sort(key=lambda r: (r["ID"] in manifest, manifest.get(r["ID"], {}).get("checked", "")))  # 新しい掲載を先に
+    todo.sort(key=lambda r: (r["ID"] not in overrides, r["ID"] in manifest, manifest.get(r["ID"], {}).get("checked", "")))  # 手で渡した画像と新しい掲載を先に
     todo = todo[:MAX_PER_RUN]
 
     by_host = collections.defaultdict(list)
     for r in todo:
         by_host[host_of(r["URL"])].append(r)
     with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        for results in pool.map(lambda group: [(r["ID"], check(r, today)) for r in group], by_host.values()):
+        for results in pool.map(lambda group: [(r["ID"], check(r, today, overrides.get(r["ID"], ""))) for r in group], by_host.values()):
             for item_id, rec in results:
                 old = manifest.get(item_id, {})
                 if rec["status"] == "error" and old.get("status") == "ok":
