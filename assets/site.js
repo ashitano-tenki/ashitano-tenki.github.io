@@ -244,8 +244,10 @@
   var btn = document.getElementById("bar-filter"), toggle = document.getElementById("filter-toggle");
   if (!btn || !toggle) return;
   btn.addEventListener("click", function () {
-    if (toggle.getAttribute("aria-expanded") !== "true") toggle.click();
-    toggle.scrollIntoView({ behavior: "smooth", block: "start" });
+    var open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.click();  // 開いていれば閉じ、閉じていれば開く
+    btn.setAttribute("aria-expanded", open ? "false" : "true");
+    if (!open) document.getElementById("filter-panel").scrollIntoView({ block: "start" });
   });
 })();
 

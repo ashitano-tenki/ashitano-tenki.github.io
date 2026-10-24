@@ -138,7 +138,17 @@
     if (state.sort === "new") {
       out.sort(function (a, b) { return a.added < b.added ? 1 : a.added > b.added ? -1 : a.rank - b.rank; });
     } else {
-      out.sort(function (a, b) { return a.rank - b.rank; });
+      // キーワードがあるときは「タイトルにそのままある → 説明などにそのままある → 言い換えで当たった」の順に、そのなかをおすすめ順に
+      var terms = normalize(state.q).split(/\s+/).filter(Boolean);
+      var tier = function (it) {
+        if (!terms.length) return 0;
+        var title = normalize(it.title);
+        if (terms.every(function (t) { return title.indexOf(t) >= 0; })) return 0;
+        if (terms.every(function (t) { return it.text.indexOf(t) >= 0; })) return 1;
+        return 2;
+      };
+      out.forEach(function (it) { it._tier = tier(it); });
+      out.sort(function (a, b) { return a._tier - b._tier || a.rank - b.rank; });
     }
     return out;
   }
@@ -188,6 +198,8 @@
     }).join("") + (chips.length > 1 ? '<button type="button" class="link-button" data-field="all">すべて外す</button>' : "");
     var n = FILTERS.filter(function (f) { return state[f]; }).length;
     filterCount.textContent = n ? "（" + n + "）" : "";
+    var barBtn = document.getElementById("bar-filter");  // スマホの帯の「絞り込む」にも、選んでいる条件の数を出す
+    if (barBtn) barBtn.textContent = "絞り込む" + (n ? "（" + n + "）" : "");
   }
 
   function countText(state) {

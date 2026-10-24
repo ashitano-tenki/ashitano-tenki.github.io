@@ -314,6 +314,8 @@ button, .button {
   .result-bar { position: sticky; top: var(--header-h, 0px); z-index: 10; background: var(--base); padding: var(--space-2) 0; margin-bottom: var(--space-2); border-bottom: var(--border-hairline) solid var(--line); transition: top .2s ease; }
   .bar-filter { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 13px; font-weight: 700; border-radius: 999px; border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
   .result-bar .sort-help { display: none; }
+  .filter-col > .filter-toggle { display: none; }  /* スマホは帯の「絞り込む」に一本化する */
+  .filter-col .filter-panel { margin-top: 0; scroll-margin-top: 140px; }
 }
 /* 観測レポートの「この週の残りを見る」 */
 .week-more { margin-top: var(--space-3); }

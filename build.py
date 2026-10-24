@@ -898,7 +898,7 @@ def build_search(listed, ctx):
     <div class="result-col">
       <div class="result-bar">
         <p id="result-count" aria-live="polite">読み込み中…</p>
-        <button type="button" class="bar-filter" id="bar-filter">絞り込む</button>
+        <button type="button" class="bar-filter" id="bar-filter" aria-controls="filter-panel" aria-expanded="false">絞り込む</button>
         <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>
