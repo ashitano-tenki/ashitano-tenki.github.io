@@ -140,6 +140,13 @@ input[type="search"], select {
   font: inherit; font-size: 16px; color: var(--ink); background: var(--card);
   border: var(--border-hairline) solid var(--text-sub); border-radius: var(--radius-md); padding: 10px var(--space-3); width: 100%;
 }
+/* プルダウンの下矢印：ブラウザ標準の矢印は枠に近すぎるので、細い矢印を枠から離して置く（暗い表示では明るい色の矢印） */
+:root { --select-arrow: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 1.5l5 5 5-5%27 fill=%27none%27 stroke=%27%235e636b%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E"); }
+:root[data-theme="dark"] { --select-arrow: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%278%27 viewBox=%270 0 12 8%27%3E%3Cpath d=%27M1 1.5l5 5 5-5%27 fill=%27none%27 stroke=%27%239aa0a8%27 stroke-width=%271.6%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E"); }
+select {
+  -webkit-appearance: none; appearance: none; padding-right: 34px;
+  background-image: var(--select-arrow); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px 8px;
+}
 input[type="search"]:focus-visible, select:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
 button, .button {
   font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; display: inline-block; text-decoration: none;
@@ -413,7 +420,7 @@ button, .button {
 .sort-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
 .sort-help { font-size: 13px; white-space: nowrap; }
 .sort-field label { font-size: 13px; color: var(--text-sub); white-space: nowrap; }
-.sort-field select { width: auto; padding: 6px var(--space-3); font-size: 14px; }
+.sort-field select { width: auto; padding: 6px 34px 6px var(--space-3); font-size: 14px; }
 .active-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); }
 .active-chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 4px 6px 4px 12px; border-radius: var(--radius-pill); background: var(--chip-bg); color: var(--ink); border: var(--border-hairline) solid var(--line); }
 .active-chip span { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--card); color: var(--text-sub); font-weight: 400; }
