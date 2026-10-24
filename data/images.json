@@ -1385,5 +1385,69 @@
   "src": "https://career-research.mynavi.jp/wp-content/uploads/2025/10/34514a5e0772d476d73d15dfc1133f2a.jpg",
   "w": 960,
   "h": 540
+ },
+ "R0173": {
+  "page": "https://doda.jp/guide/kyujin_bairitsu/data/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0174": {
+  "page": "https://shopping.bookoff.co.jp/new/0020815765",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://content.bookoff.co.jp/goodsimages/LL/002081/0020815765LL.jpg",
+  "w": 300,
+  "h": 442
+ },
+ "R0175": {
+  "page": "https://www.cloudsign.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.cloudsign.jp/wp-content/uploads/2023/06/ogp.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R0176": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1304857",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0177": {
+  "page": "https://www.diamond.co.jp/book/9784478123478.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478123470.jpg",
+  "w": 692,
+  "h": 1000
+ },
+ "R0178": {
+  "page": "https://shopping.yahoo.co.jp/products/5a3980a3e1",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://shpcatalog-pctr.c.yimg.jp/dk/ex-cooperation/image/provider/2/book/34862325.JPG?nf_img=1&nf_src=dk&nf_path=ex-cooperation/image/provider/2/notfound.png&nf_st=200",
+  "w": 340,
+  "h": 500
+ },
+ "R0179": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-9989260796",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0180": {
+  "page": "https://open.spotify.com/show/0xEK8A8MRQ8YAYAYMRGl3K",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1fc3e33bca6268d1a7db7c96d6",
+  "w": 300,
+  "h": 300
+ },
+ "R0181": {
+  "page": "https://books.rakuten.co.jp/rb/18522323/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 429: Too Many Requests"
  }
 }
