@@ -313,3 +313,11 @@
     finish();
   });
 })();
+
+// スマホの幅では、検索欄の薄い字を「キーワードで探す」だけにする（例が途中で切れないように）
+(function () {
+  if (!window.matchMedia || !window.matchMedia("(max-width: 639px)").matches) return;
+  Array.prototype.forEach.call(document.querySelectorAll('input[type="search"][placeholder^="キーワードで探す（"]'), function (el) {
+    el.setAttribute("placeholder", "キーワードで探す");
+  });
+})();

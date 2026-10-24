@@ -81,12 +81,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 .ck-wrap {
-  max-width: 680px;
+  max-width: 960px;
   margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 24px 64px;
 }
+/* 左端はほかのページ（幅960pxの枠）とそろえ、読みやすい行の長さ（680px）は保つ */
+.ck-wrap > * { max-width: 680px; }
 .band { position: fixed; top: 0; bottom: 0; left: 0; width: 8px; background: var(--ck-yellow); }
 @media (max-width: 720px) { .band { display: none; } }
 .label {

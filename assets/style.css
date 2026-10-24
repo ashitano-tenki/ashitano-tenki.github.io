@@ -106,7 +106,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .menu-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .menu-btn:hover, .menu-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
 /* フッターの表示切り替え */
-.footer-theme { margin: var(--space-6) 0 0; }
+.footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-4); margin: var(--space-6) 0 0; }
+.footer-bottom .footer-meta { margin: 0; }
+.theme-toggle { flex: none; }
 .theme-toggle { font-size: 13px; font-weight: 400; padding: 4px var(--space-3); background: transparent; color: var(--footer-text); border: var(--border-hairline) solid var(--footer-sub); border-radius: var(--radius-pill); }
 .theme-toggle:hover { color: var(--footer-strong); border-color: var(--footer-strong); }
 /* ヘッダーの検索：虫めがねを押すと、ヘッダーの下にキーワード欄が開く */
@@ -120,6 +122,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .header-search input { flex: 1; min-width: 0; }
 .global-nav a { color: var(--text-body); text-decoration: none; padding: var(--space-1) 0; }
 .global-nav a:hover { color: var(--sky); text-decoration: underline; }
+/* いま見ているページ（その中のページも含む）：文字を濃くし、下に空色の線 */
+.global-nav a[aria-current="page"] { color: var(--ink); font-weight: 700; text-decoration: none; box-shadow: inset 0 -2px 0 var(--sky); }
 
 /* 本文とフッターの間を空ける（.wrap の左右余白指定に上書きされないよう main.wrap で指定） */
 main.wrap { padding-bottom: var(--space-16); }
@@ -450,3 +454,12 @@ button, .button {
 @media (min-width: 640px) { .community-links { flex-direction: row; gap: var(--space-6); } }
 .footer-meta { color: var(--footer-sub); font-size: 13px; margin: var(--space-6) 0 0; }
 .footer-meta a { color: var(--footer-text); }
+
+/* 押したときの手応え：マウスを乗せたときの色の変化をなめらかにし、押した瞬間は少し沈ませる */
+a, button, .button, .card a, select, input[type="search"] { transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .1s ease; }
+button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active { transform: translateY(1px); }
+.card a:active { transform: translateY(1px); border-color: var(--sky); }
+@media (prefers-reduced-motion: reduce) {
+  a, button, .button, .card a, select, input[type="search"] { transition: none; }
+  button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active, .card a:active { transform: none; }
+}

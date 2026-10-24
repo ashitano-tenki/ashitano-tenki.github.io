@@ -356,8 +356,10 @@ def site_footer(ctx):
         <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
       </p>
     </div>
-    <p class="footer-theme"><button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button></p>
-    <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
+    <div class="footer-bottom">
+      <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
+    </div>
   </div>
 </footer>
 <script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
@@ -428,7 +430,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), header=site_header(), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h, _ in NAV if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
@@ -734,7 +736,7 @@ def build_combo(t, s, items, ctx):
          jsonld=[collection_ld(title, combo_lead(t, s), path, items)])
 
 
-def similar_items(item, listed, limit=4):
+def similar_items(item, listed, limit=3):
     def score(other):
         tenki = len(set(item["tenki"]) & set(other["tenki"]))
         stage = len(set(item["stages"]) & set(other["stages"]))
