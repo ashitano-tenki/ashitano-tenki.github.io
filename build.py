@@ -324,6 +324,7 @@ def site_header(current=None):
     <nav class="global-nav" id="global-nav" aria-label="サイト内">
 {nav}
     </nav>
+    <a class="header-saved-btn" href="/saved/" aria-label="あとで見る"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="header-saved-count" id="saved-count-h" hidden></span></a>
     <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
     <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
@@ -776,7 +777,8 @@ def build_item(item, listed, ctx):
     similar = similar_items(item, listed)
     similar_html = ""
     if similar:
-        similar_html = '<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>' % cards(similar, ctx)
+        similar_html = ('<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>'
+                        % sm_shelf("".join(card(it, ctx["today"]) for it in similar), len(similar), "同じ転機・段階で役立つもの"))
 
     next_html = ""
     nxt = next_stage(item)
@@ -788,7 +790,7 @@ def build_item(item, listed, ctx):
             heading = ("次の転機の準備に役立つもの" if following else "次の段階（%s）で役立つもの" % stage)
             tenki_param = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), "")
             next_html = ('<section class="section"><h2 class="section-title">%s</h2>%s%s</section>'
-                         % (e(heading), cards(picks, ctx),
+                         % (e(heading), sm_shelf("".join(card(it, ctx["today"]) for it in picks), len(picks), heading),
                             more_link(search_url(tenki=tenki_param, stage=stage),
                                       "%s×%sで役立つものをすべて見る" % (tenki_param, stage) if tenki_param
                                       else "%sで役立つものをすべて見る" % stage)))
@@ -888,6 +890,7 @@ def build_search(listed, ctx):
     <div class="result-col">
       <div class="result-bar">
         <p id="result-count" aria-live="polite">読み込み中…</p>
+        <button type="button" class="bar-filter" id="bar-filter">絞り込む</button>
         <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>

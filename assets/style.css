@@ -83,7 +83,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .global-nav { display: flex; align-items: center; gap: var(--space-1) var(--space-4); flex-wrap: wrap; font-size: 14px; }
 /* ヘッダーは1段。スマホ：ロゴ・虫めがね・メニューボタン（メニューは押すと下に開く）。広い画面：ロゴ・メニュー・虫めがね */
 .global-nav { order: 4; flex-basis: 100%; }
-.header-search-btn { order: 2; margin-left: auto; }
+.header-saved-btn { order: 2; margin-left: auto; }
+.header-search-btn { order: 2; }
 .menu-btn { order: 3; }
 .js .global-nav:not(.open) { display: none; }
 .global-nav.open { padding-top: var(--space-2); border-top: var(--border-hairline) solid var(--line); margin-top: var(--space-2); }
@@ -92,7 +93,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 @media (min-width: 760px) {
   .global-nav, .js .global-nav:not(.open) { display: flex; order: 2; flex-basis: auto; margin-left: auto; }
   .header-search-btn { order: 3; margin-left: 0; }
-  .header-inner .menu-btn { display: none; }
+  .header-inner .menu-btn, .header-saved-btn { display: none; }
 }
 .menu-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .menu-btn:hover, .menu-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
@@ -101,6 +102,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .theme-toggle { font-size: 13px; font-weight: 400; padding: 4px var(--space-3); background: transparent; color: var(--footer-text); border: var(--border-hairline) solid var(--footer-sub); border-radius: var(--radius-pill); }
 .theme-toggle:hover { color: var(--footer-strong); border-color: var(--footer-strong); }
 /* ヘッダーの検索：虫めがねを押すと、ヘッダーの下にキーワード欄が開く */
+/* スマホのヘッダーの「あとで見る」：残した数を右上に小さく出す */
+.header-saved-btn { position: relative; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
+.header-saved-btn:hover { color: var(--sky); border-color: var(--sky); }
+.header-saved-count { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--sky); color: var(--card); font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; font-variant-numeric: tabular-nums; }
 .header-search-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .header-search-btn:hover, .header-search-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
 .header-search { display: flex; gap: var(--space-2); padding-bottom: var(--space-3); }
@@ -286,6 +291,19 @@ button, .button {
   body.has-cta .site-footer { padding-bottom: calc(var(--space-12) + 72px); }
 }
 @media (min-width: 640px) { .cta-bar { display: none !important; } }
+/* スマホ・タブレット：下に読むときはヘッダーを隠し、上に戻すと出す */
+@media (max-width: 759px) {
+  .site-header { position: sticky; top: 0; z-index: 30; transition: transform .2s ease; }
+  .site-header.is-hidden { transform: translateY(-100%); }
+}
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
+/* 探すページ（スマホ）：件数・絞り込む・並び順の帯を上に残す */
+.bar-filter { display: none; }
+@media (max-width: 639px) {
+  .result-bar { position: sticky; top: var(--header-h, 0px); z-index: 10; background: var(--base); padding: var(--space-2) 0; margin-bottom: var(--space-2); border-bottom: var(--border-hairline) solid var(--line); transition: top .2s ease; }
+  .bar-filter { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 13px; font-weight: 700; border-radius: 999px; border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
+  .result-bar .sort-help { display: none; }
+}
 /* 観測レポートの「この週の残りを見る」 */
 .week-more { margin-top: var(--space-3); }
 .week-more summary { cursor: pointer; color: var(--sky); font-weight: 700; padding: var(--space-2) 0; }

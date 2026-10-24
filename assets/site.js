@@ -84,8 +84,9 @@
   }
   function paintAll() {
     Array.prototype.forEach.call(document.querySelectorAll("[data-save]"), paint);
-    var n = load().length, c = document.getElementById("saved-count");
+    var n = load().length, c = document.getElementById("saved-count"), h = document.getElementById("saved-count-h");
     if (c) c.textContent = n ? "（" + n + "）" : "";
+    if (h) { h.textContent = n > 99 ? "99+" : String(n); h.hidden = !n; }
   }
 
   window.TenkiSaved = {
@@ -205,4 +206,34 @@
     bar.hidden = !out;
     document.body.classList.toggle("has-cta", out);
   }).observe(main);
+})();
+
+// スマホ・タブレット：下に読むときはヘッダーを隠し、上に少し戻すと出す。探すページの帯はヘッダーの下に付いていく
+(function () {
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+  var mq = window.matchMedia("(max-width: 759px)"), last = window.scrollY, ticking = false;
+  function apply() {
+    ticking = false;
+    var y = window.scrollY, hidden = header.classList.contains("is-hidden");
+    if (!mq.matches || y < 80 || header.querySelector(".open, [aria-expanded=\"true\"]")) hidden = false;
+    else if (y > last + 6) hidden = true;
+    else if (y < last - 6) hidden = false;
+    header.classList.toggle("is-hidden", hidden);
+    document.documentElement.style.setProperty("--header-h", hidden || !mq.matches ? "0px" : header.offsetHeight + "px");
+    last = y;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }, { passive: true });
+  window.addEventListener("resize", apply);
+  apply();
+})();
+
+// 探すページ（スマホ）：帯の「絞り込む」で条件の欄を開いて、そこまで戻る
+(function () {
+  var btn = document.getElementById("bar-filter"), toggle = document.getElementById("filter-toggle");
+  if (!btn || !toggle) return;
+  btn.addEventListener("click", function () {
+    if (toggle.getAttribute("aria-expanded") !== "true") toggle.click();
+    toggle.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 })();
