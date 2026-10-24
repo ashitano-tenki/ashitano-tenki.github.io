@@ -1745,5 +1745,37 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48007/4800721539.jpg",
   "w": 690,
   "h": 1000
+ },
+ "R0219": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784833440851",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48334/4833440857.jpg",
+  "w": 626,
+  "h": 1000
+ },
+ "R0220": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784863679603",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48636/4863679602.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0221": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784816369544",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48163/4816369546.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0222": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784802615433",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48026/4802615434.jpg",
+  "w": 702,
+  "h": 1000
  }
 }
