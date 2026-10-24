@@ -1389,8 +1389,11 @@
  "R0173": {
   "page": "https://doda.jp/guide/kyujin_bairitsu/data/",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0173.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0174": {
   "page": "https://shopping.bookoff.co.jp/new/0020815765",
@@ -1447,8 +1450,10 @@
  "R0181": {
   "page": "https://books.rakuten.co.jp/rb/18522323/",
   "checked": "2026-10-24",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 429: Too Many Requests"
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/5986/9784344695986_1_2.jpg?downsize=600:*",
+  "w": 492,
+  "h": 800
  },
  "R0182": {
   "page": "https://career-research.mynavi.jp/reserch/20261015_116238/",

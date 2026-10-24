@@ -287,15 +287,7 @@ button, .button {
   .list-compact .card-line { display: none; }
   .list-compact .card-foot { margin-top: 6px; }
   .list-compact .save-btn { top: 6px; right: 6px; width: 28px; height: 28px; }
-  /* 紹介ページ：「公式サイトを見る」が画面の外に出たら、下に帯で出す */
-  .cta-bar:not([hidden]) { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: var(--space-2);
-    padding: 10px max(var(--space-4), env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(var(--space-4), env(safe-area-inset-left, 0px));
-    background: var(--base); border-top: var(--border-hairline) solid var(--line); box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06); }
-  .cta-bar .button { flex: 1; justify-content: center; text-align: center; }
-  .cta-bar .cta-save { flex: none; width: 48px; padding: 0; display: inline-grid; place-items: center; }
-  body.has-cta .site-footer { padding-bottom: calc(var(--space-12) + 72px); }
 }
-@media (min-width: 640px) { .cta-bar { display: none !important; } }
 /* スマホ・タブレット：下に読むときはヘッダーを隠し、上に戻すと出す */
 @media (max-width: 759px) {
   .site-header { position: sticky; top: 0; z-index: 30; transition: transform .2s ease; }

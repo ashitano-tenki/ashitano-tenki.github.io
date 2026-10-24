@@ -840,11 +840,9 @@ def build_item(item, listed, ctx):
   </dl>
   {report}
 </article>
-<div class="cta-bar" id="cta-bar" hidden>{cta_link}<button type="button" class="button button-ghost cta-save" data-save="{id}" data-title="{title}" aria-pressed="false" hidden>{icon}</button></div>
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           id=e(item["id"]), icon=SAVE_ICON, cta_link=official_link,
            memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),

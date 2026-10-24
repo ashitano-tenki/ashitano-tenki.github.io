@@ -197,17 +197,6 @@
   });
 })();
 
-// 紹介ページ（スマホ）：「公式サイトを見る」が画面の外に出たら、下に帯で出す
-(function () {
-  var bar = document.getElementById("cta-bar"), main = document.querySelector(".official");
-  if (!bar || !main || !("IntersectionObserver" in window)) return;
-  new IntersectionObserver(function (entries) {
-    var out = !entries[0].isIntersecting;
-    bar.hidden = !out;
-    document.body.classList.toggle("has-cta", out);
-  }).observe(main);
-})();
-
 // スマホ・タブレット：下に読むときはヘッダーを隠し、上に少し戻すと出す。探すページの帯はヘッダーの下に付いていく
 (function () {
   var header = document.querySelector(".site-header");
