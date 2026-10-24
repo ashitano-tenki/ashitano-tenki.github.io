@@ -1155,8 +1155,10 @@ def build_search_json(listed, ctx):
                                         " ".join(it["tenki"]), " ".join(it["stages"])]))
                     + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])),
         } for it in listed],
-        # 言い換え表の言葉にも読みを足す（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）
-        "synonyms": [sorted({x for w in g if w.strip() for x in (normalize(w), reading(w)) if x}) for g in synonyms if isinstance(g, list)],
+        # 言い換え表。読みは「どのグループに当たるか」の判定にだけ使う（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）。
+        # 読みで本文を探すと、同じ読みの別の言葉（障害と生涯）まで見つかるため、本文を探すのは words だけ
+        "synonyms": [{"words": sorted({normalize(w) for w in g if w.strip()}),
+                      "readings": sorted({reading(w) for w in g if w.strip()} - {""})} for g in synonyms if isinstance(g, list)],
     }
     write("/search.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
 

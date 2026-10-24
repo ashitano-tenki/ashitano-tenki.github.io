@@ -42,8 +42,8 @@
   function alternatives(term) {
     var alts = [term];
     data.synonyms.forEach(function (group) {
-      var hit = group.some(function (w) { return w === term || (term.length >= 2 && w.indexOf(term) >= 0); });
-      if (hit) group.forEach(function (w) { if (alts.indexOf(w) < 0) alts.push(w); });
+      var hit = group.words.concat(group.readings).some(function (w) { return w === term || (term.length >= 2 && w.indexOf(term) >= 0); });
+      if (hit) group.words.forEach(function (w) { if (alts.indexOf(w) < 0) alts.push(w); });
     });
     return alts;
   }
