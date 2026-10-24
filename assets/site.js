@@ -151,10 +151,10 @@
 
 // トップの「タイプごとに見る」の棚：いまの位置（1 / 8）、パソコンの矢印、キーボードの左右キー。自動では動かさない
 (function () {
-  var blocks = document.querySelectorAll(".shelf-block, .new-block");
+  var blocks = document.querySelectorAll(".shelf-block, .sm-shelf-block");
   if (!blocks.length) return;
   Array.prototype.forEach.call(blocks, function (block) {
-    var shelf = block.querySelector(".shelf, .news-list");
+    var shelf = block.querySelector(".shelf, .sm-shelf");
     var cards = shelf.querySelectorAll("li.card:not(.card-more)");
     var dots = block.querySelectorAll(".shelf-dots i");
     var arrows = block.querySelector(".shelf-arrows");
@@ -194,4 +194,15 @@
     window.addEventListener("resize", update);
     update();
   });
+})();
+
+// 紹介ページ（スマホ）：「公式サイトを見る」が画面の外に出たら、下に帯で出す
+(function () {
+  var bar = document.getElementById("cta-bar"), main = document.querySelector(".official");
+  if (!bar || !main || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver(function (entries) {
+    var out = !entries[0].isIntersecting;
+    bar.hidden = !out;
+    document.body.classList.toggle("has-cta", out);
+  }).observe(main);
 })();

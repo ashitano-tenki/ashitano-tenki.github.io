@@ -245,20 +245,51 @@ button, .button {
 .shelf-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: width .2s; }
 .shelf-dots i.on { background: var(--sky); width: 14px; border-radius: 3px; }
 .shelf-block.no-scroll .shelf-foot { visibility: hidden; }
-/* トップの「今週の新着」：パソコンはカードを並べ、スマホ（639px以下）はタイプごとの棚と同じ横スワイプ */
+/* パソコンではカードを並べ、スマホ（639px以下）では横にスワイプする棚になる一覧（トップの新着、転機のページのタイプ別など） */
 .sm-only { display: none !important; }
+.cards.lg-top3 > li:nth-child(n+4) { display: none; }
 @media (max-width: 639px) {
   .sm-only { display: revert !important; }
-  .new-block .shelf-foot { display: flex !important; justify-content: flex-end; }
-  .cards.news-list { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 88%; gap: var(--space-3);
+  .sm-shelf-block .shelf-foot { display: flex !important; justify-content: flex-end; }
+  .cards.sm-shelf { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 88%; gap: var(--space-3);
     overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
     margin: 0 calc(-1 * var(--space-4)); padding: 2px var(--space-4) var(--space-2); scroll-padding: 0 var(--space-4); }
-  .cards.news-list::-webkit-scrollbar { display: none; }
-  .cards.news-list > li { scroll-snap-align: start; min-width: 0; }
-  .cards.news-list .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .cards.news-list h3, .cards.news-list .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .cards.news-list .card-more { display: block !important; }
-  .new-block + .more { margin-top: var(--space-2); }
+  .cards.sm-shelf::-webkit-scrollbar { display: none; }
+  .cards.sm-shelf > li, .cards.lg-top3 > li:nth-child(n+4) { display: block; scroll-snap-align: start; min-width: 0; }
+  .cards.sm-shelf .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cards.sm-shelf h3, .cards.sm-shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .sm-shelf-block + .more { margin-top: var(--space-2); }
+  /* 転機のページのタイプ別は、トップの棚と同じ薄い空色の箱に入れる */
+  .kind-block.sm-box { margin-top: var(--space-4); background: var(--chip-bg); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+  .kind-block.sm-box .card-more a { background: var(--card); }
+  .kind-block.sm-box .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
+  .kind-block.sm-box .shelf-dots i.on { background: var(--sky); opacity: 1; }
+  .kind-block.sm-box .more { display: none; }
+  /* 長い一覧（探す・観測レポート・あとで見る）は、左に小さな画像の横長カード */
+  .cards.list-compact { gap: var(--space-2); }
+  .list-compact .card a { flex-direction: row; align-items: stretch; gap: 10px; padding: 10px; }
+  .list-compact .card-media { width: 96px; align-self: flex-start; border-width: var(--border-hairline); border-radius: 6px; }
+  .list-compact .media-fit img { padding: 3px; }
+  .list-compact .media-none span { font-size: 22px; }
+  .list-compact .card-body { padding: 0; }
+  .list-compact .card-when { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 30px; margin-bottom: 2px; }
+  .list-compact .card h3 { font-size: 15px; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .list-compact .card-line { display: none; }
+  .list-compact .card-foot { margin-top: 6px; }
+  .list-compact .save-btn { top: 6px; right: 6px; width: 28px; height: 28px; }
+  /* 紹介ページ：「公式サイトを見る」が画面の外に出たら、下に帯で出す */
+  .cta-bar:not([hidden]) { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; display: flex; gap: var(--space-2);
+    padding: 10px max(var(--space-4), env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(var(--space-4), env(safe-area-inset-left, 0px));
+    background: var(--base); border-top: var(--border-hairline) solid var(--line); box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06); }
+  .cta-bar .button { flex: 1; justify-content: center; text-align: center; }
+  .cta-bar .cta-save { flex: none; width: 48px; padding: 0; display: inline-grid; place-items: center; }
+  body.has-cta .site-footer { padding-bottom: calc(var(--space-12) + 72px); }
+}
+@media (min-width: 640px) { .cta-bar { display: none !important; } }
+/* 観測レポートの「この週の残りを見る」 */
+.week-more { margin-top: var(--space-3); }
+.week-more summary { cursor: pointer; color: var(--sky); font-weight: 700; padding: var(--space-2) 0; }
+.week-more > .cards { margin-top: var(--space-2); }
 }
 @media (prefers-reduced-motion: reduce) { .shelf-dots i { transition: none; } }
 /* 1タイプずつ薄い空色の箱に入れて、タイプの境目をわかりやすくする（カードは白のまま）。

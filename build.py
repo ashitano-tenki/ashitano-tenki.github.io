@@ -264,8 +264,17 @@ def card(item, today, kind=True, date=False):
                e(item["line"]), tag_list(item, kind), added, save_button(item)))
 
 
-def cards(items, ctx, kind=True, date=False):
-    return '<ul class="cards">%s</ul>' % "".join(card(it, ctx["today"], kind, date) for it in items)
+def cards(items, ctx, kind=True, date=False, cls=""):
+    """cls="list-compact" は長い一覧用（スマホでは左に小さな画像の横長カードになる）。"""
+    return '<ul class="cards%s">%s</ul>' % (" " + cls if cls else "", "".join(card(it, ctx["today"], kind, date) for it in items))
+
+
+def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, extra_cls=""):
+    """パソコンではカードを並べ、スマホ（639px以下）では横にスワイプする棚になる一覧。"""
+    more = ('<li class="card card-more sm-only"><a href="%s">%s<span>（%d件）</span></a></li>' % (e(more_href), e(more_label), more_count)) if more_href else ""
+    return ('<div class="sm-shelf-block"><ul class="cards sm-shelf%s" tabindex="0" aria-label="%s">%s%s</ul>'
+            '<div class="shelf-foot sm-only" aria-hidden="true"><span class="shelf-dots">%s</span></div></div>'
+            % (" " + extra_cls if extra_cls else "", e(label), items_html, more, "".join("<i></i>" for _ in range(n))))
 
 
 NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/report/", "観測レポート"), ("/check/", "セルフチェック"), ("/saved/", "あとで見る")]
@@ -501,11 +510,15 @@ def kind_sections(items, params, ctx, heading_level=2):
     out = []
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
-        sec = ['<section class="kind-block"><%s>%s%s <span class="count">%d件</span></%s>' % (h, kind_emoji(kind), e(kind), len(group), h)]
+        sec = ['<section class="kind-block sm-box"><%s>%s%s <span class="count">%d件</span></%s>' % (h, kind_emoji(kind), e(kind), len(group), h)]
         about = KIND_BY_NAME.get(kind, {}).get("about", "")
         if about:
             sec.append('<p class="kind-about">%s</p>' % e(about))
-        sec.append(cards(group[:n], ctx, kind=False))
+        # パソコンは上位 n 件、スマホは棚に shelf_size 件まで（残りは「すべて見る」カード）
+        shown = group[:max(n, CONF.get("shelf_size", 8))]
+        rest = len(group) > len(shown)
+        sec.append(sm_shelf("".join(card(it, ctx["today"], kind=False) for it in shown), len(shown), "%sの一覧" % kind,
+                            search_url(kind=kind, **params) if rest else "", "%sをすべて見る" % kind, len(group), extra_cls="lg-top%d" % n))
         if len(group) > n:
             sec.append(more_link(search_url(kind=kind, **params), "%sをもっと見る" % kind))
         sec.append("</section>")
@@ -529,11 +542,9 @@ def build_home(listed, ctx):
     if new_items:
         # パソコンはカードを並べ、スマホでは横にスワイプする棚にする（縦に12枚並ぶと長すぎるため）
         shown = new_items[:12]
-        more_card = ('<li class="card card-more sm-only"><a href="%s">今週の新着をすべて見る<span>（%d件）</span></a></li>'
-                     % (e(search_url(sort="new")), len(new_items))) if len(new_items) > len(shown) else ""
-        news = ('<div class="new-block"><ul class="cards news-list" tabindex="0" aria-label="今週の新着">%s%s</ul>'
-                '<div class="shelf-foot sm-only" aria-hidden="true"><span class="shelf-dots">%s</span></div></div>'
-                % ("".join(card(it, ctx["today"], date=True) for it in shown), more_card, "".join("<i></i>" for _ in shown)))
+        rest = len(new_items) > len(shown)
+        news = sm_shelf("".join(card(it, ctx["today"], date=True) for it in shown), len(shown), "今週の新着",
+                        search_url(sort="new") if rest else "", "今週の新着をすべて見る", len(new_items))
         if len(new_items) > 12:
             news += more_link(search_url(sort="new"), "今週の新着をすべて見る（%d件）" % len(new_items))
     else:
@@ -822,9 +833,11 @@ def build_item(item, listed, ctx):
   </dl>
   {report}
 </article>
+<div class="cta-bar" id="cta-bar" hidden>{cta_link}<button type="button" class="button button-ghost cta-save" data-save="{id}" data-title="{title}" aria-pressed="false" hidden>{icon}</button></div>
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
+           id=e(item["id"]), icon=SAVE_ICON, cta_link=official_link,
            memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
@@ -878,7 +891,7 @@ def build_search(listed, ctx):
         <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>
-      <ul id="results" class="cards"></ul>
+      <ul id="results" class="cards list-compact"></ul>
       <p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
     </div>
   </div>
@@ -904,8 +917,12 @@ def build_report(listed, ctx):
         end = start + datetime.timedelta(days=6)
         group = sorted(weeks[start], key=lambda it: (it["added"], -it["rank"]), reverse=True)
         heading = "%d年%d月%d日〜%d月%d日" % (start.year, start.month, start.day, end.month, end.day)
-        sections.append('<section class="week" id="w%s"><h2>%s <span class="count">%d件</span></h2>%s</section>'
-                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(group, ctx, date=True)))
+        # 週ごとに最初の12件を見せ、残りは「続きを見る」で開く（1週に100件以上加わることがあるため）
+        first, rest = group[:12], group[12:]
+        more = ('<details class="week-more"><summary>この週の残り %d件を見る</summary>%s</details>'
+                % (len(rest), cards(rest, ctx, date=True, cls="list-compact"))) if rest else ""
+        sections.append('<section class="week" id="w%s"><h2>%s <span class="count">%d件</span></h2>%s%s</section>'
+                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(first, ctx, date=True, cls="list-compact"), more))
     body = """
 {crumbs}
 <header class="page-head">
@@ -983,7 +1000,7 @@ def build_saved(ctx):
   <p class="note">このブラウザの中だけに保存しています。ほかの端末やブラウザとは共有されず、観測所に送られることもありません。</p>
 </header>
 <p id="saved-status" class="saved-status" aria-live="polite">読み込み中…</p>
-<ul id="saved-list" class="cards"></ul>
+<ul id="saved-list" class="cards list-compact"></ul>
 <p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
 <noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
 """.format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)
