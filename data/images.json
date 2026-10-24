@@ -1,0 +1,1121 @@
+{
+ "R0005": {
+  "page": "https://www.lancers.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://static.lancers.jp/renewal/img/top/ogp.png?v=1.0",
+  "w": 960,
+  "h": 504
+ },
+ "R0006": {
+  "page": "https://crowdworks.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://cw-assets.crowdworks.jp/vite/2026-10/1/packs/legacy/images/ogp/logomark-DY5kdKdM.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0007": {
+  "page": "https://youtrust.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://daxgddo8oz9ps.cloudfront.net/assets/ogp-pc-fce1dc48865d6157eb658382d98cc1efe52007c1c580a0be56abd982f9719d08.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0008": {
+  "page": "https://www.bizreach.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.bizreach.jp/img/logo/c_ogimage-cm_v8.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0010": {
+  "page": "https://www.jmooc.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.jmooc.jp/images/news_item/old/jmooc_logo_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0011": {
+  "page": "https://hired.co.jp/soudan",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://hired.co.jp/soudan/ogp-261015.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0012": {
+  "page": "https://posiwill.jp/career/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://posiwill.jp/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0013": {
+  "page": "https://www.meetcareer.net",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72tHZsMmCsJM2ZWUGdSqUeYxefWMi6_bvaTQtnNnA1facG1H4ryXbaZ6vjJBUzS7XdtF-Uj2Qq8vCjnVULfj_nEcr2gviyp1YW3EGZVhruAnCtUxD75hvpVNNCaq38ngiQwBermM7Le9zp_M4-xCq6tJ-knlEiVgigbXiOLNQrWi-H4eGdz8TkI9mWELUiw=w16383",
+  "w": 960,
+  "h": 212
+ },
+ "R0014": {
+  "page": "https://sogyotecho.jp/consulting/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://sogyotecho.jp/wp-content/uploads/2026/03/Sg_Expert-introduction_eyecatch_2026018.webp",
+  "w": 960,
+  "h": 512
+ },
+ "R0015": {
+  "page": "https://goworkship.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://goworkship.com/static/dist/img/ogp/large.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0016": {
+  "page": "https://www.regional.co.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.regional.co.jp/assets/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0017": {
+  "page": "https://lifeshiftlab.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://lifeshiftlab.jp/assets/images/ogp-DHzXy2BU.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0018": {
+  "page": "https://www.street-academy.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://assets.street-academy.com/assets/academy/meta_cover-15fbaf1f1e511737ae132f7fbd5a43a9b83e264e4510193ed3e437b93f45caed.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0019": {
+  "page": "https://seniorjob.jp/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0020": {
+  "page": "https://mynavi-ms.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://mynavi-ms.jp/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0021": {
+  "page": "https://schoo.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/i.schoo/images/common/default_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0022": {
+  "page": "https://www.flierinc.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://static.flierinc.com/common/logo_share.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0023": {
+  "page": "https://freelance-jp.org/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.freelance-jp.org/assets/images/top/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0024": {
+  "page": "https://career65.net/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career65.net/common/images/p_mv.png",
+  "w": 526,
+  "h": 431
+ },
+ "R0025": {
+  "page": "https://www.from-40.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0026": {
+  "page": "https://www.diamond.co.jp/book/9784478105559.html",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0027": {
+  "page": "https://www.qo-ol.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.qo-ol.jp/wp-content/uploads/2018/05/default_ogimg.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0028": {
+  "page": "https://careerdrive.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://careerdrive.jp/app/wp-content/uploads/2021/07/61dad88a173bce2efbcdf826475f4a15.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0029": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784492533871",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/LIFESHIFT100.jpg?v=1731300830",
+  "w": 500,
+  "h": 718
+ },
+ "R0030": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784295403746",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0031": {
+  "page": "https://www.diamond.co.jp/book/9784478107829.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.diamond.co.jp/book/h58i5c000001mtpp-img/9784478107829_ogp.jpg",
+  "w": 208,
+  "h": 300
+ },
+ "R0032": {
+  "page": "https://www.youtube.com/@PIVOTCAREER",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0033": {
+  "page": "https://page.yenta-app.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://page.yenta-app.com/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0034": {
+  "page": "https://anotherworks.co.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/8b691731-7a11-4993-9fb7-439c65d1ef42",
+  "w": 960,
+  "h": 504
+ },
+ "R0035": {
+  "page": "https://www.r-agent.com/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0036": {
+  "page": "https://www.wantedly.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://wantedly-assets.wantedly.com/static/visit/og_images/og-com.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0037": {
+  "page": "https://spot.accea.co.jp/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0038": {
+  "page": "https://town.crowdworks.jp/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0039": {
+  "page": "https://www.lancers.jp/lab",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://static.lancers.jp/renewal/img/lab/ogp/default.png?v=1.0",
+  "w": 960,
+  "h": 504
+ },
+ "R0040": {
+  "page": "https://www.shigoto-ryokou.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.shigoto-ryokou.com/img/new/new-top-main-img.jpg",
+  "w": 960,
+  "h": 381
+ },
+ "R0041": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121024312",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0042": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784594082727",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0043": {
+  "page": "https://kidzukutensyoku.com/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0044": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784295010883",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0045": {
+  "page": "https://waris.co.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Unavailable"
+ },
+ "R0046": {
+  "page": "https://stock-sun.com/salon/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0047": {
+  "page": "https://www.kadokawa.co.jp/product/321905000756/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0048": {
+  "page": "https://books.bunshun.jp/ud/book/num/9784163912646",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://b-bunshun.ismcdn.jp/mwimgs/6/f/480/img_6fc08297abbc3bb8f7b7ccfe068f90df1313037.jpg",
+  "w": 480,
+  "h": 693
+ },
+ "R0049": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1562501",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0050": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784911287064",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0051": {
+  "page": "https://www.diamond.co.jp/book/9784478113899.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.diamond.co.jp/book/q5hod5000001c5d2-img/9784478113899_ogp.jpg",
+  "w": 208,
+  "h": 301
+ },
+ "R0052": {
+  "page": "https://community.camp-fire.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://static.camp-fire.jp/assets/community/community_ogp2022-0b643e981b2232b021d3997e325ad79a031eb2d9ed953f5498177f5591eecb86.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0053": {
+  "page": "https://workmill.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "ValueError: 画像が小さすぎます"
+ },
+ "R0054": {
+  "page": "https://woman.nikkei.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://woman.nikkei.com/images/woman/2026/ogp_woman.png?20260401",
+  "w": 960,
+  "h": 504
+ },
+ "R0055": {
+  "page": "https://jobrainbow.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://jobrainbow.jp/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0056": {
+  "page": "https://jobrainbow.jp/magazine/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://jobrainbow.jp/magazine/img/ogp/ogp.jpg",
+  "w": 960,
+  "h": 503
+ },
+ "R0057": {
+  "page": "https://goworkship.com/magazine/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://i0.wp.com/goworkship.com/magazine/app/uploads/2020/09/c2c7bb26a33c0200446ffdb29dc12309.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0058": {
+  "page": "https://runteq.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://school.runteq.jp/assets/runteq_school_ogp-7ecb7d1227e486310d8b6f8b6c0be06da730343e754c0d48ea82024ecfa94184.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R0059": {
+  "page": "https://camp.potepan.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://camp.potepan.com/wp-content/themes/potepancamp/assets/images/ogp/courses/new-under-29.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0060": {
+  "page": "https://hired.co.jp/agent-madoguchi/engineer",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://hired.co.jp/agent-madoguchi/engineer-ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0061": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784779519550",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0062": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866633336",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0063": {
+  "page": "https://app.any-crew.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://app.any-crew.com/landing_assets/img/og_img.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0064": {
+  "page": "https://books.bunshun.jp/ud/book/num/9784167470050",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://b-bunshun.ismcdn.jp/mwimgs/4/1/480/img_4176ad7d1528cd27e48042d7a1a3b98d26909.jpg",
+  "w": 480,
+  "h": 674
+ },
+ "R0065": {
+  "page": "https://sankak.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 302: The HTTP server returned a redirect error that would lead to an infinite loop.\nThe last 30x e"
+ },
+ "R0066": {
+  "page": "https://shelikes.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/b8130034-f538-4ea4-8f75-6878309a9220",
+  "w": 960,
+  "h": 504
+ },
+ "R0067": {
+  "page": "https://kango-oshigoto.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x10a748e00>"
+ },
+ "R0068": {
+  "page": "https://www.kaigojob.com/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0069": {
+  "page": "https://service.techtrain.dev/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://service.techtrain.dev/images/common/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0070": {
+  "page": "https://www.businessinsider.jp/careerinsider/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.businessinsider.jp/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0071": {
+  "page": "https://www.forkwell.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://forkwell.com/resources/c8794a9b18a897975789bf3ba9d28ac67483ff50/img/og_image.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0072": {
+  "page": "https://lapras.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://lapras.com/lp/og.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0073": {
+  "page": "https://books.rakuten.co.jp/rb/18686193/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/3036/9784074633036_1_3.jpg?downsize=600:*",
+  "w": 600,
+  "h": 851
+ },
+ "R0074": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784074621507",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0075": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784413114004",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0076": {
+  "page": "https://worx.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0077": {
+  "page": "https://zapass.co/coaching",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/b0e8157e-6df0-447b-a297-f657e0561f25",
+  "w": 960,
+  "h": 504
+ },
+ "R0078": {
+  "page": "https://coachee-hr.com/coachee/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://coachee-hr.com/coachee/index.cgi/static/media/images/top/img_main.954a42351386a6bbebf7.png",
+  "w": 960,
+  "h": 411
+ },
+ "R0079": {
+  "page": "https://open.spotify.com/show/3zNqcVqP1aAfo7kNfGYdmR",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0080": {
+  "page": "https://www.youtube.com/@axxisinc",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0081": {
+  "page": "https://open.spotify.com/show/1jczjYrc1AoIWShzxWhy1c",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0082": {
+  "page": "https://creators.spotify.com/pod/show/kreis-pm",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded_nologo400/22340150/22340150-1678847737173-0f9d86f42134c.jpg",
+  "w": 400,
+  "h": 400
+ },
+ "R0083": {
+  "page": "https://open.spotify.com/show/4MHcKF7QfbBODlMf8ghOQa",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0084": {
+  "page": "https://open.spotify.com/show/5hDtwXgkqIleKTmPVLvAn3",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0085": {
+  "page": "https://open.spotify.com/show/7wqxcHUwLf3YJmRBzFZXLQ",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0086": {
+  "page": "https://open.spotify.com/show/7eMuJYMfNCFDGkpB1tppF3",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0087": {
+  "page": "https://open.spotify.com/show/5st0MZnpzreSOfGppPt3ip",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0088": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000284.000013597.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13597/284/13597-284-5099570aa1dd0e6336def7e0f3a8e617-900x540.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 900,
+  "h": 540
+ },
+ "R0089": {
+  "page": "https://career-research.mynavi.jp/reserch/20260109_106179/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/01/8d5b01f540298f8eb4939712a11cb4c5.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0090": {
+  "page": "https://digitalpr.jp/r/108913",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://digitalpr.jp/simg/2907/108913/715_400_20250425151246680b27de688cd.png",
+  "w": 960,
+  "h": 537
+ },
+ "R0091": {
+  "page": "https://www.miidas.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://miidas.jp/assets/next/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0092": {
+  "page": "https://next.rikunabi.com/good_point_start/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 308: Permanent Redirect"
+ },
+ "R0093": {
+  "page": "https://www.16personalities.com/ja",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.16personalities.com/static/images/og/1200x630-homepage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0094": {
+  "page": "https://www.gallup.com/cliftonstrengths/ja/home.aspx",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://imagekit.gallup.com/fusion/tr:n-emd_soc_meta_og/GFDT/frozvbzp1um8k7ixfzz8ra.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0095": {
+  "page": "https://www.freee.co.jp/personal-business/opening/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
+  "w": 630,
+  "h": 630
+ },
+ "R0096": {
+  "page": "https://www.yayoi-kk.co.jp/kigyo/starting/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.yayoi-kk.co.jp/content/dam/yayoi-corp/kigyo/starting/img/acq/og-img.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0097": {
+  "page": "https://biz.moneyforward.com/tax_return/price",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://biz.moneyforward.com/portal/images/ogp/ca_web/img_tax_return.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0098": {
+  "page": "https://biz.moneyforward.com/contract/templates/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://biz.moneyforward.com/contract/templates/wp-content/uploads/2022/06/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0099": {
+  "page": "https://majicari.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://majicari.com/img/ogimg.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0100": {
+  "page": "https://career-meet.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career-meet.com/wp-content/themes/20260526/img/ogp.jpg",
+  "w": 960,
+  "h": 672
+ },
+ "R0101": {
+  "page": "https://www.mystar60.co.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.mystar60.co.jp/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0102": {
+  "page": "https://freenance.net/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://freenance.net/wp-content/uploads/2025/09/ogp_2025.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0103": {
+  "page": "https://www.works-i.com/surveys/report/teikan2025.html",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.works-i.com/surveys/item/teikan2025sliderSP%26SNS_white.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0104": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784478122167",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0105": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784101284514",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0106": {
+  "page": "https://doda.jp/guide/kyujin_bairitsu/2026/07.html",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0107": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569856209",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0108": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1395194",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0109": {
+  "page": "https://atsoho.com/templates",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://atsoho.com/og-default-20261008.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0110": {
+  "page": "https://www.yayoi-kk.co.jp/kigyo/zeirishi-shoukai/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.yayoi-kk.co.jp/content/dam/yayoi-corp/img/gtop_og.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0111": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1849835804",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/97/a8/24/97a82460-a09a-35cb-5927-c9f451309f30/mza_5026064238719173544.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0112": {
+  "page": "https://booklive.jp/product/index/title_id/1104051/vol_no/001",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://res.booklive.jp/1104051/001/thumbnail/2L.jpg",
+  "w": 240,
+  "h": 353
+ },
+ "R0113": {
+  "page": "https://books.rakuten.co.jp/rb/18054384/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/8125/9784479798125.jpg?downsize=600:*",
+  "w": 600,
+  "h": 868
+ },
+ "R0114": {
+  "page": "https://booklive.jp/product/index/title_id/1275482/vol_no/001",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://res.booklive.jp/1275482/001/thumbnail/2L.jpg",
+  "w": 240,
+  "h": 353
+ },
+ "R0115": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569858791",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0116": {
+  "page": "https://books.rakuten.co.jp/rb/18300421/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/4216/9784756924216_1_3.jpg?downsize=600:*",
+  "w": 600,
+  "h": 853
+ },
+ "R0117": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0499407",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0118": {
+  "page": "https://open.spotify.com/show/7jxptpHaOp9ZZBJ85dKZf1",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0119": {
+  "page": "https://books.rakuten.co.jp/rb/18265312/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/7506/9784828207506_1_6.jpg?downsize=600:*",
+  "w": 600,
+  "h": 600
+ },
+ "R0120": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121508621",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0121": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784418206018",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0122": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1118037",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0123": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784413234184",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0124": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784828310251",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0125": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784799332436",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0126": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784761278649",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0127": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784772663021",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0128": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784883726387",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0129": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784820121770",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0130": {
+  "page": "https://batonz.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://batonz.jp/lp/top/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0131": {
+  "page": "https://www.freee.co.jp/publishing/book/kigyojidai8/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.freee.co.jp/publishing/book/kigyojidai7/ogp01.png",
+  "w": 960,
+  "h": 505
+ },
+ "R0132": {
+  "page": "https://bookwalker.jp/dea09fa1a7-e8cd-4c1a-a80d-b87f7bfbaa79/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://c.bookwalker.jp/e0a91900a384fdab394eaca79392810/t_700x780.jpg",
+  "w": 588,
+  "h": 780
+ },
+ "R0133": {
+  "page": "https://www.all-senmonka.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.all-senmonka.jp/img/ogpimage.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0134": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866431611",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0135": {
+  "page": "https://vs-group.jp/startup/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://vs-group.jp/startup/wp/wp-content/uploads/2026/06/1781767670.png",
+  "w": 955,
+  "h": 423
+ },
+ "R0136": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1121660",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0137": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784041135709",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0138": {
+  "page": "https://www.viacharacter.org/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://www.viacharacter.org/images/oglogo.jpg",
+  "w": 200,
+  "h": 200
+ },
+ "R0139": {
+  "page": "https://findy-code.io/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://findy-code.io/images/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0140": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534056313",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0141": {
+  "page": "https://dot-ippo.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://dot-ippo.com/dist/images/animals.png",
+  "w": 960,
+  "h": 960
+ },
+ "R0142": {
+  "page": "https://gihyo.jp/book/2026/978-4-297-15828-6",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://gihyo.jp/assets/images/ogp/2026/9784297158286.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0143": {
+  "page": "https://kibidango.com/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://kibidango.com/assets/vite/assets/fb_share_logo_1200x630-C9OGsjUF.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0144": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1159046",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0145": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0982830",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0146": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-9975429408",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0147": {
+  "page": "https://ebookjapan.yahoo.co.jp/books/743113/A003767960/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://cache2-ebookjapan.akamaized.net/contents/thumb/s/Y3100213188561.jpg?1774612545000",
+  "w": 204,
+  "h": 300
+ },
+ "R0148": {
+  "page": "https://booklive.jp/product/index/title_id/1325131/vol_no/001",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://res.booklive.jp/1325131/001/thumbnail/2L.jpg",
+  "w": 240,
+  "h": 351
+ },
+ "R0149": {
+  "page": "https://books.rakuten.co.jp/rb/18244014/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/6716/9784502546716_1_5.jpg?downsize=600:*",
+  "w": 600,
+  "h": 880
+ },
+ "R0150": {
+  "page": "https://books.rakuten.co.jp/rb/18372094/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/2398/9784065412398_1_2.jpg?downsize=600:*",
+  "w": 599,
+  "h": 851
+ },
+ "R0151": {
+  "page": "https://www.kadokawa.co.jp/product/322504000756/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://cdn.kdkw.jp/cover_1000/322504/322504000756.webp",
+  "w": 681,
+  "h": 1000
+ },
+ "R0153": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2002954",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0154": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784757123908",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0155": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2229362",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "timeout: The read operation timed out"
+ },
+ "R0156": {
+  "page": "https://podcasts.apple.com/jp/podcast/qiita-fm-%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%82%92%E6%B7%B1%E6%8E%98%E3%82%8A/id1638859097",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/c0/5e/e5/c05ee5d3-9936-7eaf-0d67-64710ef99d5a/mza_271112834342058772.jpeg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0157": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1802366515",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/d0/79/0b/d0790b7f-1bfe-8c8f-c950-172617df5d30/mza_11371651323993293304.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0158": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1771591451",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/cc/6f/be/cc6fbe24-84ba-df05-89ed-4fb88bdf80d7/mza_7427428172938727928.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0159": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1644482809",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/e0/c3/5c/e0c35c72-a5b4-de3d-8a3c-92e2f19cd0e0/mza_2731452627829574528.jpeg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0161": {
+  "page": "https://career-buddy.jp/",
+  "checked": "2026-10-24",
+  "status": "ok",
+  "src": "https://career-buddy.jp/images/companies/1/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%90%E3%83%87%E3%82%A3%E3%83%90%E3%83%8A%E3%83%BC.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0162": {
+  "page": "https://mizukara.com/careerspirit/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0163": {
+  "page": "https://www.mog-career.co.jp/",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0164": {
+  "page": "https://www.vivivit.com/boost",
+  "checked": "2026-10-24",
+  "status": "none"
+ },
+ "R0165": {
+  "page": "https://pm-school.jp/",
+  "checked": "2026-10-24",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ }
+}

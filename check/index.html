@@ -178,7 +178,8 @@ a { color: var(--ck-sky); text-underline-offset: 3px; }
 .steps li::marker { color: var(--ck-sky); font-weight: 700; }
 .rule { border: 0; border-top: 2px solid var(--ck-ink); margin: 0; }
 .picks { display: flex; flex-direction: column; gap: 12px; }
-.pick { display: flex; flex-direction: column; gap: 6px; }
+.pick { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; align-items: start; }
+.pick-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .pick-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .pick-type { font-size: 12px; font-weight: 700; color: var(--ck-sky); border: 1px solid var(--ck-sky); border-radius: var(--ck-radius-pill); padding: 0 10px; }
 .pick h3 { font-size: 18px; }
@@ -475,6 +476,13 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
   }
 
   // 観測所のおすすめ欄。データが読めなかったときは欄を出さず、観測所のトップへのリンクだけにする
+  // おすすめの左の小さな画像（掲載先のシェア用画像）。画像がなければタイプの絵文字。見た目は観測所のカードと同じ（style.css の .card-thumb）
+  function mediaHtml(img) {
+    img = img || {};
+    if (img.src) return `<div class="card-thumb media-${esc(img.fit)}" aria-hidden="true"><img src="${esc(img.src)}" alt="" loading="lazy" decoding="async"></div>`;
+    return `<div class="card-thumb media-none" aria-hidden="true"><span>${esc(img.emoji || "")}</span></div>`;
+  }
+
   function observatoryHtml(r) {
     if (!PICKS) {
       return `<p><a href="${OBS_TOP}">あしたの転機観測所で、転機に役立つサービスを探す</a></p>`;
@@ -485,10 +493,13 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
         <p class="lead">転機に役立つ民間のサービスや情報を集めている「あしたの転機観測所」から、いまの段階に合いそうなものを選びました。</p>
         <div class="picks">
           ${picks.map(p => `<article class="card pick">
+            ${mediaHtml(p.img)}
+            <div class="pick-body">
             <div class="pick-top"><span class="pick-type">${esc(p.type)}</span><span class="small">${esc(p.cost)}・${esc(p.stage.join("、"))}向け</span></div>
             <h3>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>` : esc(p.title)}</h3>
             <p>${esc(p.memo)}</p>
             ${p.page ? `<p class="small"><a href="${esc(p.page)}">観測所の紹介ページを見る</a></p>` : ""}
+            </div>
           </article>`).join("")}
         </div>
         <p><a href="${esc(listUrl(r))}">${esc(listLabel(r))}</a></p>

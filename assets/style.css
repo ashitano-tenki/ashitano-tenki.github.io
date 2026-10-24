@@ -175,7 +175,7 @@ button, .button {
 .card a:hover { border-color: var(--sky); }
 /* あとで見る */
 .card { position: relative; }
-.card .card-when, .card h3 { padding-right: 36px; }
+.card .card-when { padding-right: 36px; }  /* 右上の「あとで見る」ボタンと重ならないように（タイトルはその下の行なので空けない） */
 .save-btn { position: absolute; top: 10px; right: 10px; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; background: var(--card); border: var(--border-hairline) solid var(--line); color: transparent; }
 .save-btn svg path, .save-wide svg path { fill: transparent; stroke: var(--text-sub); }
 .save-btn:hover svg path, .save-wide:hover svg path { stroke: var(--sky); }
@@ -194,6 +194,19 @@ button, .button {
 .card .card-line { font-size: 14px; line-height: 1.7; color: var(--text-body); margin: 0 0 var(--space-3); }
 .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .card-date { font-size: 12px; color: var(--text-sub); }
+/* 掲載先の公式ページのシェア用画像（tools/fetch_images.py が取得・縮小）。カードは左に小さな四角、紹介ページはタイトルの上。
+   横長は枠いっぱいに切り抜き、正方形・縦長（本の表紙など）は枠の中に収める。画像がなければタイプの絵文字を同じ枠に出す */
+.card-row { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 10px; flex: 1; }
+.card-body { display: flex; flex-direction: column; min-width: 0; }
+.card-thumb, .detail-hero { background: var(--chip-bg); border: var(--border-hairline) solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.card-thumb { align-self: start; aspect-ratio: 1 / 1; border-radius: 6px; }
+.card-thumb img, .detail-hero img { display: block; width: 100%; height: 100%; }
+.media-wide img { object-fit: cover; }
+.media-fit img { object-fit: contain; padding: 6px; }
+.media-none span { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 26px; line-height: 1; }
+.detail-hero { aspect-ratio: 1.91 / 1; max-width: 640px; border-radius: 12px; margin: 0 0 var(--space-4); }
+.detail-hero.media-fit img { padding: var(--space-3); }
+.detail-hero.media-none span { font-size: 64px; }
 .new { display: inline-block; font-family: var(--font-sans); font-size: 11px; font-weight: 700; line-height: 1.6; letter-spacing: 0.04em; color: var(--sky); border: var(--border-hairline) solid var(--sky); border-radius: var(--radius-sm); padding: 0 5px; margin-right: 6px; vertical-align: 2px; }
 .tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 .tag { font-size: 12px; line-height: 1.6; padding: 1px 10px; border-radius: var(--radius-pill); background: var(--base); border: var(--border-hairline) solid var(--line); color: var(--text-body); }

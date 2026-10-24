@@ -57,6 +57,26 @@ KINDS = CONF["kinds"]  # 種類（タイプ）の一覧と表示順
 KIND_BY_NAME = {k["name"]: k for k in KINDS}
 
 
+def load_images():
+    """掲載先のシェア用画像の記録（tools/fetch_images.py が書く data/images.json）。画像が取れたものだけを返す。"""
+    path = os.path.join(ROOT, "data", "images.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        data = json.load(f)
+    exclude = set(CONF.get("image_exclude", []))
+    out = {}
+    for item_id, rec in data.items():
+        if (rec.get("status") == "ok" and item_id not in exclude
+                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + ".jpg"))
+                and os.path.exists(os.path.join(ROOT, "images", "items", item_id + "-s.jpg"))):
+            out[item_id] = rec
+    return out
+
+
+IMAGES = load_images()
+
+
 # ---------------------------------------------------------------- データ
 
 def fetch_csv(url):
@@ -236,10 +256,10 @@ def save_button(item):
 def card(item, today, kind=True, date=False):
     """カード1枚。kind=False はタイプのまとまりの中（タイプは見出しでわかる）、date=True は新着の一覧で使う。"""
     added = '<span class="card-date">%s</span>' % e(added_label(item["added"], today)) if date else ""
-    return ('<li class="card"><a href="/item/%s/"><p class="card-when" title="%s">%s</p><h3>%s</h3><p class="card-line">%s</p>'
-            '<div class="card-foot">%s%s</div></a>%s</li>'
-            % (e(item["id"]), e(when_line(item)), e(when_line(item)), e(item["title"]), e(item["line"]), tag_list(item, kind),
-               added, save_button(item)))
+    return ('<li class="card"><a href="/item/%s/"><div class="card-row">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
+            '<h3>%s</h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></div></a>%s</li>'
+            % (e(item["id"]), item_media(item, "card-thumb", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
+               e(item["line"]), tag_list(item, kind), added, save_button(item)))
 
 
 def cards(items, ctx, kind=True, date=False):
@@ -415,6 +435,30 @@ def emoji(char):
 
 def kind_emoji(kind):
     return emoji(KIND_BY_NAME.get(kind, {}).get("emoji", ""))
+
+
+def image_info(item):
+    """掲載先の画像があれば (URLの末尾の版, 収め方, 幅, 高さ) を返す。横長は枠いっぱいに切り抜き（wide）、
+    正方形や縦長（本の表紙など）は枠の中に収める（fit）。"""
+    rec = IMAGES.get(item["id"])
+    if not rec:
+        return None
+    w, h = rec["w"], rec["h"]
+    return rec["checked"].replace("-", ""), ("wide" if w / h >= 1.6 else "fit"), w, h
+
+
+def item_media(item, cls, small):
+    """カードの小さな画像（small=True）か、紹介ページの大きな画像。画像がなければタイプの絵文字を同じ枠に出す。"""
+    info = image_info(item)
+    if not info:
+        return '<div class="%s media-none" aria-hidden="true"><span>%s</span></div>' % (
+            cls, e(KIND_BY_NAME.get(item["kind"], {}).get("emoji", "")))
+    ver, fit, w, h = info
+    if small:
+        return ('<div class="%s media-%s" aria-hidden="true"><img src="/images/items/%s-s.jpg?v=%s" alt="" loading="lazy" decoding="async"></div>'
+                % (cls, fit, e(item["id"]), ver))
+    return ('<div class="%s media-%s"><img src="/images/items/%s.jpg?v=%s" alt="" width="%d" height="%d" decoding="async"></div>'
+            % (cls, fit, e(item["id"]), ver, w, h))
 
 
 def kind_shelves(items, ctx):
@@ -752,6 +796,7 @@ def build_item(item, listed, ctx):
     body = """
 {crumbs}
 <article class="detail">
+  {hero}
   <h1>{title}</h1>
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
@@ -768,7 +813,7 @@ def build_item(item, listed, ctx):
 {similar}
 {next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
-           memo=e(item["memo"]), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
+           memo=e(item["memo"]), hero=item_media(item, "detail-hero", False), official=official, tenki=tenki_links, stages=stage_links, cost=e(cost_label(item["cost"]) or "―"),
            provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            published=published_row(item),
@@ -952,6 +997,14 @@ def normalize(s):
     return "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in s)
 
 
+def image_ref(item):
+    """JSで描くカード（探す・あとで見る・セルフチェック）用。小さな画像のURLと収め方。画像がなければタイプの絵文字。"""
+    info = image_info(item)
+    if not info:
+        return {"emoji": KIND_BY_NAME.get(item["kind"], {}).get("emoji", "")}
+    return {"src": "/images/items/%s-s.jpg?v=%s" % (item["id"], info[0]), "fit": info[1]}
+
+
 def build_search_json(listed, ctx):
     synonyms = load_json("synonyms.json").get("groups", [])
     data = {
@@ -959,7 +1012,7 @@ def build_search_json(listed, ctx):
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"], "cost": cost_label(it["cost"]),
             "added": it["added"].isoformat() if it["added"] else "",
-            "rank": it["rank"], "new": it["id"] in ctx["new_ids"],
+            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
             "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"],
                                         " ".join(it["tenki"]), " ".join(it["stages"])])),
         } for it in listed],
@@ -985,7 +1038,7 @@ def build_check(listed, ctx):
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
         "memo": it["memo"], "url": it["url"], "cost": cost_label(it["cost"]), "rank": it["rank"],
-        "page": "/item/%s/" % it["id"],
+        "page": "/item/%s/" % it["id"], "img": image_ref(it),
     } for it in listed]}
     write("/check/picks.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     # 結果ごとのシェア用ページ（/check/sogu/ など）。SNSには段階ごとの画像を見せ、開いた人はセルフチェックへ移る
@@ -1124,6 +1177,11 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(OUT, "assets"))
+    # 掲載先の画像（画像が取れて、除外していないものだけ）
+    os.makedirs(os.path.join(OUT, "images", "items"))
+    for item_id in IMAGES:
+        for name in (item_id + ".jpg", item_id + "-s.jpg"):
+            shutil.copy2(os.path.join(ROOT, "images", "items", name), os.path.join(OUT, "images", "items", name))
 
     build_home(listed, ctx)
     build_search(listed, ctx)

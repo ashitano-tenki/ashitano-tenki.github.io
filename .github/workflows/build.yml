@@ -27,6 +27,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # 掲載先の公式ページからシェア用の画像を取得して縮小する（新しい掲載と、取得から日がたったものだけ。1回60件まで）。
+      # 画像の縮小に Pillow を使う。ここで失敗しても、前回までの画像のままサイトの更新は続ける
+      - name: 掲載先の画像を取得する
+        continue-on-error: true
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0"
+          .venv/bin/python tools/fetch_images.py
+
       # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
       - name: CSVを読み込んでサイトを作る
         run: |
@@ -42,7 +51,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/meta.json data/latest.csv
+          git add data/meta.json data/latest.csv data/images.json images/items
           git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
           git push
 

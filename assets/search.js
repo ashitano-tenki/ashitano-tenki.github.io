@@ -155,15 +155,21 @@
     return (y === THIS_YEAR ? "" : y + "年") + mo + "月" + d + "日に追加";
   }
 
+  // カードの左の小さな画像（掲載先のシェア用画像）。画像がなければタイプの絵文字（build.py の item_media と同じ形）
+  function mediaHtml(img) {
+    img = img || {};
+    if (img.src) return '<div class="card-thumb media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
+    return '<div class="card-thumb media-none" aria-hidden="true"><span>' + esc(img.emoji || "") + "</span></div>";
+  }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
     if (it.cost) tags += '<span class="tag tag-cost">' + esc(it.cost) + "</span>";
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/">' +
+    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/"><div class="card-row">' + mediaHtml(it.img) + '<div class="card-body">' +
       '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
       "<h3>" + esc(it.title) + "</h3>" +
       '<p class="card-line">' + esc(it.line) + "</p>" +
       '<div class="card-foot"><div class="tags">' + tags + "</div>" + (byNew ? '<span class="card-date">' + esc(addedLabel(it.added)) + "</span>" : "") + "</div>" +
-      "</a>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
+      "</div></div></a>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
   }
 
   // 選んでいる条件を「×で外せる札」として並べる
