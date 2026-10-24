@@ -133,13 +133,35 @@
     return '<li class="card"><a href="/item/' + encodeURIComponent(id) + '/"><h3>掲載を終えた情報（' + esc(id) + '）</h3><p class="card-line">提供が終わったか、掲載を終えました。</p></a>' +
       window.TenkiSaved.button(id, id) + "</li>";
   }
+  // 送られてきたリスト（/saved/?ids=R0001,R0002）。自分の保存は変えずに表示し、「入れる」を押したら自分の保存に足す
+  var sharedIds = (new URLSearchParams(location.search).get("ids") || "").split(",").filter(function (id) { return /^R\d{3,6}$/.test(id); }).slice(0, 100);
+  var importBtn = document.getElementById("saved-import"), shareBtn = document.getElementById("saved-share"), shareNote = document.getElementById("saved-share-note");
   function renderSaved() {
     if (!items) return;
-    var ids = load();
+    var shared = sharedIds.length > 0, ids = shared ? sharedIds : load();
     listEl.innerHTML = ids.map(function (id) { return items[id] ? cardHtml(items[id]) : endedHtml(id); }).join("");
-    statusEl.textContent = ids.length ? ids.length + "件" : "まだ何も残していません。気になったカードの右上のボタンを押すと、ここに並びます。";
-    clearBtn.hidden = !ids.length;
+    statusEl.textContent = shared ? "送られてきたリストです（" + ids.length + "件）。"
+      : ids.length ? ids.length + "件" : "まだ何も残していません。気になったカードの右上のボタンを押すと、ここに並びます。";
+    clearBtn.hidden = shared || !ids.length;
+    if (importBtn) importBtn.hidden = !shared;
+    if (shareBtn) shareBtn.hidden = shared || !ids.length;
   }
+  if (importBtn) importBtn.addEventListener("click", function () {
+    var list = load();
+    sharedIds.slice().reverse().forEach(function (id) { if (list.indexOf(id) < 0) list.unshift(id); });
+    store(list); sharedIds = [];
+    history.replaceState(null, "", location.pathname);
+    paintAll(); renderSaved();
+    shareNote.textContent = "あとで見るに入れました";
+  });
+  if (shareBtn) shareBtn.addEventListener("click", function () {
+    var url = location.origin + location.pathname + "?ids=" + load().join(",");
+    var data = { title: "あとで見るリスト｜あしたの転機観測所", url: url };
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { shareNote.textContent = "URLをコピーしました。ほかの端末や相手に送ってください"; },
+      function () { shareNote.textContent = url; });
+    else shareNote.textContent = url;
+  });
   if (listEl) {
     clearBtn.addEventListener("click", function () { store([]); paintAll(); renderSaved(); });
     fetch("/search.json").then(function (r) { return r.json(); }).then(function (data) {

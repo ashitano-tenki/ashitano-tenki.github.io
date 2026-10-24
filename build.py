@@ -1017,6 +1017,7 @@ def build_saved(ctx):
 </header>
 <p id="saved-status" class="saved-status" aria-live="polite">読み込み中…</p>
 <ul id="saved-list" class="cards list-compact"></ul>
+<p class="saved-actions"><button type="button" id="saved-import" class="button" hidden>自分の「あとで見る」に入れる</button><button type="button" id="saved-share" class="button button-ghost share-list" hidden>このリストを送る</button><span id="saved-share-note" class="note" aria-live="polite"></span></p>
 <p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
 <noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
 """.format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)
@@ -1029,8 +1030,22 @@ def build_404(ctx):
   <h1>ページが見つかりません</h1>
   <p class="lead">お探しのページは移動したか、削除された可能性があります。</p>
 </header>
-<p><a class="button" href="/">トップへ戻る</a> <a class="button button-ghost" href="/search/">一覧から探す</a></p>
-"""
+<form class="search-box" action="/search/" method="get" role="search">
+  <label for="nf-q" class="visually-hidden">キーワード</label>
+  <input id="nf-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
+  <button type="submit">探す</button>
+</form>
+<section class="section">
+  <h2 class="section-title">転機から探す</h2>
+  <ul class="chips">{tenki}</ul>
+</section>
+<section class="section">
+  <h2 class="section-title">タイプから探す</h2>
+  <ul class="chips">{kinds}</ul>
+</section>
+<p class="more"><a href="/">トップへ戻る</a></p>
+""".format(tenki="".join('<li><a href="%s">%s</a></li>' % (e(tenki_url(t)), e(t["name"])) for t in TENKI),
+           kinds="".join('<li><a href="%s">%s%s</a></li>' % (e(search_url(kind=k["name"])), kind_emoji(k["name"]), e(k["name"])) for k in KINDS))
     page("/404.html", "ページが見つかりません", CONF["description"], body, noindex=True, ctx=ctx)
 
 
@@ -1128,6 +1143,15 @@ def build_check(listed, ctx):
 """.format(title=e(title), desc=e(desc), base=e(BASE), site=e(CONF["site_name"]), slug=st["slug"]))
 
 
+def feed_image(item):
+    """RSSの各記事に、カードと同じ画像を付ける（RSSリーダーで画像が出る）。"""
+    info = image_info(item)
+    if not info:
+        return ""
+    path = os.path.join(ROOT, "images", "items", item["id"] + "-s.webp")
+    return '<enclosure url="%s/images/items/%s-s.webp?v=%s" type="image/webp" length="%d"/>' % (BASE, item["id"], info[0], os.path.getsize(path))
+
+
 def build_feed(listed, ctx):
     """観測レポートのRSS。追加日の新しい順に最大50件。"""
     from email.utils import format_datetime
@@ -1136,8 +1160,8 @@ def build_feed(listed, ctx):
         return format_datetime(datetime.datetime(d.year, d.month, d.day, 5, 0, tzinfo=JST))
     entries = "".join(
         "<item><title>%s</title><link>%s/item/%s/</link><guid isPermaLink=\"true\">%s/item/%s/</guid>"
-        "<description>%s</description><category>%s</category><pubDate>%s</pubDate></item>"
-        % (e(it["title"]), BASE, it["id"], BASE, it["id"], e("%s｜%s" % (when_line(it), it["memo"])), e(it["kind"]), pub(it["added"]))
+        "<description>%s</description><category>%s</category><pubDate>%s</pubDate>%s</item>"
+        % (e(it["title"]), BASE, it["id"], BASE, it["id"], e("%s｜%s" % (when_line(it), it["memo"])), e(it["kind"]), pub(it["added"]), feed_image(it))
         for it in items)
     write("/feed.xml", '''<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>%s 観測レポート</title><link>%s/report/</link>

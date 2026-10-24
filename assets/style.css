@@ -192,6 +192,8 @@ button, .button {
 .official { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); max-width: 600px; }
 .official .button { justify-content: center; text-align: center; white-space: nowrap; }
 .share-btn { display: inline-flex; align-items: center; gap: var(--space-2); }
+.saved-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: 0 0 var(--space-3); }
+.saved-actions .note { margin: 0; }
 @media (max-width: 639px) {
   .official { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
   .official > .button:first-child { grid-column: 1 / -1; }
