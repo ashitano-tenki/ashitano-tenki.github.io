@@ -993,6 +993,7 @@ def build_about(listed, ctx):
 {analytics}
 <h2>運営者</h2>
 <p>運営は黒田悠介です。キャリア研究家として、これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。</p>
+<p>ほかの活動や発信は、<a href="{operator_url}" rel="noopener" target="_blank">黒田悠介のリンク集（Linktree）</a>にまとめています。</p>
 
 <h2>あしたの転機について</h2>
 <p>「あしたの転機」は、キャリアの転機について考え、転機を迎えている人どうしがつながるための場です。この観測所はその一部として運営しています。</p>
@@ -1003,7 +1004,7 @@ def build_about(listed, ctx):
 </article>
 """.format(crumbs=breadcrumb([("観測所について", None)]), stage_dl=stage_dl,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
-           analytics=ANALYTICS_ABOUT if CONF.get("goatcounter_code") else "")
+           analytics=ANALYTICS_ABOUT if CONF.get("goatcounter_code") else "", operator_url=e(CONF.get("operator_url", "")))
     page("/about/", "観測所について", "あしたの転機観測所の目的、掲載の基準、並び順の考え方、情報の集め方と運営者について。", body, ctx=ctx)
 
 

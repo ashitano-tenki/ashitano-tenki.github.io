@@ -9,6 +9,7 @@
   "report_form_url": "https://docs.google.com/forms/d/e/1FAIpQLSfIFhTnh5-Yl-Uk9Do4k5_68kA53zByMw1P37CmeiMhwtsBmg/viewform?usp=pp_url&entry.13586301={id}",
   "_contact_form_url の説明": "フッターと「観測所について」に置く「観測所へのご連絡」のリンク先。",
   "contact_form_url": "https://forms.gle/gMJKkAsVSVBRmwBT6",
+  "operator_url": "https://linktr.ee/chlorine0528",
   "_google_site_verification の説明": "Google Search Console の所有権の確認に使う文字列（HTMLタグの content の中身）。全ページの head に入る。",
   "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs",
   "_goatcounter_code の説明": "アクセス解析 GoatCounter のサイト名（https://〇〇.goatcounter.com の〇〇）。空のあいだは計測しない。",
