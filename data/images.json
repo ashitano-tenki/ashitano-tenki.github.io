@@ -1511,8 +1511,12 @@
  },
  "R0188": {
   "page": "https://www.timeticket.jp/",
-  "checked": "2026-10-24",
-  "status": "none"
+  "checked": "2026-10-25",
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0188.jpg",
+  "w": 960,
+  "h": 500
  },
  "R0189": {
   "page": "https://the-board.jp/",
@@ -1548,13 +1552,12 @@
  },
  "R0193": {
   "page": "https://www.netoff.co.jp/detail/0001377541/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.netoff.co.jp/images/logo_fb.gif",
-  "w": 164,
-  "h": 164,
-  "suspect": true,
-  "small": true
+  "src": "file:images/manual/R0193.jpg",
+  "w": 960,
+  "h": 1366
  },
  "R0194": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784091231802",
@@ -1598,9 +1601,12 @@
  },
  "R0199": {
   "page": "https://biz.moneyforward.com/mfc-partner/advisor-referrals/",
-  "checked": "2026-10-24",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "checked": "2026-10-25",
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0199.jpg",
+  "w": 960,
+  "h": 444
  },
  "R0200": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784478119600",
@@ -1660,9 +1666,12 @@
  },
  "R0207": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2224241",
-  "checked": "2026-10-24",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "checked": "2026-10-25",
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0207.jpg",
+  "w": 960,
+  "h": 1369
  },
  "R0208": {
   "page": "https://digitalpr.jp/r/127291",
@@ -1690,8 +1699,12 @@
  },
  "R0211": {
   "page": "https://www.amazon.co.jp/dp/4868450484",
-  "checked": "2026-10-24",
-  "status": "none"
+  "checked": "2026-10-25",
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0211.jpg",
+  "w": 960,
+  "h": 1410
  },
  "R0212": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784802135863",
@@ -1711,8 +1724,12 @@
  },
  "R0214": {
   "page": "https://amzn.asia/d/0c0ggN5v",
-  "checked": "2026-10-24",
-  "status": "none"
+  "checked": "2026-10-25",
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0214.jpg",
+  "w": 960,
+  "h": 1411
  },
  "R0215": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784866367484",
@@ -1789,8 +1806,11 @@
  "R0224": {
   "page": "https://podcasts.apple.com/jp/podcast/おとなのしごおわクラブ/id1803007652",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 16-26: ordinal not in range(128)"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0224.jpg",
+  "w": 960,
+  "h": 960
  },
  "R0225": {
   "page": "https://lp.mikata-ins.co.jp/m21/index.php?dcd=efgm5BIP&acd=ctv45GIO",
@@ -1851,12 +1871,20 @@
  "R0232": {
   "page": "https://www.amazon.co.jp/dp/B0FMHTH7WN",
   "checked": "2026-10-25",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0232.jpg",
+  "w": 912,
+  "h": 1500
  },
  "R0233": {
   "page": "https://www.amazon.co.jp/dp/B0FN7FJGHC",
   "checked": "2026-10-25",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0233.jpg",
+  "w": 912,
+  "h": 1500
  },
  "R0234": {
   "page": "https://www.maruzenjunkudo.co.jp/products/9784816379338",
@@ -1963,13 +1991,20 @@
  "R0247": {
   "page": "https://www.ielove.co.jp/career/",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0247.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0248": {
   "page": "https://www.m-next.jp/",
   "checked": "2026-10-25",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0248.jpg",
+  "w": 489,
+  "h": 256
  },
  "R0249": {
   "page": "https://www.yamatogokorocareer.jp/",
