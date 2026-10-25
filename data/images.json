@@ -734,11 +734,12 @@
  },
  "R0095": {
   "page": "https://www.freee.co.jp/personal-business/opening/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
-  "w": 630,
-  "h": 630
+  "src": "file:images/manual/R0095.jpg",
+  "w": 960,
+  "h": 503
  },
  "R0096": {
   "page": "https://www.yayoi-kk.co.jp/kigyo/starting/",
@@ -1127,11 +1128,12 @@
  },
  "R0141": {
   "page": "https://dot-ippo.com/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://dot-ippo.com/dist/images/animals.png",
+  "src": "file:images/manual/R0141.jpg",
   "w": 960,
-  "h": 960
+  "h": 535
  },
  "R0142": {
   "page": "https://gihyo.jp/book/2026/978-4-297-15828-6",
@@ -2736,5 +2738,13 @@
   "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/10/26b625c22bf1d6b8a6c1f8b80132b8e2.jpg",
   "w": 960,
   "h": 521
+ },
+ "R0336": {
+  "page": "https://job-medley.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://static.job-medley.com/banner/og_image_1200_640.png",
+  "w": 960,
+  "h": 480
  }
 }
