@@ -57,11 +57,12 @@
  },
  "R0013": {
   "page": "https://www.meetcareer.net",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://lh7-us.googleusercontent.com/sitesv-images-rt/AMxu72tHZsMmCsJM2ZWUGdSqUeYxefWMi6_bvaTQtnNnA1facG1H4ryXbaZ6vjJBUzS7XdtF-Uj2Qq8vCjnVULfj_nEcr2gviyp1YW3EGZVhruAnCtUxD75hvpVNNCaq38ngiQwBermM7Le9zp_M4-xCq6tJ-knlEiVgigbXiOLNQrWi-H4eGdz8TkI9mWELUiw=w16383",
+  "src": "file:images/manual/R0013.jpg",
   "w": 960,
-  "h": 212
+  "h": 544
  },
  "R0014": {
   "page": "https://sogyotecho.jp/consulting/",
@@ -196,11 +197,12 @@
  },
  "R0031": {
   "page": "https://www.diamond.co.jp/book/9784478107829.html",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.diamond.co.jp/book/h58i5c000001mtpp-img/9784478107829_ogp.jpg",
-  "w": 208,
-  "h": 300
+  "src": "file:images/manual/R0031.jpg",
+  "w": 960,
+  "h": 1389
  },
  "R0032": {
   "page": "https://www.youtube.com/@PIVOTCAREER",
@@ -369,11 +371,12 @@
  },
  "R0051": {
   "page": "https://www.diamond.co.jp/book/9784478113899.html",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.diamond.co.jp/book/q5hod5000001c5d2-img/9784478113899_ogp.jpg",
-  "w": 208,
-  "h": 301
+  "src": "file:images/manual/R0051.jpg",
+  "w": 960,
+  "h": 1387
  },
  "R0052": {
   "page": "https://community.camp-fire.jp/",
@@ -872,11 +875,12 @@
  },
  "R0112": {
   "page": "https://booklive.jp/product/index/title_id/1104051/vol_no/001",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://res.booklive.jp/1104051/001/thumbnail/2L.jpg",
-  "w": 240,
-  "h": 353
+  "src": "file:images/manual/R0112.jpg",
+  "w": 960,
+  "h": 1412
  },
  "R0113": {
   "page": "https://books.rakuten.co.jp/rb/18054384/",
@@ -888,11 +892,12 @@
  },
  "R0114": {
   "page": "https://booklive.jp/product/index/title_id/1275482/vol_no/001",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://res.booklive.jp/1275482/001/thumbnail/2L.jpg",
-  "w": 240,
-  "h": 353
+  "src": "file:images/manual/R0114.jpg",
+  "w": 960,
+  "h": 1412
  },
  "R0115": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569858791",
@@ -1096,11 +1101,12 @@
  },
  "R0138": {
   "page": "https://www.viacharacter.org/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://www.viacharacter.org/images/oglogo.jpg",
-  "w": 200,
-  "h": 200
+  "src": "file:images/manual/R0138.jpg",
+  "w": 649,
+  "h": 472
  },
  "R0139": {
   "page": "https://findy-code.io/",
@@ -1172,19 +1178,21 @@
  },
  "R0147": {
   "page": "https://ebookjapan.yahoo.co.jp/books/743113/A003767960/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://cache2-ebookjapan.akamaized.net/contents/thumb/s/Y3100213188561.jpg?1774612545000",
-  "w": 204,
-  "h": 300
+  "src": "file:images/manual/R0147.jpg",
+  "w": 960,
+  "h": 1410
  },
  "R0148": {
   "page": "https://booklive.jp/product/index/title_id/1325131/vol_no/001",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://res.booklive.jp/1325131/001/thumbnail/2L.jpg",
-  "w": 240,
-  "h": 351
+  "src": "file:images/manual/R0148.jpg",
+  "w": 960,
+  "h": 1410
  },
  "R0149": {
   "page": "https://books.rakuten.co.jp/rb/18244014/",
@@ -1683,9 +1691,10 @@
  },
  "R0209": {
   "page": "https://open.spotify.com/show/2nr5tFrD05firH7McYEnkY",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1ff2c2af79151713c1a15e7d66",
+  "src": "file:images/manual/R0209.jpg",
   "w": 256,
   "h": 256
  },
