@@ -545,9 +545,14 @@ def kind_sections(items, params, ctx, heading_level=2):
 
 def build_home(listed, ctx):
     new_items = sorted(ctx["new_items"], key=lambda it: (it["added"], -it["rank"]), reverse=True)
+    # 転機の入口：「転機から探す」のページと同じ絵文字を付け、件数は出さない（共通の掲載を含むと実態より大きく見えるため）。
+    # 共通・その他は「どの転機にも役立つもの」1つにまとめる
     tenki_links = "".join(
-        '<li><a href="%s">%s<span class="count">%d</span></a></li>' % (tenki_url(t), e(t["name"]), ctx["tenki_count"][t["name"]])
-        for t in TENKI if ctx["tenki_count"][t["name"]])
+        '<li><a href="%s">%s%s</a></li>' % (tenki_url(t), emoji(t.get("emoji", "")), e(t["name"]))
+        for t in TENKI if t["past"] and ctx["tenki_count"][t["name"]])
+    common_t = next((t for t in TENKI if t["name"] == COMMON), None)
+    if common_t and ctx["tenki_count"][COMMON]:
+        tenki_links += '<li><a href="%s">どの転機にも役立つもの</a></li>' % tenki_url(common_t)
     stage_links = "".join(
         '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s["about"]))
         for s in STAGES)
@@ -555,13 +560,11 @@ def build_home(listed, ctx):
         '<li><a href="%s">%s%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), len(g))
         for k, g in by_kind(listed))
     if new_items:
-        # パソコンはカードを並べ、スマホでは横にスワイプする棚にする（縦に12枚並ぶと長すぎるため）
-        shown = new_items[:12]
+        # 6件だけ見せ、続きは観測レポートへ（日付ごと・転機ごとに見られるため）。スマホでは横にスワイプする棚にする
+        shown = new_items[:6]
         rest = len(new_items) > len(shown)
         news = sm_shelf("".join(card(it, ctx["today"], date=True) for it in shown), len(shown), "今週の新着",
-                        search_url(sort="new") if rest else "", "今週の新着をすべて見る", len(new_items))
-        if len(new_items) > 12:
-            news += more_link(search_url(sort="new"), "今週の新着をすべて見る（%d件）" % len(new_items))
+                        "/report/" if rest else "", "観測レポートで今週の新着をすべて見る", len(new_items))
     else:
         news = '<p class="empty">この1週間に追加されたものはありません。</p>'
     body = """
@@ -598,7 +601,7 @@ def build_home(listed, ctx):
 <section class="section">
   <h2 class="section-title">今週の新着</h2>
   {news}
-  <p class="more"><a href="/report/">週ごとの観測レポートを見る</a></p>
+  <p class="more"><a href="/report/">{news_more}</a></p>
 </section>
 
 <section class="section">
@@ -609,6 +612,7 @@ def build_home(listed, ctx):
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
+           news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
            popular="".join('<a class="start-word" href="/search/?q=%s">%s</a>' % (e(quote(w)), e(w)) for w in popular_words(listed, ctx)))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
