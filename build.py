@@ -557,7 +557,7 @@ def build_home(listed, ctx):
         '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s["about"]))
         for s in STAGES)
     kind_links = "".join(
-        '<li><a href="%s">%s%s<span class="count">%d</span></a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), len(g))
+        '<li><a href="%s">%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k))
         for k, g in by_kind(listed))
     if new_items:
         # 6件だけ見せ、続きは観測レポートへ（日付ごと・転機ごとに見られるため）。スマホでは横にスワイプする棚にする
