@@ -2620,5 +2620,13 @@
   "checked": "2026-10-25",
   "status": "error",
   "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0335": {
+  "page": "https://career-research.mynavi.jp/report/20261005_115971/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/10/26b625c22bf1d6b8a6c1f8b80132b8e2.jpg",
+  "w": 960,
+  "h": 521
  }
 }
