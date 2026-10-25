@@ -1034,6 +1034,28 @@ def build_search(listed, ctx):
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
 
+WEEKDAYS = "月火水木金土日"
+
+
+def report_cards(items, ctx):
+    """観測レポートのカード。転機で絞れるように、カードに転機の名前を持たせる（どの転機にもの掲載は「共通」）。"""
+    out = []
+    for it in items:
+        html = card(it, ctx["today"], date=True)
+        out.append(html.replace('<li class="card"', '<li class="card" data-tenki="%s"' % e(" ".join(it["tenki"])), 1))
+    return '<ul class="cards list-compact">%s</ul>' % "".join(out)
+
+
+def report_breakdown(group):
+    """週の内訳の1行：転機ごと（その転機ならではの数）と、タイプごとの件数を多い順に。"""
+    tc = [(t["name"], sum(1 for it in group if t["name"] in it["tenki"])) for t in TENKI if t["past"]]
+    common = sum(1 for it in group if COMMON in it["tenki"])
+    tc = [(n, c) for n, c in sorted(tc, key=lambda x: -x[1]) if c] + ([("どの転機にも", common)] if common else [])
+    kc = [(k, len(g)) for k, g in sorted(by_kind(group), key=lambda x: -len(x[1]))]
+    return ('<p class="week-breakdown"><span>%s</span><span>%s</span></p>'
+            % ("・".join("%s %d" % (e(n), c) for n, c in tc), "・".join("%s %d" % (e(k), c) for k, c in kc)))
+
+
 def build_report(listed, ctx):
     weeks = {}
     for it in listed:
@@ -1041,25 +1063,38 @@ def build_report(listed, ctx):
             continue
         start = it["added"] - datetime.timedelta(days=it["added"].weekday())
         weeks.setdefault(start, []).append(it)
+    this_week = ctx["today"] - datetime.timedelta(days=ctx["today"].weekday())
     sections = []
     for start in sorted(weeks, reverse=True):
         end = start + datetime.timedelta(days=6)
-        group = sorted(weeks[start], key=lambda it: (it["added"], -it["rank"]), reverse=True)
-        heading = "%d年%d月%d日〜%d月%d日" % (start.year, start.month, start.day, end.month, end.day)
-        # 週ごとに最初の12件を見せ、残りは「続きを見る」で開く（1週に100件以上加わることがあるため）
-        first, rest = group[:12], group[12:]
-        more = ('<details class="week-more"><summary>この週の残り %d件を見る</summary>%s</details>'
-                % (len(rest), cards(rest, ctx, date=True, cls="list-compact"))) if rest else ""
-        sections.append('<section class="week" id="w%s"><h2>%s <span class="count">%d件</span></h2>%s%s</section>'
-                        % (start.strftime("%Y%m%d"), e(heading), len(group), cards(first, ctx, date=True, cls="list-compact"), more))
+        group = weeks[start]
+        label = {this_week: "今週", this_week - datetime.timedelta(days=7): "先週"}.get(start, "")
+        dates = "%d年%d月%d日〜%d月%d日" % (start.year, start.month, start.day, end.month, end.day) if not label else "%d月%d日〜%d月%d日" % (start.month, start.day, end.month, end.day)
+        heading = ('<b>%s</b>%s' % (label, e(dates))) if label else e(dates)
+        # 週の中を日付ごとに区切る。各日は最初の6件を見せ、残りは「この日の残りを見る」で開く
+        days = []
+        for d in sorted({it["added"] for it in group}, reverse=True):
+            day_items = sorted([it for it in group if it["added"] == d], key=lambda it: it["rank"])
+            first, rest = day_items[:6], day_items[6:]
+            more = ('<details class="week-more"><summary>この日の残り <span class="rest-n">%d</span>件を見る</summary>%s</details>'
+                    % (len(rest), report_cards(rest, ctx))) if rest else ""
+            days.append('<section class="report-day"><h3>%d月%d日（%s）<span class="count"><span class="day-n">%d</span>件</span></h3>%s%s</section>'
+                        % (d.month, d.day, WEEKDAYS[d.weekday()], len(day_items), report_cards(first, ctx), more))
+        sections.append('<section class="week" id="w%s"><h2>%s <span class="count"><span class="week-n">%d</span>件</span></h2>%s%s</section>'
+                        % (start.strftime("%Y%m%d"), heading, len(group), report_breakdown(group), "".join(days)))
+    tabs = ('<div class="kind-tabs report-tabs" role="group" aria-label="転機で絞る"><button type="button" aria-pressed="true" data-tenki="">すべて</button>%s</div>'
+            % "".join('<button type="button" aria-pressed="false" data-tenki="%s">%s</button>' % (e(t["name"]), e(t["name"])) for t in TENKI if t["past"]))
     body = """
 {crumbs}
 <header class="page-head">
-  <h1 class="with-rss">観測レポート <a class="rss-link" href="/feed.xml">RSS</a></h1>
+  <h1>観測レポート</h1>
   <p class="lead">観測所に新しく加わったサービスと情報を、週ごとにまとめています。</p>
 </header>
+{tabs}
+<p class="report-empty" id="report-empty" hidden>この転機の新着は、まだありません。</p>
 {sections}
-""".format(crumbs=breadcrumb([("観測レポート", None)]),
+<p class="rss-note"><a href="/feed.xml">新着をRSSで受け取る</a>（ニュースリーダーに登録すると、新しく加わった掲載が届きます）</p>
+""".format(crumbs=breadcrumb([("観測レポート", None)]), tabs=tabs if sections else "",
            sections="\n".join(sections) or '<p class="empty">まだ記録がありません。</p>')
     page("/report/", "観測レポート", "あしたの転機観測所に新しく加わったサービスと情報を、週ごとにまとめています。", body, ctx=ctx)
 

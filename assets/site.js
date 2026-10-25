@@ -336,3 +336,50 @@
     });
   });
 })();
+
+// 観測レポート：転機のボタンで、その転機の新着だけを表示する。選んだ転機は URL（?tenki=）に残す
+(function () {
+  var tabs = document.querySelector(".report-tabs");
+  if (!tabs) return;
+  var weeks = document.querySelectorAll(".week");
+  var empty = document.getElementById("report-empty");
+  function apply(t) {
+    Array.prototype.forEach.call(tabs.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-tenki") === t)); });
+    var anyWeek = false;
+    Array.prototype.forEach.call(weeks, function (week) {
+      var weekN = 0;
+      Array.prototype.forEach.call(week.querySelectorAll(".report-day"), function (day) {
+        var n = 0;
+        Array.prototype.forEach.call(day.querySelectorAll("li.card[data-tenki]"), function (li) {
+          var show = !t || li.getAttribute("data-tenki").split(" ").indexOf(t) >= 0;
+          li.hidden = !show;
+          if (show) n++;
+        });
+        // 絞っているときは、その日の該当分をすべて開いて見せる（件数が少なくなるため）
+        var details = day.querySelector("details");
+        if (details) {
+          details.open = !!t;
+          details.querySelector("summary").hidden = !!t;
+        }
+        day.querySelector(".day-n").textContent = n;
+        day.hidden = n === 0;
+        weekN += n;
+      });
+      week.querySelector(".week-n").textContent = weekN;
+      var breakdown = week.querySelector(".week-breakdown");
+      if (breakdown) breakdown.hidden = !!t;
+      week.hidden = weekN === 0;
+      if (weekN) anyWeek = true;
+    });
+    if (empty) empty.hidden = anyWeek;
+    var url = new URL(location.href);
+    if (t) url.searchParams.set("tenki", t); else url.searchParams.delete("tenki");
+    history.replaceState(null, "", url.pathname + url.search + url.hash);
+  }
+  tabs.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-tenki]");
+    if (b) apply(b.getAttribute("data-tenki"));
+  });
+  var start = new URLSearchParams(location.search).get("tenki") || "";
+  if (start && tabs.querySelector('button[data-tenki="' + start.replace(/"/g, "") + '"]')) apply(start);
+})();

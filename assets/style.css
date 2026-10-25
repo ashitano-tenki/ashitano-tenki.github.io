@@ -225,7 +225,7 @@ button, .button {
 }
 /* スマホ：小さな文字のリンクも、見た目はそのままで押せる範囲を上下に広げる */
 @media (max-width: 759px) {
-  .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .sort-help, .rss-link, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
+  .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .sort-help, .rss-note a, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
 }
 .save-wide { display: inline-flex; align-items: center; gap: var(--space-2); }
 .save-wide[aria-pressed="true"] { border-color: var(--sky); color: var(--sky); }
@@ -539,9 +539,18 @@ button, .button {
 
 /* 観測レポート */
 .week { margin-top: var(--space-8); }
-.with-rss { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3); }
-.rss-link { font-family: var(--font-sans); font-size: 14px; font-weight: 400; }
-.week h2 { font-size: 20px; margin: 0 0 var(--space-3); }
+.week h2 { font-size: 20px; margin: 0 0 var(--space-2); padding-bottom: var(--space-2); border-bottom: var(--border-rule) solid var(--ink); display: flex; align-items: baseline; gap: var(--space-2); }
+.week h2 b { font-weight: 700; margin-right: var(--space-1); }
+.week h2 .count { margin-left: auto; }
+/* 週の内訳（転機ごと・タイプごとの件数） */
+.week-breakdown { margin: 0 0 var(--space-4); display: grid; gap: 2px; font-size: 13px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+/* 週の中の日付ごとの区切り */
+.report-day { margin-top: var(--space-4); }
+.report-day h3 { font-size: 16px; margin: 0 0 var(--space-2); display: flex; align-items: baseline; gap: var(--space-2); }
+.report-day h3 .count { font-weight: 400; }
+.report-tabs { margin-top: var(--space-4); }
+.report-empty { margin-top: var(--space-6); color: var(--text-sub); }
+.rss-note { margin-top: var(--space-8); font-size: 14px; color: var(--text-sub); }
 
 /* フッター：強調ページと同じ ink 地。黄色は区切り線の1本だけ */
 .site-footer { background: var(--footer-bg); color: var(--footer-text); padding: var(--space-8) 0 var(--space-12); font-size: 15px; border-top: 4px solid var(--yellow); }
