@@ -2584,5 +2584,19 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48156/4815642060.jpg",
   "w": 647,
   "h": 1000
+ },
+ "R0330": {
+  "page": "https://www.visasq.co.jp/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+ },
+ "R0331": {
+  "page": "https://newspicks.expert/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/3e9c3a79-2b79-43f8-b234-447a1cea79bd",
+  "w": 960,
+  "h": 504
  }
 }
