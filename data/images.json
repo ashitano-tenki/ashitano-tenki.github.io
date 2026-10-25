@@ -2198,5 +2198,68 @@
   "page": "https://www.jacgroup.com/jp/press-release/main/03/teaserItems1/01/linkList/0/link/251219.pdf",
   "checked": "2026-10-25",
   "status": "none"
+ },
+ "R0276": {
+  "page": "https://vetagent.jp",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://vetagent.jp/img/og_image_800_418_dog.jpg",
+  "w": 800,
+  "h": 418
+ },
+ "R0277": {
+  "page": "https://www.samurai.co.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.samurai.co.jp/og-image.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0278": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784756924964",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756924964.jpg",
+  "w": 716,
+  "h": 1000
+ },
+ "R0279": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784781625218",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47816/4781625215.jpg",
+  "w": 676,
+  "h": 1000
+ },
+ "R0280": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569859156",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45698/4569859151.jpg",
+  "w": 610,
+  "h": 1000
+ },
+ "R0281": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784756924322",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756924328.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0282": {
+  "page": "https://www.jacgroup.com/jp/press-release/main/03/teaserItems1/00/linkList/01/link/260306.pdf",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0283": {
+  "page": "https://www.jacgroup.com/jp/press-release/main/03/teaserItems1/0/linkList/01/link/241218-1.pdf",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0284": {
+  "page": "https://www.jacgroup.com/jp/press-release/main/03/teaserItems1/01/linkList/010/link/250918.pdf",
+  "checked": "2026-10-25",
+  "status": "none"
  }
 }
