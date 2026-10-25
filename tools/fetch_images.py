@@ -242,6 +242,7 @@ def check(row, today, override=""):
                 raise ValueError("images/manual/ の外のファイルは使えません")
             with open(path, "rb") as f:
                 data = f.read(MAX_BYTES + 1)
+            rec["fsize"] = len(data)  # 同じファイル名で入れ替えたときに気づけるように
         elif data is None:
             data, _, _ = fetch(src, MAX_BYTES + 1)
         if len(data) > MAX_BYTES:
@@ -359,6 +360,10 @@ def main():
             return True
         if row["ID"] in overrides and rec.get("src") != overrides[row["ID"]]:
             return True  # 手で渡した画像が新しく入った・変わった
+        if row["ID"] in overrides and overrides[row["ID"]].startswith("file:"):
+            path = os.path.join(ROOT, overrides[row["ID"]][5:])
+            if os.path.exists(path) and rec.get("fsize") != os.path.getsize(path):
+                return True  # 同じファイル名のまま画像を入れ替えた
         age = (today - datetime.date.fromisoformat(rec["checked"])).days
         return age >= (REFRESH_DAYS if rec["status"] == "ok" else RETRY_DAYS)
 
