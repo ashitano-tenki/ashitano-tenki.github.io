@@ -137,7 +137,6 @@ main.wrap { padding-bottom: var(--space-16); }
 .check-link a { font-weight: 700; }
 .check-link a::after { content: " →"; }
 .check-link span { display: block; font-size: 13px; color: var(--text-sub); }
-.hero-meta { font-size: 13px; color: var(--text-sub); margin: var(--space-2) 0 0; }
 .search-box { display: flex; gap: var(--space-2); }
 .search-box input { flex: 1; min-width: 0; }
 input[type="search"], select {
@@ -481,6 +480,7 @@ button, .button {
 .fchip.off input { cursor: default; }
 /* 何も入れていない最初の画面：よく探される言葉と入口 */
 .start-help { margin-top: var(--space-3); }
+.home-words { margin-top: var(--space-3); }
 .start-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--text-sub); }
 .start-words { display: flex; flex-wrap: wrap; gap: 6px; }
 .start-word { display: inline-block; padding: 5px 14px; border-radius: var(--radius-pill); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; font-size: 14px; }

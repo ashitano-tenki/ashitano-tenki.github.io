@@ -569,7 +569,10 @@ def build_home(listed, ctx):
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
     <button type="submit">探す</button>
   </form>
-  <p class="hero-meta">掲載中 {total}件</p>
+  <div class="start-help home-words">
+    <p class="start-label">よく探される言葉</p>
+    <div class="start-words">{popular}</div>
+  </div>
 </section>
 
 <section class="entrances">
@@ -599,9 +602,10 @@ def build_home(listed, ctx):
   {kinds}
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
-           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), total=len(listed), tenki_links=tenki_links,
+           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
-           kinds=kind_shelves(listed, ctx))
+           kinds=kind_shelves(listed, ctx),
+           popular="".join('<a class="start-word" href="/search/?q=%s">%s</a>' % (e(quote(w)), e(w)) for w in popular_words(listed, ctx)))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
                "description": CONF["description"], "inLanguage": "ja",
                "potentialAction": {"@type": "SearchAction", "target": BASE + "/search/?q={search_term_string}",
