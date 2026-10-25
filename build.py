@@ -1198,8 +1198,8 @@ def build_saved(ctx):
   <p>まずは次のところから、気になるものを探してみてください。</p>
   <ul class="saved-empty-links">
     <li><a href="/tenki/"><b>転機から探す</b><span>転職・独立・副業など、迎えている転機から</span></a></li>
-    <li><a href="/search/"><b>探す</b><span>キーワードや段階・タイプで絞り込んで</span></a></li>
-    <li><a href="/check/"><b>セルフチェック</b><span>いまの段階をふりかえって、合いそうなものを見つける</span></a></li>
+    <li><a href="/search/"><b>キーワードで探す</b><span>キーワードや段階・タイプで絞り込んで</span></a></li>
+    <li><a href="/check/"><b>セルフチェックする</b><span>いまの段階をふりかえって、合いそうなものを見つける</span></a></li>
   </ul>
 </div>
 <p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
