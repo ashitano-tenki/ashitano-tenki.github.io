@@ -2332,10 +2332,11 @@
  "R0287": {
   "page": "https://hoiku.mynavi.jp/",
   "checked": "2026-10-25",
+  "manual": true,
   "status": "ok",
-  "src": "https://hoiku.mynavi.jp/assets/img/ogp.png",
+  "src": "file:images/manual/R0287.jpg",
   "w": 960,
-  "h": 960
+  "h": 473
  },
  "R0288": {
   "page": "https://doda.jp/woman/",
