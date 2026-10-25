@@ -357,23 +357,54 @@ button, .button {
 .kind-block h2, .kind-block h3 { font-size: 20px; margin: 0 0 var(--space-3); }
 
 /* 転機ページ */
-.stage-nav { margin-top: var(--space-6); }
-.stage-nav h2 { font-size: 20px; margin: 0 0 var(--space-3); }
-.stage-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
-@media (min-width: 640px) { .stage-nav ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.stage-nav a { display: block; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-3) var(--space-4); text-decoration: none; color: var(--ink); }
-.stage-nav a:hover { border-color: var(--sky); }
-.stage-nav strong { display: block; font-size: 13px; color: var(--sky); }
-.stage-nav span { font-weight: 700; }
-.tenki-list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); }
-.tenki-row { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4) var(--space-6); }
-.tenki-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); }
-.tenki-row p { margin: var(--space-1) 0 0; font-size: 14px; color: var(--text-body); }
-.tenki-row .stage-chips { margin-top: var(--space-3); }
-.stage-dl { margin: var(--space-3) 0; display: grid; gap: 6px; }
-.stage-dl div { display: flex; gap: var(--space-3); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); padding: var(--space-2) var(--space-3); }
-.stage-dl dt { font-weight: 700; color: var(--sky); flex: none; width: 3em; }
-.stage-dl dd { margin: 0; font-size: 15px; color: var(--text-body); }
+/* 転機から探す：転機ごとのカード（パソコンは2列）と、段階の帯（段階名・ひとこと・件数） */
+.tenki-cards { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); }
+@media (min-width: 760px) { .tenki-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tenki-card { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4) var(--space-4) var(--space-4); display: flex; flex-direction: column; }
+.tenki-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--ink); text-decoration: none; }
+.tenki-name:hover { color: var(--sky); text-decoration: underline; }
+.tenki-name .emoji { margin-right: 6px; }
+.tenki-card > p { margin: var(--space-1) 0 var(--space-3); font-size: 14px; color: var(--text-body); }
+.stage-band { list-style: none; margin: auto 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.stage-band a, .stage-band .off { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 8px 4px; border-radius: var(--radius-md); background: var(--chip-bg); text-decoration: none; text-align: center; font-variant-numeric: tabular-nums; }
+.stage-band a:hover { box-shadow: inset 0 0 0 1px var(--sky); }
+.stage-band b { font-size: 15px; color: var(--ink); }
+.stage-band span { font-size: 11px; line-height: 1.4; color: var(--text-sub); }
+.stage-band em { font-style: normal; font-size: 12px; color: var(--sky-on-tint); font-weight: 700; }
+.stage-band .off { opacity: .45; }
+@media (max-width: 479px) {
+  .stage-band { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage-band a, .stage-band .off { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 6px; }
+  .stage-band em { flex-basis: 100%; }
+}
+.tenki-extra { margin-top: var(--space-4); }
+.lost-box { margin-top: var(--space-8); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); padding: var(--space-4); }
+.lost-box h2 { font-size: 18px; margin: 0 0 var(--space-2); }
+.lost-box p { margin: 0 0 var(--space-2); font-size: 14px; color: var(--text-body); }
+.lost-box ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+/* 転機のページ：転機の流れ（準備→遭遇→順応→安定）。番号と区切り線だけで流れを見せる */
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4) var(--space-6); }
+@media (min-width: 760px) { .flow { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.flow li { border-top: var(--border-hairline) solid var(--line); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-1); }
+.flow-head { margin: 0; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.flow-no { font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.flow-head b { font-family: var(--font-display); font-size: 18px; color: var(--ink); }
+.flow-short { font-size: 12px; color: var(--text-sub); }
+.flow-text { margin: 0; font-size: 14px; color: var(--text-body); }
+.flow li a { font-size: 14px; margin-top: auto; }
+/* タイプの切り替えボタン（JavaScript が使えるときだけ） */
+.kind-tabs { display: none; }
+.js .kind-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 var(--space-2); }
+.kind-tabs button { font-size: 13px; font-weight: 400; padding: 6px 14px; border-radius: var(--radius-pill); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
+.kind-tabs button:hover { border-color: var(--sky); }
+.kind-tabs button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--base); font-weight: 700; }
+/* 転機×段階のページ：この時期によくあること・次の一歩 */
+.combo-guide { margin-top: var(--space-6); display: grid; gap: var(--space-3); }
+@media (min-width: 760px) { .combo-guide { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.combo-guide > div { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); padding: var(--space-4); }
+.combo-guide h2 { font-size: 16px; margin: 0 0 var(--space-2); }
+.combo-guide ul, .combo-guide ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; font-size: 15px; color: var(--text-body); }
+.combo-check { margin: 0; grid-column: 1 / -1; font-size: 14px; }
 
 /* 詳細ページ */
 .detail { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-6); margin-top: var(--space-4); }

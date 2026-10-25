@@ -520,7 +520,7 @@ def kind_sections(items, params, ctx, heading_level=2):
     out = []
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
-        sec = ['<section class="kind-block sm-box"><%s>%s%s <span class="count">%d件</span></%s>' % (h, kind_emoji(kind), e(kind), len(group), h)]
+        sec = ['<section class="kind-block sm-box" data-kind="%s"><%s>%s%s <span class="count">%d件</span></%s>' % (e(kind), h, kind_emoji(kind), e(kind), len(group), h)]
         about = KIND_BY_NAME.get(kind, {}).get("about", "")
         if about:
             sec.append('<p class="kind-about">%s</p>' % e(about))
@@ -633,6 +633,72 @@ def combo_lead(t, s):
     return s["lead"].format(name=t["name"], past=t["past"])
 
 
+CHECK_TEXT = load_json("check.json")  # セルフチェックと同じ「この時期によくあること」「次の一歩」を転機のページにも出す
+
+
+def own_and_common(items, t):
+    """その転機ならではの掲載と、どの転機にも役立つ共通の掲載に分ける。"""
+    own = [it for it in items if t["name"] in it["tenki"]]
+    common = [it for it in items if t["name"] not in it["tenki"]]
+    return own, common
+
+
+def stage_band(t, own, combo_names):
+    """段階の帯：段階名・ひとこと・その転機ならではの件数。転機×段階のページがない段階や、0件の段階は押せない形で薄く出す。"""
+    out = []
+    for s in STAGES:
+        n = sum(1 for it in own if s["name"] in it["stages"])
+        inner = '<b>%s</b><span>%s</span><em>%d件</em>' % (e(s["name"]), e(s.get("short", "")), n)
+        if n and s["name"] in combo_names:
+            out.append('<li><a href="/tenki/%s/%s/" aria-label="%s（%d件）">%s</a></li>' % (t["slug"], s["slug"], e(combo_title(t, s)), n, inner))
+        else:
+            out.append('<li><span class="off">%s</span></li>' % inner)
+    return '<ul class="stage-band" aria-label="%sの段階">%s</ul>' % (e(t["name"]), "".join(out))
+
+
+def kind_tabs(items):
+    """タイプの切り替えボタン（JavaScript が使えるときだけ出る）。タイプが3つ以上あるときだけ置く。"""
+    kinds = [k for k, g in by_kind(items)]
+    if len(kinds) < 3:
+        return ""
+    return ('<div class="kind-tabs" role="group" aria-label="タイプで絞る"><button type="button" aria-pressed="true" data-kind="">すべて</button>%s</div>'
+            % "".join('<button type="button" aria-pressed="false" data-kind="%s">%s</button>' % (e(k), e(k)) for k in kinds))
+
+
+def own_section(t, own, params, ctx, heading, level):
+    """その転機ならではの掲載：タイプの切り替えボタンと、タイプごとの欄。"""
+    h = "h%d" % level
+    return ('<section class="section own-section"><%s class="section-title">%s</%s>%s<div class="kind-area">%s</div></section>'
+            % (h, e(heading), h, kind_tabs(own), kind_sections(own, params, ctx, heading_level=level + 1)))
+
+
+def common_section(common, ctx, more_params, level):
+    """どの転機にも役立つ共通の掲載は、おすすめ順の上位6件だけを1つの棚にまとめ、残りは一覧へ。"""
+    if not common:
+        return ""
+    h = "h%d" % level
+    shown = sorted(common, key=lambda it: it["rank"])[:6]
+    return ('<section class="section common-section"><%s class="section-title">どの転機にも役立つもの</%s>'
+            '<p class="note">どの転機を迎えた人にも役立つサービスと情報です。</p>%s%s</section>'
+            % (h, h, sm_shelf("".join(card(it, ctx["today"]) for it in shown), len(shown), "どの転機にも役立つもの"),
+               more_link(search_url(**more_params), "どの転機にも役立つものをすべて見る（%d件）" % len(common))))
+
+
+def tenki_flow(t, own, combo_names):
+    """転機の流れ：準備→遭遇→順応→安定と、段階ごとの「この時期によくあること」（セルフチェックと同じ文章）。"""
+    texts = CHECK_TEXT["combos"].get(t["name"], {})
+    cells = []
+    for i, s in enumerate(STAGES):
+        common = (texts.get(s["name"]) or {}).get("common") or []
+        n = sum(1 for it in own if s["name"] in it["stages"])
+        link = ('<a href="/tenki/%s/%s/">%sの段階で役立つもの</a>' % (t["slug"], s["slug"], e(s["name"]))
+                if n and s["name"] in combo_names else "")
+        cells.append('<li><p class="flow-head"><span class="flow-no">%d</span><b>%s</b><span class="flow-short">%s</span></p>%s%s</li>'
+                     % (i + 1, e(s["name"]), e(s.get("short", "")), "".join('<p class="flow-text">%s</p>' % e(c) for c in common[:1]), link))
+    return ('<section class="section tenki-flow"><h2 class="section-title">%sの流れ</h2><ol class="flow">%s</ol></section>'
+            % (e(t["name"]), "".join(cells)))
+
+
 def build_tenki(listed, ctx):
     index_rows = []
     for t in TENKI:
@@ -646,55 +712,54 @@ def build_tenki(listed, ctx):
                 if len(sub) >= CONF["min_combo_items"]:
                     combos.append((s, sub))
                     build_combo(t, s, sub, ctx)
-        stage_nav = ""
-        if combos:
-            stage_nav = '<nav class="stage-nav" aria-label="段階で絞る"><h2>段階から探す</h2><ul>%s</ul></nav>' % "".join(
-                '<li><a href="/tenki/%s/%s/"><strong>%s</strong><span>%s</span></a></li>'
-                % (t["slug"], s["slug"], e(s["name"]), e(combo_title(t, s))) for s, sub in combos)
+        combo_names = {s["name"] for s, sub in combos}
+        own, common = own_and_common(items, t)
         heading = tenki_heading(t)
+        if t["past"]:
+            main = (tenki_flow(t, own, combo_names)
+                    + own_section(t, own, {"tenki": t["name"]}, ctx, "%sならではのサービスと情報" % t["name"], 2)
+                    + common_section(common, ctx, {"tenki": COMMON}, 2))
+        else:
+            main = '<section class="section">%s%s%s</section>' % (kind_tabs(items), '<div class="kind-area">%s</div>' % kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=2),
+                                                                  more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
         body = """
 {crumbs}
 <header class="page-head">
   <h1>{heading}</h1>
 {intro}
-  <p class="page-meta">掲載中 {n}件</p>
 </header>
-{stage_nav}
-<section class="section">
-  <h2 class="section-title">タイプごとに見る</h2>
-  {kinds}
-  {more}
-</section>
-""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading), intro=intro_html(t["about"], NOTES.get("tenki", {}).get(t["name"], "")),
-           n=len(items), stage_nav=stage_nav,
-           kinds=kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=3),
-           more=more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
+{main}
+""".format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], None)]), heading=e(heading),
+           intro=intro_html(t["about"], NOTES.get("tenki", {}).get(t["name"], "")), main=main)
         page(tenki_url(t), heading, t["about"], body, ctx=ctx, image=og_image(t["slug"]),
              jsonld=[collection_ld(heading, t["about"], tenki_url(t), items)])
-        index_rows.append((t, items, combos))
+        index_rows.append((t, items, own, combo_names))
 
-    rows = []
-    for t, items, combos in index_rows:
-        combo_html = ""
-        if combos:
-            combo_html = '<ul class="chips stage-chips" aria-label="%sの段階">%s</ul>' % (e(t["name"]), "".join(
-                '<li><a href="/tenki/%s/%s/" title="%s">%s</a></li>' % (t["slug"], s["slug"], e(combo_title(t, s)), e(s["name"])) for s, sub in combos))
-        rows.append('<li class="tenki-row"><a class="tenki-name" href="%s">%s <span class="count">%d件</span></a><p>%s</p>%s</li>'
-                    % (tenki_url(t), e(t["name"]), len(items), e(t["about"]), combo_html))
-    stage_dl = "".join("<div><dt>%s</dt><dd>%s</dd></div>" % (e(s["name"]), e(s["about"])) for s in STAGES)
+    cards, extra = [], []
+    for t, items, own, combo_names in index_rows:
+        if not t["past"]:
+            extra.append('<li><a href="%s">%s</a></li>' % (tenki_url(t), e(tenki_heading(t).replace("サービスと情報", "もの"))))
+            continue
+        cards.append('<li class="tenki-card"><a class="tenki-name" href="%s">%s%s</a><p>%s</p>%s</li>'
+                     % (tenki_url(t), emoji(t.get("emoji", "")), e(t["name"]), e(t["about"]), stage_band(t, own, combo_names)))
     body = """
 {crumbs}
 <header class="page-head">
   <h1>転機から探す</h1>
-  <p class="lead">転職、独立、起業など、迎えている転機を選んでください。転機ごとのページでは、段階に分けて探すこともできます。</p>
+  <p class="lead">転職、独立、起業など、迎えている転機を選んでください。段階を押すと、その時期に役立つものに絞って見られます。</p>
 </header>
-<ul class="tenki-list">{rows}</ul>
-<section class="section">
-  <h2 class="section-title">段階について</h2>
-  <p class="note">観測所では、転機の時期を4つの段階に分けています。</p>
-  <dl class="stage-dl">{stage_dl}</dl>
+<ul class="tenki-cards">{cards}</ul>
+<ul class="chips tenki-extra">{extra}</ul>
+<section class="lost-box">
+  <h2>どの転機か、まだはっきりしない人へ</h2>
+  <p>何かを変えたいけれど、どの転機かはまだ決まっていない。そんなときは、いまの段階を確かめるところから始めてみてください。</p>
+  <ul>
+    <li><a href="/check/">セルフチェックで、いまの段階を確かめる</a></li>
+    <li><a href="{common_url}">どの転機にも役立つものを見る</a></li>
+  </ul>
 </section>
-""".format(crumbs=breadcrumb([("転機から探す", None)]), rows="".join(rows), stage_dl=stage_dl)
+""".format(crumbs=breadcrumb([("転機から探す", None)]), cards="".join(cards), extra="".join(extra),
+           common_url=e(next((tenki_url(t) for t in TENKI if t["name"] == COMMON), "/search/")))
     page("/tenki/", "転機から探す", "転職、独立、起業、副業、退職・休職、定年、学び直し。迎えている転機から、役立つサービスと情報を探せます。", body, ctx=ctx)
 
 
@@ -706,24 +771,36 @@ def collection_ld(name, description, path, items):
                 for i, it in enumerate(items[:50])]}}
 
 
+def combo_guide(t, s):
+    """転機×段階のページの「この時期によくあること」と「次の一歩」（セルフチェックの結果と同じ文章）。"""
+    text = CHECK_TEXT["combos"].get(t["name"], {}).get(s["name"])
+    if not text:
+        return ""
+    return """<section class="combo-guide">
+  <div><h2>この時期によくあること</h2><ul>%s</ul></div>
+  <div><h2>次の一歩</h2><ol>%s</ol></div>
+  <p class="combo-check"><a href="/check/">自分の段階をセルフチェックで確かめる</a></p>
+</section>""" % ("".join("<li>%s</li>" % e(x) for x in text["common"]), "".join("<li>%s</li>" % e(x) for x in text["steps"]))
+
+
 def build_combo(t, s, items, ctx):
     title = combo_title(t, s)
+    own, common = own_and_common(items, t)
     body = """
 {crumbs}
 <header class="page-head">
   <h1>{title}</h1>
 {intro}
-  <p class="page-meta">掲載中 {n}件</p>
 </header>
-<section class="section">
-  {kinds}
-  {more}
-</section>
+{guide}
+{own}
+{common}
 """.format(crumbs=breadcrumb([("転機から探す", "/tenki/"), (t["name"], tenki_url(t)), (s["name"], None)]),
-           title=e(title), n=len(items),
+           title=e(title),
            intro=intro_html(combo_lead(t, s), NOTES.get("combos", {}).get(t["name"], {}).get(s["name"], "")),
-           kinds=kind_sections(items, {"tenki": t["name"], "stage": s["name"]}, ctx, heading_level=2),
-           more=more_link(search_url(tenki=t["name"], stage=s["name"]), "この条件の掲載情報をすべて見る"))
+           guide=combo_guide(t, s),
+           own=own_section(t, own, {"tenki": t["name"], "stage": s["name"]}, ctx, "%s×%sのサービスと情報" % (t["name"], s["name"]), 2) if own else "",
+           common=common_section(common, ctx, {"tenki": COMMON, "stage": s["name"]}, 2))
     path = "/tenki/%s/%s/" % (t["slug"], s["slug"])
     page(path, title, combo_lead(t, s), body, ctx=ctx, image=og_image("%s-%s" % (t["slug"], s["slug"])),
          jsonld=[collection_ld(title, combo_lead(t, s), path, items)])

@@ -321,3 +321,18 @@
     el.setAttribute("placeholder", "キーワードで探す");
   });
 })();
+
+// 転機のページ：タイプの切り替えボタンを押すと、そのタイプの欄だけを表示する
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll(".kind-tabs"), function (tabs) {
+    var area = tabs.parentNode.querySelector(".kind-area");
+    if (!area) return;
+    tabs.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button");
+      if (!b) return;
+      var kind = b.getAttribute("data-kind");
+      Array.prototype.forEach.call(tabs.querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+      Array.prototype.forEach.call(area.querySelectorAll(".kind-block"), function (sec) { sec.hidden = !!kind && sec.getAttribute("data-kind") !== kind; });
+    });
+  });
+})();
