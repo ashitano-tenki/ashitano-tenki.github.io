@@ -366,8 +366,6 @@
         weekN += n;
       });
       week.querySelector(".week-n").textContent = weekN;
-      var breakdown = week.querySelector(".week-breakdown");
-      if (breakdown) breakdown.hidden = !!t;
       week.hidden = weekN === 0;
       if (weekN) anyWeek = true;
     });

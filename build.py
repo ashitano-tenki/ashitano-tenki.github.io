@@ -1046,16 +1046,6 @@ def report_cards(items, ctx):
     return '<ul class="cards list-compact">%s</ul>' % "".join(out)
 
 
-def report_breakdown(group):
-    """週の内訳の1行：転機ごと（その転機ならではの数）と、タイプごとの件数を多い順に。"""
-    tc = [(t["name"], sum(1 for it in group if t["name"] in it["tenki"])) for t in TENKI if t["past"]]
-    common = sum(1 for it in group if COMMON in it["tenki"])
-    tc = [(n, c) for n, c in sorted(tc, key=lambda x: -x[1]) if c] + ([("どの転機にも", common)] if common else [])
-    kc = [(k, len(g)) for k, g in sorted(by_kind(group), key=lambda x: -len(x[1]))]
-    return ('<p class="week-breakdown"><span>%s</span><span>%s</span></p>'
-            % ("・".join("%s %d" % (e(n), c) for n, c in tc), "・".join("%s %d" % (e(k), c) for k, c in kc)))
-
-
 def build_report(listed, ctx):
     weeks = {}
     for it in listed:
@@ -1080,8 +1070,8 @@ def build_report(listed, ctx):
                     % (len(rest), report_cards(rest, ctx))) if rest else ""
             days.append('<section class="report-day"><h3>%d月%d日（%s）<span class="count"><span class="day-n">%d</span>件</span></h3>%s%s</section>'
                         % (d.month, d.day, WEEKDAYS[d.weekday()], len(day_items), report_cards(first, ctx), more))
-        sections.append('<section class="week" id="w%s"><h2>%s <span class="count"><span class="week-n">%d</span>件</span></h2>%s%s</section>'
-                        % (start.strftime("%Y%m%d"), heading, len(group), report_breakdown(group), "".join(days)))
+        sections.append('<section class="week" id="w%s"><h2>%s <span class="count"><span class="week-n">%d</span>件</span></h2>%s</section>'
+                        % (start.strftime("%Y%m%d"), heading, len(group), "".join(days)))
     tabs = ('<div class="kind-tabs report-tabs" role="group" aria-label="転機で絞る"><button type="button" aria-pressed="true" data-tenki="">すべて</button>%s</div>'
             % "".join('<button type="button" aria-pressed="false" data-tenki="%s">%s</button>' % (e(t["name"]), e(t["name"])) for t in TENKI if t["past"]))
     body = """
