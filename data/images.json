@@ -2301,5 +2301,150 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756919359.jpg",
   "w": 702,
   "h": 1000
+ },
+ "R0291": {
+  "page": "https://doctor.mynavi.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://doctor.mynavi.jp/common/img/og_img.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0292": {
+  "page": "https://kaigoshoku.mynavi.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://kaigoshoku.mynavi.jp/build/assets/ogp-BnNo4U9g.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0293": {
+  "page": "https://relax-job.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://relax-job.com/images/user_frontend/pc/logo_ogimage.png",
+  "w": 600,
+  "h": 600
+ },
+ "R0294": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000072.000023588.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/23588/72/23588-72-056322706bb89e0b44cbdf91811bccd0-2048x1075.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R0295": {
+  "page": "https://menta.work/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 429: Too Many Requests"
+ },
+ "R0296": {
+  "page": "https://www.silver-x.co.jp/founders-program",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.silver-x.co.jp/founders-program/og-cohort2.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0297": {
+  "page": "https://careerbreak-lab.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://careerbreak-lab.com/ogp/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0298": {
+  "page": "https://kyodonewsprwire.jp/release/202607162659",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://kyodonewsprwire.jp/prwfile/release/M104026/202607162659/_prw_PI1lg_lGgcJjnZ.jpg",
+  "w": 800,
+  "h": 420
+ },
+ "R0299": {
+  "page": "https://rc.persol-group.co.jp/thinktank/data/sidejob4/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://rc.persol-group.co.jp/wp-content/uploads/2025/10/ogp_sidejob4_096.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0300": {
+  "page": "https://hupro-job.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://d1f6uk4q1da4gu.cloudfront.net/og-image.png",
+  "w": 960,
+  "h": 502
+ },
+ "R0301": {
+  "page": "https://escareer.co.jp/mycounselor/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://escareer.co.jp/mycounselor/wp-content/uploads/2018/06/e8960c6cabc5df7f93405f316cfa0046.png",
+  "w": 960,
+  "h": 535
+ },
+ "R0302": {
+  "page": "https://beyond-border.me/",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0303": {
+  "page": "https://co-medical.mynavi.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://co-medical.mynavi.jp/images/comedical_ogp.png",
+  "w": 960,
+  "h": 960
+ },
+ "R0304": {
+  "page": "https://medfit.co.jp/support_info/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x73bc9f976a20>"
+ },
+ "R0305": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784418206056",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44182/4418206051.jpg",
+  "w": 678,
+  "h": 1000
+ },
+ "R0306": {
+  "page": "https://www.amazon.co.jp/dp/4799108778",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0307": {
+  "page": "https://www.gironmeshi.net/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_auto/169812/972443_346375.png",
+  "w": 960,
+  "h": 366
+ },
+ "R0308": {
+  "page": "https://goodcoach.work/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://goodcoach.work/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0309": {
+  "page": "https://www.realme-career.com/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 32-38: ordinal not in range(128)"
+ },
+ "R0310": {
+  "page": "https://sekokan-next.worldcorp-jp.com/",
+  "checked": "2026-10-25",
+  "status": "none"
  }
 }
