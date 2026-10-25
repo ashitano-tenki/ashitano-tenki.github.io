@@ -994,10 +994,9 @@ def build_search(listed, ctx):
     <input id="q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）" autocomplete="off" aria-autocomplete="list" aria-controls="suggest">
     <ul id="suggest" class="suggest" role="listbox" aria-label="候補" hidden></ul>
   </div>
-  <div id="start-help" class="start-help" hidden>
+  <div id="start-help" class="start-help">
     <p class="start-label">よく探される言葉</p>
     <div class="start-words">{popular}</div>
-    <p class="start-links"><a href="/tenki/">転機から探す</a><a href="/check/">いまの段階をセルフチェックする</a></p>
   </div>
   <div class="search-layout">
     <div class="filter-col">

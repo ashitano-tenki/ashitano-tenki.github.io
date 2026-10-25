@@ -305,7 +305,10 @@
     updateCounts(state);
     renderZeroHelp(state);
     renderSynNote(state);
-    startHelp.hidden = !!(state.q || FILTERS.some(function (f) { return state[f]; }));
+    // よく探される言葉は常に出しておき（高さが変わらないように）、いま探している言葉に印を付ける
+    Array.prototype.forEach.call(startHelp.querySelectorAll(".start-word"), function (a) {
+      if (a.textContent === state.q) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
     countEl.textContent = countText(state);
     render(true);
     reportZero(state);
@@ -320,6 +323,14 @@
   form.addEventListener("input", function (ev) {
     if (ev.target === qInput) renderSuggest();
     clearTimeout(timer); timer = setTimeout(run, 200);
+  });
+  // よく探される言葉：押すと、ページを読み直さずにその言葉で探す（選んでいる条件はそのまま）。もう一度押すと外れる
+  startHelp.addEventListener("click", function (ev) {
+    var a = ev.target.closest(".start-word");
+    if (!a) return;
+    ev.preventDefault();
+    qInput.value = a.getAttribute("aria-current") === "true" ? "" : a.textContent;
+    run();
   });
   suggestEl.addEventListener("click", function (ev) {
     var b = ev.target.closest("button[data-word]");
