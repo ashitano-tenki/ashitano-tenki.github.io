@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>転機の段階セルフチェック｜あしたの転機観測所</title>
-<meta name="description" content="18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。">
+<meta name="description" content="16の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかと、転機を乗り切る4つの資源のバランスをふりかえるセルフチェック。">
 <link rel="canonical" href="https://ashitano-tenki.github.io/check/">
 <meta property="og:title" content="転機の段階セルフチェック">
-<meta property="og:description" content="18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。">
+<meta property="og:description" content="16の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかと、転機を乗り切る4つの資源のバランスをふりかえるセルフチェック。">
 <meta property="og:url" content="https://ashitano-tenki.github.io/check/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="あしたの転機観測所">
@@ -212,6 +212,29 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
 #app .tag { background: transparent; line-height: 1.8; }
 /* 質問に答えているあいだは、ヘッダーをロゴだけにして回答に集中できるようにする（フッターも隠す） */
 .in-question .global-nav, .in-question .header-search-btn, .in-question .menu-btn, .in-question .header-search, .in-question .site-footer { display: none !important; }
+/* 前回の結果・準備のなかの位置・4つの資源・相談メモ・印刷 */
+.prev-note { font-size: 14px; color: var(--ck-ink); background: var(--ck-base-yellow); border-radius: 8px; padding: 8px 12px; margin: 0; }
+.sub-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 8px; }
+.sub-steps span { font-size: 13px; padding: 3px 12px; border-radius: var(--ck-radius-pill); border: 1px solid var(--ck-text-on-ink-sub, #9aa0a8); color: var(--ck-text-on-ink); }
+.sub-steps .on { background: var(--ck-yellow); border-color: var(--ck-yellow); color: var(--ck-ink); font-weight: 700; }
+.gentle { margin: 0; padding: 14px 16px; border-left: 4px solid var(--ck-sky); background: var(--ck-card); border-radius: 8px; color: var(--ck-ink); }
+.common { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; color: var(--ck-text-body); }
+.s4 { display: flex; flex-direction: column; gap: 12px; }
+.s4-row { display: grid; grid-template-columns: 3em minmax(0, 1fr) 4.5em; gap: 2px 12px; align-items: center; }
+.s4-row b { font-family: var(--ck-font-display); }
+.s4-row .track { height: 10px; background: var(--ck-line); border-radius: var(--ck-radius-pill); overflow: hidden; }
+.s4-row .track i { display: block; height: 100%; background: var(--ck-sky-bright); border-radius: var(--ck-radius-pill); }
+.s4-row.low .track i { background: var(--ck-yellow); }
+.s4-row .lv { font-size: 13px; color: var(--ck-text-sub); }
+.s4-row.low .lv { color: var(--ck-ink); font-weight: 700; }
+.s4-short { grid-column: 2 / -1; font-size: 12px; color: var(--ck-text-sub); }
+.memo { white-space: pre-line; overflow-wrap: anywhere; font-size: 14px; line-height: 1.8; color: var(--ck-ink); background: var(--ck-card); border: 1px dashed var(--ck-text-sub); border-radius: 10px; padding: 14px 16px; margin: 0; }
+.share button:disabled { opacity: .6; cursor: default; }
+@media print {
+  .site-header, .site-footer, .skip-link, .band, .no-print, #observatory { display: none !important; }
+  .result-hero { background: none !important; border: 1px solid #000; }
+  .result-hero p, .result-hero .stage-name { color: #000 !important; }
+}
 </style>
 </head>
 <body>
@@ -220,424 +243,9 @@ footer { border-top: 1px solid var(--ck-line); padding-top: 24px; }
 <!--SITE_HEADER-->
 <div id="main" tabindex="-1"><main class="ck-wrap" id="app"></main></div>
 
+<script>window.CHECK_DATA = /*CHECK_DATA*/null;</script>
 <script>
-(() => {
-  const NOTE_URL = "https://note.com/chlorine0528/m/m206813f097e5";
-  const FB_URL = "https://www.facebook.com/share/g/1JmZs5Et5r";
-  const SHARE_URL = "https://ashitano-tenki.github.io/check/";
-  // 結果ごとのシェア用URL（/check/sogu/ など）。SNSで段階ごとの画像が出て、開くとこのページに移る
-  const STAGE_SLUG = { "準備": "junbi", "遭遇": "sogu", "順応": "junno", "安定": "antei" };
-  const HASHTAGS = ["あしたの転機", "転機の段階セルフチェック"];
-
-  const STAGES = ["準備", "遭遇", "順応", "安定"];
-  const STAGE_INFO = {
-    "準備": {
-      short: "転機を考え、備える時期",
-      desc: "気持ちは動き始めているけれど、まだ形にはなっていない段階です。迷いがあるのは、真剣に考えている証拠でもあります。いまは決めることより、材料を集めることを楽しんでみてください。",
-      steps: [
-        "気になっていることを、ひとまず紙に書き出してみる",
-        "その転機を経験した人に、1人だけ話を聞いてみる",
-        "「いつごろまでに何を決めるか」を、ゆるく決めておく"
-      ]
-    },
-    "遭遇": {
-      short: "新しい環境に入った直後",
-      desc: "覚えることが多く、前の環境とのちがいに戸惑いやすい時期です。うまくいかないことがあっても、それは転機のふつうの一場面です。最初は成果より、知ることを優先して大丈夫です。",
-      steps: [
-        "最初の3か月は、成果より「知ること」を優先する",
-        "わからないことを気軽に聞ける人を、1人見つけておく",
-        "前の環境と比べて気づいたことをメモしておく。あとで自分の強みが見えてきます"
-      ]
-    },
-    "順応": {
-      short: "慣れていく時期",
-      desc: "仕事の進め方がわかってきて、自分なりのやり方を試せるようになる時期です。転機に入ってから最初の1年くらいがこの段階にあたります。手応えと違和感の両方を、言葉にしておくと後で役立ちます。",
-      steps: [
-        "うまくいったやり方を、言葉にして残しておく",
-        "社外や別の分野の人とも話してみる",
-        "転機の前に描いていた期待と、いまの実感を見比べてみる"
-      ]
-    },
-    "安定": {
-      short: "落ち着き、次を見すえる時期",
-      desc: "迷わずに動けるようになり、気持ちにも余裕が出てくる時期です。同時に、次の転機の準備が少しずつ始まる時期でもあります。転機はくり返し訪れるものなので、ここが次のサイクルの入口になります。",
-      steps: [
-        "いまの環境で得たものを、一度棚卸ししてみる",
-        "「次にやってみたいこと」を、小さく試してみる",
-        "これから転機を迎える人の話を聞いてみる。あなたの経験が誰かの助けになります"
-      ]
-    }
-  };
-  const NEED_INFO = {
-    "相談": { label: "話せる相手", text: "誰かに話しながら考えると進みやすいタイプかもしれません。答えをもらうより、話すことで考えが整理されていきます。" },
-    "仕事": { label: "小さく試す場", text: "頭で考えるより、小さく試して確かめるのが合っていそうです。いきなり大きく動かず、お試しできる場を探してみてください。" },
-    "学習": { label: "学びの機会", text: "知識や見通しが増えると、動きやすくなるタイプかもしれません。体系立てて学べる場があると心強そうです。" },
-    "内省": { label: "ひとりで考える時間", text: "まずは自分の考えを整理する時間が助けになりそうです。書き出したり、ふりかえったりする時間を少し確保してみてください。" },
-    "交流": { label: "同じ転機の仲間", text: "同じような転機にいる人とのつながりが支えになりそうです。似た経験をした人の話は、何よりのヒントになります。" }
-  };
-
-  // 観測所のおすすめ。サイトを作るたびに観測所の公開用データから書き出す picks.json を読む
-  // rank はおすすめ順の順位（1が先頭。画像があるものが先、そのなかで観測スコアの高い順）。スコアそのものは載せていない
-  const OBS_TOP = "/";
-  let PICKS = null; // 読めなかったときは null のまま
-  const picksReady = fetch("/check/picks.json", { cache: "no-cache" })
-    .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
-    .then(data => { if (Array.isArray(data.items) && data.items.length) PICKS = data.items; })
-    .catch(() => {});
-
-  const SCALE = [
-    { label: "とてもあてはまる", v: 3 },
-    { label: "ややあてはまる", v: 2 },
-    { label: "あまりあてはまらない", v: 1 },
-    { label: "あてはまらない", v: 0 }
-  ];
-
-  // 質問。kind: choice（選択肢ごとに加点）／scale（4段階、stageに加点）
-  const Q = [
-    { kind: "choice", key: "tenki", text: "いま向き合っている転機に、いちばん近いものはどれですか？",
-      opts: ["転職", "独立（個人事業主）", "起業（法人）", "副業・複業", "退職・休職", "定年", "学び直し", "まだはっきりしない"].map(t => ({ label: t, tenki: t.replace(/（.*）/, "") })) },
-    { kind: "choice", key: "time", text: "その転機のなかで、いまはどのあたりにいますか？",
-      opts: [
-        { label: "まだ動き出していない。考えたり調べたりしている", stage: { "準備": 3 } },
-        { label: "新しい環境に入って、3か月以内", stage: { "遭遇": 3 } },
-        { label: "新しい環境に入って、3か月から1年くらい", stage: { "順応": 3 } },
-        { label: "1年以上たって、落ち着いてきた", stage: { "安定": 3 } }
-      ] },
-    { kind: "scale", stage: "準備", text: "「このままでいいのかな」と考えることが増えた" },
-    { kind: "scale", stage: "遭遇", text: "新しい環境のルールや人間関係を覚えるので手一杯だ" },
-    { kind: "scale", stage: "順応", text: "仕事の進め方が、少しずつわかってきた" },
-    { kind: "scale", stage: "安定", text: "いまの環境では、だいたい迷わずに動ける" },
-    { kind: "scale", stage: "準備", text: "転機について情報を集めたり、人に話を聞いたりしている" },
-    { kind: "scale", stage: "遭遇", text: "前の環境とのちがいに、戸惑うことがある" },
-    { kind: "scale", stage: "順応", text: "自分なりのやり方を試して、手応えを確かめている" },
-    { kind: "scale", stage: "安定", text: "毎日が、少し単調に感じることがある" },
-    { kind: "scale", stage: "準備", text: "動くなら、いつ・何から始めるかを考えている" },
-    { kind: "scale", stage: "遭遇", text: "期待していたことと実際とのちがいを感じている" },
-    { kind: "scale", stage: "順応", text: "周りに、頼れる人や相談できる人ができてきた" },
-    { kind: "scale", stage: "安定", text: "次に挑戦したいことが、頭に浮かぶことがある" },
-    { kind: "choice", key: "need", text: "いま困っていることに、いちばん近いのはどれですか？",
-      opts: [
-        { label: "誰に相談すればいいのかわからない", need: { "相談": 2 } },
-        { label: "収入や仕事の得かたが見えない", need: { "仕事": 2 } },
-        { label: "足りない知識やスキルがある", need: { "学習": 2 } },
-        { label: "自分が何をしたいのか、整理できていない", need: { "内省": 2 } }
-      ] },
-    { kind: "choice", key: "need", text: "いま、あると助かるものはどれですか？",
-      opts: [
-        { label: "話を聞いてくれる人", need: { "相談": 1 } },
-        { label: "仕事や案件の情報", need: { "仕事": 1 } },
-        { label: "学べる講座や教材", need: { "学習": 1 } },
-        { label: "同じ転機にいる仲間", need: { "交流": 2 } }
-      ] },
-    { kind: "choice", key: "need", text: "考えを進めるとき、どのやり方が合っていますか？",
-      opts: [
-        { label: "人に直接話を聞く", need: { "相談": 1 } },
-        { label: "実際に小さく試してみる", need: { "仕事": 1 } },
-        { label: "本や講座で体系立てて学ぶ", need: { "学習": 1 } },
-        { label: "ひとりで書き出して考える", need: { "内省": 1 } }
-      ] },
-    { kind: "choice", key: "need", text: "転機のことを、身近な人に話せていますか？",
-      opts: [
-        { label: "よく話せている", need: {} },
-        { label: "少し話せている", need: {} },
-        { label: "ほとんど話せていない", need: { "相談": 1, "交流": 1 } },
-        { label: "話せる人がいない", need: { "交流": 1, "相談": 1 } }
-      ] }
-  ];
-
-  const answers = new Array(Q.length).fill(null);
-  let idx = -1; // -1: 冒頭、Q.length: 結果
-  const app = document.getElementById("app");
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
-  function cycleSvg(active) {
-    const pos = { "準備": [180, 52], "遭遇": [308, 180], "順応": [180, 308], "安定": [52, 180] };
-    const nodes = STAGES.map(s => {
-      const [x, y] = pos[s];
-      const on = s === active;
-      return `<g>
-        <circle cx="${x}" cy="${y}" r="38" style="fill:var(${on ? "--ck-node-on-bg" : "--ck-card"});stroke:var(${on ? "--ck-node-on-bg" : "--ck-sky-bright"})" stroke-width="2"/>
-        <text x="${x}" y="${y + 7}" text-anchor="middle" font-size="20" font-weight="700" style="fill:var(${on ? "--ck-node-on-fg" : "--ck-ink"})">${s}</text>
-      </g>`;
-    }).join("");
-    return `<svg class="cycle" viewBox="0 0 360 360" role="img" aria-label="転機のサイクル：準備、遭遇、順応、安定をくり返す${active ? "。いまは" + active : ""}">
-      <defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ck-sky-bright)"/></marker></defs>
-      <circle cx="180" cy="180" r="128" fill="none" style="stroke:var(--ck-line)" stroke-width="2"/>
-      <path d="M 222 66 A 128 128 0 0 1 294 138" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 294 222 A 128 128 0 0 1 222 294" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 138 294 A 128 128 0 0 1 66 222" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
-      <path d="M 66 138 A 128 128 0 0 1 138 66" fill="none" style="stroke:var(--ck-sky-bright)" stroke-width="2" marker-end="url(#ah)"/>
-      <text x="180" y="176" text-anchor="middle" font-size="13" style="fill:var(--ck-text-sub)" font-family="Noto Sans JP, sans-serif">転機は</text>
-      <text x="180" y="196" text-anchor="middle" font-size="13" style="fill:var(--ck-text-sub)" font-family="Noto Sans JP, sans-serif">くり返し訪れる</text>
-      ${nodes}
-    </svg>`;
-  }
-
-  function renderIntro() {
-    app.innerHTML = `<div class="stack-lg">
-      <section class="stack">
-        <h1>転機の段階<wbr>セルフチェック</h1>
-        <p class="lead">転職、独立、副業、学び直し。キャリアの転機には「段階」があります。いまのあなたがどの段階にいるのかを、18の質問でふりかえってみましょう。</p>
-        <div class="meta"><span class="tag">全18問</span><span class="tag">約5分</span><span class="tag">登録不要</span></div>
-        <div><button class="btn btn-primary" id="start">チェックを始める</button></div>
-      </section>
-      <section class="stack">
-        ${cycleSvg(null)}
-        <div class="stage-list">
-          ${STAGES.map(s => `<div><b>${s}</b><span>${STAGE_INFO[s].short}</span></div>`).join("")}
-        </div>
-        <p class="small">心理学者ナイジェル・ニコルソンの「トランジション・サイクル」をもとにしています。診断ではなく、いまの自分をふりかえるきっかけとして使ってください。回答はこのページの中だけで使い、どこにも送信しません。</p>
-      </section>
-    </div>`;
-    document.getElementById("start").onclick = () => go(0);
-  }
-
-  function renderQuestion() {
-    const q = Q[idx];
-    const pct = Math.round((idx / Q.length) * 100);
-    const a = answers[idx];
-    let body;
-    if (q.kind === "scale") {
-      body = `<div class="scale" role="group" aria-label="あてはまり度">
-        ${SCALE.map((s, i) => `<button class="opt" data-i="${i}" aria-pressed="${a === i}">${s.label}</button>`).join("")}
-      </div>`;
-    } else {
-      body = `<div class="opts" role="group">
-        ${q.opts.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="${a === i}">${esc(o.label)}</button>`).join("")}
-      </div>`;
-    }
-    const section = idx < 2 ? "いまの状況" : idx < 14 ? "気持ちと行動" : "あると助かるもの";
-    app.innerHTML = `<div class="stack" style="gap:24px">
-      <div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>
-      <div class="qhead"><p class="label">${section}</p><span class="qcount">${idx + 1} / ${Q.length}</span></div>
-      <p class="qtext" id="qt">${esc(q.text)}</p>
-      ${body}
-      <div class="qnav">
-        <button class="btn btn-ghost" id="back">${idx === 0 ? "はじめに戻る" : "前の質問へ"}</button>
-        ${a !== null && idx < Q.length - 1 ? `<button class="btn btn-ghost" id="next">次の質問へ</button>` : ""}
-      </div>
-    </div>`;
-    app.querySelectorAll(".opt").forEach(b => b.onclick = () => {
-      answers[idx] = Number(b.dataset.i);
-      go(idx + 1);
-    });
-    document.getElementById("back").onclick = () => go(idx - 1);
-    const nx = document.getElementById("next");
-    if (nx) nx.onclick = () => go(idx + 1);
-  }
-
-  function score() {
-    const st = { "準備": 0, "遭遇": 0, "順応": 0, "安定": 0 };
-    const need = { "相談": 0, "仕事": 0, "学習": 0, "内省": 0, "交流": 0 };
-    let tenki = "まだはっきりしない", timeStage = null, firstNeed = null;
-    Q.forEach((q, i) => {
-      const a = answers[i];
-      if (a === null) return;
-      if (q.kind === "scale") { st[q.stage] += SCALE[a].v; return; }
-      const o = q.opts[a];
-      if (o.tenki) tenki = o.tenki;
-      if (o.stage) for (const k in o.stage) { st[k] += o.stage[k]; timeStage = k; }
-      if (o.need) {
-        for (const k in o.need) need[k] += o.need[k];
-        if (firstNeed === null && i === 14) firstNeed = Object.keys(o.need)[0];
-      }
-    });
-    // 同点のときは「いまどのあたりか」の回答を優先し、次にサイクルの順
-    const order = s => (s === timeStage ? -1 : STAGES.indexOf(s));
-    const ranked = [...STAGES].sort((a, b) => st[b] - st[a] || order(a) - order(b));
-    const top = ranked[0];
-    const second = ranked[1];
-    const between = st[top] - st[second] <= 1 ? second : null;
-    const needRanked = Object.keys(need).sort((a, b) => need[b] - need[a] || (a === firstNeed ? -1 : b === firstNeed ? 1 : 0));
-    return { st, top, between, need: needRanked[0], tenki };
-  }
-
-  function pickItems(r) {
-    const scored = PICKS.map(p => {
-      let s = 0;
-      if (p.stage.includes(r.top)) s += 4;
-      if (p.type === r.need) s += 3;
-      if (p.tenki.includes(r.tenki)) s += 2;
-      return { p, s };
-    }).filter(x => x.s > 0);
-    scored.sort((a, b) => b.s - a.s || a.p.rank - b.p.rank);
-    const list = scored.length ? scored : PICKS.map(p => ({ p, s: 0 })).sort((a, b) => a.p.rank - b.p.rank);
-    return list.slice(0, 3).map(x => x.p);
-  }
-
-  // 結果の転機と段階で絞った、観測所の一覧へのリンク
-  function listUrl(r) {
-    const p = new URLSearchParams();
-    if (r.tenki !== "まだはっきりしない") p.set("tenki", r.tenki);
-    p.set("stage", r.top);
-    return "/search/?" + p.toString();
-  }
-  function listLabel(r) {
-    return r.tenki === "まだはっきりしない"
-      ? `「${r.top}」の段階で役立つものを、観測所ですべて見る`
-      : `「${r.tenki}×${r.top}」で役立つものを、観測所ですべて見る`;
-  }
-
-  // 観測所のおすすめ欄。データが読めなかったときは欄を出さず、観測所のトップへのリンクだけにする
-  // おすすめの上の画像（掲載先のシェア用画像）。画像がなければタイプの絵文字。見た目は観測所のカードと同じ（style.css の .card-media）
-  function mediaHtml(img) {
-    img = img || {};
-    if (img.src) return `<div class="card-media media-${esc(img.fit)}" aria-hidden="true"><img src="${esc(img.src)}" alt="" loading="lazy" decoding="async"></div>`;
-    return `<div class="card-media media-none" aria-hidden="true"><span>${esc(img.emoji || "")}</span></div>`;
-  }
-
-  // アクセス解析：結果に出たおすすめが押されたら、どの掲載かを数える（回答や結果は送らない）
-  document.addEventListener("click", ev => {
-    const a = ev.target.closest(".pick a");
-    if (!a || !window.goatcounter || !window.goatcounter.count) return;
-    const card = a.closest(".pick");
-    window.goatcounter.count({ path: "check-pick/" + card.dataset.pick, title: card.dataset.pickTitle, event: true });
-  });
-
-  function observatoryHtml(r) {
-    if (!PICKS) {
-      return `<p><a href="${OBS_TOP}">あしたの転機観測所で、転機に役立つサービスを探す</a></p>`;
-    }
-    const picks = pickItems(r);
-    return `<section class="stack">
-        <h2>あしたの転機観測所から</h2>
-        <p class="lead">転機に役立つ民間のサービスや情報を集めている「あしたの転機観測所」から、いまの段階に合いそうなものを選びました。</p>
-        <div class="picks">
-          ${picks.map(p => `<article class="card pick" data-pick="${esc(p.id)}" data-pick-title="${esc(p.title)}">
-            ${mediaHtml(p.img)}
-            <div class="pick-body">
-            <div class="pick-top"><span class="pick-type">${esc(p.type)}</span><span class="small">${esc(p.stage.join("、"))}向け</span></div>
-            <h3>${p.url ? `<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>` : esc(p.title)}</h3>
-            <p>${esc(p.memo)}</p>
-            ${p.page ? `<p class="small"><a href="${esc(p.page)}">観測所の紹介ページを見る</a></p>` : ""}
-            </div>
-          </article>`).join("")}
-        </div>
-        <p><a href="${esc(listUrl(r))}">${esc(listLabel(r))}</a></p>
-        <p class="small">観測所の情報は、これから少しずつ増えていきます。</p>
-      </section>`;
-  }
-
-  function renderResult() {
-    const r = score();
-    const info = STAGE_INFO[r.top];
-    const need = NEED_INFO[r.need];
-    const max = 12;
-    const tenkiLabel = r.tenki === "まだはっきりしない" ? "転機" : `${r.tenki}の転機`;
-    const shareBody = `「転機の段階セルフチェック」をやってみたら、いまは「${r.top}」の段階でした。`;
-    const tagText = HASHTAGS.map(t => "#" + t).join(" ");
-    const shareUrl = SHARE_URL + STAGE_SLUG[r.top] + "/";
-    const shareText = `${shareBody}\n${shareUrl}\n${tagText}`;
-    const xUrl = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareBody) + "&url=" + encodeURIComponent(shareUrl) + "&hashtags=" + encodeURIComponent(HASHTAGS.join(","));
-    // Facebookはシェア画面に投稿文を入れておけないため、Xと同じ投稿文をコピーしてから開き、貼り付けてもらう
-    const fbUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(shareUrl);
-
-    app.innerHTML = `<div class="stack-lg">
-      <section class="result-hero">
-        <p>${esc(tenkiLabel)}のなかで、いまのあなたは</p>
-        <p class="stage-name">${r.top}</p>
-        <p>${info.short}にいるようです。${r.between ? `「${r.between}」の要素も強く出ているので、${STAGES.indexOf(r.between) === (STAGES.indexOf(r.top) + 1) % 4 ? "次の段階へ移りつつある" : "ひとつ前の段階から移ってきた"}ところかもしれません。` : ""}</p>
-      </section>
-
-      <section class="stack">
-        ${cycleSvg(r.top)}
-        <div class="bars" aria-label="段階ごとのあてはまり度">
-          ${STAGES.map(s => `<div class="bar${s === r.top ? " on" : ""}"><b>${s}</b><div class="track"><i style="width:${Math.round((r.st[s] / max) * 100)}%"></i></div><span>${r.st[s]}/${max}</span></div>`).join("")}
-        </div>
-      </section>
-
-      <section class="stack">
-        <h2>「${r.top}」はどんな時期？</h2>
-        <p class="lead">${info.desc}</p>
-        <div class="card stack">
-          <h3>次の一歩のヒント</h3>
-          <ol class="steps">${info.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>
-        </div>
-      </section>
-
-      <section class="stack">
-        <h2>支えになりそうなのは<wbr>「${need.label}」</h2>
-        <p class="lead">${need.text}</p>
-      </section>
-
-      <hr class="rule">
-
-      <div id="observatory"></div>
-
-      <section class="stack">
-        <h2>転機を<wbr>ひとりで抱えこまないために</h2>
-        <p class="lead">「あしたの転機」は、キャリアの転機について考え、語り合うコミュニティです。いろいろな転機を経験した人の話に触れてみてください。</p>
-        <div class="links">
-          <a class="card linkcard" href="${FB_URL}" target="_blank" rel="noopener"><b>Facebookグループ</b><span>転機について語り合う場。気軽にのぞいてみてください</span></a>
-          <a class="card linkcard" href="${NOTE_URL}" target="_blank" rel="noopener"><b>noteマガジン</b><span>転機にまつわる話を、記事で読めます</span></a>
-        </div>
-      </section>
-
-      <section class="stack">
-        <h3>結果をシェアする</h3>
-        <p class="share-text" id="sharetext">${esc(shareText)}</p>
-        <div class="share">
-          <a href="${xUrl}" target="_blank" rel="noopener">Xでシェア</a>
-          <a href="${fbUrl}" target="_blank" rel="noopener" id="fbshare">Facebookでシェア</a>
-          <button id="copy">文章をコピー</button>
-        </div>
-        <p class="small" id="sharenote" aria-live="polite">Facebookでシェアするときは、上の文章が自動でコピーされます。開いた画面の投稿欄に貼り付けてください。</p>
-      </section>
-
-      <div><button class="btn btn-ghost" id="retry">もう一度チェックする</button></div>
-
-      <footer class="stack">
-        <p class="small">このチェックは、心理学者ナイジェル・ニコルソンの「トランジション・サイクル」（準備・遭遇・順応・安定）をもとに、黒田悠介（キャリア研究家）が作りました。医学的・心理学的な診断ではありません。回答はこのページの中だけで使い、どこにも送信しません。</p>
-      </footer>
-    </div>`;
-
-    const obs = document.getElementById("observatory");
-    const fillObs = () => { if (obs.isConnected) obs.innerHTML = observatoryHtml(r); };
-    fillObs();
-    picksReady.then(fillObs);
-
-    document.getElementById("retry").onclick = () => { answers.fill(null); go(-1); };
-    const copyBtn = document.getElementById("copy");
-    copyBtn.onclick = () => {
-      const done = () => { copyBtn.textContent = "コピーしました"; setTimeout(() => copyBtn.textContent = "文章をコピー", 2000); };
-      const fallback = () => {
-        const range = document.createRange();
-        range.selectNodeContents(document.getElementById("sharetext"));
-        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-        copyBtn.textContent = "選択しました。コピーしてください";
-      };
-      try { navigator.clipboard.writeText(shareText).then(done, fallback); } catch (e) { fallback(); }
-    };
-    const note = document.getElementById("sharenote");
-    document.getElementById("fbshare").onclick = ev => {
-      ev.preventDefault();
-      const selectText = () => {
-        const range = document.createRange();
-        range.selectNodeContents(document.getElementById("sharetext"));
-        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-        note.textContent = "上の文章を選択しました。コピーして、Facebookの投稿欄に貼り付けてください。";
-      };
-      let copying;
-      try { copying = navigator.clipboard.writeText(shareText); } catch (e) { copying = Promise.reject(e); }
-      window.open(fbUrl, "_blank", "noopener");
-      copying.then(() => { note.textContent = "投稿文をコピーしました。開いたFacebookの画面で、投稿欄に貼り付けてください。"; }, selectText);
-    };
-  }
-
-  function go(n) {
-    idx = Math.max(-1, Math.min(n, Q.length));
-    document.body.classList.toggle("in-question", idx >= 0 && idx < Q.length);
-    if (idx === -1) renderIntro();
-    else if (idx === Q.length) renderResult();
-    else renderQuestion();
-    window.scrollTo({ top: 0 });
-    const focusEl = app.querySelector("#qt, h1, .result-hero");
-    if (focusEl) { focusEl.setAttribute("tabindex", "-1"); focusEl.focus({ preventScroll: true }); }
-  }
-
-  window.__tenki = { Q, answers, score, go }; // 確認用
-  renderIntro();
-})();
+/*CHECK_JS*/
 </script>
 
 <!--SITE_FOOTER-->

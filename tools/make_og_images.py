@@ -2,7 +2,7 @@
 """共有画像（1200×630）を assets/og/ に作るスクリプト。
 転機別ページ・掛け合わせページの画像と、セルフチェックの画像（全体用1枚と、結果の段階ごとの4枚）を作る。
 
-Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの文面は config/tenki.json と check/index.html（段階のひとこと説明）から作るので、
+Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの文面は config/tenki.json と check/check.js（段階のひとこと説明）から作るので、
 それらの名前や文面を変えたときにだけ実行し直して、できた画像をリポジトリに入れる。
 
   python3 tools/make_og_images.py
@@ -88,7 +88,6 @@ def svg(kicker, title, fonts, antenna):
 </style>
 <rect width="1200" height="630" fill="#fbfaf5"/>
 <rect x="0" y="0" width="28" height="630" fill="#f5c518"/>
-<text x="106" y="96" font-family="Hiragino Sans" font-weight="700" font-size="22" letter-spacing="2.6" fill="#1874b8">OBSERVATORY FOR CAREER TRANSITIONS</text>
 <text x="106" y="{kicker_y}" font-family="ZK" font-weight="700" font-size="34" fill="#1874b8">{kicker}</text>
 {title}
 <rect x="106" y="500" width="120" height="4" fill="#1a1d23"/>
@@ -143,9 +142,9 @@ def crop_top(png_path, out_path, height=630):
 
 
 def check_stage_texts():
-    """セルフチェックの段階ごとのひとこと説明（check/index.html の STAGE_INFO の short）を読む。"""
+    """セルフチェックの段階ごとのひとこと説明（check/check.js の STAGE_INFO の short）を読む。"""
     import re
-    src = open(os.path.join(ROOT, "check", "index.html"), encoding="utf-8").read()
+    src = open(os.path.join(ROOT, "check", "check.js"), encoding="utf-8").read()
     return dict(re.findall(r'"(準備|遭遇|順応|安定)": \{\s*short: "([^"]+)"', src))
 
 
@@ -156,7 +155,6 @@ CHECK_HEAD = """<svg xmlns="http://www.w3.org/2000/svg" width="750" height="393.
 </style>
 <rect width="1200" height="630" fill="#1a1d23"/>
 <rect x="0" y="0" width="28" height="630" fill="#f5c518"/>
-<text x="106" y="96" font-family="Hiragino Sans" font-weight="700" font-size="22" letter-spacing="2.6" fill="#f5c518">SELF CHECK</text>
 <text x="106" y="560" font-family="ZK" font-weight="700" font-size="30" fill="#fbfaf5">あしたの転機観測所</text>
 <text x="400" y="560" font-family="Hiragino Sans" font-size="22" fill="#9aa0a8">ashitano-tenki.github.io</text>
 <g transform="translate(1000 420) scale(1.25)">{antenna}</g>
@@ -180,7 +178,7 @@ def svg_check_general(fonts, antenna):
                      for i in range(3))
     return (CHECK_HEAD.format(black=fonts[0], bold=fonts[1], antenna=antenna) + """
 <text x="106" y="200" font-family="ZK" font-weight="900" font-size="68" fill="#fbfaf5">転機の段階セルフチェック</text>
-<text x="106" y="270" font-family="ZK" font-weight="700" font-size="34" fill="#d6d9de">18の質問で、いまどの段階にいるかをふりかえる</text>
+<text x="106" y="270" font-family="ZK" font-weight="700" font-size="34" fill="#d6d9de">16の質問で、いまの段階と4つの資源をふりかえる</text>
 {stages}{arrows}
 </svg>""".format(stages=stages, arrows=arrows))
 

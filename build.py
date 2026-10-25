@@ -1061,7 +1061,7 @@ def build_guide(listed, ctx):
 <p>受け取った人がURLを開くと、同じリストが表示され、「自分の『あとで見る』に入れる」で取り込めます。リストはそれぞれのブラウザの中にだけ保存され、観測所に送られることはありません。</p>
 
 <h2>いまの段階を一緒にふりかえる</h2>
-<p><a href="/check/">転機の段階セルフチェック</a>は、18の質問で、転機のどの段階にいるかをふりかえるものです。結果には、その段階の説明と次の一歩のヒント、観測所からのおすすめが出ます。相談の入口や、面談の前の宿題として使えます。回答や結果は送信されません。</p>
+<p><a href="/check/">転機の段階セルフチェック</a>は、16の質問で、転機のどの段階にいるかと、転機を乗り切る4つの資源（状況・自分・支え・戦略）のバランスをふりかえるものです。結果には、転機と段階に合わせた次の一歩と、観測所からのおすすめが出ます。最後の「相談メモ」は、コピーや印刷をして相談の場で使えます。相談の入口や、面談の前の宿題として使えます。回答や結果は送信されません。</p>
 
 <h2>紹介するときに知っておいてほしいこと</h2>
 <ul>
@@ -1171,25 +1171,17 @@ def build_check(listed, ctx):
         assert mark in text, mark
     head = (HEAD_SCRIPT + '<link rel="alternate" type="application/rss+xml" title="%s 観測レポート" href="/feed.xml">\n'
             '<link rel="stylesheet" href="/assets/style.css?v=%s">' % (e(CONF["site_name"]), ctx["version"]))
+    # 質問と結果の文章（config/check.json）と、動きの JavaScript（check/check.js）をページに埋め込む
+    with open(os.path.join(ROOT, "check", "check.js"), encoding="utf-8") as f:
+        js = f.read()
+    data = json.dumps(load_json("check.json"), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     text = (text.replace("<!--SITE_HEAD-->", head)
                 .replace("<!--SITE_HEADER-->", site_header("/check/"))
-                .replace("<!--SITE_FOOTER-->", site_footer(ctx)))
+                .replace("<!--SITE_FOOTER-->", site_footer(ctx))
+                .replace("/*CHECK_DATA*/null", data)
+                .replace("/*CHECK_JS*/", js))
     write("/check/", text)
     ctx["sitemap"].append((BASE + "/check/", ctx["today"]))
-    # リニューアル版の試作（/check/beta/）。検索には出さず、どこからもリンクしない。確認が終わったら /check/ と入れ替える
-    beta_path = os.path.join(ROOT, "check", "beta.html")
-    if os.path.exists(beta_path):
-        with open(beta_path, encoding="utf-8") as f:
-            beta = f.read()
-        with open(os.path.join(ROOT, "check", "check.js"), encoding="utf-8") as f:
-            js = f.read()
-        data = json.dumps(load_json("check.json"), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
-        beta = (beta.replace("<!--SITE_HEAD-->", head)
-                    .replace("<!--SITE_HEADER-->", site_header("/check/"))
-                    .replace("<!--SITE_FOOTER-->", site_footer(ctx))
-                    .replace("/*CHECK_DATA*/null", data)
-                    .replace("/*CHECK_JS*/", js))
-        write("/check/beta/", beta)
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
         "memo": it["memo"], "url": it["url"], "rank": it["rank"],
@@ -1199,7 +1191,7 @@ def build_check(listed, ctx):
     # 結果ごとのシェア用ページ（/check/sogu/ など）。SNSには段階ごとの画像を見せ、開いた人はセルフチェックへ移る
     for st in STAGES:
         title = "いまは「%s」の段階でした｜転機の段階セルフチェック" % st["name"]
-        desc = "18の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかをふりかえるセルフチェック。"
+        desc = "16の質問で、キャリアの転機のどの段階（準備・遭遇・順応・安定）にいるかと、転機を乗り切る4つの資源のバランスをふりかえるセルフチェック。"
         write("/check/%s/" % st["slug"], """<!doctype html>
 <html lang="ja">
 <head>
