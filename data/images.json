@@ -2598,5 +2598,27 @@
   "src": "https://storage.googleapis.com/production-os-assets/assets/3e9c3a79-2b79-43f8-b234-447a1cea79bd",
   "w": 960,
   "h": 504
+ },
+ "R0332": {
+  "page": "https://www.pt-ot-st.net/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.pt-ot-st.net/images/ogpimg.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0333": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784087213195",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40872/4087213196.jpg",
+  "w": 618,
+  "h": 1000
+ },
+ "R0334": {
+  "page": "https://doctorsfile.jp/jobs/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
  }
 }
