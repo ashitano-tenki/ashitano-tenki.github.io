@@ -153,7 +153,9 @@
     var shared = sharedIds.length > 0, ids = shared ? sharedIds : load();
     listEl.innerHTML = ids.map(function (id) { return items[id] ? cardHtml(items[id]) : endedHtml(id); }).join("");
     statusEl.textContent = shared ? "送られてきたリストです（" + ids.length + "件）。"
-      : ids.length ? ids.length + "件" : "まだ何も残していません。気になったカードの右上のボタンを押すと、ここに並びます。";
+      : ids.length ? ids.length + "件" : "まだ何も残していません。";
+    var emptyEl = document.getElementById("saved-empty");
+    if (emptyEl) emptyEl.hidden = shared || ids.length > 0;
     clearBtn.hidden = shared || !ids.length;
     if (importBtn) importBtn.hidden = !shared;
     if (shareBtn) shareBtn.hidden = shared || !ids.length;

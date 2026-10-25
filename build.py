@@ -1194,6 +1194,14 @@ def build_saved(ctx):
 </div>
 <p id="saved-share-note" class="note saved-note" aria-live="polite"></p>
 <ul id="saved-list" class="cards list-compact"></ul>
+<div id="saved-empty" class="saved-empty" hidden>
+  <p>まずは次のところから、気になるものを探してみてください。</p>
+  <ul class="saved-empty-links">
+    <li><a href="/tenki/"><b>転機から探す</b><span>転職・独立・副業など、迎えている転機から</span></a></li>
+    <li><a href="/search/"><b>探す</b><span>キーワードや段階・タイプで絞り込んで</span></a></li>
+    <li><a href="/check/"><b>セルフチェック</b><span>いまの段階をふりかえって、合いそうなものを見つける</span></a></li>
+  </ul>
+</div>
 <p class="more-wrap"><button type="button" id="saved-clear" class="link-button" hidden>すべて外す</button></p>
 <noscript><p class="note">この機能にはJavaScriptを使います。</p></noscript>
 """.format(crumbs=breadcrumb([("あとで見る", None)]), icon=SAVE_ICON)

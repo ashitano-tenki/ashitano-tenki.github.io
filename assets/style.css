@@ -572,3 +572,11 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .js .related-tabs + .related-panel .related-h, .js .related-panel .related-h { display: none; }
 .related-h { font-size: 18px; margin: var(--space-4) 0 var(--space-2); }
 .related-tabs { margin-bottom: var(--space-3); }
+/* あとで見る：0件のときの入口 */
+.saved-empty > p { margin: 0 0 var(--space-3); color: var(--text-body); }
+.saved-empty-links { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+@media (min-width: 760px) { .saved-empty-links { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.saved-empty-links a { display: flex; flex-direction: column; gap: 2px; height: 100%; padding: var(--space-3) var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); text-decoration: none; color: var(--ink); }
+.saved-empty-links a:hover { border-color: var(--sky); }
+.saved-empty-links b { font-size: 16px; color: var(--sky); }
+.saved-empty-links span { font-size: 13px; color: var(--text-sub); }
