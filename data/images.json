@@ -2446,5 +2446,143 @@
   "page": "https://sekokan-next.worldcorp-jp.com/",
   "checked": "2026-10-25",
   "status": "none"
+ },
+ "R0311": {
+  "page": "https://herrise.co.jp/",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0312": {
+  "page": "https://www.lady-carry.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.lady-carry.com/img/ladycarry-threads-og-20260908.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0313": {
+  "page": "https://www.amazon.co.jp/dp/4864902380",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48649/4864902380.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0314": {
+  "page": "https://jikorikai.com/details/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://jikorikai.com/wp-content/uploads/2022/04/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0315": {
+  "page": "https://freelance-hub.jp/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x765fcd0a0360>"
+ },
+ "R0316": {
+  "page": "https://open.spotify.com/show/6yfBSH5If5aYXlNm6JFfqQ",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fe5d827afb36872503290fc23",
+  "w": 300,
+  "h": 300
+ },
+ "R0317": {
+  "page": "https://www.atpress.ne.jp/news/5646815/print",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0318": {
+  "page": "https://newscast.jp/news/4626756",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.atpress.ne.jp/attachments/jUVqEhR9ca6SWDJ80p61.png",
+  "w": 960,
+  "h": 396
+ },
+ "R0319": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756920522",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756920527.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0320": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756922373",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756922376.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0321": {
+  "page": "https://freelance-tensyoku.com/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/75a369e1-9f8b-493b-a946-268c83beaa01",
+  "w": 960,
+  "h": 540
+ },
+ "R0322": {
+  "page": "https://rssc.rikkyo.ac.jp/",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0323": {
+  "page": "https://amzn.to/4j1Heng",
+  "checked": "2026-10-25",
+  "status": "none"
+ },
+ "R0324": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784815637798",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48156/4815637792.jpg",
+  "w": 648,
+  "h": 1000
+ },
+ "R0325": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784140887639",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "http://www.maruzenjunkudo.co.jp/cdn/shop/files/w1200xh628px_logo_maruzenjunkudo.png?v=1761281971",
+  "w": 960,
+  "h": 502
+ },
+ "R0326": {
+  "page": "https://hr-library.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/197283ec-a9eb-4a39-bcaa-de4cf069e5e0",
+  "w": 960,
+  "h": 504
+ },
+ "R0327": {
+  "page": "https://www.diamond.co.jp/book/9784478022122.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44780/4478022127.jpg",
+  "w": 693,
+  "h": 1000
+ },
+ "R0328": {
+  "page": "https://www.diamond.co.jp/book/9784478022368.html",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44780/4478022364.jpg",
+  "w": 696,
+  "h": 1000
+ },
+ "R0329": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784815642068",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48156/4815642060.jpg",
+  "w": 647,
+  "h": 1000
  }
 }
