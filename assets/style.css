@@ -460,10 +460,64 @@ button, .button {
 @media (min-width: 900px) {
   .search-layout { grid-template-columns: 240px minmax(0, 1fr); gap: var(--space-8); align-items: start; }
   .filter-toggle { display: none; }
-  .js .filter-panel:not(.open), .filter-panel { display: grid; grid-template-columns: 1fr; margin-top: 0; position: sticky; top: var(--space-4); }
+  .js .filter-panel:not(.open), .filter-panel { display: grid; grid-template-columns: 1fr; margin-top: 0; }
   .result-col .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .field label { display: block; font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 2px; }
+/* 探す：条件のボタン（中身はラジオボタン。件数つき、0件は押せない） */
+.filter-panel { grid-template-columns: 1fr; }
+.chip-group { border: 0; margin: 0; padding: 0; min-width: 0; }
+.chip-group legend { font-size: 13px; font-weight: 700; color: var(--text-sub); margin-bottom: 6px; padding: 0; }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.fchip { position: relative; }
+.fchip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.fchip span { display: inline-flex; align-items: baseline; gap: 5px; padding: 5px 12px; border-radius: var(--radius-pill); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); font-size: 14px; line-height: 1.5; }
+.fchip i { font-style: normal; font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
+.fchip:hover span { border-color: var(--sky); }
+.fchip input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--base); font-weight: 700; }
+.fchip input:checked + span i { color: var(--footer-text); }
+.fchip input:focus-visible + span { outline: 2px solid var(--sky); outline-offset: 2px; }
+.fchip.off span { opacity: .4; }
+.fchip.off input { cursor: default; }
+/* 何も入れていない最初の画面：よく探される言葉と入口 */
+.start-help { margin-top: var(--space-3); }
+.start-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--text-sub); }
+.start-words { display: flex; flex-wrap: wrap; gap: 6px; }
+.start-word { display: inline-block; padding: 5px 14px; border-radius: var(--radius-pill); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; font-size: 14px; }
+.start-word:hover { border-color: var(--sky); color: var(--sky); }
+.start-links { margin: var(--space-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: 14px; }
+/* 入力中の候補 */
+.search-q { position: relative; }
+.suggest { position: absolute; left: 0; right: 0; top: 100%; z-index: 20; list-style: none; margin: 4px 0 0; padding: 4px 0; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: 0 4px 16px rgba(26, 29, 35, 0.12); }
+.suggest button { display: block; width: 100%; text-align: left; background: none; border: 0; border-radius: 0; padding: 8px 14px; font-size: 15px; font-weight: 400; color: var(--ink); }
+.suggest button:hover, .suggest button:focus-visible { background: var(--chip-bg); outline: none; }
+/* カード／一覧の切り替え（パソコンだけ。スマホはもともと一覧） */
+.view-switch { display: none; }
+@media (min-width: 640px) {
+  .view-switch { display: inline-flex; border: var(--border-hairline) solid var(--line); border-radius: var(--radius-pill); overflow: hidden; }
+  .view-switch button { font-size: 13px; font-weight: 400; padding: 4px 14px; border: 0; border-radius: 0; background: var(--card); color: var(--ink); }
+  .view-switch button + button { border-left: var(--border-hairline) solid var(--line); }
+  .view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--base); font-weight: 700; }
+  .result-col .cards.view-list { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
+  .view-list .card a { flex-direction: row; align-items: stretch; gap: 14px; padding: 10px; }
+  .view-list .card-media { width: 150px; flex: none; align-self: flex-start; border-width: var(--border-hairline); border-radius: 6px; }
+  .view-list .media-none span { font-size: 26px; }
+  .view-list .card-body { padding: 0 30px 0 0; }
+  .view-list .card-when { font-size: 12px; margin-bottom: 2px; }
+  .view-list .card h3 { font-size: 16px; margin-bottom: 2px; }
+  .view-list .card-line { margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .view-list .card-foot { margin-top: 0; }
+  .view-list .save-btn { top: 8px; right: 8px; width: 28px; height: 28px; }
+}
+/* 転機で絞ったときの区切り（ここから下は、どの転機にも役立つもの） */
+.list-divider { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: var(--space-4) 0 var(--space-1); font-weight: 700; color: var(--ink); }
+.list-divider::after { content: ""; flex: 1; border-top: var(--border-hairline) solid var(--line); }
+/* 0件のとき、外すと見つかる条件 */
+.relax-btn { font-size: 14px; font-weight: 400; padding: 6px 14px; border-radius: var(--radius-md); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
+.relax-btn:hover { border-color: var(--sky); }
+.relax-btn b { color: var(--sky-on-tint); }
+/* 言い換えで広げて探したときの一言 */
+.syn-note { margin: 0 0 var(--space-3); font-size: 13px; color: var(--text-sub); }
 .result-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); font-size: 15px; }
 .sort-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
 .sort-help { font-size: 13px; white-space: nowrap; }

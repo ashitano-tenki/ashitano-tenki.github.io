@@ -957,9 +957,32 @@ def build_item(item, listed, ctx):
     page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"])
 
 
+def popular_words(listed, ctx, k=8):
+    """「よく探される言葉」：言い換え表の各グループの代表の言葉と、向いている人の言葉のうち、掲載が3件以上あるもの（タイプの名前と「無料」は除く）。
+    毎日の更新で、日付に合わせて k 個を選び直す。"""
+    groups = [g for g in load_json("synonyms.json").get("groups", []) if isinstance(g, list) and g]
+    # タイプの名前（ボタンで選べる）と、サイトで出していない費用の言葉は外す
+    skip = {k["name"] for k in KINDS} | {"無料"}
+    pool = [w for w in dict.fromkeys([g[0] for g in groups] + CONF.get("audience", [])) if w not in skip]
+    texts = [normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"])])) for it in listed]
+    pool = [w for w in pool if sum(1 for t in texts if normalize(w) in t) >= 3]
+    if len(pool) <= k:
+        return pool
+    # 日付を種にして選ぶので、同じ日のうちは何度作り直しても同じ言葉になる
+    import random
+    return random.Random(ctx["today"].toordinal()).sample(pool, k)
+
+
 def build_search(listed, ctx):
-    def options(values):
-        return "".join('<option value="%s">%s</option>' % (e(v), e(v)) for v in values)
+    words = popular_words(listed, ctx)
+
+    def chip_group(name, label, values, labels=None):
+        """条件のボタン（ラジオボタンを押しやすい形にしたもの）。件数は search.js が入れる"""
+        labels = labels or {}
+        opts = [("", "すべて")] + [(v, labels.get(v, v)) for v in values]
+        return ('<fieldset class="chip-group"><legend>%s</legend><div class="fchips">%s</div></fieldset>'
+                % (e(label), "".join('<label class="fchip"><input type="radio" name="%s" value="%s"%s><span>%s<i></i></span></label>'
+                                     % (name, e(v), " checked" if not v else "", e(t)) for v, t in opts)))
     body = """
 {crumbs}
 <header class="page-head page-head-tight">
@@ -968,15 +991,21 @@ def build_search(listed, ctx):
 <form id="filters" class="filters" action="/search/" method="get" role="search">
   <div class="search-q">
     <label for="q" class="visually-hidden">キーワード</label>
-    <input id="q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
+    <input id="q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）" autocomplete="off" aria-autocomplete="list" aria-controls="suggest">
+    <ul id="suggest" class="suggest" role="listbox" aria-label="候補" hidden></ul>
+  </div>
+  <div id="start-help" class="start-help" hidden>
+    <p class="start-label">よく探される言葉</p>
+    <div class="start-words">{popular}</div>
+    <p class="start-links"><a href="/tenki/">転機から探す</a><a href="/check/">いまの段階をセルフチェックする</a></p>
   </div>
   <div class="search-layout">
     <div class="filter-col">
       <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">絞り込む<span id="filter-count"></span></button>
       <div id="filter-panel" class="filter-panel">
-        <div class="field"><label for="tenki">転機</label><select id="tenki" name="tenki"><option value="">すべて</option>{tenki}</select></div>
-        <div class="field"><label for="stage">段階</label><select id="stage" name="stage"><option value="">すべて</option>{stages}</select></div>
-        <div class="field"><label for="kind">タイプ</label><select id="kind" name="kind"><option value="">すべて</option>{kinds}</select></div>
+        {tenki}
+        {stages}
+        {kinds}
         <noscript><button type="submit">この条件で探す</button></noscript>
       </div>
     </div>
@@ -984,19 +1013,24 @@ def build_search(listed, ctx):
       <div class="result-bar">
         <p id="result-count" aria-live="polite">読み込み中…</p>
         <button type="button" class="bar-filter" id="bar-filter" aria-controls="filter-panel" aria-expanded="false">絞り込む</button>
+        <div class="view-switch" role="group" aria-label="表示の切り替え"><button type="button" data-view="card" aria-pressed="true">カード</button><button type="button" data-view="list" aria-pressed="false">一覧</button></div>
         <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>
+      <p id="syn-note" class="syn-note" hidden></p>
       <ul id="results" class="cards list-compact"></ul>
       <p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
     </div>
   </div>
 </form>
 <noscript><p class="note">検索にはJavaScriptを使います。使えない場合は<a href="/tenki/">転機から探す</a>をご利用ください。</p></noscript>
-<script>window.TENKI_PAGE_SIZE = {page_size}; window.TENKI_THIS_YEAR = {year};</script>
+<script>window.TENKI_PAGE_SIZE = {page_size}; window.TENKI_THIS_YEAR = {year}; window.TENKI_POPULAR = {popular_json};</script>
 <script src="/assets/search.js?v={ver}" defer></script>
-""".format(crumbs=breadcrumb([("探す", None)]), kinds=options(kinds_of(listed)),
-           tenki=options([t["name"] for t in TENKI]), stages=options([s["name"] for s in STAGES]),
+""".format(crumbs=breadcrumb([("探す", None)]), kinds=chip_group("kind", "タイプ", kinds_of(listed)),
+           tenki=chip_group("tenki", "転機", [t["name"] for t in TENKI], {COMMON: "どの転機にも", OTHER: "そのほか"}),
+           stages=chip_group("stage", "段階", [s["name"] for s in STAGES]),
+           popular="".join('<a class="start-word" href="?q=%s">%s</a>' % (e(quote(w)), e(w)) for w in words),
+           popular_json=json.dumps(words, ensure_ascii=False),
            page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
@@ -1232,6 +1266,10 @@ def build_search_json(listed, ctx):
         "synonyms": [{"words": sorted({normalize(w) for w in g if w.strip()}),
                       "readings": sorted({reading(w) for w in g if w.strip()} - {""})} for g in synonyms if isinstance(g, list)],
     }
+    # 入力中の候補（言い換え表の言葉のうち、掲載に1件以上あるもの）。読みを添えて、ひらがなでも候補に出す
+    texts = [i["text"] for i in data["items"]]
+    words = list(dict.fromkeys(w.strip() for g in synonyms if isinstance(g, list) for w in g if w.strip()))
+    data["suggest"] = [{"w": w, "r": reading(w)} for w in words if any(normalize(w) in t for t in texts)]
     write("/search.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
 
 

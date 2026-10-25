@@ -4,12 +4,11 @@
   var PAGE = window.TENKI_PAGE_SIZE || 20;
   var THIS_YEAR = window.TENKI_THIS_YEAR || new Date().getFullYear();
   var FIELDS = ["q", "tenki", "stage", "kind", "sort"];
-  // 「絞り込む」の中にある条件
-  var FILTERS = ["tenki", "stage", "kind"].filter(function (f) { return document.getElementById(f); });
-  var SELECTS = FILTERS.slice();
+  var form = document.getElementById("filters");
+  // 「絞り込む」の中にある条件（押すだけのボタン。中身はラジオボタン）
+  var FILTERS = ["tenki", "stage", "kind"].filter(function (f) { return form.querySelector('[name="' + f + '"]'); });
   var LABELS = { kind: "タイプ", tenki: "転機", stage: "段階" };
   var COMMON = "共通", OTHER = "その他";
-  var form = document.getElementById("filters");
   var list = document.getElementById("results");
   var countEl = document.getElementById("result-count");
   var moreBtn = document.getElementById("more");
@@ -21,11 +20,12 @@
   zeroHelp.className = "zero-help";
   zeroHelp.hidden = true;
   chipsEl.parentNode.insertBefore(zeroHelp, chipsEl.nextSibling);
-  // 選択肢のもとの名前を覚えておき、件数を付け直せるようにする
-  SELECTS.forEach(function (f) {
-    Array.prototype.forEach.call(form.elements[f].options, function (o) { o.dataset.label = o.textContent; });
-  });
   var data = null, results = [], shown = 0, byNew = false;  // byNew: 新着順のときだけカードに追加日を出す
+  var ownCount = -1;  // 転機で絞ったとき、その転機ならではの件数（ここで「どの転機にも役立つもの」の区切りを入れる）。区切らないときは -1
+  var startHelp = document.getElementById("start-help");
+  var synNote = document.getElementById("syn-note");
+  var suggestEl = document.getElementById("suggest");
+  var qInput = document.getElementById("q");
 
   function normalize(s) {
     s = (s || "").normalize("NFKC").toLowerCase();
@@ -56,10 +56,18 @@
     return state;
   }
 
+  // ラジオボタンの組で、値が v のものを選ぶ（RadioNodeList の value に "" を入れても「すべて」は選ばれないため）
+  function setRadio(name, v) {
+    var hit = Array.prototype.filter.call(form.querySelectorAll('input[name="' + name + '"]'), function (x) { return x.value === v; })[0];
+    if (hit) hit.checked = true;
+    return !!hit;
+  }
+
   function writeForm(state) {
     FIELDS.forEach(function (f) {
       var el = form.elements[f];
       if (!el) return;
+      if (FILTERS.indexOf(f) >= 0) { if (!setRadio(f, state[f])) setRadio(f, ""); return; }
       if (el.type === "checkbox") { el.checked = state[f] === "1"; return; }
       if (el.tagName === "SELECT" && state[f] && !Array.prototype.some.call(el.options, function (o) { return o.value === state[f]; })) {
         el.add(new Option(state[f], state[f]));
@@ -109,22 +117,24 @@
     return s;
   }
 
-  // 選択肢ごとに「それを選んだら何件になるか」を付け、0件になるものは選べなくする
+  // ボタンごとに「それを選んだら何件になるか」を付け、0件になるものは押せなくする
   function updateCounts(state) {
-    SELECTS.forEach(function (f) {
+    FILTERS.forEach(function (f) {
       var base = without(state, f);
-      Array.prototype.forEach.call(form.elements[f].options, function (o) {
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="' + f + '"]'), function (input) {
         var s = without(base, f);
-        s[f] = o.value;
+        s[f] = input.value;
         var n = match(s).length;
-        o.textContent = (o.dataset.label || o.value) + "（" + n + "）";
-        o.disabled = n === 0 && o.value !== state[f];
+        input.parentNode.querySelector("i").textContent = n;
+        input.disabled = n === 0 && input.value !== state[f];
+        input.parentNode.classList.toggle("off", input.disabled);
       });
     });
   }
 
   // 0件のとき、どの条件を外せば見つかるかを示す
-  var POPULAR = ["転職", "副業", "フリーランス", "起業", "確定申告", "コーチング", "学び直し", "50代"];
+  // よく探される言葉（毎日の更新で入れ替わる。build.py の popular_words）
+  var POPULAR = window.TENKI_POPULAR || ["転職", "副業", "フリーランス", "起業", "確定申告", "コーチング", "学び直し", "50代"];
 
   function renderZeroHelp(state) {
     var hints = [];
@@ -133,10 +143,10 @@
       ["q"].concat(FILTERS).forEach(function (f) {
         if (!state[f] || (f === "q" && onlyQ)) return;  // キーワードだけのときは「外すと全件」は出さない
         var n = match(without(state, f)).length;
-        if (n) hints.push('<button type="button" class="link-button" data-field="' + f + '">' + esc(chipText(f, state)) + "を外すと" + n + "件</button>");
+        if (n) hints.push('<button type="button" class="relax-btn" data-field="' + f + '">' + esc(chipText(f, state)) + "を外すと <b>" + n + "件</b></button>");
       });
     }
-    var html = hints.length ? "<span>条件を外すと見つかります：</span>" + hints.join("") : "";
+    var html = hints.length ? "<span>条件を1つ外すと見つかります：</span>" + hints.join("") : "";
     // キーワードだけで0件のときは、よく探される言葉と「転機から探す」を出して、すぐに探し直せるようにする
     if (!results.length && state.q) {
       html += (html ? '<span class="zero-break"></span>' : "") + "<span>こんな言葉で探せます：</span>" + POPULAR.map(function (w) {
@@ -148,6 +158,7 @@
   }
 
   function filter(state) {
+    ownCount = -1;
     var out = match(state);
     if (state.sort === "new") {
       out.sort(function (a, b) { return a.added < b.added ? 1 : a.added > b.added ? -1 : a.rank - b.rank; });
@@ -162,7 +173,14 @@
         return 2;
       };
       out.forEach(function (it) { it._tier = tier(it); });
-      out.sort(function (a, b) { return a._tier - b._tier || a.rank - b.rank; });
+      // 転機で絞ったときは、その転機ならではの掲載を先に、どの転機にも役立つ共通の掲載を後に（転機のページと同じ並び）
+      var t = state.tenki, split = t && t !== COMMON && t !== OTHER;
+      var grp = function (it) { return split && it.tenki.indexOf(t) < 0 ? 1 : 0; };
+      out.sort(function (a, b) { return grp(a) - grp(b) || a._tier - b._tier || a.rank - b.rank; });
+      if (split) {
+        ownCount = out.filter(function (it) { return grp(it) === 0; }).length;
+        if (ownCount === 0 || ownCount === out.length) ownCount = -1;
+      }
     }
     return out;
   }
@@ -227,7 +245,9 @@
   function render(reset) {
     if (reset) { list.innerHTML = ""; shown = 0; }
     var next = results.slice(shown, shown + PAGE);
-    list.insertAdjacentHTML("beforeend", next.map(cardHtml).join(""));
+    list.insertAdjacentHTML("beforeend", next.map(function (it, j) {
+      return (shown + j === ownCount ? '<li class="list-divider" role="presentation">どの転機にも役立つもの</li>' : "") + cardHtml(it);
+    }).join(""));
     shown += next.length;
     moreBtn.hidden = shown >= results.length;
     if (!moreBtn.hidden) moreBtn.textContent = "もっと見る（残り" + (results.length - shown) + "件）";
@@ -248,6 +268,34 @@
     }, 2000);
   }
 
+  // 言い換えで広げて探したときに、そのことを一言添える
+  function renderSynNote(state) {
+    var parts = [];
+    normalize(state.q).split(/\s+/).filter(Boolean).forEach(function (t) {
+      var alts = alternatives(t).filter(function (w) { return w !== t; });
+      if (alts.length) parts.push("「" + t + "」と同じ意味の言葉（" + alts.slice(0, 3).join("・") + (alts.length > 3 ? "など" : "") + "）");
+    });
+    synNote.hidden = !parts.length || !results.length;
+    synNote.textContent = parts.length ? parts.join("、") + "も含めて探しています。" : "";
+  }
+
+  // 入力中の候補：言い換え表の言葉から、入力した文字（ひらがなは読み）を含むものを最大5つ
+  function renderSuggest() {
+    var q = normalize(qInput.value.trim());
+    var words = [];
+    if (data && data.suggest && q.length >= 2) {
+      data.suggest.forEach(function (o) {
+        if (words.length >= 5) return;
+        if (normalize(o.w) === q) return;
+        if (normalize(o.w).indexOf(q) >= 0 || (o.r && o.r.indexOf(q) >= 0)) words.push(o.w);
+      });
+    }
+    suggestEl.hidden = !words.length;
+    suggestEl.innerHTML = words.map(function (w) {
+      return '<li role="option"><button type="button" data-word="' + esc(w) + '">' + esc(w) + "</button></li>";
+    }).join("");
+  }
+
   function run() {
     var state = readForm();
     updateUrl(state);
@@ -256,6 +304,8 @@
     renderChips(state);
     updateCounts(state);
     renderZeroHelp(state);
+    renderSynNote(state);
+    startHelp.hidden = !!(state.q || FILTERS.some(function (f) { return state[f]; }));
     countEl.textContent = countText(state);
     render(true);
     reportZero(state);
@@ -267,12 +317,55 @@
   }
 
   var timer;
-  form.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(run, 200); });
+  form.addEventListener("input", function (ev) {
+    if (ev.target === qInput) renderSuggest();
+    clearTimeout(timer); timer = setTimeout(run, 200);
+  });
+  suggestEl.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-word]");
+    if (!b) return;
+    qInput.value = b.getAttribute("data-word");
+    suggestEl.hidden = true;
+    run();
+  });
+  qInput.addEventListener("keydown", function (ev) { if (ev.key === "Escape") suggestEl.hidden = true; });
+  document.addEventListener("click", function (ev) { if (!ev.target.closest(".search-q")) suggestEl.hidden = true; });
+  // 選んでいるボタンをもう一度押すと外れる（「すべて」に戻る）
+  var wasChecked = null;
+  form.addEventListener("pointerdown", function (ev) {
+    var label = ev.target.closest(".fchip");
+    var input = label && label.querySelector("input");
+    wasChecked = input && input.checked && input.value ? input : null;
+  });
+  form.addEventListener("click", function (ev) {
+    var input = ev.target.closest(".fchip") && ev.target.closest(".fchip").querySelector("input");
+    if (input && input === wasChecked && ev.target === input) {
+      setRadio(input.name, "");
+      wasChecked = null;
+      run();
+    }
+  });
+  // カード／一覧の表示の切り替え（パソコン）。選んだ表示はこのブラウザに覚えておく
+  var viewSwitch = document.querySelector(".view-switch");
+  function setView(v) {
+    list.classList.toggle("view-list", v === "list");
+    Array.prototype.forEach.call(viewSwitch.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-view") === v)); });
+  }
+  if (viewSwitch) {
+    try { setView(localStorage.getItem("tenki-view") || "card"); } catch (e) { setView("card"); }
+    viewSwitch.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button[data-view]");
+      if (!b) return;
+      setView(b.getAttribute("data-view"));
+      try { localStorage.setItem("tenki-view", b.getAttribute("data-view")); } catch (e) {}
+    });
+  }
   form.addEventListener("change", run);
   form.addEventListener("submit", function (ev) { ev.preventDefault(); run(); });
   moreBtn.addEventListener("click", function () { render(false); });
   toggle.addEventListener("click", function () { setPanel(!panel.classList.contains("open")); });
   function clearField(k) {
+    if (FILTERS.indexOf(k) >= 0) { setRadio(k, ""); return; }
     var el = form.elements[k];
     if (el.type === "checkbox") el.checked = false; else el.value = "";
   }
