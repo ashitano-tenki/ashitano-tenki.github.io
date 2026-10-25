@@ -1176,6 +1176,20 @@ def build_check(listed, ctx):
                 .replace("<!--SITE_FOOTER-->", site_footer(ctx)))
     write("/check/", text)
     ctx["sitemap"].append((BASE + "/check/", ctx["today"]))
+    # リニューアル版の試作（/check/beta/）。検索には出さず、どこからもリンクしない。確認が終わったら /check/ と入れ替える
+    beta_path = os.path.join(ROOT, "check", "beta.html")
+    if os.path.exists(beta_path):
+        with open(beta_path, encoding="utf-8") as f:
+            beta = f.read()
+        with open(os.path.join(ROOT, "check", "check.js"), encoding="utf-8") as f:
+            js = f.read()
+        data = json.dumps(load_json("check.json"), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+        beta = (beta.replace("<!--SITE_HEAD-->", head)
+                    .replace("<!--SITE_HEADER-->", site_header("/check/"))
+                    .replace("<!--SITE_FOOTER-->", site_footer(ctx))
+                    .replace("/*CHECK_DATA*/null", data)
+                    .replace("/*CHECK_JS*/", js))
+        write("/check/beta/", beta)
     data = {"items": [{
         "id": it["id"], "title": it["title"], "type": it["kind"], "tenki": it["tenki"], "stage": it["stages"],
         "memo": it["memo"], "url": it["url"], "rank": it["rank"],
