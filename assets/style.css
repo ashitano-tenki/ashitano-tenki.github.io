@@ -568,3 +568,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
   a, button, .button, .card a, select, input[type="search"] { transition: none; }
   button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active, .card a:active { transform: none; }
 }
+/* 紹介ページの下の関連（切り替えボタンがあるときは、パネルの見出しを隠す） */
+.js .related-tabs + .related-panel .related-h, .js .related-panel .related-h { display: none; }
+.related-h { font-size: 18px; margin: var(--space-4) 0 var(--space-2); }
+.related-tabs { margin-bottom: var(--space-3); }

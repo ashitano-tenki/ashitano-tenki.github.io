@@ -381,3 +381,19 @@
   var start = new URLSearchParams(location.search).get("tenki") || "";
   if (start && tabs.querySelector('button[data-tenki="' + start.replace(/"/g, "") + '"]')) apply(start);
 })();
+
+// 紹介ページの下の関連：「同じ転機・段階」と「次の段階」を切り替えボタンで1つにまとめる
+(function () {
+  var tabs = document.querySelector(".related-tabs");
+  if (!tabs) return;
+  var panels = tabs.parentNode.querySelectorAll(".related-panel");
+  function show(n) {
+    Array.prototype.forEach.call(tabs.querySelectorAll("button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-panel") === n)); });
+    Array.prototype.forEach.call(panels, function (p) { p.hidden = p.getAttribute("data-panel") !== n; });
+  }
+  tabs.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-panel]");
+    if (b) show(b.getAttribute("data-panel"));
+  });
+  show("0");
+})();

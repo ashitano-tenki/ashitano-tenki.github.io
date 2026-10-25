@@ -113,6 +113,11 @@ def parse_month(value):
     return int(m.group(1)), int(m.group(2))
 
 
+def fix_memo(text):
+    """観測メモの言い回しを整える。「〜に向く。」は不自然なので「〜に向いている。」にする（スプレッドシートはそのまま）。"""
+    return re.sub(r"に向く(?=。|$)", "に向いている", text or "")
+
+
 def month_label(ym):
     return "%d年%d月" % ym if ym else ""
 
@@ -159,7 +164,7 @@ def parse_rows(text):
             "kind": row["種類"],
             "tenki": split_list(row["転機の種類"]),
             "stages": split_list(row["段階"]),
-            "memo": row["観測メモ"],
+            "memo": fix_memo(row["観測メモ"]),
             "url": row["URL"] if re.match(r"^https?://", row["URL"]) else "",
             "provider": row["提供元・著者"],
             "observed": parse_date(row["最終観測日"]),
@@ -836,21 +841,35 @@ def next_stage(item):
     return order[last + 1], False
 
 
-def published_row(item):
-    """「発表・更新時期」の行。調査は「2026年7月発表」、ほかは「2026年8月」。空欄なら行ごと出さない。"""
-    if not item["published"]:
-        return ""
-    if item["kind"] == "調査":
-        return '    <div><dt>発表時期</dt><dd>%s発表</dd></div>\n' % e(month_label(item["published"]))
-    return '    <div><dt>発表・更新</dt><dd>%s</dd></div>\n' % e(month_label(item["published"]))
-
-
 def report_link(item):
     url = CONF.get("report_form_url", "")
     if not url:
         return '<p class="report">情報の誤りに気づいたときのお知らせフォームは準備中です。</p>'
     href = url.replace("{id}", quote(item["id"])).replace("{title}", quote(item["title"]))
     return '<p class="report"><a href="%s" rel="noopener" target="_blank">この情報の誤りを知らせる</a></p>' % e(href)
+
+
+KIND_PHRASE = {"相談": "相談先", "仕事": "仕事サービス", "学習": "学びの場", "内省": "自己分析サービス", "実務": "実務サービス",
+               "交流": "コミュニティ", "書籍": "本", "媒体": "メディア", "調査": "調査レポート"}
+
+
+def item_kind_phrase(item):
+    """ページの題名に添える言葉。例：「転職の仕事サービス」「キャリアの転機に役立つ本」"""
+    kind = KIND_PHRASE.get(item["kind"], item["kind"])
+    tenki = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), "")
+    return "%sの%s" % (tenki, kind) if tenki else "キャリアの転機に役立つ%s" % kind
+
+
+def related_section(panels):
+    """紹介ページの下の関連。1つならそのまま、2つなら切り替えボタン（JavaScript が使えないときは両方並べる）。"""
+    if not panels:
+        return ""
+    if len(panels) == 1:
+        return '<section class="section related"><h2 class="section-title">%sで役立つもの</h2>%s</section>' % (e(panels[0][0]), panels[0][1])
+    tabs = "".join('<button type="button" aria-pressed="%s" data-panel="%d">%s</button>' % ("true" if i == 0 else "false", i, e(name)) for i, (name, _) in enumerate(panels))
+    bodies = "".join('<div class="related-panel" data-panel="%d"><h3 class="related-h">%sで役立つもの</h3>%s</div>' % (i, e(name), html) for i, (name, html) in enumerate(panels))
+    return ('<section class="section related"><h2 class="section-title">あわせて見たいもの</h2>'
+            '<div class="kind-tabs related-tabs" role="group" aria-label="関連の切り替え">%s</div>%s</section>' % (tabs, bodies))
 
 
 def build_item(item, listed, ctx):
@@ -861,12 +880,10 @@ def build_item(item, listed, ctx):
         return "、".join(out) or "―"
 
     similar = similar_items(item, listed)
-    similar_html = ""
+    panels = []  # 下の関連：（ボタンの名前, 中身）。2つあるときは切り替えボタンで1つの区切りにまとめる
     if similar:
-        similar_html = ('<section class="section"><h2 class="section-title">同じ転機・段階で役立つもの</h2>%s</section>'
-                        % sm_shelf("".join(card(it, ctx["today"]) for it in similar), len(similar), "同じ転機・段階で役立つもの"))
+        panels.append(("同じ転機・段階", sm_shelf("".join(card(it, ctx["today"]) for it in similar), len(similar), "同じ転機・段階で役立つもの")))
 
-    next_html = ""
     nxt = next_stage(item)
     if item["listed"] and nxt:
         stage, following = nxt
@@ -875,13 +892,18 @@ def build_item(item, listed, ctx):
         if picks:
             heading = ("次の転機の準備に役立つもの" if following else "次の段階（%s）で役立つもの" % stage)
             tenki_param = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), "")
-            next_html = ('<section class="section"><h2 class="section-title">%s</h2>%s%s</section>'
-                         % (e(heading), sm_shelf("".join(card(it, ctx["today"]) for it in picks), len(picks), heading),
-                            more_link(search_url(tenki=tenki_param, stage=stage),
-                                      "%s×%sで役立つものをすべて見る" % (tenki_param, stage) if tenki_param
-                                      else "%sで役立つものをすべて見る" % stage)))
+            panels.append(("次の転機の準備" if following else "次の段階（%s）" % stage,
+                           sm_shelf("".join(card(it, ctx["today"]) for it in picks), len(picks), heading)
+                           + more_link(search_url(tenki=tenki_param, stage=stage),
+                                       "%s×%sで役立つものをすべて見る" % (tenki_param, stage) if tenki_param
+                                       else "%sで役立つものをすべて見る" % stage)))
+    similar_html = related_section(panels)
 
-    crumbs = breadcrumb([("探す", "/search/"), (item["title"], None)])
+    # パンくずは、その掲載のいちばん目の転機のページを通る（どの転機にもの掲載は「どの転機にも」）
+    main = next((TENKI_BY_NAME[t] for t in item["tenki"] if t in TENKI_BY_NAME), None)
+    crumbs = breadcrumb([("転機から探す", "/tenki/")]
+                        + ([("どの転機にも" if main["name"] == COMMON else main["name"], tenki_url(main))] if main else [])
+                        + [(item["title"], None)])
     if not item["listed"]:
         body = """
 {crumbs}
@@ -919,7 +941,6 @@ def build_item(item, listed, ctx):
     <div><dt>転機</dt><dd>{tenki}</dd></div>
     <div><dt>段階</dt><dd>{stages}</dd></div>
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
-{published}    <div><dt>最終観測日</dt><dd>{observed}</dd></div>
   </dl>
   <div class="helpful" data-id="{id}" data-title="{title}" hidden>
     <p class="helpful-q">この紹介は役に立ちましたか？</p>
@@ -929,14 +950,12 @@ def build_item(item, listed, ctx):
   {report}
 </article>
 {similar}
-{next}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
            hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
-           provider=e(item["provider"] or "―"), observed=fmt_date(item["observed"]), report=report_link(item),
+           provider=e(item["provider"] or "―"), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
-           published=published_row(item),
-           similar=similar_html, next=next_html)
+           similar=similar_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
     ld_type = {"書籍": "Book", "調査": "Report"}.get(item["kind"], "Service")
     about = {"@type": ld_type, "name": item["title"], "description": item["memo"]}
@@ -958,7 +977,8 @@ def build_item(item, listed, ctx):
     info = image_info(item)
     if info:  # 構造化データにも画像（掲載先の画像）を入れる
         about["image"] = "%s/images/items/%s.webp" % (BASE, item["id"])
-    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"])
+    page("/item/%s/" % item["id"], item["title"], desc, body, ctx=ctx, jsonld=[webpage], image=og, lastmod=item["observed"],
+         full_title="%s（%s）｜%s" % (item["title"], item_kind_phrase(item), CONF["site_name"]))
 
 
 def popular_words(listed, ctx, k=8):
@@ -1122,7 +1142,7 @@ def build_about(listed, ctx):
 <p>特定の人や時期に特化しているか、運営の実績、無料で試せるか、情報の新しさをもとに並べています。一覧を見やすくするため、公式ページの画像を表示できるものを先に並べています。掲載依頼や広告で順番を変えることはありません。</p>
 
 <h2>情報の集め方と点検</h2>
-<p>掲載情報は、AIが公開されている情報をもとに集め、内容を確かめてから載せています。載せたあともAIが定期的に点検し、内容を確かめた日を「最終観測日」として表示しています。</p>
+<p>掲載情報は、AIが公開されている情報をもとに集め、内容を確かめてから載せています。載せたあともAIが定期的に点検しています。</p>
 <p>料金や内容は変わることがあります。利用する前に、公式サイトで最新の情報を確かめてください。</p>
 
 <h2 id="images">掲載している画像について</h2>
