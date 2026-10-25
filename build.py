@@ -578,8 +578,8 @@ def build_home(listed, ctx):
     <button type="submit">探す</button>
   </form>
   <div class="start-help home-words">
-    <p class="start-label">よく探される言葉</p>
-    <div class="start-words">{popular}</div>
+    <p class="start-label">こんな言葉で探せます</p>
+    <div class="start-words" data-shown="8">{popular}</div>
   </div>
 </section>
 
@@ -614,7 +614,7 @@ def build_home(listed, ctx):
            stage_links=stage_links, kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
-           popular="".join('<a class="start-word" href="/search/?q=%s">%s</a>' % (e(quote(w)), e(w)) for w in popular_words(listed, ctx)))
+           popular=start_words_html(popular_words(listed, ctx), "/search/?q="))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
                "description": CONF["description"], "inLanguage": "ja",
                "potentialAction": {"@type": "SearchAction", "target": BASE + "/search/?q={search_term_string}",
@@ -985,20 +985,22 @@ def build_item(item, listed, ctx):
          full_title="%s（%s）｜%s" % (item["title"], item_kind_phrase(item), CONF["site_name"]))
 
 
-def popular_words(listed, ctx, k=8):
-    """「よく探される言葉」：言い換え表の各グループの代表の言葉と、向いている人の言葉のうち、掲載が3件以上あるもの（タイプの名前と「無料」は除く）。
-    毎日の更新で、日付に合わせて k 個を選び直す。"""
-    groups = [g for g in load_json("synonyms.json").get("groups", []) if isinstance(g, list) and g]
-    # タイプの名前（ボタンで選べる）と、サイトで出していない費用の言葉は外す
-    skip = {k["name"] for k in KINDS} | {"無料"}
-    pool = [w for w in dict.fromkeys([g[0] for g in groups] + CONF.get("audience", [])) if w not in skip]
-    texts = [normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"])])) for it in listed]
-    pool = [w for w in pool if sum(1 for t in texts if normalize(w) in t) >= 3]
-    if len(pool) <= k:
-        return pool
-    # 日付を種にして選ぶので、同じ日のうちは何度作り直しても同じ言葉になる
+SHOWN_WORDS = 8  # 「こんな言葉で探せます」に一度に出す数
+
+
+def popular_words(listed, ctx):
+    """「こんな言葉で探せます」の言葉（config/site.json の start_words。掲載データで件数を確かめて選んだ言葉と、実際に検索された言葉）。
+    ページにはすべて書き出し、開くたびに site.js がランダムに8つを選んで出す。JavaScript が使えないときに出る最初の8つは、日付ごとに入れ替える。"""
     import random
-    return random.Random(ctx["today"].toordinal()).sample(pool, k)
+    words = list(dict.fromkeys(CONF.get("start_words", [])))
+    random.Random(ctx["today"].toordinal()).shuffle(words)
+    return words
+
+
+def start_words_html(words, href):
+    """言葉のボタン。9つ目以降は隠しておき、site.js がランダムに入れ替える"""
+    return "".join('<a class="start-word" href="%s%s"%s>%s</a>' % (href, e(quote(w)), " hidden" if i >= SHOWN_WORDS else "", e(w))
+                   for i, w in enumerate(words))
 
 
 def build_search(listed, ctx):
@@ -1023,8 +1025,8 @@ def build_search(listed, ctx):
     <ul id="suggest" class="suggest" role="listbox" aria-label="候補" hidden></ul>
   </div>
   <div id="start-help" class="start-help">
-    <p class="start-label">よく探される言葉</p>
-    <div class="start-words">{popular}</div>
+    <p class="start-label">こんな言葉で探せます</p>
+    <div class="start-words" data-shown="8">{popular}</div>
   </div>
   <div class="search-layout">
     <div class="filter-col">
@@ -1056,7 +1058,7 @@ def build_search(listed, ctx):
 """.format(crumbs=breadcrumb([("探す", None)]), kinds=chip_group("kind", "タイプ", kinds_of(listed)),
            tenki=chip_group("tenki", "転機", [t["name"] for t in TENKI], {COMMON: "どの転機にも", OTHER: "そのほか"}),
            stages=chip_group("stage", "段階", [s["name"] for s in STAGES]),
-           popular="".join('<a class="start-word" href="?q=%s">%s</a>' % (e(quote(w)), e(w)) for w in words),
+           popular=start_words_html(words, "?q="),
            popular_json=json.dumps(words, ensure_ascii=False),
            page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
@@ -1119,7 +1121,7 @@ def build_report(listed, ctx):
 
 ANALYTICS_ABOUT = """<h2 id="analytics">アクセス解析について</h2>
 <p>観測所をよりよくするために、アクセス解析の GoatCounter（goatcounter.com）を使っています。Cookie は使わず、閲覧した人を特定する情報も集めません。</p>
-<p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで何も見つからなかったときは、そのとき入力されたキーワードも送ります。言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
+<p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで入力されたキーワードも送ります（入力の途中ではなく、手を止めたときの言葉だけ）。メールアドレスや電話番号、URLのような言葉は送りません。「こんな言葉で探せます」に出す言葉を選んだり、言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
 <p>紹介ページで「公式サイトを見る」「あとで見る」「共有」と、「この紹介は役に立ちましたか？」のボタンが押されたときは、どの掲載で押されたか（掲載のIDとタイトル）を数えます。役に立った掲載を知り、掲載するものや並び順を見直すのに使います。</p>
 <p>転機の段階セルフチェックは、始めた回数、最後まで答えた回数と結果の段階、結果に出たおすすめが押された回数だけを数えます。一つひとつの回答や、4つの資源のバランス、相談メモの中身は送りません。</p>
 """

@@ -133,8 +133,8 @@
   }
 
   // 0件のとき、どの条件を外せば見つかるかを示す
-  // よく探される言葉（毎日の更新で入れ替わる。build.py の popular_words）
-  var POPULAR = window.TENKI_POPULAR || ["転職", "副業", "フリーランス", "起業", "確定申告", "コーチング", "学び直し", "50代"];
+  // こんな言葉で探せます（config/site.json の start_words）。0件のときは、この中からランダムに8つを出す
+  var POPULAR = (window.TENKI_POPULAR || ["転職エージェント", "確定申告", "コーチング", "学び直し"]).slice().sort(function () { return Math.random() - 0.5; }).slice(0, 8);
 
   function renderZeroHelp(state) {
     var hints = [];
@@ -147,7 +147,7 @@
       });
     }
     var html = hints.length ? "<span>条件を1つ外すと見つかります：</span>" + hints.join("") : "";
-    // キーワードだけで0件のときは、よく探される言葉と「転機から探す」を出して、すぐに探し直せるようにする
+    // キーワードだけで0件のときは、こんな言葉で探せますの言葉と「転機から探す」を出して、すぐに探し直せるようにする
     if (!results.length && state.q) {
       html += (html ? '<span class="zero-break"></span>' : "") + "<span>こんな言葉で探せます：</span>" + POPULAR.map(function (w) {
         return '<a class="zero-word" href="?q=' + encodeURIComponent(w) + '">' + esc(w) + "</a>";
@@ -253,18 +253,20 @@
     if (!moreBtn.hidden) moreBtn.textContent = "もっと見る（残り" + (results.length - shown) + "件）";
   }
 
-  // 何も見つからなかったキーワードを、アクセス解析（GoatCounter）に送る。入力の途中では送らず、同じ言葉は1回だけ
+  // 探した言葉を、アクセス解析（GoatCounter）に送る。見つかった言葉は search/〇〇、何も見つからなかった言葉は search-zero/〇〇。
+  // 入力の途中では送らず（2秒止まってから）、同じ言葉は1回だけ。「こんな言葉で探せます」に足す言葉や、言い換え表の見直しに使う
   var zeroTimer, zeroSent = {};
   function reportZero(state) {
     clearTimeout(zeroTimer);
     var q = (state.q || "").trim();
-    if (results.length || !q || zeroSent[q]) return;
+    if (!q || q.length > 30 || zeroSent[q]) return;
     // メールアドレス・電話番号・URLのような、個人につながりうる言葉は記録しない
     if (/@|https?:|www\.|\d{2,4}[-‐－ー\s]?\d{2,4}[-‐－ー\s]?\d{3,4}|\d{7,}/.test(q.normalize("NFKC"))) return;
+    var found = results.length > 0;
     zeroTimer = setTimeout(function () {
       if (!window.goatcounter || !window.goatcounter.count) return;
       zeroSent[q] = true;
-      window.goatcounter.count({ path: "search-zero/" + q.slice(0, 50), title: "0件：" + q.slice(0, 50), event: true });
+      window.goatcounter.count({ path: (found ? "search/" : "search-zero/") + q, title: (found ? "検索：" : "0件：") + q, event: true });
     }, 2000);
   }
 
@@ -305,7 +307,7 @@
     updateCounts(state);
     renderZeroHelp(state);
     renderSynNote(state);
-    // よく探される言葉は常に出しておき（高さが変わらないように）、いま探している言葉に印を付ける
+    // こんな言葉で探せますは常に出しておき（高さが変わらないように）、いま探している言葉に印を付ける
     Array.prototype.forEach.call(startHelp.querySelectorAll(".start-word"), function (a) {
       if (a.textContent === state.q) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
     });
@@ -324,7 +326,7 @@
     if (ev.target === qInput) renderSuggest();
     clearTimeout(timer); timer = setTimeout(run, 200);
   });
-  // よく探される言葉：押すと、ページを読み直さずにその言葉で探す（選んでいる条件はそのまま）。もう一度押すと外れる
+  // こんな言葉で探せます：押すと、ページを読み直さずにその言葉で探す（選んでいる条件はそのまま）。もう一度押すと外れる
   startHelp.addEventListener("click", function (ev) {
     var a = ev.target.closest(".start-word");
     if (!a) return;

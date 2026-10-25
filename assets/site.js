@@ -399,3 +399,15 @@
   });
   show("0");
 })();
+
+// こんな言葉で探せます：ページを開くたびに、言葉の一覧からランダムに選んで出す（数は data-shown）
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll(".start-words[data-shown]"), function (box) {
+    var words = Array.prototype.slice.call(box.querySelectorAll(".start-word"));
+    var n = parseInt(box.getAttribute("data-shown"), 10) || 8;
+    for (var i = words.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1)), t = words[i]; words[i] = words[j]; words[j] = t;
+    }
+    words.forEach(function (a, k) { a.hidden = k >= n; box.appendChild(a); });
+  });
+})();
