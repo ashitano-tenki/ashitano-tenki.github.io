@@ -469,7 +469,9 @@ def image_info(item):
     if "ver" not in rec:
         with open(os.path.join(ROOT, "images", "items", item["id"] + ".webp"), "rb") as f:
             rec["ver"] = hashlib.md5(f.read()).hexdigest()[:8]
-    return rec["ver"], ("wide" if w / h >= 1.6 else "fit"), w, h
+    # 1.4:1 より横長なら、上下が少し切れても枠いっぱいに出す（左右の空白を作らない）。image_fill は個別に枠いっぱいにする掲載
+    wide = w / h >= 1.4 or item["id"] in CONF.get("image_fill", [])
+    return rec["ver"], ("wide" if wide else "fit"), w, h
 
 
 def item_media(item, cls, small):
