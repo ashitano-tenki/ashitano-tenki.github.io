@@ -753,13 +753,9 @@ def build_tenki(listed, ctx):
 <section class="lost-box">
   <h2>どの転機か、まだはっきりしない人へ</h2>
   <p>何かを変えたいけれど、どの転機かはまだ決まっていない。そんなときは、いまの段階を確かめるところから始めてみてください。</p>
-  <ul>
-    <li><a href="/check/">セルフチェックで、いまの段階を確かめる</a></li>
-    <li><a href="{common_url}">どの転機にも役立つものを見る</a></li>
-  </ul>
+  <p class="lost-link"><a href="/check/">セルフチェックで、いまの段階を確かめる</a></p>
 </section>
-""".format(crumbs=breadcrumb([("転機から探す", None)]), cards="".join(cards), extra="".join(extra),
-           common_url=e(next((tenki_url(t) for t in TENKI if t["name"] == COMMON), "/search/")))
+""".format(crumbs=breadcrumb([("転機から探す", None)]), cards="".join(cards), extra="".join(extra))
     page("/tenki/", "転機から探す", "転職、独立、起業、副業、退職・休職、定年、学び直し。迎えている転機から、役立つサービスと情報を探せます。", body, ctx=ctx)
 
 
