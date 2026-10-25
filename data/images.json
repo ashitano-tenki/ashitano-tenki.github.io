@@ -2261,5 +2261,45 @@
   "page": "https://www.jacgroup.com/jp/press-release/main/03/teaserItems1/01/linkList/010/link/250918.pdf",
   "checked": "2026-10-25",
   "status": "none"
+ },
+ "R0285": {
+  "page": "https://mynavi-kango.jp/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+ },
+ "R0286": {
+  "page": "https://mynavi-agent.jp/pharma/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0287": {
+  "page": "https://hoiku.mynavi.jp/",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://hoiku.mynavi.jp/assets/img/ogp.png",
+  "w": 960,
+  "h": 960
+ },
+ "R0288": {
+  "page": "https://doda.jp/woman/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0289": {
+  "page": "https://woman-type.jp/",
+  "checked": "2026-10-25",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0290": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1505707",
+  "checked": "2026-10-25",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756919359.jpg",
+  "w": 702,
+  "h": 1000
  }
 }
