@@ -149,11 +149,13 @@
  },
  "R0024": {
   "page": "https://career65.net/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 124106,
   "status": "ok",
-  "src": "https://career65.net/common/images/p_mv.png",
-  "w": 526,
-  "h": 431
+  "src": "file:images/manual/R0024.jpg",
+  "w": 960,
+  "h": 480
  },
  "R0026": {
   "page": "https://www.diamond.co.jp/book/9784478105559.html",
@@ -343,11 +345,11 @@
   "page": "https://stock-sun.com/salon/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 25878,
+  "fsize": 39507,
   "status": "ok",
   "src": "file:images/manual/R0046.jpg",
-  "w": 745,
-  "h": 474
+  "w": 843,
+  "h": 458
  },
  "R0047": {
   "page": "https://www.kadokawa.co.jp/product/321905000756/",
@@ -529,11 +531,11 @@
   "page": "https://kango-oshigoto.jp/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 118529,
+  "fsize": 157584,
   "status": "ok",
   "src": "file:images/manual/R0067.jpg",
   "w": 960,
-  "h": 648
+  "h": 540
  },
  "R0068": {
   "page": "https://www.kaigojob.com/",
@@ -813,11 +815,13 @@
  },
  "R0100": {
   "page": "https://career-meet.com/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 112749,
   "status": "ok",
-  "src": "https://career-meet.com/wp-content/themes/20260526/img/ogp.jpg",
+  "src": "file:images/manual/R0100.jpg",
   "w": 960,
-  "h": 672
+  "h": 505
  },
  "R0101": {
   "page": "https://www.mystar60.co.jp/",
@@ -1165,11 +1169,11 @@
   "page": "https://www.viacharacter.org/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 12595,
+  "fsize": 167616,
   "status": "ok",
   "src": "file:images/manual/R0138.jpg",
-  "w": 649,
-  "h": 472
+  "w": 960,
+  "h": 532
  },
  "R0139": {
   "page": "https://findy-code.io/",
@@ -1361,19 +1365,23 @@
  },
  "R0160": {
   "page": "https://wakuwakumamare.wixsite.com/mamare",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 291549,
   "status": "ok",
-  "src": "https://static.wixstatic.com/media/2a3609_b6a11017be5f4c5aa2265ced1d803565%7Emv2.png/v1/fit/w_2500,h_1330,al_c/2a3609_b6a11017be5f4c5aa2265ced1d803565%7Emv2.png",
-  "w": 500,
-  "h": 500
+  "src": "file:images/manual/R0160.jpg",
+  "w": 960,
+  "h": 540
  },
  "R0161": {
   "page": "https://career-buddy.jp/",
-  "checked": "2026-10-24",
+  "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 67767,
   "status": "ok",
-  "src": "https://career-buddy.jp/images/companies/1/%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2%E3%83%90%E3%83%87%E3%82%A3%E3%83%90%E3%83%8A%E3%83%BC.jpg",
+  "src": "file:images/manual/R0161.jpg",
   "w": 960,
-  "h": 960
+  "h": 508
  },
  "R0162": {
   "page": "https://mizukara.com/careerschool/",
@@ -2038,11 +2046,11 @@
   "page": "https://www.proz.com/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 24259,
+  "fsize": 111242,
   "status": "ok",
   "src": "file:images/manual/R0240.jpg",
   "w": 960,
-  "h": 761
+  "h": 505
  },
  "R0241": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569849751",
@@ -2131,10 +2139,12 @@
  "R0251": {
   "page": "https://shigoto100.com/",
   "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 94577,
   "status": "ok",
-  "src": "https://shigoto100.com/wp-content/themes/tokyo/img/common/logo_ogp_600px.jpg",
-  "w": 600,
-  "h": 600
+  "src": "file:images/manual/R0251.jpg",
+  "w": 960,
+  "h": 320
  },
  "R0252": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800721525",
@@ -2182,21 +2192,21 @@
   "page": "https://logi-career.jp/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 120928,
+  "fsize": 148558,
   "status": "ok",
   "src": "file:images/manual/R0258.jpg",
-  "w": 840,
-  "h": 660
+  "w": 960,
+  "h": 446
  },
  "R0259": {
   "page": "https://butsuryujin.com/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 131024,
+  "fsize": 226695,
   "status": "ok",
   "src": "file:images/manual/R0259.jpg",
-  "w": 800,
-  "h": 600
+  "w": 960,
+  "h": 520
  },
  "R0260": {
   "page": "https://omotenashi.work/service/introduction",
@@ -2227,10 +2237,12 @@
  "R0263": {
   "page": "https://kenshoku-bank.com/",
   "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 30852,
   "status": "ok",
-  "src": "https://kenshoku-bank.com/logo_kenshoku_bank.png",
-  "w": 520,
-  "h": 390
+  "src": "file:images/manual/R0263.jpg",
+  "w": 960,
+  "h": 502
  },
  "R0264": {
   "page": "https://beautyangel.jp/",
@@ -2260,11 +2272,11 @@
   "page": "https://www.zenkyukyo.or.jp/wp/wp-content/uploads/2025/12/d37cca442beb50c950c2bb9ac5c77f33-3.pdf",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 222702,
+  "fsize": 230594,
   "status": "ok",
   "src": "file:images/manual/R0267.jpg",
   "w": 960,
-  "h": 619
+  "h": 610
  },
  "R0268": {
   "page": "https://doda.jp/challenge/",
@@ -2417,24 +2429,24 @@
   "h": 758
  },
  "R0285": {
-  "page": "https://mynavi-kango.jp/",
+  "page": "https://kango.mynavi.jp/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 44752,
+  "fsize": 40718,
   "status": "ok",
   "src": "file:images/manual/R0285.jpg",
   "w": 960,
-  "h": 960
+  "h": 526
  },
  "R0286": {
   "page": "https://mynavi-agent.jp/pharma/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 44675,
+  "fsize": 40562,
   "status": "ok",
   "src": "file:images/manual/R0286.jpg",
   "w": 960,
-  "h": 960
+  "h": 534
  },
  "R0287": {
   "page": "https://hoiku.mynavi.jp/",
@@ -2493,10 +2505,12 @@
  "R0293": {
   "page": "https://relax-job.com/",
   "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 146920,
   "status": "ok",
-  "src": "https://relax-job.com/images/user_frontend/pc/logo_ogimage.png",
-  "w": 600,
-  "h": 600
+  "src": "file:images/manual/R0293.jpg",
+  "w": 960,
+  "h": 610
  },
  "R0294": {
   "page": "https://prtimes.jp/main/html/rd/p/000000072.000023588.html",
@@ -2568,19 +2582,21 @@
   "page": "https://beyond-border.me/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 92205,
+  "fsize": 109831,
   "status": "ok",
   "src": "file:images/manual/R0302.jpg",
   "w": 960,
-  "h": 890
+  "h": 526
  },
  "R0303": {
   "page": "https://co-medical.mynavi.jp/",
   "checked": "2026-10-25",
+  "manual": true,
+  "fsize": 36132,
   "status": "ok",
-  "src": "https://co-medical.mynavi.jp/images/comedical_ogp.png",
+  "src": "file:images/manual/R0303.jpg",
   "w": 960,
-  "h": 960
+  "h": 526
  },
  "R0304": {
   "page": "https://medfit.co.jp/support_info/",
@@ -2640,11 +2656,11 @@
   "page": "https://sekokan-next.worldcorp-jp.com/",
   "checked": "2026-10-25",
   "manual": true,
-  "fsize": 56844,
+  "fsize": 150660,
   "status": "ok",
   "src": "file:images/manual/R0310.jpg",
-  "w": 640,
-  "h": 420
+  "w": 960,
+  "h": 541
  },
  "R0311": {
   "page": "https://herrise.co.jp/",
