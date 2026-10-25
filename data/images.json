@@ -2087,7 +2087,11 @@
  "R0259": {
   "page": "https://butsuryujin.com/",
   "checked": "2026-10-25",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0259.jpg",
+  "w": 800,
+  "h": 600
  },
  "R0260": {
   "page": "https://omotenashi.work/service/introduction",
@@ -2149,7 +2153,11 @@
  "R0267": {
   "page": "https://www.zenkyukyo.or.jp/wp/wp-content/uploads/2025/12/d37cca442beb50c950c2bb9ac5c77f33-3.pdf",
   "checked": "2026-10-25",
-  "status": "none"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0267.jpg",
+  "w": 960,
+  "h": 619
  },
  "R0268": {
   "page": "https://doda.jp/challenge/",
@@ -2323,14 +2331,20 @@
  "R0288": {
   "page": "https://doda.jp/woman/",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0288.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0289": {
   "page": "https://woman-type.jp/",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0289.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0290": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1505707",
@@ -2449,8 +2463,11 @@
  "R0304": {
   "page": "https://medfit.co.jp/support_info/",
   "checked": "2026-10-25",
-  "status": "error",
-  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x73bc9f976a20>"
+  "manual": true,
+  "status": "ok",
+  "src": "file:images/manual/R0304.jpg",
+  "w": 960,
+  "h": 506
  },
  "R0305": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784418206056",
