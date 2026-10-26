@@ -3505,8 +3505,12 @@
  "R0416": {
   "page": "https://freelance.levtech.jp/",
   "checked": "2026-10-27",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 23017,
+  "status": "ok",
+  "src": "file:images/manual/R0416.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0417": {
   "page": "https://mid-works.com/",
@@ -3519,8 +3523,12 @@
  "R0418": {
   "page": "https://flxy.jp/",
   "checked": "2026-10-27",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 76689,
+  "status": "ok",
+  "src": "file:images/manual/R0418.jpg",
+  "w": 960,
+  "h": 502
  },
  "R0419": {
   "page": "https://www.geechs-job.com/",
@@ -3557,8 +3565,12 @@
  "R0423": {
   "page": "https://www.bigdata-navi.com",
   "checked": "2026-10-27",
-  "status": "error",
-  "note": "ValueError: 画像が小さすぎます"
+  "manual": true,
+  "fsize": 14184,
+  "status": "ok",
+  "src": "file:images/manual/R0423.jpg",
+  "w": 596,
+  "h": 335
  },
  "R0424": {
   "page": "https://pe-bank.co.jp/",
@@ -3623,5 +3635,13 @@
   "src": "https://engineer-style.jp/img/common/enstyle_OGP.png",
   "w": 960,
   "h": 504
+ },
+ "R0432": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784799114209",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47991/4799114204.jpg",
+  "w": 692,
+  "h": 1000
  }
 }
