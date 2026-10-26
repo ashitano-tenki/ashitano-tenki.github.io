@@ -3117,5 +3117,163 @@
   "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/04/a11b4bb3ba448d1fa402ac3dc62cc91f-1.jpg",
   "w": 960,
   "h": 540
+ },
+ "R0368": {
+  "page": "https://shuuumatu-worker.com/",
+  "checked": "2026-10-26",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+ },
+ "R0369": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784763142894",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47631/4763142895.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0370": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784054070875",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40540/4054070876.jpg",
+  "w": 703,
+  "h": 1000
+ },
+ "R0371": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800594280",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48005/4800594286.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0372": {
+  "page": "https://career-research.mynavi.jp/reserch/20260318_108650/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/03/249de73d581067f7d8b6083df15d1148-1.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0373": {
+  "page": "https://career-research.mynavi.jp/?p=99469",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2025/08/a11b4bb3ba448d1fa402ac3dc62cc91f-4.jpg",
+  "w": 960,
+  "h": 521
+ },
+ "R0374": {
+  "page": "https://career-research.mynavi.jp/reserch/20260729_113348/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/07/cea42cee52d1c3e207cd9ab8345c3145.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0375": {
+  "page": "http://i.mento.jp/",
+  "checked": "2026-10-26",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0376": {
+  "page": "https://mt-worker.com/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://mt-worker.com/file/box/assets/img/common/OGP.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R0377": {
+  "page": "https://ptotst-worker.com/",
+  "checked": "2026-10-26",
+  "status": "error",
+  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7027402ae660>"
+ },
+ "R0378": {
+  "page": "https://mtjob.jp/",
+  "checked": "2026-10-26",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0379": {
+  "page": "https://sketter.jp/",
+  "checked": "2026-10-26",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -5] No address associated with hostname>"
+ },
+ "R0380": {
+  "page": "https://jtuc-freelance-rousai.org/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://jtuc-freelance-rousai.org/img/ogp_image.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0381": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784875264651",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48752/4875264658.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0382": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784492261248",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44922/4492261249.jpg",
+  "w": 691,
+  "h": 1000
+ },
+ "R0383": {
+  "page": "https://www.diamond.co.jp/book/9784478122228.html",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478122229.jpg",
+  "w": 691,
+  "h": 1000
+ },
+ "R0384": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062710",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534062710.jpg",
+  "w": 692,
+  "h": 1000
+ },
+ "R0385": {
+  "page": "https://www.amazon.co.jp/dp/B0FKWHD3NN",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43446/4344693566.jpg",
+  "w": 670,
+  "h": 1000
+ },
+ "R0386": {
+  "page": "https://www.kadokawa.co.jp/product/322509001314/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40460/4046079436.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0387": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784883356515",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48833/4883356515.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0388": {
+  "page": "https://www.amazon.co.jp/dp/4805113685",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48051/4805113685.jpg",
+  "w": 690,
+  "h": 1000
  }
 }
