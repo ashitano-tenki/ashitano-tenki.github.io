@@ -3275,5 +3275,167 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48051/4805113685.jpg",
   "w": 690,
   "h": 1000
+ },
+ "R0389": {
+  "page": "https://sokudan.work/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "http://sokudan.work/images/ogp-default.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0390": {
+  "page": "https://itpropartners.com/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://itpropartners.com/img/ogpimage_1.png",
+  "w": 960,
+  "h": 395
+ },
+ "R0392": {
+  "page": "https://www.craudia.com/worker",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.craudia.com/images/fb-icon.jpg",
+  "w": 200,
+  "h": 200
+ },
+ "R0393": {
+  "page": "https://career-research.mynavi.jp/reserch/20240402_73516/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2024/04/673b066377ab5988a596ececa3c1f0bd.jpg",
+  "w": 960,
+  "h": 523
+ },
+ "R0395": {
+  "page": "https://career-research.mynavi.jp/reserch/20261015_116251/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/10/634fe17bc82176b45966600796ee751c.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0396": {
+  "page": "https://www.co-medical.com/",
+  "checked": "2026-10-26",
+  "status": "none"
+ },
+ "R0397": {
+  "page": "https://pet-nurseagent.jp/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://pet-nurseagent.jp/wp/wp-content/uploads/2026/06/OGP-PA.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0398": {
+  "page": "https://open.spotify.com/show/1Zfy2Jmh58MQKtead46p1a",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1fd71dbf86cea484b4be660853",
+  "w": 300,
+  "h": 300
+ },
+ "R0399": {
+  "page": "https://chikumashobo.co.jp/product/9784480685605/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44806/448068560X.jpg",
+  "w": 613,
+  "h": 1000
+ },
+ "R0400": {
+  "page": "https://career-research.mynavi.jp/reserch/20260916_114839/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://career-research.mynavi.jp/wp-content/uploads/2026/09/868cc8feb21286ae14dff4a93edaa652.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0401": {
+  "page": "https://jrc-rousai.com/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://jrc-rousai.com/ogp.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0402": {
+  "page": "https://www.diamond.co.jp/book/9784478122389.html",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478122385.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R0403": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784396117276",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43961/4396117272.jpg",
+  "w": 606,
+  "h": 1000
+ },
+ "R0404": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784910534022",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49105/4910534024.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0405": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784416925225",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44169/4416925220.jpg",
+  "w": 768,
+  "h": 1000
+ },
+ "R0406": {
+  "page": "https://www.n-free.jp/",
+  "checked": "2026-10-26",
+  "status": "none"
+ },
+ "R0407": {
+  "page": "https://taxnap.com/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://taxnap.com/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0408": {
+  "page": "https://freelance.bizlink.io/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://freelance.bizlink.io/opengraph-image.png?1c08d0a627b83dd9",
+  "w": 830,
+  "h": 436
+ },
+ "R0409": {
+  "page": "https://prosharing.bizlink.io/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://prosharing.bizlink.io/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0410": {
+  "page": "https://bizlink-career.co.jp/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://bizlink-career.co.jp/assets/uploads/facebook-og.jpg",
+  "w": 960,
+  "h": 501
+ },
+ "R0411": {
+  "page": "https://www.gmo-office.com/",
+  "checked": "2026-10-26",
+  "status": "ok",
+  "src": "https://www.gmo-office.com/assets/imgs/common/ogp-gmo-os.png",
+  "w": 960,
+  "h": 504
  }
 }
