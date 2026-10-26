@@ -3623,10 +3623,12 @@
  "R0430": {
   "page": "https://it-kyujin.jp/freelance",
   "checked": "2026-10-27",
+  "manual": true,
+  "fsize": 102552,
   "status": "ok",
-  "src": "https://it-kyujin.jp/assets/wp-content/uploads/2025/01/h0003.webp",
-  "w": 728,
-  "h": 400
+  "src": "file:images/manual/R0430.jpg",
+  "w": 960,
+  "h": 538
  },
  "R0431": {
   "page": "https://engineer-style.jp",
