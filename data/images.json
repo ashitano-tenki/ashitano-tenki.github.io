@@ -3063,7 +3063,12 @@
  "R0360": {
   "page": "https://www.jmsc.co.jp/career/",
   "checked": "2026-10-26",
-  "status": "none"
+  "manual": true,
+  "fsize": 131593,
+  "status": "ok",
+  "src": "file:images/manual/R0360.jpg",
+  "w": 960,
+  "h": 407
  },
  "R0361": {
   "page": "https://www.green-japan.com/",
@@ -3097,11 +3102,6 @@
   "w": 681,
   "h": 1000
  },
- "R0365": {
-  "page": "https://www.mog-career.co.jp/",
-  "checked": "2026-10-26",
-  "status": "none"
- },
  "R0366": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784413045964",
   "checked": "2026-10-26",
@@ -3119,10 +3119,14 @@
   "h": 540
  },
  "R0368": {
-  "page": "https://shuuumatu-worker.com/",
+  "page": "https://shuuumatu-worker.jp/",
   "checked": "2026-10-26",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+  "manual": true,
+  "fsize": 55132,
+  "status": "ok",
+  "src": "file:images/manual/R0368.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0369": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784763142894",
@@ -3175,8 +3179,12 @@
  "R0375": {
   "page": "http://i.mento.jp/",
   "checked": "2026-10-26",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 76090,
+  "status": "ok",
+  "src": "file:images/manual/R0375.jpg",
+  "w": 960,
+  "h": 474
  },
  "R0376": {
   "page": "https://mt-worker.com/",
@@ -3189,20 +3197,32 @@
  "R0377": {
   "page": "https://ptotst-worker.com/",
   "checked": "2026-10-26",
-  "status": "error",
-  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x7027402ae660>"
+  "manual": true,
+  "fsize": 31063,
+  "status": "ok",
+  "src": "file:images/manual/R0377.jpg",
+  "w": 960,
+  "h": 567
  },
  "R0378": {
   "page": "https://mtjob.jp/",
   "checked": "2026-10-26",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 155290,
+  "status": "ok",
+  "src": "file:images/manual/R0378.jpg",
+  "w": 960,
+  "h": 497
  },
  "R0379": {
   "page": "https://sketter.jp/",
   "checked": "2026-10-26",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno -5] No address associated with hostname>"
+  "manual": true,
+  "fsize": 117419,
+  "status": "ok",
+  "src": "file:images/manual/R0379.jpg",
+  "w": 960,
+  "h": 499
  },
  "R0380": {
   "page": "https://jtuc-freelance-rousai.org/",
@@ -3295,10 +3315,12 @@
  "R0392": {
   "page": "https://www.craudia.com/worker",
   "checked": "2026-10-26",
+  "manual": true,
+  "fsize": 26082,
   "status": "ok",
-  "src": "https://www.craudia.com/images/fb-icon.jpg",
-  "w": 200,
-  "h": 200
+  "src": "file:images/manual/R0392.jpg",
+  "w": 960,
+  "h": 407
  },
  "R0393": {
   "page": "https://career-research.mynavi.jp/reserch/20240402_73516/",
@@ -3319,7 +3341,12 @@
  "R0396": {
   "page": "https://www.co-medical.com/",
   "checked": "2026-10-26",
-  "status": "none"
+  "manual": true,
+  "fsize": 14961,
+  "status": "ok",
+  "src": "file:images/manual/R0396.jpg",
+  "w": 940,
+  "h": 539
  },
  "R0397": {
   "page": "https://pet-nurseagent.jp/",
@@ -3396,7 +3423,12 @@
  "R0406": {
   "page": "https://www.n-free.jp/",
   "checked": "2026-10-26",
-  "status": "none"
+  "manual": true,
+  "fsize": 126959,
+  "status": "ok",
+  "src": "file:images/manual/R0406.jpg",
+  "w": 960,
+  "h": 563
  },
  "R0407": {
   "page": "https://taxnap.com/",
