@@ -3469,5 +3469,159 @@
   "src": "https://www.gmo-office.com/assets/imgs/common/ogp-gmo-os.png",
   "w": 960,
   "h": 504
+ },
+ "R0412": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784167904951",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41679/4167904950.jpg",
+  "w": 693,
+  "h": 1000
+ },
+ "R0413": {
+  "page": "https://aile-official.co.jp/parallelcareer/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://aile-official.co.jp/parallelcareer/wp-content/uploads/2022/06/cropped-Project2.png",
+  "w": 960,
+  "h": 960
+ },
+ "R0414": {
+  "page": "https://finance.techbiz.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://finance.techbiz.com/src/img/ogp_image.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0415": {
+  "page": "https://hr.techbiz.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://hr.techbiz.com/src/img/ogp_image.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0416": {
+  "page": "https://freelance.levtech.jp/",
+  "checked": "2026-10-27",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0417": {
+  "page": "https://mid-works.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://mid-works.com/asset/img/common/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0418": {
+  "page": "https://flxy.jp/",
+  "checked": "2026-10-27",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0419": {
+  "page": "https://www.geechs-job.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://geechs-job.com/images/common/posse_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0420": {
+  "page": "https://freelance.techcareer.jp",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://cdn-freelance.techcareer.jp/assets/ogp/banner-48fae4c87bb796fe9e65af6ee65f5f7a2462b674e798954c583737760d19faec.png",
+  "w": 960,
+  "h": 672
+ },
+ "R0421": {
+  "page": "https://tech.coconala.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://tech.coconala.com/images/open-graph-20260820.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0422": {
+  "page": "https://freelance.findy-code.io/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://freelance.findy-code.io/images/ogimage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0423": {
+  "page": "https://www.bigdata-navi.com",
+  "checked": "2026-10-27",
+  "status": "error",
+  "note": "ValueError: 画像が小さすぎます"
+ },
+ "R0424": {
+  "page": "https://pe-bank.co.jp/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://pe-bank.co.jp/wp-content/uploads/2022/03/ogp-1.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0425": {
+  "page": "https://tech.hipro-job.jp",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://tech.hipro-job.jp/sites/default/files/2023-08/hpt_ogp_kojin.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R0426": {
+  "page": "https://tech-stock.com/",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://tech-stock.com/wp-content/uploads/2024/12/TSogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0427": {
+  "page": "https://www.engineer-factory.com/freelance",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://www.engineer-factory.com/img/freelance/common/ogp_ef-f.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R0428": {
+  "page": "https://freelance.potepan.com",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://freelance.potepan.com/assets/common/potepan-freelance-ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0429": {
+  "page": "https://creator.levtech.jp",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://lt-prd-ownd-images.s3.ap-northeast-1.amazonaws.com/common/ltcr/ogp_ltcr.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0430": {
+  "page": "https://it-kyujin.jp/freelance",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://it-kyujin.jp/assets/wp-content/uploads/2025/01/h0003.webp",
+  "w": 728,
+  "h": 400
+ },
+ "R0431": {
+  "page": "https://engineer-style.jp",
+  "checked": "2026-10-27",
+  "status": "ok",
+  "src": "https://engineer-style.jp/img/common/enstyle_OGP.png",
+  "w": 960,
+  "h": 504
  }
 }
