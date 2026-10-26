@@ -30,6 +30,11 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 REQUIRED_COLUMNS = ["ID", "タイトル", "種類", "転機の種類", "段階", "観測メモ", "URL",
                     "提供元・著者", "費用", "最終観測日", "追加日", "観測スコア", "状態"]
 LISTED_STATES = {"確認済み", "要更新"}
+
+
+def valid_id(item_id):
+    """掲載IDとして使える文字だけか（ページや画像のファイル名に使うので、英数字・ハイフン・下線だけにする）。"""
+    return bool(re.fullmatch(r"[A-Za-z0-9_-]+", item_id or ""))
 COST_ORDER = ["無料", "一部無料", "有料"]
 COMMON = "共通"
 OTHER = "その他"
@@ -66,7 +71,7 @@ def load_images():
     exclude = set(CONF.get("image_exclude", []))
     out = {}
     for item_id, rec in data.items():
-        if (rec.get("status") == "ok" and item_id not in exclude
+        if (valid_id(item_id) and rec.get("status") == "ok" and item_id not in exclude
                 and os.path.exists(os.path.join(ROOT, "images", "items", item_id + ".webp"))
                 and os.path.exists(os.path.join(ROOT, "images", "items", item_id + "-s.webp"))):
             out[item_id] = rec
@@ -150,7 +155,7 @@ def parse_rows(text):
     for raw in reader:
         row = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
         item_id = row["ID"]
-        if not item_id or not row["タイトル"] or not re.match(r"^[A-Za-z0-9_-]+$", item_id):
+        if not valid_id(item_id) or not row["タイトル"]:
             continue
         if item_id in seen:
             continue

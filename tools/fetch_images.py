@@ -190,6 +190,8 @@ def save_images(item_id, data):
     w, h = im.size
     if w < 80 or h < 80:
         raise ValueError("画像が小さすぎます")
+    if not build.valid_id(item_id):
+        raise ValueError("掲載IDに使えない文字があります")
     large = im.copy()
     if w > LARGE_W:
         large = large.resize((LARGE_W, round(h * LARGE_W / w)), Image.LANCZOS)
@@ -208,6 +210,8 @@ def save_card(item_id, im):
 
 
 def remove_files(item_id):
+    if not build.valid_id(item_id):
+        return
     for name in (item_id + ".webp", item_id + "-s.webp", item_id + ".jpg", item_id + "-s.jpg"):
         path = os.path.join(IMG_DIR, name)
         if os.path.exists(path):
@@ -324,7 +328,7 @@ def main():
     manifest = {}
     if os.path.exists(MANIFEST):
         with open(MANIFEST, encoding="utf-8") as f:
-            manifest = json.load(f)
+            manifest = {k: v for k, v in json.load(f).items() if build.valid_id(k)}
     exclude = set(build.CONF.get("image_exclude", []))
     keep = set(build.CONF.get("image_keep", []))
     overrides = {}
@@ -336,7 +340,7 @@ def main():
     rows, all_ids = [], set()
     for raw in reader:
         row = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
-        if not row.get("ID"):
+        if not build.valid_id(row.get("ID")):  # サイト本体と同じIDのチェック（ファイル名に使うため）
             continue
         all_ids.add(row["ID"])
         if row.get("状態") in build.LISTED_STATES and row.get("URL", "").startswith(("http://", "https://")):
