@@ -572,6 +572,7 @@ def build_home(listed, ctx):
     body = """
 <section class="hero">
   <h1>{site}</h1>
+  <p class="hero-count"><b>{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
   <p class="check-link"><a href="/check/">転機の段階をセルフチェックする</a></p>
   <form class="search-box" action="/search/" method="get" role="search">
@@ -612,7 +613,7 @@ def build_home(listed, ctx):
   {kinds}
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
-           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), tenki_links=tenki_links,
+           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
            stage_links=stage_links, kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),

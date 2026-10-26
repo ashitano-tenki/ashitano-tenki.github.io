@@ -133,6 +133,11 @@ main.wrap { padding-bottom: var(--space-16); }
 .hero::before { content: ""; position: absolute; left: 0; top: var(--space-12); bottom: var(--space-8); width: var(--border-band); background: var(--yellow); }
 .hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
+/* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
+.hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-2); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
+.hero-count b { font-family: var(--font-display); font-weight: 900; font-size: 32px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+.hero-count span { font-size: 13px; color: var(--text-sub); }
+.hero-count span::before { content: "・"; }
 .check-link { margin: calc(-1 * var(--space-4)) 0 var(--space-6); font-size: 15px; }
 .check-link a { font-weight: 700; }
 .check-link a::after { content: " →"; }
