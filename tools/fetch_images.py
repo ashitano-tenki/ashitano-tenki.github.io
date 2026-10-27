@@ -33,7 +33,7 @@ import urllib.parse
 import unicodedata
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -54,6 +54,13 @@ MAX_BYTES = 8_000_000     # これより大きい画像は使わない
 SMALL_MIN_SIDE = 200      # 短い辺がこれより小さい画像は「小さい」として差し替えを頼む
 LARGE_W = 960             # 紹介ページ用の幅
 CARD_W, CARD_H = 600, 314  # カードの上の画像枠（1.91:1）を高精細の画面でも粗くなく埋められる大きさ
+FRAME = 1.91              # カードと紹介ページの画像枠の縦横比
+FILL_BELOW = 1.4          # これより縦に近い画像は、左右を足して枠いっぱいにする（build.py の image_info と同じ境目）
+# 本の表紙とPodcastのカバーは、左右を足さずに枠の中に収める
+COVER_HOSTS = ("kinokuniya.co.jp", "maruzenjunkudo.co.jp", "books.rakuten.co.jp", "item.rakuten.co.jp/book",
+               "amazon.co.jp", "amzn.", "booklive.jp", "bookwalker.jp", "ebookjapan.", "diamond.co.jp/book",
+               "kadokawa.co.jp/product", "books.bunshun.jp", "shopping.yahoo.co.jp", "netoff.co.jp", "bookoff.co.jp",
+               "spotify.com", "podcasts.apple.com", "anchor.fm", "stand.fm", "voicy.jp")
 
 _last = {}
 _lock = threading.Lock()
@@ -176,7 +183,34 @@ def og_image_url(page_url):
     return src if src.startswith(("http://", "https://")) else ""
 
 
-def save_images(item_id, data):
+def fills_frame(row):
+    """左右を足して枠いっぱいにしてよい掲載か（本の表紙とPodcastのカバーは除く。image_fill は切り抜いて枠いっぱいにする掲載）。"""
+    return (row.get("種類") != "書籍" and not any(h in row.get("URL", "") for h in COVER_HOSTS)
+            and row.get("ID") not in build.CONF.get("image_fill", []))
+
+
+def widen(im):
+    """縦に近い画像の左右を足して 1.91:1 にする。左右の端の色がそろっていればその色で塗り（白地のロゴなど）、
+    そろっていなければ同じ画像をぼかして背景に敷く（写真など）。元の画像は切らない。"""
+    w, h = im.size
+    nw = round(h * FRAME)
+    # 左右の端（幅の2%）の画素のうち、いちばん多い色に近いものが9割以上なら「端の色がそろっている」とみなす
+    px = list(im.crop((0, 0, max(1, w // 50), h)).getdata()) + list(im.crop((w - max(1, w // 50), 0, w, h)).getdata())
+    base = tuple(sorted(p[i] for p in px)[len(px) // 2] for i in range(3))
+    flat = sum(1 for p in px if max(abs(p[i] - base[i]) for i in range(3)) <= 24) >= len(px) * 0.9
+    if flat:
+        canvas = Image.new("RGB", (nw, h), base)
+    else:
+        scale = nw / w
+        bg = im.resize((nw, round(h * scale)), Image.LANCZOS)
+        top = (bg.height - h) // 2
+        bg = bg.crop((0, top, nw, top + h)).filter(ImageFilter.GaussianBlur(max(8, h // 25)))
+        canvas = Image.blend(bg, Image.new("RGB", (nw, h), (255, 255, 255)), 0.25)
+    canvas.paste(im, ((nw - w) // 2, 0))
+    return canvas
+
+
+def save_images(item_id, data, fill=False):
     """画像を読み込み直して JPEG で2つ書き出す（元のファイルはそのまま使わない）。(幅, 高さ) を返す。"""
     im = Image.open(io.BytesIO(data))
     im.load()
@@ -192,6 +226,9 @@ def save_images(item_id, data):
         raise ValueError("画像が小さすぎます")
     if not build.valid_id(item_id):
         raise ValueError("掲載IDに使えない文字があります")
+    if fill and w / h < FILL_BELOW:
+        im = widen(im)
+        w, h = im.size
     large = im.copy()
     if w > LARGE_W:
         large = large.resize((LARGE_W, round(h * LARGE_W / w)), Image.LANCZOS)
@@ -251,7 +288,7 @@ def check(row, today, override=""):
             data, _, _ = fetch(src, MAX_BYTES + 1)
         if len(data) > MAX_BYTES:
             raise ValueError("画像が大きすぎます")
-        w, h = save_images(row["ID"], data)
+        w, h = save_images(row["ID"], data, fills_frame(row))
         return dict(rec, status="ok", src=src, w=w, h=h)
     except Exception as ex:  # 取れなかったときは前の画像を残す（一時的な失敗で消さない）
         return dict(rec, status="error", note=("%s: %s" % (type(ex).__name__, ex))[:120])
@@ -368,6 +405,8 @@ def main():
             path = os.path.join(ROOT, overrides[row["ID"]][5:])
             if os.path.exists(path) and rec.get("fsize") != os.path.getsize(path):
                 return True  # 同じファイル名のまま画像を入れ替えた
+        if rec.get("status") == "ok" and rec.get("w") and rec["w"] / rec["h"] < FILL_BELOW and fills_frame(row):
+            return True  # 縦に近い画像を、左右を足して作り直す
         age = (today - datetime.date.fromisoformat(rec["checked"])).days
         return age >= (REFRESH_DAYS if rec["status"] == "ok" else RETRY_DAYS)
 

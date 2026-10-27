@@ -1568,11 +1568,11 @@
  },
  "R0183": {
   "page": "https://www.youtube.com/channel/UC96jiVMyHT-JsEMF0EOtnbQ",
-  "checked": "2026-10-24",
+  "checked": "2026-10-28",
   "status": "ok",
   "src": "https://yt3.googleusercontent.com/a4UBH8LgeRsEM8W49wqOVuN36yn9GI0e1f5a3hjd6_SgOHUx0hV2SQixtQuznhv6jyFfk2ir4o4=s900-c-k-c0x00ffffff-no-rj",
-  "w": 900,
-  "h": 900
+  "w": 960,
+  "h": 503
  },
  "R0184": {
   "page": "https://globis.jp/",
@@ -4071,7 +4071,7 @@
   "status": "ok",
   "src": "https://strategyconsultant-bank.com/images/ogImage.png",
   "w": 960,
-  "h": 686
+  "h": 503
  },
  "R0482": {
   "page": "https://extreme-freelance.jp/",
