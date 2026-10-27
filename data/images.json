@@ -3963,5 +3963,120 @@
   "src": "file:images/manual/R0468.jpg",
   "w": 617,
   "h": 324
+ },
+ "R0469": {
+  "page": "https://tech-go.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/our-vision-production.appspot.com/official/tech_go/logo_2510.webp",
+  "w": 951,
+  "h": 155,
+  "small": true
+ },
+ "R0470": {
+  "page": "https://unison-career.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://unison-career.jp/renewal-2024/wp-content/uploads/2026/08/OG.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0471": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784798192321",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47981/4798192325.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0472": {
+  "page": "https://www.manpowergroup.jp/company/r_center/w_paper/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.manpowergroup.jp/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0473": {
+  "page": "https://furusatokengyo.jp/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0474": {
+  "page": "https://yakuzaishi.yakumatch.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://yakuzaishi.yakumatch.com/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0475": {
+  "page": "https://joins.co.jp/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0476": {
+  "page": "https://www.passion-leaders.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.passion-leaders.com/img/common/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0477": {
+  "page": "https://itconsultant-bank.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://itconsultant-bank.com/ogImage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0478": {
+  "page": "https://freelance.fosternet.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://freelance.fosternet.jp/assets/images/common/og_image.png",
+  "w": 960,
+  "h": 672
+ },
+ "R0479": {
+  "page": "https://at-engineer.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://atengineer.s3.ap-northeast-1.amazonaws.com/common/at_engineer_logo_kana_horizontal.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0480": {
+  "page": "https://points-of-you-japan.com/ja",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://points-of-you-japan.com/2020new/wp-content/uploads/2017/04/poy_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0481": {
+  "page": "https://strategyconsultant-bank.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://strategyconsultant-bank.com/images/ogImage.png",
+  "w": 960,
+  "h": 686
+ },
+ "R0482": {
+  "page": "https://extreme-freelance.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://extreme-freelance.jp/assets/img/common/fls_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0483": {
+  "page": "https://jceoa.org/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://jceoa.org/jceoa-wp/wp-content/themes/jceoa/assets/img/ogp.png",
+  "w": 960,
+  "h": 504
  }
 }
