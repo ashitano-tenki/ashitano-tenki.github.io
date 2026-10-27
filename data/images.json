@@ -3621,8 +3621,8 @@
   "h": 504
  },
  "R0430": {
-  "page": "https://it-kyujin.jp/freelance",
-  "checked": "2026-10-27",
+  "page": "https://it-kyujin.jp",
+  "checked": "2026-10-28",
   "manual": true,
   "fsize": 102552,
   "status": "ok",
@@ -3645,5 +3645,264 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47991/4799114204.jpg",
   "w": 692,
   "h": 1000
+ },
+ "R0433": {
+  "page": "https://lancersagent.com",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+ },
+ "R0434": {
+  "page": "https://professional-agent.lancers.jp/consultant/",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0435": {
+  "page": "https://tech.crowdworks.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://tech.crowdworks.jp/assets/cwt_og-2c4229b31bddd67733391c424a1c898b9c8bae5b55a3af9e17ac83a45f8d0675.png",
+  "w": 960,
+  "h": 480
+ },
+ "R0436": {
+  "page": "https://www.free-consul.biz",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.free-consul.biz/wp-content/uploads/2025/09/solution-og-image.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0437": {
+  "page": "https://www.high-performer.jp/consultant/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.high-performer.jp/consultant/wp-content/uploads/2024/12/HCogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0438": {
+  "page": "https://withwork.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://withwork.com/assets/withwork/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0439": {
+  "page": "https://saleshub.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://saleshub.jp/images/common/ogp/image.png",
+  "w": 760,
+  "h": 400
+ },
+ "R0440": {
+  "page": "https://nimaime.or.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://nimaime.or.jp/wordpress/wp-content/themes/original/img/common/cmn_ogp_img.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0441": {
+  "page": "https://www.share-machi.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/0369b7_dba2668532094a5fac643bcce671fdd5%7Emv2.png/v1/fit/w_2500,h_1330,al_c/0369b7_dba2668532094a5fac643bcce671fdd5%7Emv2.png",
+  "w": 960,
+  "h": 539
+ },
+ "R0442": {
+  "page": "https://greenz.jp/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0443": {
+  "page": "https://soar-world.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://soar-world.com/wp-content/uploads/2019/12/share.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0444": {
+  "page": "https://fastgrow.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.fastgrow.jp/assets/ogp-default-7f4c16e8225338dfd8c7eb7cc40584351b51d704dcdf65b3a914e0f3a060fa76.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0445": {
+  "page": "https://workcation.or.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://workcation.or.jp/wp-content/uploads/2025/01/ogp.png",
+  "w": 960,
+  "h": 480
+ },
+ "R0446": {
+  "page": "https://non-programmer.or.jp",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://non-programmer.or.jp/wp-content/uploads/2021/07/LOGO_00610_final-1_square.png",
+  "w": 512,
+  "h": 512
+ },
+ "R0447": {
+  "page": "https://satonova.org/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://satonova.org/nkpmymqT6kwpv/wp-content/themes/20231205_satonoba/img/common/satonoba_ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0448": {
+  "page": "https://freelance.techbiz.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://freelance.techbiz.com/src/img/ogp_image.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0449": {
+  "page": "https://consul-data-bank.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://consul-data-bank.com/wp-content/uploads/2022/01/cropped-CDB_Logo_12.jpg",
+  "w": 512,
+  "h": 512
+ },
+ "R0450": {
+  "page": "https://engineer-data-bank.com/",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "UnicodeEncodeError: 'ascii' codec can't encode character '\\xd7' in position 40: ordinal not in range(128)"
+ },
+ "R0451": {
+  "page": "https://freelance.ageless.co.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://d9r8ffjmrfeiu.cloudfront.net/packs/images/45bf1b9215dad19f6a4d.png",
+  "w": 960,
+  "h": 460
+ },
+ "R0452": {
+  "page": "https://www.offeeer.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.offeeer.jp/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0453": {
+  "page": "https://www.engineer-route.com",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.engineer-route.com/front/images/ER_OGP3.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0454": {
+  "page": "https://biz.moneyforward.com/starting-business",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0455": {
+  "page": "https://semiconductor-job.com/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0456": {
+  "page": "https://career.sponavi.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://career.sponavi.com/wp-content/themes/career/images/logo_for_ogp.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0457": {
+  "page": "https://www.creativevillage.ne.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://www.creativevillage.ne.jp/wp-content/uploads/2022/11/ogp_1200x630.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0458": {
+  "page": "https://suke-dachi.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://suke-dachi.jp/assets/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0459": {
+  "page": "https://keieishaterrace.jp",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+ },
+ "R0460": {
+  "page": "https://ten-inc.biz/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0461": {
+  "page": "https://eotokyo.org/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://eotokyo.org/wp-content/uploads/2024/09/home.jpg",
+  "w": 960,
+  "h": 540
+ },
+ "R0462": {
+  "page": "https://shachomeikan.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://shachomeikan.jp/assets/img/common/shacho_meikan_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0463": {
+  "page": "https://www.doctor-agent.com/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0464": {
+  "page": "https://hitalent.co.jp/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://hitalent.co.jp/wp-content/uploads/2022/06/ogp-1.png",
+  "w": 600,
+  "h": 315
+ },
+ "R0465": {
+  "page": "https://locacary.com/",
+  "checked": "2026-10-28",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/71f4c9f6-e0a5-42ba-9348-d1d0de1a6559",
+  "w": 960,
+  "h": 504
+ },
+ "R0466": {
+  "page": "https://assign-inc.com/",
+  "checked": "2026-10-28",
+  "status": "none"
+ },
+ "R0467": {
+  "page": "https://highclass.work/",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0468": {
+  "page": "https://itpropartners.com/hr",
+  "checked": "2026-10-28",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Unavailable"
  }
 }
