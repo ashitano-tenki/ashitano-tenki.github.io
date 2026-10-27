@@ -3480,11 +3480,13 @@
  },
  "R0413": {
   "page": "https://aile-official.co.jp/parallelcareer/",
-  "checked": "2026-10-27",
+  "checked": "2026-10-28",
+  "manual": true,
+  "fsize": 61241,
   "status": "ok",
-  "src": "https://aile-official.co.jp/parallelcareer/wp-content/uploads/2022/06/cropped-Project2.png",
+  "src": "file:images/manual/R0413.jpg",
   "w": 960,
-  "h": 960
+  "h": 540
  },
  "R0414": {
   "page": "https://finance.techbiz.com/",
@@ -3649,14 +3651,22 @@
  "R0433": {
   "page": "https://lancersagent.com",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+  "manual": true,
+  "fsize": 41103,
+  "status": "ok",
+  "src": "file:images/manual/R0433.jpg",
+  "w": 960,
+  "h": 495
  },
  "R0434": {
   "page": "https://professional-agent.lancers.jp/consultant/",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "fsize": 81269,
+  "status": "ok",
+  "src": "file:images/manual/R0434.jpg",
+  "w": 960,
+  "h": 463
  },
  "R0435": {
   "page": "https://tech.crowdworks.jp/",
@@ -3717,7 +3727,12 @@
  "R0442": {
   "page": "https://greenz.jp/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 413034,
+  "status": "ok",
+  "src": "file:images/manual/R0442.jpg",
+  "w": 960,
+  "h": 496
  },
  "R0443": {
   "page": "https://soar-world.com/",
@@ -3746,10 +3761,12 @@
  "R0446": {
   "page": "https://non-programmer.or.jp",
   "checked": "2026-10-28",
+  "manual": true,
+  "fsize": 106672,
   "status": "ok",
-  "src": "https://non-programmer.or.jp/wp-content/uploads/2021/07/LOGO_00610_final-1_square.png",
-  "w": 512,
-  "h": 512
+  "src": "file:images/manual/R0446.jpg",
+  "w": 960,
+  "h": 458
  },
  "R0447": {
   "page": "https://satonova.org/",
@@ -3770,16 +3787,22 @@
  "R0449": {
   "page": "https://consul-data-bank.com/",
   "checked": "2026-10-28",
+  "manual": true,
+  "fsize": 117201,
   "status": "ok",
-  "src": "https://consul-data-bank.com/wp-content/uploads/2022/01/cropped-CDB_Logo_12.jpg",
-  "w": 512,
-  "h": 512
+  "src": "file:images/manual/R0449.jpg",
+  "w": 960,
+  "h": 586
  },
  "R0450": {
   "page": "https://engineer-data-bank.com/",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "UnicodeEncodeError: 'ascii' codec can't encode character '\\xd7' in position 40: ordinal not in range(128)"
+  "manual": true,
+  "fsize": 45762,
+  "status": "ok",
+  "src": "file:images/manual/R0450.jpg",
+  "w": 960,
+  "h": 540
  },
  "R0451": {
   "page": "https://freelance.ageless.co.jp/",
@@ -3808,13 +3831,22 @@
  "R0454": {
   "page": "https://biz.moneyforward.com/starting-business",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 42717,
+  "status": "ok",
+  "src": "file:images/manual/R0454.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0455": {
   "page": "https://semiconductor-job.com/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 128621,
+  "status": "ok",
+  "src": "file:images/manual/R0455.jpg",
+  "w": 960,
+  "h": 544
  },
  "R0456": {
   "page": "https://career.sponavi.com/",
@@ -3843,13 +3875,22 @@
  "R0459": {
   "page": "https://keieishaterrace.jp",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  "manual": true,
+  "fsize": 149399,
+  "status": "ok",
+  "src": "file:images/manual/R0459.jpg",
+  "w": 960,
+  "h": 544
  },
  "R0460": {
   "page": "https://ten-inc.biz/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 86903,
+  "status": "ok",
+  "src": "file:images/manual/R0460.jpg",
+  "w": 960,
+  "h": 500
  },
  "R0461": {
   "page": "https://eotokyo.org/",
@@ -3870,7 +3911,12 @@
  "R0463": {
   "page": "https://www.doctor-agent.com/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 168847,
+  "status": "ok",
+  "src": "file:images/manual/R0463.jpg",
+  "w": 960,
+  "h": 559
  },
  "R0464": {
   "page": "https://hitalent.co.jp/",
@@ -3891,18 +3937,31 @@
  "R0466": {
   "page": "https://assign-inc.com/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 105528,
+  "status": "ok",
+  "src": "file:images/manual/R0466.jpg",
+  "w": 960,
+  "h": 481
  },
  "R0467": {
   "page": "https://highclass.work/",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 145897,
+  "status": "ok",
+  "src": "file:images/manual/R0467.jpg",
+  "w": 960,
+  "h": 476
  },
  "R0468": {
   "page": "https://itpropartners.com/hr",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Unavailable"
+  "manual": true,
+  "fsize": 8436,
+  "status": "ok",
+  "src": "file:images/manual/R0468.jpg",
+  "w": 617,
+  "h": 324
  }
 }
