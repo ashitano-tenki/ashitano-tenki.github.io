@@ -4000,7 +4000,12 @@
  "R0473": {
   "page": "https://furusatokengyo.jp/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 274482,
+  "status": "ok",
+  "src": "file:images/manual/R0473.jpg",
+  "w": 960,
+  "h": 459
  },
  "R0474": {
   "page": "https://yakuzaishi.yakumatch.com/",
@@ -4013,7 +4018,12 @@
  "R0475": {
   "page": "https://joins.co.jp/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 21236,
+  "status": "ok",
+  "src": "file:images/manual/R0475.jpg",
+  "w": 960,
+  "h": 588
  },
  "R0476": {
   "page": "https://www.passion-leaders.com/",
