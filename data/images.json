@@ -4169,5 +4169,90 @@
   "src": "file:images/manual/R0495.jpg",
   "w": 960,
   "h": 519
+ },
+ "R0496": {
+  "page": "https://career.vook.vc",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://career.vook.vc/_nuxt/img/ogp.103330e.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0497": {
+  "page": "https://squareup.com/jp/ja/invoices",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://images.ctfassets.net/2d5q1td6cyxq/1znx1xs46cXqAWJLlDjAyA/60dd141fd24d7da357dd0777f574d0fe/ph210406A_Marketing_2566_L.png?w=1200&h=630&fit=thumb&fm=jpg&q=90",
+  "w": 960,
+  "h": 504
+ },
+ "R0498": {
+  "page": "https://www.veterinaryclinic-kaigyo.com/",
+  "checked": "2026-10-29",
+  "status": "none"
+ },
+ "R0499": {
+  "page": "https://www.styledesigner.net/",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://www.styledesigner.net/assets/images/common/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0500": {
+  "page": "https://salowin.jp/",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://salowin.jp/wp/wp-content/uploads/2023/02/salowin_ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0501": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000024.000020227.html",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/20227/24/20227-24-a217dcf853e51f198c484dbecc6f306a-1536x1024.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R0502": {
+  "page": "http://www.fc-hikaku.net/",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://www.fc-hikaku.net/assets/top/top_ogp-84a64e56f6ada9045e8174757ab84635174878bbaa8c10e87fffe85d6cb712f9.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0503": {
+  "page": "https://canaeru.usen.com/",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://canaeru.usen.com/img/OGP.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0504": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1093955",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48652/4865280537.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R0505": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0954944",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40473/4047364053.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0506": {
+  "page": "https://mo-wct.jp/",
+  "checked": "2026-10-29",
+  "status": "ok",
+  "src": "https://cdn.peraichi.com/userData/5a960f8d-d8ac-4899-9c4a-32a10a00002b/img/cfe436fa-6c28-4148-9c9a-0eca3751d0fe/Writer_s_Cafeterrace_icon.png",
+  "w": 779,
+  "h": 408
  }
 }
