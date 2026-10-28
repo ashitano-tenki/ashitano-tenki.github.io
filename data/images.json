@@ -4093,7 +4093,12 @@
  "R0484": {
   "page": "https://lounge.dmm.com/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 36027,
+  "status": "ok",
+  "src": "file:images/manual/R0484.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0485": {
   "page": "https://elevate-works.jp/",
@@ -4127,18 +4132,6 @@
   "w": 960,
   "h": 540
  },
- "R0489": {
-  "page": "https://paiza.jp/pages/careers/freelance-line",
-  "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
- },
- "R0490": {
-  "page": "https://freelance.akkodis.co.jp/",
-  "checked": "2026-10-28",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
- },
  "R0492": {
   "page": "https://chip-career.com/",
   "checked": "2026-10-28",
@@ -4150,18 +4143,31 @@
  "R0493": {
   "page": "https://wacul-ai.com/service-cop/marketer-agent/creator/",
   "checked": "2026-10-28",
-  "status": "none"
+  "manual": true,
+  "fsize": 51421,
+  "status": "ok",
+  "src": "file:images/manual/R0493.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0494": {
   "page": "https://enbest.jp/",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 52280,
+  "status": "ok",
+  "src": "file:images/manual/R0494.jpg",
+  "w": 960,
+  "h": 496
  },
  "R0495": {
   "page": "https://xcubed.co.jp/consultant_lp/lp03/",
   "checked": "2026-10-28",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 231824,
+  "status": "ok",
+  "src": "file:images/manual/R0495.jpg",
+  "w": 960,
+  "h": 519
  }
 }
