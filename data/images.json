@@ -4189,7 +4189,12 @@
  "R0498": {
   "page": "https://www.veterinaryclinic-kaigyo.com/",
   "checked": "2026-10-29",
-  "status": "none"
+  "manual": true,
+  "fsize": 110777,
+  "status": "ok",
+  "src": "file:images/manual/R0498.jpg",
+  "w": 960,
+  "h": 565
  },
  "R0499": {
   "page": "https://www.styledesigner.net/",
