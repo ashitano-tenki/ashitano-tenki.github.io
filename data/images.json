@@ -4259,5 +4259,352 @@
   "src": "https://cdn.peraichi.com/userData/5a960f8d-d8ac-4899-9c4a-32a10a00002b/img/cfe436fa-6c28-4148-9c9a-0eca3751d0fe/Writer_s_Cafeterrace_icon.png",
   "w": 779,
   "h": 408
+ },
+ "R0507": {
+  "page": "https://www.enworld.com/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0508": {
+  "page": "https://www.robertwalters.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.robertwalters.co.jp/content/dam/robert-walters-redesign/country/japan/images/content-images/1200x628/robert-walters-japan-new-banner-2026-1200x628px.png",
+  "w": 960,
+  "h": 502
+ },
+ "R0509": {
+  "page": "https://www.michaelpage.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.michaelpage.co.jp/sites/michaelpage.co.jp/files/2026-08/michaelpage-logo.jpg",
+  "w": 382,
+  "h": 200
+ },
+ "R0510": {
+  "page": "https://www.daijob.com/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0511": {
+  "page": "https://paytner.co.jp/factoring/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://paytner.co.jp/assets/metadata/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0512": {
+  "page": "https://labol.co.jp/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0513": {
+  "page": "https://bizcomfort.jp/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0514": {
+  "page": "https://mosh.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://mosh.jp/assets/brand/ogp-CpXmdU5y.png",
+  "w": 960,
+  "h": 480
+ },
+ "R0515": {
+  "page": "https://www.lhh.com/ja-jp",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.lhh.com/ja-jp/-/media/84754d223f164eec9ab148df647ca122.jpg?h=630&iar=0&w=1200&hash=95F1A77033449DF9D0D6B1CB16FD61E3",
+  "w": 960,
+  "h": 504
+ },
+ "R0516": {
+  "page": "https://www.randstad.co.jp/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0517": {
+  "page": "https://www.servicegrant.or.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.servicegrant.or.jp/svgtcms/wp-content/themes/SVGT2024/img/logo.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0518": {
+  "page": "https://circu.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://circu.co.jp/wp-content/uploads/2019/08/190812_circulation_ogp_C-3.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0519": {
+  "page": "https://tabippo.net/poolo/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://tabippo.net/wp-content/uploads/20250108132827/ogp_a.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0520": {
+  "page": "https://www.yell4u.jp/supporter",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/7e800e08-6fcf-4d88-abb9-9dc00c5c07ca",
+  "w": 960,
+  "h": 504
+ },
+ "R0521": {
+  "page": "https://ququmo.com/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0522": {
+  "page": "https://www.openwork.jp/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0523": {
+  "page": "https://jobtalk.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://cdn.jobtalk.jp/common/img/ogp-img.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0524": {
+  "page": "https://careerconnection.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://careerconnection.jp/assets/img/careercon-square-icon.png",
+  "w": 382,
+  "h": 200
+ },
+ "R0525": {
+  "page": "https://doda.jp/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "TimeoutError: The read operation timed out"
+ },
+ "R0526": {
+  "page": "https://tenshoku.mynavi.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://tenshoku.mynavi.jp/img/1110/social/logo.jpg",
+  "w": 382,
+  "h": 200
+ },
+ "R0527": {
+  "page": "https://next.rikunabi.com/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0528": {
+  "page": "https://type.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "http://type.jp/s/img_banner/facebook_image.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0529": {
+  "page": "https://employment.en-japan.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://employment.en-japan.com/imageFile/user/og_employment.png",
+  "w": 567,
+  "h": 378
+ },
+ "R0530": {
+  "page": "https://jp.indeed.com/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0531": {
+  "page": "https://www.linkedin.com/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0532": {
+  "page": "https://www.pasonacareer.jp/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0533": {
+  "page": "https://en-ambi.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://en-ambi.com/imageFile/user/global/ogp_01.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0534": {
+  "page": "https://timee.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://timee.co.jp/_assets/ogp.D2zkELIe.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0535": {
+  "page": "https://jp.stanby.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://jp.stanby.com/images/ogimage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0536": {
+  "page": "https://uzuz.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://uzuz.jp/wp/wp-content/uploads/2016/08/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0537": {
+  "page": "https://www.jaic-college.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.jaic-college.jp/wp-content/uploads/2023/07/shuushokucollege-home.jpg",
+  "w": 960,
+  "h": 609
+ },
+ "R0538": {
+  "page": "https://part.shufu-job.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://cdn.shufu-job.jp/marketing/ogp_main.jpg?1793282487",
+  "w": 960,
+  "h": 503
+ },
+ "R0539": {
+  "page": "https://20s-type.mynavi.jp/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+ },
+ "R0540": {
+  "page": "https://hataractive.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://hataractive.jp/img/owned/common/banner/ogpImage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0541": {
+  "page": "https://www.ii-syusyoku.com/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+ },
+ "R0542": {
+  "page": "https://directscout.recruit.co.jp/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0543": {
+  "page": "https://www.udemy.com/ja/",
+  "checked": "2026-10-30",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0544": {
+  "page": "https://globis.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://globis.jp/lp_assets/images/common/OGP.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0545": {
+  "page": "https://tech-camp.in/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://tech-camp.in/images/ogp.png",
+  "w": 960,
+  "h": 472
+ },
+ "R0546": {
+  "page": "https://www.c-c-j.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.c-c-j.com/img/rn_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0547": {
+  "page": "https://www.u-can.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.u-can.co.jp/common/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0548": {
+  "page": "https://www.bni.com/country/japan/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.bni.com/wp-content/uploads/2025/04/BNI-Refresh.png",
+  "w": 960,
+  "h": 523
+ },
+ "R0549": {
+  "page": "https://studying.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://studying.jp/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0550": {
+  "page": "https://www.tac-school.co.jp/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0551": {
+  "page": "https://prtimes.jp/main/html/rd/p/000001341.000043465.html",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://prtimes.jp/i/43465/1341/resize/d43465-1341-289320-pixta_111505981-0.jpg",
+  "w": 640,
+  "h": 426
+ },
+ "R0552": {
+  "page": "https://www.hrpro.co.jp/research_detail.php?r_no=430",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0553": {
+  "page": "https://www.workport.co.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.workport.co.jp/cmn5/img/ogp_new2.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0554": {
+  "page": "https://mba.globis.ac.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://mba.globis.ac.jp/assets/img/og/like.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0555": {
+  "page": "https://resemom.jp/release/prtimes/20260218/171625.html",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://resemom.jp/release/imgs/list/316286.png",
+  "w": 382,
+  "h": 200
  }
 }
