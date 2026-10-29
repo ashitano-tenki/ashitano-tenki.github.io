@@ -4263,8 +4263,12 @@
  "R0507": {
   "page": "https://www.enworld.com/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 23144,
+  "status": "ok",
+  "src": "file:images/manual/R0507.jpg",
+  "w": 960,
+  "h": 582
  },
  "R0508": {
   "page": "https://www.robertwalters.co.jp/",
@@ -4285,7 +4289,12 @@
  "R0510": {
   "page": "https://www.daijob.com/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 167135,
+  "status": "ok",
+  "src": "file:images/manual/R0510.jpg",
+  "w": 960,
+  "h": 533
  },
  "R0511": {
   "page": "https://paytner.co.jp/factoring/",
@@ -4298,14 +4307,22 @@
  "R0512": {
   "page": "https://labol.co.jp/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 17840,
+  "status": "ok",
+  "src": "file:images/manual/R0512.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0513": {
   "page": "https://bizcomfort.jp/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 242180,
+  "status": "ok",
+  "src": "file:images/manual/R0513.jpg",
+  "w": 960,
+  "h": 512
  },
  "R0514": {
   "page": "https://mosh.jp/",
@@ -4326,7 +4343,12 @@
  "R0516": {
   "page": "https://www.randstad.co.jp/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 22765,
+  "status": "ok",
+  "src": "file:images/manual/R0516.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0517": {
   "page": "https://www.servicegrant.or.jp/",
@@ -4363,13 +4385,22 @@
  "R0521": {
   "page": "https://ququmo.com/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 46635,
+  "status": "ok",
+  "src": "file:images/manual/R0521.jpg",
+  "w": 650,
+  "h": 317
  },
  "R0522": {
   "page": "https://www.openwork.jp/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 26581,
+  "status": "ok",
+  "src": "file:images/manual/R0522.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0523": {
   "page": "https://jobtalk.jp/",
@@ -4390,8 +4421,12 @@
  "R0525": {
   "page": "https://doda.jp/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "TimeoutError: The read operation timed out"
+  "manual": true,
+  "fsize": 41482,
+  "status": "ok",
+  "src": "file:images/manual/R0525.jpg",
+  "w": 946,
+  "h": 360
  },
  "R0526": {
   "page": "https://tenshoku.mynavi.jp/",
@@ -4404,7 +4439,12 @@
  "R0527": {
   "page": "https://next.rikunabi.com/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 44815,
+  "status": "ok",
+  "src": "file:images/manual/R0527.jpg",
+  "w": 800,
+  "h": 450
  },
  "R0528": {
   "page": "https://type.jp/",
@@ -4425,18 +4465,32 @@
  "R0530": {
   "page": "https://jp.indeed.com/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 15495,
+  "status": "ok",
+  "src": "file:images/manual/R0530.jpg",
+  "w": 842,
+  "h": 442
  },
  "R0531": {
   "page": "https://www.linkedin.com/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 36888,
+  "status": "ok",
+  "src": "file:images/manual/R0531.jpg",
+  "w": 960,
+  "h": 553
  },
  "R0532": {
   "page": "https://www.pasonacareer.jp/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 6921,
+  "status": "ok",
+  "src": "file:images/manual/R0532.jpg",
+  "w": 600,
+  "h": 315
  },
  "R0533": {
   "page": "https://en-ambi.com/",
@@ -4489,8 +4543,12 @@
  "R0539": {
   "page": "https://20s-type.mynavi.jp/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+  "manual": true,
+  "fsize": 27860,
+  "status": "ok",
+  "src": "file:images/manual/R0539.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0540": {
   "page": "https://hataractive.jp/",
@@ -4501,27 +4559,40 @@
   "h": 504
  },
  "R0541": {
-  "page": "https://www.ii-syusyoku.com/",
+  "page": "https://iishuusyoku.com/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno -2] Name or service not known>"
+  "manual": true,
+  "fsize": 117510,
+  "status": "ok",
+  "src": "file:images/manual/R0541.jpg",
+  "w": 960,
+  "h": 427
  },
  "R0542": {
   "page": "https://directscout.recruit.co.jp/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 38581,
+  "status": "ok",
+  "src": "file:images/manual/R0542.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0543": {
   "page": "https://www.udemy.com/ja/",
   "checked": "2026-10-30",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 26707,
+  "status": "ok",
+  "src": "file:images/manual/R0543.jpg",
+  "w": 960,
+  "h": 560
  },
  "R0544": {
-  "page": "https://globis.jp/",
+  "page": "https://mynavi-job20s.jp/",
   "checked": "2026-10-30",
   "status": "ok",
-  "src": "https://globis.jp/lp_assets/images/common/OGP.jpg",
+  "src": "https://mynavi-job20s.jp/images/og_img.jpg",
   "w": 960,
   "h": 504
  },
@@ -4568,7 +4639,12 @@
  "R0550": {
   "page": "https://www.tac-school.co.jp/",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 191805,
+  "status": "ok",
+  "src": "file:images/manual/R0550.jpg",
+  "w": 960,
+  "h": 518
  },
  "R0551": {
   "page": "https://prtimes.jp/main/html/rd/p/000001341.000043465.html",
@@ -4581,7 +4657,12 @@
  "R0552": {
   "page": "https://www.hrpro.co.jp/research_detail.php?r_no=430",
   "checked": "2026-10-30",
-  "status": "none"
+  "manual": true,
+  "fsize": 20004,
+  "status": "ok",
+  "src": "file:images/manual/R0552.jpg",
+  "w": 800,
+  "h": 400
  },
  "R0553": {
   "page": "https://www.workport.co.jp/",
@@ -4606,5 +4687,66 @@
   "src": "https://resemom.jp/release/imgs/list/316286.png",
   "w": 382,
   "h": 200
+ },
+ "R0556": {
+  "page": "https://www.bizocean.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.bizocean.jp/assets/ogp/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0557": {
+  "page": "https://sharefull.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://sharefull.com/wp-content/themes/sharefull/img/ogp_sukimaro.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0558": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784074621507",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40746/4074621509.jpg",
+  "w": 707,
+  "h": 1000
+ },
+ "R0559": {
+  "page": "https://www.agaroot.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/production.wp.s3.agaroot.jp/wp-content/uploads/2021/06/22120111/ogpdefault_img.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0560": {
+  "page": "https://www.lec-jp.com/",
+  "checked": "2026-10-30",
+  "status": "none"
+ },
+ "R0561": {
+  "page": "https://haa.athuman.com/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://haa.athuman.com/images/top/og.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0562": {
+  "page": "https://mynavi-agent.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://mynavi-agent.jp/resource/common/img/ogp_agent.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0563": {
+  "page": "https://www.o-hara.ac.jp/",
+  "checked": "2026-10-30",
+  "status": "ok",
+  "src": "https://www.o-hara.ac.jp/assets/images/common/ogimage.png",
+  "w": 960,
+  "h": 504
  }
 }
