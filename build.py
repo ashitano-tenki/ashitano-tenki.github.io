@@ -559,9 +559,9 @@ def build_home(listed, ctx):
         for t in TENKI if t["past"] and ctx["tenki_count"][t["name"]])
     common_t = next((t for t in TENKI if t["name"] == COMMON), None)
     if common_t and ctx["tenki_count"][COMMON]:
-        tenki_links += '<li><a href="%s">どの転機にも役立つもの</a></li>' % tenki_url(common_t)
+        tenki_links += '<li><a href="%s">全般</a></li>' % tenki_url(common_t)
     stage_links = "".join(
-        '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s.get("home", s["about"])))
+        '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s.get("short", "")))
         for s in STAGES)
     kind_links = "".join(
         '<li><a href="%s">%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k))
@@ -598,7 +598,7 @@ def build_home(listed, ctx):
   </div>
   <div class="entrance">
     <h2>{e_stage}今の段階から探す</h2>
-    <ul class="stages">{stage_links}</ul>
+    <ul class="stages stage-grid">{stage_links}</ul>
   </div>
   <div class="entrance">
     <h2>{e_kind}タイプから探す</h2>
