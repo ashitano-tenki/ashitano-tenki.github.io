@@ -561,7 +561,7 @@ def build_home(listed, ctx):
     if common_t and ctx["tenki_count"][COMMON]:
         tenki_links += '<li><a href="%s">どの転機にも役立つもの</a></li>' % tenki_url(common_t)
     stage_links = "".join(
-        '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s["about"]))
+        '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s.get("home", s["about"])))
         for s in STAGES)
     kind_links = "".join(
         '<li><a href="%s">%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k))
