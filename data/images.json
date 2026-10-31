@@ -4748,5 +4748,76 @@
   "src": "https://www.o-hara.ac.jp/assets/images/common/ogimage.png",
   "w": 960,
   "h": 504
+ },
+ "R0564": {
+  "page": "https://web-camp.io/",
+  "checked": "2026-10-31",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+ },
+ "R0565": {
+  "page": "https://www.sejuku.net/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "https://www.sejuku.net/service/wp-content/uploads/2024/08/ogp_common.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0566": {
+  "page": "https://codecamp.jp/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "https://codecamp.jp/assets/comprehensives/og_image-4b4cdfe541c870fab08d4850d95e35e5c0612c2586f18938965e766037f19ca9.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0567": {
+  "page": "https://www.waseda.jp/fcom/wbs/",
+  "checked": "2026-10-31",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R0568": {
+  "page": "https://carryme.jp/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "https://carryme.jp/wp-content/themes/carryme.jp_theme/common/images/ogp.png",
+  "w": 960,
+  "h": 502
+ },
+ "R0569": {
+  "page": "https://www.ikukyu-mirais.com/",
+  "checked": "2026-10-31",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+ },
+ "R0570": {
+  "page": "https://buff-community.jp/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "http://static1.squarespace.com/static/5c296cfae17ba3d4ccaff949/t/6483db8ca212f6364ebfa7ac/1686363020639/buff-16th_cover.png?format=1500w",
+  "w": 960,
+  "h": 540
+ },
+ "R0571": {
+  "page": "https://www.ohmae.ac.jp/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "https://www.ohmae.ac.jp/wbbtp/wp-content/uploads/2023/05/ogp2023.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0572": {
+  "page": "https://mamaworks.jp/",
+  "checked": "2026-10-31",
+  "status": "none"
+ },
+ "R0573": {
+  "page": "https://freeconsultant.jp/",
+  "checked": "2026-10-31",
+  "status": "ok",
+  "src": "https://freeconsultant.jp/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
  }
 }
