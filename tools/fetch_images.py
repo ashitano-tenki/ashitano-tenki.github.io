@@ -33,7 +33,7 @@ import urllib.parse
 import unicodedata
 import urllib.request
 
-from PIL import Image, ImageFilter
+from PIL import Image, ImageChops, ImageFilter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -210,6 +210,42 @@ def widen(im):
     return canvas
 
 
+LOGO_MAX_AREA = 0.08      # 無地の背景で、中身（ロゴなど）がこの割合より小さい画像は寄って大きく見せる
+LOGO_TARGET_W = 0.5       # 寄ったあと、中身が枠の幅に占める割合の目安
+LOGO_MAX_ZOOM = 2.2       # 寄りすぎて粗くならないよう、拡大はここまで
+
+
+def zoom_logo(im):
+    """無地の背景の真ん中に小さなロゴがあるだけの画像は、ロゴに寄って 1.91:1 で切り出す。当てはまらなければそのまま返す。"""
+    w, h = im.size
+    if w / h < FILL_BELOW:
+        return im
+    edge = max(1, min(w, h) // 50)
+    px = (list(im.crop((0, 0, w, edge)).getdata()) + list(im.crop((0, h - edge, w, h)).getdata())
+          + list(im.crop((0, 0, edge, h)).getdata()) + list(im.crop((w - edge, 0, w, h)).getdata()))
+    base = tuple(sorted(p[i] for p in px)[len(px) // 2] for i in range(3))
+    if sum(1 for p in px if max(abs(p[i] - base[i]) for i in range(3)) <= 12) < len(px) * 0.97:
+        return im  # 端の色がそろっていない（写真や模様）
+    diff = ImageChops.difference(im, Image.new("RGB", im.size, base)).convert("L").point(lambda v: 255 if v > 28 else 0)
+    box = diff.getbbox()
+    if not box:
+        return im
+    bw, bh = box[2] - box[0], box[3] - box[1]
+    if bw * bh > w * h * LOGO_MAX_AREA:
+        return im
+    # 幅で半分、または高さで3割を占めるまで寄る。ただし中身が枠からはみ出しそうなとき・切り出しが小さくなりすぎるとき（幅480px未満）は控える
+    zoom = min(LOGO_MAX_ZOOM, max(LOGO_TARGET_W * w / bw, 0.3 * h / bh), 0.85 * w / bw, 0.8 * h / bh, w / 480)
+    if zoom <= 1.15:
+        return im
+    cw = round(w / zoom)
+    ch = round(cw / FRAME)
+    cx, cy = (box[0] + box[2]) / 2, (box[1] + box[3]) / 2
+    canvas = Image.new("RGB", (cw, ch), base)
+    left, top = round(cx - cw / 2), round(cy - ch / 2)
+    canvas.paste(im.crop((max(0, left), max(0, top), min(w, left + cw), min(h, top + ch))), (max(0, -left), max(0, -top)))
+    return canvas
+
+
 def save_images(item_id, data, fill=False):
     """画像を読み込み直して JPEG で2つ書き出す（元のファイルはそのまま使わない）。(幅, 高さ) を返す。"""
     im = Image.open(io.BytesIO(data))
@@ -228,6 +264,9 @@ def save_images(item_id, data, fill=False):
         raise ValueError("掲載IDに使えない文字があります")
     if fill and w / h < FILL_BELOW:
         im = widen(im)
+        w, h = im.size
+    if fill:
+        im = zoom_logo(im)
         w, h = im.size
     large = im.copy()
     if w > LARGE_W:

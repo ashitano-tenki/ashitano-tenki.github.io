@@ -414,8 +414,8 @@
   "fsize": 13639,
   "status": "ok",
   "src": "file:images/manual/R0053.jpg",
-  "w": 960,
-  "h": 504
+  "w": 565,
+  "h": 296
  },
  "R0054": {
   "page": "https://woman.nikkei.com/",
@@ -2231,8 +2231,8 @@
   "checked": "2026-10-25",
   "status": "ok",
   "src": "https://xn--gmqq38ad1f12g8nk0ol.jp/assets/img/ogp.png",
-  "w": 960,
-  "h": 504
+  "w": 566,
+  "h": 296
  },
  "R0263": {
   "page": "https://kenshoku-bank.com/",
@@ -3493,16 +3493,16 @@
   "checked": "2026-10-27",
   "status": "ok",
   "src": "https://finance.techbiz.com/src/img/ogp_image.jpg",
-  "w": 960,
-  "h": 504
+  "w": 489,
+  "h": 256
  },
  "R0415": {
   "page": "https://hr.techbiz.com/",
   "checked": "2026-10-27",
   "status": "ok",
   "src": "https://hr.techbiz.com/src/img/ogp_image.jpg",
-  "w": 960,
-  "h": 504
+  "w": 524,
+  "h": 274
  },
  "R0416": {
   "page": "https://freelance.levtech.jp/",
@@ -3603,8 +3603,8 @@
   "checked": "2026-10-27",
   "status": "ok",
   "src": "https://www.engineer-factory.com/img/freelance/common/ogp_ef-f.webp",
-  "w": 960,
-  "h": 504
+  "w": 597,
+  "h": 313
  },
  "R0428": {
   "page": "https://freelance.potepan.com",
@@ -3747,8 +3747,8 @@
   "checked": "2026-10-28",
   "status": "ok",
   "src": "https://www.fastgrow.jp/assets/ogp-default-7f4c16e8225338dfd8c7eb7cc40584351b51d704dcdf65b3a914e0f3a060fa76.png",
-  "w": 960,
-  "h": 504
+  "w": 480,
+  "h": 251
  },
  "R0445": {
   "page": "https://workcation.or.jp/",
@@ -3781,8 +3781,8 @@
   "checked": "2026-10-28",
   "status": "ok",
   "src": "https://freelance.techbiz.com/src/img/ogp_image.jpg",
-  "w": 960,
-  "h": 504
+  "w": 597,
+  "h": 313
  },
  "R0449": {
   "page": "https://consul-data-bank.com/",
@@ -4047,8 +4047,8 @@
   "checked": "2026-10-28",
   "status": "ok",
   "src": "https://freelance.fosternet.jp/assets/images/common/og_image.png",
-  "w": 960,
-  "h": 672
+  "w": 669,
+  "h": 350
  },
  "R0479": {
   "page": "https://at-engineer.jp/",
@@ -4087,8 +4087,8 @@
   "checked": "2026-10-28",
   "status": "ok",
   "src": "https://jceoa.org/jceoa-wp/wp-content/themes/jceoa/assets/img/ogp.png",
-  "w": 960,
-  "h": 504
+  "w": 532,
+  "h": 279
  },
  "R0484": {
   "page": "https://lounge.dmm.com/",
@@ -4209,8 +4209,8 @@
   "checked": "2026-10-29",
   "status": "ok",
   "src": "https://salowin.jp/wp/wp-content/uploads/2023/02/salowin_ogp.jpg",
-  "w": 960,
-  "h": 504
+  "w": 597,
+  "h": 313
  },
  "R0501": {
   "page": "https://prtimes.jp/main/html/rd/p/000000024.000020227.html",
@@ -4677,8 +4677,8 @@
   "checked": "2026-10-30",
   "status": "ok",
   "src": "https://mba.globis.ac.jp/assets/img/og/like.jpg",
-  "w": 960,
-  "h": 504
+  "w": 527,
+  "h": 276
  },
  "R0555": {
   "page": "https://resemom.jp/release/prtimes/20260218/171625.html",
