@@ -630,7 +630,7 @@ def build_home(listed, ctx):
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
-           ai_check='<p class="check-link">%s</p>' % ai_link(TENKI_AI + "#stage-check", "転機AIに相談する", "home") if TENKI_AI else "",
+           ai_check='<p class="check-link">%s</p>' % ai_link(TENKI_AI, "転機AIに相談する", "home") if TENKI_AI else "",
            stage_links=stage_links, kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),

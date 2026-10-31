@@ -10,7 +10,7 @@
   "_contact_form_url の説明": "フッターと「観測所について」に置く「観測所へのご連絡」のリンク先。",
   "contact_form_url": "https://forms.gle/gMJKkAsVSVBRmwBT6",
   "operator_url": "https://linktr.ee/chlorine0528",
-  "_tenki_ai_url の説明": "キャリア相談のAI「転機AI」（Claude のアーティファクト）のURL。メニュー・紹介ページ・探す・トップのリンク先。紹介ページでは末尾に #掲載ID、トップでは #stage-check を付ける。空にするとリンクを出さない。",
+  "_tenki_ai_url の説明": "キャリア相談のAI「転機AI」（Claude のアーティファクト）のURL。メニュー・紹介ページ・探す・トップのリンク先。紹介ページでは末尾に #掲載ID を付ける。空にするとリンクを出さない。",
   "tenki_ai_url": "https://claude.ai/artifact/MdtzkXt5Pch2MNhXsdCTnc",
   "_google_site_verification の説明": "Google Search Console の所有権の確認に使う文字列（HTMLタグの content の中身）。全ページの head に入る。",
   "google_site_verification": "QfZTihD29VHshRbTilTzPcex8edTvSmGA6GJXm81WHs",
