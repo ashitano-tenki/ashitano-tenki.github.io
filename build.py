@@ -591,7 +591,7 @@ def build_home(listed, ctx):
   <h1>{site}</h1>
   <p class="hero-count"><b>{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
-  <p class="check-link"><a href="/check/">転機の段階をセルフチェックする</a>{ai_check}</p>
+  {ai_check}
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -630,7 +630,7 @@ def build_home(listed, ctx):
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
-           ai_check=ai_link(TENKI_AI + "#stage-check", "転機の段階をAIとセルフチェックする", "home", "ai-check") if TENKI_AI else "",
+           ai_check='<p class="check-link">%s</p>' % ai_link(TENKI_AI + "#stage-check", "転機AIに相談する", "home") if TENKI_AI else "",
            stage_links=stage_links, kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
@@ -950,7 +950,7 @@ def build_item(item, listed, ctx):
                 '<button type="button" class="button button-ghost share-btn" data-share-title="%s" hidden>%s<span>共有</span></button></p>'
                 % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON, e(item["title"] + "｜" + CONF["site_name"]), SHARE_ICON))
     if TENKI_AI:
-        official += ('<p class="ai-consult">%s<span class="ai-note">Claudeにログインすると、AIが相談に乗ります（無料プランで利用できます）。</span></p>'
+        official += ('<p class="ai-consult">%s<span class="ai-note">Claudeにログインすると、AIが相談に乗ります（無料プランでも利用可）。</span></p>'
                      % ai_link("%s#%s" % (TENKI_AI, item["id"]), "この情報が自分に合うか、転機AIに相談する", "item/" + item["id"]))
     tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]))
     stage_links = links(item["stages"], STAGE_BY_NAME, lambda n: search_url(stage=n))
