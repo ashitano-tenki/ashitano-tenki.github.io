@@ -1046,10 +1046,12 @@ def build_search(listed, ctx):
     </div>
     <div class="result-col">
       <div class="result-bar">
-        <p id="result-count" aria-live="polite">読み込み中…</p>
+        <div class="bar-count">
+          <p id="result-count" aria-live="polite">読み込み中…</p>
+          <div class="view-switch" role="group" aria-label="表示の切り替え"><button type="button" data-view="card" aria-pressed="true" title="カードで表示" aria-label="カードで表示"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1.2"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1.2"/><rect x="9" y="9" width="5.5" height="5.5" rx="1.2"/></svg></button><button type="button" data-view="list" aria-pressed="false" title="一覧で表示" aria-label="一覧で表示"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><rect x="1.5" y="2" width="4" height="3.2" rx=".8"/><rect x="7" y="2.6" width="7.5" height="2" rx="1"/><rect x="1.5" y="6.4" width="4" height="3.2" rx=".8"/><rect x="7" y="7" width="7.5" height="2" rx="1"/><rect x="1.5" y="10.8" width="4" height="3.2" rx=".8"/><rect x="7" y="11.4" width="7.5" height="2" rx="1"/></svg></button></div>
+        </div>
         <button type="button" class="bar-filter" id="bar-filter" aria-controls="filter-panel" aria-expanded="false">絞り込む</button>
-        <div class="view-switch" role="group" aria-label="表示の切り替え"><button type="button" data-view="card" aria-pressed="true">カード</button><button type="button" data-view="list" aria-pressed="false">一覧</button></div>
-        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select><a class="sort-help" href="/about/#order">並び順の考え方</a></div>
+        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">おすすめ順</option><option value="new">新着順</option></select></div>
       </div>
       <div id="active-chips" class="active-chips" hidden></div>
       <p id="syn-note" class="syn-note" hidden></p>

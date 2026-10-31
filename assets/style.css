@@ -237,7 +237,7 @@ button, .button {
 }
 /* スマホ：小さな文字のリンクも、見た目はそのままで押せる範囲を上下に広げる */
 @media (max-width: 759px) {
-  .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .sort-help, .rss-note a, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
+  .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .rss-note a, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
 }
 .save-wide { display: inline-flex; align-items: center; gap: var(--space-2); }
 .save-wide[aria-pressed="true"] { border-color: var(--sky); color: var(--sky); }
@@ -349,7 +349,6 @@ button, .button {
 @media (max-width: 639px) {
   .result-bar { position: sticky; top: var(--header-h, 0px); z-index: 10; background: var(--base); padding: var(--space-2) 0; margin-bottom: var(--space-2); border-bottom: var(--border-hairline) solid var(--line); transition: top .2s ease; }
   .bar-filter { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 13px; font-weight: 700; border-radius: 999px; border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
-  .result-bar .sort-help { display: none; }
   .filter-col > .filter-toggle { display: none; }  /* スマホは帯の「絞り込む」に一本化する */
   .filter-col .filter-panel { margin-top: 0; scroll-margin-top: 140px; }
 }
@@ -506,10 +505,11 @@ button, .button {
 /* カード／一覧の切り替え（パソコンだけ。スマホはもともと一覧） */
 .view-switch { display: none; }
 @media (min-width: 640px) {
-  .view-switch { display: inline-flex; border: var(--border-hairline) solid var(--line); border-radius: var(--radius-pill); overflow: hidden; }
-  .view-switch button { font-size: 13px; font-weight: 400; padding: 4px 14px; border: 0; border-radius: 0; background: var(--card); color: var(--ink); }
-  .view-switch button + button { border-left: var(--border-hairline) solid var(--line); }
-  .view-switch button[aria-pressed="true"] { background: var(--ink); color: var(--base); font-weight: 700; }
+  .view-switch { display: inline-flex; gap: 2px; }
+  .view-switch button { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: none; color: var(--text-sub); }
+  .view-switch svg { fill: currentColor; }
+  .view-switch button:hover { color: var(--sky); }
+  .view-switch button[aria-pressed="true"] { background: var(--chip-bg); color: var(--ink); }
   .result-col .cards.view-list { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
   .view-list .card a { flex-direction: row; align-items: stretch; gap: 14px; padding: 10px; }
   .view-list .card-media { width: 150px; flex: none; align-self: flex-start; border-width: var(--border-hairline); border-radius: 6px; }
@@ -532,7 +532,6 @@ button, .button {
 .syn-note { margin: 0 0 var(--space-3); font-size: 13px; color: var(--text-sub); }
 .result-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); font-size: 15px; }
 .sort-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
-.sort-help { font-size: 13px; white-space: nowrap; }
 .sort-field label { font-size: 13px; color: var(--text-sub); white-space: nowrap; }
 .sort-field select { width: auto; padding: 6px 34px 6px var(--space-3); font-size: 14px; }
 .active-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); }
@@ -540,6 +539,7 @@ button, .button {
 .active-chip span { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--card); color: var(--text-sub); font-weight: 400; }
 .active-chip:hover span { color: var(--ink); }
 .result-bar p { margin: 0; }
+.bar-count { display: flex; align-items: center; gap: 14px; }
 .more-wrap { text-align: center; margin-top: var(--space-4); }
 
 /* 読み物 */
