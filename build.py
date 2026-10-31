@@ -897,10 +897,11 @@ def related_section(panels):
 
 
 def build_item(item, listed, ctx):
-    def links(names, lookup, make):
+    def links(names, lookup, make, labels=None):
         out = []
         for n in names:
-            out.append('<a href="%s">%s</a>' % (e(make(n)), e(n)) if n in lookup else e(n))
+            label = (labels or {}).get(n, n)
+            out.append('<a href="%s">%s</a>' % (e(make(n)), e(label)) if n in lookup else e(label))
         return "、".join(out) or "―"
 
     similar = similar_items(item, listed)
@@ -952,7 +953,7 @@ def build_item(item, listed, ctx):
     if TENKI_AI:
         official += ('<p class="ai-consult">%s<span class="ai-note">Claudeにログインすると、AIが相談に乗ります（無料プランでも利用可）。</span></p>'
                      % ai_link("%s#%s" % (TENKI_AI, item["id"]), "この情報が自分に合うか、転機AIに相談する", "item/" + item["id"]))
-    tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]))
+    tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]), {COMMON: "どの転機にも", OTHER: "そのほか"})
     stage_links = links(item["stages"], STAGE_BY_NAME, lambda n: search_url(stage=n))
     body = """
 {crumbs}
