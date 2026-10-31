@@ -451,13 +451,23 @@ button, .button {
 .facts div { display: flex; gap: var(--space-3); padding: 10px 0; border-bottom: var(--border-hairline) solid var(--line); }
 .facts dt { width: 6.5em; flex: none; font-size: 14px; font-weight: 700; color: var(--text-sub); }
 .facts dd { margin: 0; overflow-wrap: anywhere; }
-.report { font-size: 14px; color: var(--text-body); margin: var(--space-1) 0 0; }
 /* 紹介ページの「この紹介は役に立ちましたか？」 */
-.helpful { margin: var(--space-6) 0 var(--space-3); padding: var(--space-4); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); background: var(--base); }
-.helpful-q, .helpful-thanks { margin: 0; font-size: 15px; font-weight: 700; }
-.helpful-thanks { font-weight: 400; color: var(--text-body); }
-.helpful-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); margin-top: var(--space-3); max-width: 400px; }
-.helpful-btns .button { padding-left: var(--space-2); padding-right: var(--space-2); text-align: center; }
+/* 紹介ページの右の列の終わり：「役に立ちましたか？」と「誤りを知らせる」は主役ではないので、細い線で区切った小さな文字の欄にまとめる */
+.helpful { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); margin: var(--space-6) 0 0; padding-top: var(--space-4); border-top: var(--border-hairline) solid var(--line); }
+.helpful-q, .helpful-thanks { margin: 0; font-size: 13px; color: var(--text-sub); }
+.helpful-btns { display: flex; gap: 6px; }
+.helpful-btns .button { font-size: 13px; font-weight: 400; padding: 3px 12px; border-radius: var(--radius-pill); border-color: var(--line); color: var(--text-body); background: transparent; }
+.helpful-btns .button:hover { border-color: var(--sky); color: var(--sky); }
+.report { font-size: 13px; color: var(--text-sub); margin: var(--space-2) 0 0; }
+.helpful[hidden] + .report { margin-top: var(--space-6); padding-top: var(--space-4); border-top: var(--border-hairline) solid var(--line); }  /* 「役に立ちましたか？」が出ないとき（JavaScriptが使えないとき）も区切る */
+.report a { color: var(--text-sub); }
+.report a:hover { color: var(--sky); }
+@media (max-width: 759px) {
+  .detail { display: flex; flex-direction: column; }
+  .detail-side { display: contents; }
+  .detail .facts { order: 1; }
+  .detail .helpful, .detail .report { order: 2; }
+}
 .ended-note { padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--base-yellow); font-weight: 700; }
 
 /* 一覧ページ */

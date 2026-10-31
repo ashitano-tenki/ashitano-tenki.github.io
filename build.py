@@ -963,6 +963,12 @@ def build_item(item, listed, ctx):
   <div class="detail-side">
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
+  <div class="helpful" data-id="{id}" data-title="{title}" hidden>
+    <p class="helpful-q">この紹介は役に立ちましたか？</p>
+    <div class="helpful-btns"><button type="button" class="button button-ghost" data-helpful="yes">👍 役に立った</button><button type="button" class="button button-ghost" data-helpful="no">👎 いまひとつ</button></div>
+    <p class="helpful-thanks" hidden>ありがとうございます。観測所の見直しに使います。</p>
+  </div>
+  {report}
   </div>
   <dl class="facts">
     <div><dt>タイプ</dt><dd><a href="{kind_url}">{kind}</a></dd></div>
@@ -970,12 +976,6 @@ def build_item(item, listed, ctx):
     <div><dt>段階</dt><dd>{stages}</dd></div>
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
   </dl>
-  <div class="helpful" data-id="{id}" data-title="{title}" hidden>
-    <p class="helpful-q">この紹介は役に立ちましたか？</p>
-    <div class="helpful-btns"><button type="button" class="button button-ghost" data-helpful="yes">👍 役に立った</button><button type="button" class="button button-ghost" data-helpful="no">👎 いまひとつ</button></div>
-    <p class="helpful-thanks" hidden>ありがとうございます。観測所の見直しに使います。</p>
-  </div>
-  {report}
 </article>
 {similar}
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
