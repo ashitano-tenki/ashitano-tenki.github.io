@@ -433,11 +433,12 @@ button, .button {
   .detail h1 { grid-row: 1; }
   .detail-hero { grid-column: 1; grid-row: 2; max-width: none; margin: 0; }
   .hero-credit { grid-column: 1; grid-row: 3; margin: var(--space-2) 0 0; }
-  .detail-side { grid-column: 2; grid-row: 2 / 4; }
+  .detail-side { grid-column: 2; grid-row: 2 / 5; }
+  /* 種類・転機・段階などの表は画像の下に置き、画像の下が空かないようにする */
+  .detail .facts { grid-column: 1; grid-row: 4; margin-top: 20px; margin-bottom: 0; }
   .detail-side .memo p { margin: 0; }
   .detail-side .official { max-width: none; margin: 20px 0 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .detail-side .official > .button:first-child { grid-column: 1 / -1; }
-  .detail .facts { margin-top: var(--space-6); }
 }
 .official { margin: 0 0 var(--space-6); }
 .ai-consult { margin: calc(12px - var(--space-6)) 0 var(--space-6); font-size: 14px; }
