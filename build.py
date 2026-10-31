@@ -585,9 +585,8 @@ def build_home(listed, ctx):
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
     <button type="submit">探す</button>
   </form>
-  <div class="start-help home-words">
-    <p class="start-label">こんな言葉で探せます</p>
-    <div class="start-words" data-shown="8">{popular}</div>
+  <div class="start-help">
+    <div class="start-words" data-shown="8" role="group" aria-label="検索の例">{popular}</div>
   </div>
 </section>
 
@@ -1033,8 +1032,7 @@ def build_search(listed, ctx):
     <ul id="suggest" class="suggest" role="listbox" aria-label="候補" hidden></ul>
   </div>
   <div id="start-help" class="start-help">
-    <p class="start-label">こんな言葉で探せます</p>
-    <div class="start-words" data-shown="8">{popular}</div>
+    <div class="start-words" data-shown="8" role="group" aria-label="検索の例">{popular}</div>
   </div>
   <div class="search-layout">
     <div class="filter-col">
