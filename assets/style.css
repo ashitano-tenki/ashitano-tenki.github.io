@@ -100,11 +100,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 @media (max-width: 759px) { .global-nav.open { flex-direction: column; align-items: flex-start; gap: 0; } }
 @media (min-width: 760px) {
   .global-nav, .js .global-nav:not(.open) { display: flex; order: 2; flex-basis: auto; margin-left: auto; }
-  .header-search-btn { order: 3; margin-left: 0; }
-  .header-inner .menu-btn, .header-inner .header-saved-btn { display: none; }
+  .header-saved-btn { order: 3; margin-left: var(--space-2); }
+  .header-search-btn { order: 4; margin-left: 0; }
+  .header-inner .menu-btn { display: none; }
 }
-/* 760〜899px は、メニューと虫めがねが1段に収まるよう少し詰める */
-@media (min-width: 760px) and (max-width: 899px) { .global-nav { column-gap: var(--space-3); font-size: 13px; } }
 .menu-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .menu-btn:hover, .menu-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
 /* フッターの表示切り替え */
@@ -114,9 +113,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 .theme-toggle { font-size: 13px; font-weight: 400; padding: 4px var(--space-3); background: transparent; color: var(--footer-text); border: var(--border-hairline) solid var(--footer-sub); border-radius: var(--radius-pill); }
 .theme-toggle:hover { color: var(--footer-strong); border-color: var(--footer-strong); }
 /* ヘッダーの検索：虫めがねを押すと、ヘッダーの下にキーワード欄が開く */
-/* スマホのヘッダーの「あとで見る」：残した数を右上に小さく出す */
+/* ヘッダーの「あとで見る」（しおりの絵）：残した数を右上に小さく出す */
 .header-saved-btn { position: relative; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
-.header-saved-btn:hover { color: var(--sky); border-color: var(--sky); }
+.header-saved-btn:hover, .header-saved-btn[aria-current="page"] { color: var(--sky); border-color: var(--sky); }
 .header-saved-count { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--sky); color: var(--card); font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; font-variant-numeric: tabular-nums; }
 .header-search-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .header-search-btn:hover, .header-search-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
@@ -245,7 +244,6 @@ button, .button {
 }
 .save-wide { display: inline-flex; align-items: center; gap: var(--space-2); }
 .save-wide[aria-pressed="true"] { border-color: var(--sky); color: var(--sky); }
-.saved-count { font-size: 12px; color: var(--text-sub); }
 .save-inline svg { vertical-align: -3px; }
 .save-inline svg path { fill: transparent; stroke: var(--text-sub); }
 .saved-status { margin: var(--space-4) 0 var(--space-3); }

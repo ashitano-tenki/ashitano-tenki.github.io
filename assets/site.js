@@ -96,8 +96,7 @@
   }
   function paintAll() {
     Array.prototype.forEach.call(document.querySelectorAll("[data-save]"), paint);
-    var n = load().length, c = document.getElementById("saved-count"), h = document.getElementById("saved-count-h");
-    if (c) c.textContent = n ? "（" + n + "）" : "";
+    var n = load().length, h = document.getElementById("saved-count-h");
     if (h) { h.textContent = n > 99 ? "99+" : String(n); h.hidden = !n; }
   }
 

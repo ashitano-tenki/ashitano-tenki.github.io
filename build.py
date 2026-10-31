@@ -288,15 +288,15 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
             % (" " + extra_cls if extra_cls else "", e(label), items_html, more, "".join("<i></i>" for _ in range(n))))
 
 
-NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/report/", "観測レポート"), ("/check/", "セルフチェック"), ("/saved/", "あとで見る")]
+# 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック")]
 
 
 def nav_links(current=None):
     out = []
     for href, label in NAV:
-        extra = '<span class="saved-count" id="saved-count"></span>' if href == "/saved/" else ""
         cur = ' aria-current="page"' if href == current else ""
-        out.append('      <a href="%s"%s>%s%s</a>' % (href, cur, e(label), extra))
+        out.append('      <a href="%s"%s>%s</a>' % (href, cur, e(label)))
         if href == "/check/" and TENKI_AI:
             out.append('      ' + ai_link(TENKI_AI, "転機AIに相談", "nav"))
     return "\n".join(out)
@@ -348,7 +348,7 @@ def site_header(current=None):
     <nav class="global-nav" id="global-nav" aria-label="サイト内">
 {nav}
     </nav>
-    <a class="header-saved-btn" href="/saved/" aria-label="あとで見る"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="header-saved-count" id="saved-count-h" hidden></span></a>
+    <a class="header-saved-btn" href="/saved/" aria-label="あとで見る" title="あとで見る"{saved_cur}><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M6 3h12v18l-6-4.5L6 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="header-saved-count" id="saved-count-h" hidden></span></a>
     <a class="header-search-btn" id="header-search-btn" href="/search/" aria-label="キーワードで探す" aria-expanded="false" aria-controls="header-search"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
     <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="global-nav"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
@@ -357,7 +357,7 @@ def site_header(current=None):
     <input id="header-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
     <button type="submit">探す</button>
   </form>
-</header>""".format(site=e(CONF["site_name"]), nav=nav_links(current))
+</header>""".format(site=e(CONF["site_name"]), nav=nav_links(current), saved_cur=' aria-current="page"' if current == "/saved/" else "")
 
 
 def site_footer(ctx):
@@ -445,7 +445,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h, _ in NAV if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
