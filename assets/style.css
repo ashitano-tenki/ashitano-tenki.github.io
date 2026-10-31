@@ -620,3 +620,34 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .saved-empty-links a:hover { border-color: var(--sky); }
 .saved-empty-links b { font-size: 16px; color: var(--sky); }
 .saved-empty-links span { font-size: 13px; color: var(--text-sub); }
+
+/* 「あしたの転機」のページ（/project/） */
+.pj-note { margin: var(--space-2) 0 0; font-size: 13px; color: var(--text-sub); }
+.pj-block { margin-top: var(--space-12); }
+.pj-lead { margin: 0 0 var(--space-4); color: var(--text-body); }
+.pj-more { margin: var(--space-4) 0 0; font-weight: 700; }
+.pj-soon { display: inline-block; margin-left: var(--space-2); padding: 0 10px; font-size: 13px; font-weight: 700; color: var(--text-sub); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-pill); vertical-align: 1px; }
+.pj-date { display: block; font-size: 13px; color: var(--text-sub); }
+.pj-sub { font-size: 17px; margin: var(--space-6) 0 var(--space-3); }
+.pj-posts, .pj-list, .pj-events, .pj-goods { list-style: none; margin: 0; padding: 0; }
+.pj-posts { display: grid; gap: var(--space-3); }
+.pj-post { display: flex; gap: var(--space-4); align-items: flex-start; padding: var(--space-3); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); text-decoration: none; color: var(--ink); }
+.pj-post:hover { border-color: var(--sky); }
+.pj-post img, .pj-post-noimg { flex: none; width: 160px; aspect-ratio: 1.91; object-fit: cover; height: auto; border-radius: 6px; background: var(--chip-bg); }
+.pj-post-body { min-width: 0; }
+.pj-post-title { display: block; font-weight: 700; line-height: 1.6; }
+.pj-post:hover .pj-post-title { color: var(--sky); text-decoration: underline; }
+@media (max-width: 479px) { .pj-post img, .pj-post-noimg { width: 104px; } .pj-post-title { font-size: 15px; } }
+.pj-list li { padding: var(--space-2) 0; border-bottom: var(--border-hairline) solid var(--line); }
+.pj-events { display: grid; gap: var(--space-3); }
+.pj-event { padding: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); }
+.pj-event p { margin: 0; }
+.pj-event-when { font-size: 14px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pj-event-title { margin-top: 2px !important; font-weight: 700; }
+.pj-event-meta { margin-top: var(--space-1) !important; font-size: 14px; color: var(--text-body); }
+.pj-event-desc { margin-top: var(--space-2) !important; font-size: 14px; color: var(--text-body); }
+.pj-event.is-past { background: transparent; }
+.pj-event.is-past .pj-event-when { color: var(--text-sub); }
+.pj-goods li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-4); padding: var(--space-3) 0; border-bottom: var(--border-hairline) solid var(--line); }
+.pj-goods li:first-child { border-top: var(--border-hairline) solid var(--line); }
+.pj-price { color: var(--text-body); font-variant-numeric: tabular-nums; white-space: nowrap; }

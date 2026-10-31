@@ -60,7 +60,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/meta.json data/latest.csv data/images.json images/items
+          git add data/meta.json data/latest.csv data/project.csv data/images.json images/items
           git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
           git push
 

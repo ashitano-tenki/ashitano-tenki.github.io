@@ -17,8 +17,8 @@
   "_goatcounter_code の説明": "アクセス解析 GoatCounter のサイト名（https://〇〇.goatcounter.com の〇〇）。空のあいだは計測しない。",
   "goatcounter_code": "yusukekuroda",
 
-  "note_url": "https://note.com/chlorine0528/m/m206813f097e5",
-  "facebook_url": "https://www.facebook.com/share/g/1JmZs5Et5r",
+  "_project_csv_url の説明": "「あしたの転機」のページ（/project/）の中身。スプレッドシートの「あしたの転機」タブをCSVで公開したURL。読めない日は data/project.csv（前回の中身）を使う。",
+  "project_csv_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJKyhKUJ4ZTf6g4Caao2Mag_eIUThO0VqTXvtqn9n37N10dwQK5YpgDK7T6ROIUx9E42LQd_nZykaF/pub?gid=1484436033&single=true&output=csv",
 
   "new_days": 7,
   "min_combo_items": 5,

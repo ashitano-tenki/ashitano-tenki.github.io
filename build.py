@@ -365,11 +365,8 @@ def site_footer(ctx):
     return """<footer class="site-footer">
   <div class="wrap">
     <div class="community">
-      <p>この観測所は、黒田悠介が運営する「あしたの転機プロジェクト」の一部です。転機について考える記事はnoteマガジンで発信、転機を迎えている人同士の交流はFacebookグループで開催しています。</p>
-      <p class="community-links">
-        <a href="{note}" rel="noopener" target="_blank">noteマガジン「あしたの転機」</a>
-        <a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>
-      </p>
+      <p>この観測所は、黒田悠介が運営する「あしたの転機」プロジェクトの一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
+      <p class="community-links"><a href="/project/">「あしたの転機」のページを見る</a></p>
     </div>
     <div class="footer-bottom">
       <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
@@ -377,7 +374,7 @@ def site_footer(ctx):
     </div>
   </div>
 </footer>
-<script src="/assets/site.js?v={ver}"></script>""".format(note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+<script src="/assets/site.js?v={ver}"></script>""".format(contact=e(CONF["contact_form_url"]),
                          updated=fmt_date(ctx["today"]), ver=ctx["version"]) + analytics_tag(ctx)
 
 
@@ -446,7 +443,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
            og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
-           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+           contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]))
     write(path, html_text)
     if not noindex:
@@ -1210,14 +1207,10 @@ def build_about(listed, ctx):
 <p>ほかの活動や発信は、<a href="{operator_url}" rel="noopener" target="_blank">黒田悠介のリンク集（Linktree）</a>にまとめています。</p>
 
 <h2>あしたの転機について</h2>
-<p>「あしたの転機」は、キャリアの転機について考え、転機を迎えている人どうしがつながるための場です。この観測所はその一部として運営しています。</p>
-<ul>
-  <li><a href="{note}" rel="noopener" target="_blank">noteマガジン「あしたの転機」</a>：転機について考える記事を載せています。</li>
-  <li><a href="{fb}" rel="noopener" target="_blank">Facebookグループ「あしたの転機」</a>：同じように転機を迎えている人と交流できます。</li>
-</ul>
+<p>「あしたの転機」は、キャリアの転機について考え、転機を迎えている人どうしがつながるための場です。この観測所はその一部として運営しています。noteマガジン、イベント、コミュニティなどは、<a href="/project/">「あしたの転機」のページ</a>にまとめています。</p>
 </article>
 """.format(crumbs=breadcrumb([("観測所について", None)]), stage_dl=stage_dl,
-           note=e(CONF["note_url"]), fb=e(CONF["facebook_url"]), contact=e(CONF["contact_form_url"]),
+           contact=e(CONF["contact_form_url"]),
            analytics=ANALYTICS_ABOUT if CONF.get("goatcounter_code") else "", operator_url=e(CONF.get("operator_url", "")))
     page("/about/", "観測所について", "あしたの転機観測所の目的、掲載の基準、並び順の考え方、情報の集め方と運営者について。", body, ctx=ctx)
 
@@ -1282,6 +1275,190 @@ def build_guide(listed, ctx):
 </article>
 """.format(crumbs=breadcrumb([("支援者の方へ", None)]), contact=e(CONF["contact_form_url"]))
     page("/guide/", "キャリア支援者の方へ", "キャリアコンサルタント・人事・コーチなど、転機を迎えた人を支える方に向けた、あしたの転機観測所の使い方です。", body, ctx=ctx)
+
+
+# ---------------------------------------------------------------- あしたの転機（運営元のプロジェクトのページ）
+# 観測所の一覧・検索・絞り込み・並び順には入れない。中身はスプレッドシートの「あしたの転機」タブ（config/site.json の project_csv_url）。
+
+# ページの冒頭の紹介文。直したいときはここを書き換える
+PROJECT_INTRO = ("「あしたの転機」は、あしたやってくるかもしれない人生の転機について、就職・転職・独立・複業など、"
+                 "これからの時代の働き方や生き方をテーマに語り合うコミュニティです。"
+                 "一人ひとりの「あれが転機だったな」という経験を持ち寄って、noteやイベントで分かち合っています。")
+PROJECT_SNAPSHOT = os.path.join(ROOT, "data", "project.csv")  # 前回読めた中身（読めなかった日はこれを使う）
+PROJECT_TEXT = {}  # main() で読んだCSVの文字列（--save-data のとき data/project.csv に残す）
+
+
+def project_rows():
+    """「あしたの転機」タブの行。「表示しない」の行は除く。読めなければ前回の中身を使う。"""
+    text = ""
+    url = CONF.get("project_csv_url", "")
+    if url:
+        try:
+            text = fetch_csv(url)
+            PROJECT_TEXT["text"] = text
+        except BuildError as ex:
+            print("注意: あしたの転機のCSVを読めませんでした（前回の中身を使います）: %s" % ex, file=sys.stderr)
+    if not text and os.path.exists(PROJECT_SNAPSHOT):
+        with open(PROJECT_SNAPSHOT, encoding="utf-8") as f:
+            text = f.read()
+    rows = []
+    for r in csv.DictReader(io.StringIO(text)):
+        r = {k.strip(): (v or "").strip() for k, v in r.items() if k}
+        if r.get("区分") and r.get("タイトル") and r.get("表示") != "表示しない":
+            rows.append(r)
+    return rows
+
+
+def read_feed(url, limit):
+    """RSSから新しい順に limit 件（タイトル・リンク・公開日・画像）。読めなければ空。"""
+    import xml.etree.ElementTree as ET
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "tenki-kansoku-build"})
+        with urllib.request.urlopen(req, timeout=30) as res:
+            root = ET.fromstring(res.read())
+    except Exception as ex:  # フィードが読めない日は、リンクだけを出す
+        print("注意: フィードを読めませんでした: %s (%s)" % (url, ex), file=sys.stderr)
+        return []
+    out = []
+    for it in root.iter("item"):
+        title, link = (it.findtext("title") or "").strip(), (it.findtext("link") or "").strip()
+        if not title or not link.startswith("https://"):
+            continue
+        date = None
+        try:
+            date = datetime.datetime.strptime((it.findtext("pubDate") or "").strip(), "%a, %d %b %Y %H:%M:%S %z").astimezone(JST).date()
+        except ValueError:
+            pass
+        thumb = (it.findtext("{http://search.yahoo.com/mrss/}thumbnail") or "").strip()
+        out.append({"title": title, "link": link, "date": date, "thumb": thumb})
+        if len(out) >= limit:
+            break
+    return out
+
+
+def project_thumb(url):
+    """記事の画像を観測所の中に取り込む（見る人の端末から外のサイトへ読みに行かないように）。取り込めなければ空。"""
+    if not url.startswith("https://"):
+        return ""
+    url = re.sub(r"([?&])width=\d+", r"\1width=480", url)
+    name = hashlib.sha1(url.encode("utf-8")).hexdigest()[:16]
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "tenki-kansoku-build"})
+        with urllib.request.urlopen(req, timeout=30) as res:
+            kind, data = res.headers.get("Content-Type", ""), res.read(3_000_000)
+    except Exception:
+        return ""
+    ext = {"image/png": ".png", "image/webp": ".webp", "image/gif": ".gif"}.get(kind.split(";")[0].strip(), ".jpg")
+    path = "/images/project/%s%s" % (name, ext)
+    os.makedirs(os.path.join(OUT, "images", "project"), exist_ok=True)
+    with open(os.path.join(OUT, path.lstrip("/")), "wb") as f:
+        f.write(data)
+    return path
+
+
+def parse_when(value):
+    try:
+        return datetime.datetime.strptime(value, "%Y/%m/%d %H:%M").replace(tzinfo=JST)
+    except ValueError:
+        return None
+
+
+def event_when(start, end):
+    """「11月6日（木）19:30〜21:30」の形。日をまたぐときは終わりの日付も書く。"""
+    s = "%d月%d日（%s）%s" % (start.month, start.day, WEEKDAYS[start.weekday()], start.strftime("%H:%M"))
+    if end:
+        s += "〜" + (end.strftime("%H:%M") if end.date() == start.date()
+                    else "%d月%d日 %s" % (end.month, end.day, end.strftime("%H:%M")))
+    return s
+
+
+def build_project(ctx):
+    rows = project_rows()
+    by = {}
+    for r in rows:
+        by.setdefault(r["区分"], []).append(r)
+    ext = lambda href, label, cls="": '<a%s href="%s" rel="noopener" target="_blank">%s</a>' % (' class="%s"' % cls if cls else "", e(href), e(label))
+    blocks = []
+
+    # note：マガジンへのリンクと、フィードの新しい記事5件
+    for r in by.get("note", []):
+        posts = read_feed(r["フィードURL"], 5) if r.get("フィードURL") and r.get("表示") == "表示する" else []
+        items = []
+        for p in posts:
+            img = project_thumb(p["thumb"])
+            items.append('<li><a class="pj-post linkcard" href="%s" rel="noopener" target="_blank">%s<span class="pj-post-body"><span class="pj-post-title">%s</span>%s</span></a></li>'
+                         % (e(p["link"]), '<img src="%s" alt="" loading="lazy" width="240" height="126">' % img if img else '<span class="pj-post-noimg" aria-hidden="true"></span>',
+                            e(p["title"]), '<span class="pj-date">%s</span>' % fmt_date(p["date"]) if p["date"] else ""))
+        blocks.append('<section class="pj-block"><h2 class="section-title">noteマガジン</h2>'
+                      '<p class="pj-lead">転機について考える記事を、noteマガジン「%s」で発信しています。</p>%s<p class="pj-more">%s</p></section>'
+                      % (e(r["タイトル"].replace("（noteマガジン）", "")), '<ul class="pj-posts">%s</ul>' % "".join(items) if items else "",
+                         ext(r["URL"], "noteマガジンを見る") if r.get("URL") else ""))
+
+    # Podcast：準備中のあいだは「準備中」とだけ出す。表示するにしたら番組へのリンクと最新回3件
+    for r in by.get("Podcast", []):
+        if r.get("表示") == "準備中" or not r.get("URL"):
+            body = '<p class="pj-lead">番組「%s」<span class="pj-soon">準備中</span></p>' % e(r["タイトル"])
+        else:
+            eps = read_feed(r["フィードURL"], 3) if r.get("フィードURL") else []
+            body = '<p class="pj-lead">番組「%s」%s</p>' % (e(r["タイトル"]), "：" + e(r["説明"]) if r.get("説明") else "")
+            if eps:
+                body += '<ul class="pj-list">%s</ul>' % "".join(
+                    '<li>%s%s</li>' % (ext(p["link"], p["title"]), '<span class="pj-date">%s</span>' % fmt_date(p["date"]) if p["date"] else "") for p in eps)
+            body += '<p class="pj-more">%s</p>' % ext(r["URL"], "番組を聴く")
+        blocks.append('<section class="pj-block"><h2 class="section-title">Podcast</h2>%s</section>' % body)
+
+    # イベント：日時のない行はPeatixのグループページ。日時のある行は、これからのもの（近い順）と過去のもの（新しい順に5件）に分ける
+    ev = by.get("イベント", [])
+    if ev:
+        now = datetime.datetime.now(JST)
+        groups = [r for r in ev if not parse_when(r.get("開始日時", ""))]
+        dated = [(parse_when(r["開始日時"]), parse_when(r.get("終了日時", "")), r) for r in ev if parse_when(r.get("開始日時", ""))]
+        upcoming = sorted([d for d in dated if (d[1] or d[0]) >= now], key=lambda d: d[0])
+        past = sorted([d for d in dated if (d[1] or d[0]) < now], key=lambda d: d[0], reverse=True)[:5]
+
+        def event_li(d, soon):
+            s, en, r = d
+            meta = " ・ ".join(x for x in [e(r.get("場所", "")), e(r.get("価格", ""))] if x)
+            return ('<li class="pj-event%s"><p class="pj-event-when">%s</p><p class="pj-event-title">%s</p>%s%s</li>'
+                    % ("" if soon else " is-past", event_when(s, en), ext(r["URL"], r["タイトル"]) if r.get("URL") else e(r["タイトル"]),
+                       '<p class="pj-event-meta">%s</p>' % meta if meta else "",
+                       '<p class="pj-event-desc">%s</p>' % e(r["説明"]) if soon and r.get("説明") else ""))
+        body = ""
+        if upcoming:
+            body += '<h3 class="pj-sub">これからのイベント</h3><ul class="pj-events">%s</ul>' % "".join(event_li(d, True) for d in upcoming)
+        if past:
+            body += '<h3 class="pj-sub">過去のイベント</h3><ul class="pj-events">%s</ul>' % "".join(event_li(d, False) for d in past)
+        more = "".join('<p class="pj-more">%s</p>' % ext(r["URL"], "Peatixでイベントの一覧を見る") for r in groups if r.get("URL"))
+        blocks.append('<section class="pj-block"><h2 class="section-title">イベント</h2>'
+                      '<p class="pj-lead">転機をテーマに語り合うイベントを開いています。申し込みはPeatixから受け付けています。</p>%s%s</section>' % (body, more))
+
+    # グッズ：価格のない行はショップ、価格のある行は商品
+    gd = by.get("グッズ", [])
+    if gd:
+        shops = [r for r in gd if not r.get("価格")]
+        goods = [r for r in gd if r.get("価格")]
+        body = '<ul class="pj-goods">%s</ul>' % "".join(
+            '<li>%s<span class="pj-price">%s</span></li>' % (ext(r["URL"], r["タイトル"]) if r.get("URL") else e(r["タイトル"]), e(r["価格"])) for r in goods) if goods else ""
+        more = "".join('<p class="pj-more">%s</p>' % ext(r["URL"], "ショップを見る") for r in shops if r.get("URL"))
+        blocks.append('<section class="pj-block"><h2 class="section-title">グッズ</h2>'
+                      '<p class="pj-lead">あしたの転機のオフィシャルグッズを、Tシャツトリニティで販売しています。</p>%s%s</section>' % (body, more))
+
+    # コミュニティ
+    for r in by.get("コミュニティ", []):
+        blocks.append('<section class="pj-block"><h2 class="section-title">コミュニティ</h2>'
+                      '<p class="pj-lead">転機を迎えている人どうしで、%sで交流しています。</p><p class="pj-more">%s</p></section>'
+                      % (e(r["タイトル"]), ext(r["URL"], "Facebookグループを見る") if r.get("URL") else ""))
+
+    body = """
+{crumbs}
+<header class="page-head">
+  <h1>あしたの転機</h1>
+  <p class="lead">{intro}</p>
+  <p class="pj-note">この観測所の運営元のプロジェクトです。観測所の一覧や並び順には含めていません。</p>
+</header>
+{blocks}
+""".format(crumbs=breadcrumb([("あしたの転機", None)]), intro=e(PROJECT_INTRO), blocks="\n".join(blocks))
+    page("/project/", "あしたの転機", "この観測所を運営する「あしたの転機」プロジェクトのnoteマガジン、Podcast、イベント、グッズ、コミュニティ。", body, ctx=ctx)
 
 
 def build_404(ctx):
@@ -1566,6 +1743,7 @@ def main():
     build_404(ctx)
     build_saved(ctx)
     build_guide(listed, ctx)
+    build_project(ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_feed(listed, ctx)
@@ -1578,6 +1756,9 @@ def main():
         f.write("\n")
     if args.save_data:
         save_snapshot(text)
+        if PROJECT_TEXT.get("text"):
+            with open(PROJECT_SNAPSHOT, "w", encoding="utf-8") as f:
+                f.write(PROJECT_TEXT["text"])
     print("作成しました: 全%d件（掲載中%d件、今週の新着%d件、ページ%d枚）"
           % (len(items), len(listed), len(new_items), len(ctx["sitemap"])))
 
