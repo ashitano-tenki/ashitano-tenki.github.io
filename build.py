@@ -297,7 +297,19 @@ def nav_links(current=None):
         extra = '<span class="saved-count" id="saved-count"></span>' if href == "/saved/" else ""
         cur = ' aria-current="page"' if href == current else ""
         out.append('      <a href="%s"%s>%s%s</a>' % (href, cur, e(label), extra))
+        if href == "/check/" and TENKI_AI:
+            out.append('      ' + ai_link(TENKI_AI, "転機AIに相談", "nav"))
     return "\n".join(out)
+
+
+TENKI_AI = CONF.get("tenki_ai_url", "")
+
+
+def ai_link(href, label, where, cls=""):
+    """転機AI（観測所の外、Claude のアーティファクト）へのリンク。新しいタブで開き（↗ の印は style.css が付ける）、どこから移ったかを数える。"""
+    return ('<a%s href="%s" target="_blank" rel="noopener" data-goatcounter-click="tenki-ai/%s" data-goatcounter-title="転機AI（%s）">%s'
+            '<span class="visually-hidden">（新しいタブで開く）</span></a>'
+            % (' class="%s"' % cls if cls else "", e(href), e(where), e(where), e(label)))
 
 
 _CRUMBS = []  # 直前に作ったパンくず。page() が構造化データ（BreadcrumbList）に使う
@@ -579,7 +591,7 @@ def build_home(listed, ctx):
   <h1>{site}</h1>
   <p class="hero-count"><b>{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
-  <p class="check-link"><a href="/check/">転機の段階をセルフチェックする</a></p>
+  <p class="check-link"><a href="/check/">転機の段階をセルフチェックする</a>{ai_check}</p>
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -618,6 +630,7 @@ def build_home(listed, ctx):
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
            e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
+           ai_check=ai_link(TENKI_AI + "#stage-check", "転機の段階をAIとセルフチェックする", "home", "ai-check") if TENKI_AI else "",
            stage_links=stage_links, kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
@@ -936,6 +949,9 @@ def build_item(item, listed, ctx):
                 'data-title="%s" aria-pressed="false" hidden>%s<span>あとで見る</span></button>'
                 '<button type="button" class="button button-ghost share-btn" data-share-title="%s" hidden>%s<span>共有</span></button></p>'
                 % (official_link, e(item["id"]), e(item["title"]), SAVE_ICON, e(item["title"] + "｜" + CONF["site_name"]), SHARE_ICON))
+    if TENKI_AI:
+        official += ('<p class="ai-consult">%s<span class="ai-note">Claudeにログインすると、AIが相談に乗ります（無料プランで利用できます）。</span></p>'
+                     % ai_link("%s#%s" % (TENKI_AI, item["id"]), "この情報が自分に合うか、転機AIに相談する", "item/" + item["id"]))
     tenki_links = links(item["tenki"], TENKI_BY_NAME, lambda n: tenki_url(TENKI_BY_NAME[n]))
     stage_links = links(item["stages"], STAGE_BY_NAME, lambda n: search_url(stage=n))
     body = """
@@ -1010,6 +1026,19 @@ def start_words_html(words, href):
                    for i, w in enumerate(words))
 
 
+def ai_help_html():
+    """探すページの転機AIへの案内。結果が少ないとき（data-few の件数以下）は囲みで、多いときは一番下に1行で出す（search.js が切り替える）。"""
+    if not TENKI_AI:
+        return ""
+    return ('<aside id="ai-help" class="ai-help" data-few="5" hidden>'
+            '<p class="ai-help-title">うまく見つからないときは</p>'
+            '<p class="ai-help-text">いまの状況を話すと、転機AIが合いそうな情報を一緒に探します。</p>'
+            '%s</aside>'
+            '<p id="ai-line" class="ai-line" hidden>%s</p>'
+            % (ai_link(TENKI_AI, "転機AIに相談する", "search-few", "button button-ghost"),
+               ai_link(TENKI_AI, "見つからないときは、転機AIに相談する", "search")))
+
+
 def build_search(listed, ctx):
     words = popular_words(listed, ctx)
 
@@ -1057,6 +1086,7 @@ def build_search(listed, ctx):
       <p id="syn-note" class="syn-note" hidden></p>
       <ul id="results" class="cards list-compact"></ul>
       <p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
+      {ai_help}
     </div>
   </div>
 </form>
@@ -1068,7 +1098,7 @@ def build_search(listed, ctx):
            stages=chip_group("stage", "段階", [s["name"] for s in STAGES]),
            popular=start_words_html(words, "?q="),
            popular_json=json.dumps(words, ensure_ascii=False),
-           page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
+           ai_help=ai_help_html(), page_size=int(CONF["list_page_size"]), year=ctx["today"].year, ver=ctx["version"])
     page("/search/", "探す", "キャリアの転機に役立つサービスと情報を、転機・段階・タイプで絞り込み、キーワードで検索できます。", body, ctx=ctx)
 
 
@@ -1131,6 +1161,7 @@ ANALYTICS_ABOUT = """<h2 id="analytics">アクセス解析について</h2>
 <p>観測所をよりよくするために、アクセス解析の GoatCounter（goatcounter.com）を使っています。Cookie は使わず、閲覧した人を特定する情報も集めません。</p>
 <p>送っているのは、見たページ、どこから来たか（検索エンジンやSNSなど）、ブラウザや画面の大きさといった大まかな情報です。探すページで入力されたキーワードも送ります（入力の途中ではなく、手を止めたときの言葉だけ）。メールアドレスや電話番号、URLのような言葉は送りません。「こんな言葉で探せます」に出す言葉を選んだり、言い換え表を見直したり、掲載するものを探したりするのに使います。</p>
 <p>紹介ページで「公式サイトを見る」「あとで見る」「共有」と、「この紹介は役に立ちましたか？」のボタンが押されたときは、どの掲載で押されたか（掲載のIDとタイトル）を数えます。役に立った掲載を知り、掲載するものや並び順を見直すのに使います。</p>
+<p>転機AIへのリンクが押されたときは、どのページのリンクから移ったか（メニュー、トップ、探す、紹介ページのどれか。紹介ページなら掲載のID）を数えます。</p>
 <p>転機の段階セルフチェックは、始めた回数、最後まで答えた回数と結果の段階、結果に出たおすすめが押された回数だけを数えます。一つひとつの回答や、4つの資源のバランス、相談メモの中身は送りません。</p>
 """
 

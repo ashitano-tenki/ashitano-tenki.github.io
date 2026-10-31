@@ -313,7 +313,17 @@
     });
     countEl.textContent = countText(state);
     render(true);
+    renderAiHelp();
     reportZero(state);
+  }
+
+  // 転機AIへの案内：結果が少ないときは結果の下に囲みで、多いときは一番下に1行で出す
+  var aiHelp = document.getElementById("ai-help"), aiLine = document.getElementById("ai-line");
+  function renderAiHelp() {
+    if (!aiHelp || !aiLine) return;
+    var few = results.length <= (parseInt(aiHelp.getAttribute("data-few"), 10) || 5);
+    aiHelp.hidden = !few;
+    aiLine.hidden = few;
   }
 
   function setPanel(open) {

@@ -101,8 +101,10 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 @media (min-width: 760px) {
   .global-nav, .js .global-nav:not(.open) { display: flex; order: 2; flex-basis: auto; margin-left: auto; }
   .header-search-btn { order: 3; margin-left: 0; }
-  .header-inner .menu-btn, .header-saved-btn { display: none; }
+  .header-inner .menu-btn, .header-inner .header-saved-btn { display: none; }
 }
+/* 760〜899px は、メニューと虫めがねが1段に収まるよう少し詰める */
+@media (min-width: 760px) and (max-width: 899px) { .global-nav { column-gap: var(--space-3); font-size: 13px; } }
 .menu-btn { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border-radius: 50%; color: var(--text-body); border: var(--border-hairline) solid var(--line); background: var(--card); }
 .menu-btn:hover, .menu-btn[aria-expanded="true"] { color: var(--sky); border-color: var(--sky); }
 /* フッターの表示切り替え */
@@ -142,6 +144,8 @@ main.wrap { padding-bottom: var(--space-16); }
 .check-link a { font-weight: 700; }
 .check-link a::after { content: " →"; }
 .check-link span { display: block; font-size: 13px; color: var(--text-sub); }
+/* トップの転機AIへのリンク（セルフチェックの下に1行） */
+.check-link .ai-check { display: table; margin-top: var(--space-1); font-weight: 400; }
 .search-box { display: flex; gap: var(--space-2); }
 .search-box input { flex: 1; min-width: 0; }
 input[type="search"], select {
@@ -436,6 +440,9 @@ button, .button {
   .detail .facts { margin-top: var(--space-6); }
 }
 .official { margin: 0 0 var(--space-6); }
+.ai-consult { margin: calc(12px - var(--space-6)) 0 var(--space-6); font-size: 14px; }
+.ai-note { display: block; margin-top: 2px; font-size: 12px; color: var(--text-sub); }
+@media (min-width: 760px) { .detail-side .ai-consult { margin: 12px 0 0; } }
 .facts { margin: 0 0 var(--space-3); border-top: var(--border-rule) solid var(--ink); }
 .facts div { display: flex; gap: var(--space-3); padding: 10px 0; border-bottom: var(--border-hairline) solid var(--line); }
 .facts dt { width: 6.5em; flex: none; font-size: 14px; font-weight: 700; color: var(--text-sub); }
@@ -530,6 +537,12 @@ button, .button {
 .relax-btn b { color: var(--sky-on-tint); }
 /* 言い換えで広げて探したときの一言 */
 .syn-note { margin: 0 0 var(--space-3); font-size: 13px; color: var(--text-sub); }
+/* 探すページの転機AIへの案内（結果が少ないときは囲み、多いときは一番下に1行） */
+.ai-help { margin: var(--space-6) 0 0; padding: var(--space-4) 20px; border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); background: var(--card); }
+.ai-help-title { margin: 0 0 var(--space-1); font-weight: 700; color: var(--ink); }
+.ai-help-text { margin: 0 0 var(--space-3); font-size: 14px; color: var(--text-body); }
+.ai-help .button { padding: 8px 16px; font-size: 14px; }
+.ai-line { margin: var(--space-6) 0 0; font-size: 14px; text-align: center; }
 .result-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-3); font-size: 15px; }
 .sort-field { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-2); }
 .sort-field label { font-size: 13px; color: var(--text-sub); white-space: nowrap; }
