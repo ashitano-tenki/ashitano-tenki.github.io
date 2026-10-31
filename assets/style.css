@@ -9,6 +9,7 @@
   --sky: #1874b8;
   --sky-bright: #2f95d6;
   --yellow: #f5c518;
+  --marker: #f5c518;          /* トップの見出しに引く蛍光ペンの色 */
   --text-body: #4a4f57;
   --text-sub: #5e636b;
   --text-on-ink: #d6d9de;
@@ -26,7 +27,7 @@
   --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
   /* 角丸・線・影 */
   --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px; --radius-pill: 999px;
-  --border-hairline: 1px; --border-rule: 2px; --border-band: 8px;
+  --border-hairline: 1px; --border-rule: 2px;
   --shadow-card: 0 1px 2px rgba(26, 29, 35, 0.06);
   /* フッター（どちらの表示でも ink 地） */
   --footer-bg: #1a1d23;
@@ -45,6 +46,7 @@
   --sky: #7cc0ee;
   --sky-bright: #4aa8e4;
   --yellow: #f5c518;
+  --marker: rgba(245, 197, 24, 0.42);  /* 暗い表示では明るい文字が読めるよう薄める */
   --text-body: #c9cdd3;
   --text-sub: #a3a9b1;
   --line: #313640;
@@ -132,8 +134,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 main.wrap { padding-bottom: var(--space-16); }
 
 /* トップ：表紙と同じく左端に黄色の縦帯 */
-.hero { position: relative; padding: var(--space-12) 0 var(--space-8) calc(var(--border-band) + var(--space-4)); }
-.hero::before { content: ""; position: absolute; left: 0; top: var(--space-12); bottom: var(--space-8); width: var(--border-band); background: var(--yellow); }
+.hero { position: relative; padding: var(--space-12) 0 var(--space-8); }
+/* 見出しの文字の下のほうに、蛍光ペンで引いたような黄色を敷く（2行になっても行ごとに引く） */
+.hero-mark { background: linear-gradient(transparent 70%, var(--marker) 70%, var(--marker) 90%, transparent 90%); padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */

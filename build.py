@@ -588,7 +588,7 @@ def build_home(listed, ctx):
         news = '<p class="empty">この1週間に追加されたものはありません。</p>'
     body = """
 <section class="hero">
-  <h1>{site}</h1>
+  <h1><span class="hero-mark">{site}</span></h1>
   <p class="hero-count"><b>{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
   {ai_check}
