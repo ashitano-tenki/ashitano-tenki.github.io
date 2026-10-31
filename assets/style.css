@@ -72,6 +72,8 @@ body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.8;
+  line-break: strict;      /* 行頭に「ー」「っ」などが来ないようにする */
+  text-autospace: normal;  /* 日本語と英数字のあいだに少し間をあける（対応しているブラウザだけ） */
 }
 a { color: var(--sky); text-decoration: underline; text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
