@@ -4756,9 +4756,13 @@
  },
  "R0564": {
   "page": "https://web-camp.io/",
-  "checked": "2026-10-31",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 30579,
+  "status": "ok",
+  "src": "file:images/manual/R0564.jpg",
+  "w": 960,
+  "h": 503
  },
  "R0565": {
   "page": "https://www.sejuku.net/",
@@ -4778,9 +4782,13 @@
  },
  "R0567": {
   "page": "https://www.waseda.jp/fcom/wbs/",
-  "checked": "2026-10-31",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 127888,
+  "status": "ok",
+  "src": "file:images/manual/R0567.jpg",
+  "w": 960,
+  "h": 533
  },
  "R0568": {
   "page": "https://carryme.jp/",
@@ -4792,9 +4800,13 @@
  },
  "R0569": {
   "page": "https://www.ikukyu-mirais.com/",
-  "checked": "2026-10-31",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 66816,
+  "status": "ok",
+  "src": "file:images/manual/R0569.jpg",
+  "w": 960,
+  "h": 424
  },
  "R0570": {
   "page": "https://buff-community.jp/",
@@ -4814,8 +4826,13 @@
  },
  "R0572": {
   "page": "https://mamaworks.jp/",
-  "checked": "2026-10-31",
-  "status": "none"
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 15150,
+  "status": "ok",
+  "src": "file:images/manual/R0572.jpg",
+  "w": 960,
+  "h": 542
  },
  "R0573": {
   "page": "https://freeconsultant.jp/",
@@ -4833,12 +4850,6 @@
   "w": 698,
   "h": 1000
  },
- "R0575": {
-  "page": "https://cloud-link.co.jp/",
-  "checked": "2026-11-01",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
- },
  "R0576": {
   "page": "https://www.geekly.co.jp/",
   "checked": "2026-11-01",
@@ -4850,7 +4861,12 @@
  "R0577": {
   "page": "https://re-katsu.jp/career/",
   "checked": "2026-11-01",
-  "status": "none"
+  "manual": true,
+  "fsize": 163327,
+  "status": "ok",
+  "src": "file:images/manual/R0577.jpg",
+  "w": 960,
+  "h": 494
  },
  "R0578": {
   "page": "https://www.neo-career.co.jp/humanresource/liber-career/",
@@ -4887,8 +4903,12 @@
  "R0582": {
   "page": "https://mba.nucba.ac.jp/",
   "checked": "2026-11-01",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found Not Resolved"
+  "manual": true,
+  "fsize": 170233,
+  "status": "ok",
+  "src": "file:images/manual/R0582.jpg",
+  "w": 960,
+  "h": 507
  },
  "R0583": {
   "page": "https://bs.doshisha.ac.jp/bs/index.html",
@@ -4925,8 +4945,12 @@
  "R0587": {
   "page": "https://www.iuj.ac.jp/jp/",
   "checked": "2026-11-01",
-  "status": "error",
-  "note": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  "manual": true,
+  "fsize": 128736,
+  "status": "ok",
+  "src": "file:images/manual/R0587.jpg",
+  "w": 960,
+  "h": 497
  },
  "R0588": {
   "page": "https://www.sbi-u.ac.jp/",
@@ -4939,7 +4963,12 @@
  "R0589": {
   "page": "https://www.mpd.ac.jp/",
   "checked": "2026-11-01",
-  "status": "none"
+  "manual": true,
+  "fsize": 228489,
+  "status": "ok",
+  "src": "file:images/manual/R0589.jpg",
+  "w": 960,
+  "h": 543
  },
  "R0590": {
   "page": "https://kaishi.ac.jp/graduate-school/",
