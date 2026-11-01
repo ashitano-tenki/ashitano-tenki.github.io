@@ -321,7 +321,7 @@
 
       <section class="stack no-print">
         <h2>転機を<wbr>ひとりで抱えこまないために</h2>
-        <p class="lead">「あしたの転機」は、キャリアの転機について考え、語り合うコミュニティです。いろいろな転機を経験した人の話に触れてみてください。</p>
+        <p class="lead">「あしたの転機プロジェクト」は、あしたやってくるかもしれない人生の転機について、これからの時代の働き方や生き方をテーマに考えていくプロジェクトです。いろいろな転機を経験した人の話に触れてみてください。</p>
         <div class="links">
           <a class="card linkcard" href="${FB_URL}" target="_blank" rel="noopener"><b>Facebookグループ</b><span>転機について語り合う場。気軽にのぞいてみてください</span></a>
           <a class="card linkcard" href="${NOTE_URL}" target="_blank" rel="noopener"><b>noteマガジン</b><span>転機にまつわる話を、記事で読めます</span></a>
