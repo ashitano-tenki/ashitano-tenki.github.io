@@ -4722,8 +4722,13 @@
  },
  "R0560": {
   "page": "https://www.lec-jp.com/",
-  "checked": "2026-10-30",
-  "status": "none"
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 222760,
+  "status": "ok",
+  "src": "file:images/manual/R0560.jpg",
+  "w": 960,
+  "h": 579
  },
  "R0561": {
   "page": "https://haa.athuman.com/",
@@ -4827,5 +4832,153 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48007/4800730503.jpg",
   "w": 698,
   "h": 1000
+ },
+ "R0575": {
+  "page": "https://cloud-link.co.jp/",
+  "checked": "2026-11-01",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+ },
+ "R0576": {
+  "page": "https://www.geekly.co.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.geekly.co.jp/img/geekly_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0577": {
+  "page": "https://re-katsu.jp/career/",
+  "checked": "2026-11-01",
+  "status": "none"
+ },
+ "R0578": {
+  "page": "https://www.neo-career.co.jp/humanresource/liber-career/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.neo-career.co.jp/humanresource/wp-content/uploads/2023/11/a109e8c993963ce59d23f4b14a349780.jpg",
+  "w": 960,
+  "h": 640
+ },
+ "R0579": {
+  "page": "https://www.kbs.keio.ac.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.kbs.keio.ac.jp/icon.png",
+  "w": 470,
+  "h": 246
+ },
+ "R0580": {
+  "page": "https://www.im.i.hosei.ac.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.im.i.hosei.ac.jp/wp-content/uploads/2016/10/imlogo.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0581": {
+  "page": "https://www.aoyamabs.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/p_62ec962c34785a93bb0af81b/568b0f5c-2868-427a-879f-795a9b6e7bd8%2Flogo_ogp.png",
+  "w": 960,
+  "h": 502
+ },
+ "R0582": {
+  "page": "https://mba.nucba.ac.jp/",
+  "checked": "2026-11-01",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found Not Resolved"
+ },
+ "R0583": {
+  "page": "https://bs.doshisha.ac.jp/bs/index.html",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://bs.doshisha.ac.jp/bs/images/common/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0584": {
+  "page": "http://www.ritsumei.ac.jp/mba/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.ritsumei.ac.jp/mba2/common/img/og_img.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0585": {
+  "page": "https://iba.kwansei.ac.jp/bs/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://iba.kwansei.ac.jp/wp/wp-content/uploads/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0586": {
+  "page": "https://www.chuo-u.ac.jp/academics/pro_graduateschool/business/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.chuo-u.ac.jp/media/images/common/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0587": {
+  "page": "https://www.iuj.ac.jp/jp/",
+  "checked": "2026-11-01",
+  "status": "error",
+  "note": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+ },
+ "R0588": {
+  "page": "https://www.sbi-u.ac.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://p1.ssl-cdn.jp/var/data/u/66/262beb3f356/img/ogp.png?cache=1412588492",
+  "w": 960,
+  "h": 502
+ },
+ "R0589": {
+  "page": "https://www.mpd.ac.jp/",
+  "checked": "2026-11-01",
+  "status": "none"
+ },
+ "R0590": {
+  "page": "https://kaishi.ac.jp/graduate-school/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://kaishi.ac.jp/graduate-school/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0591": {
+  "page": "https://www.meiji.ac.jp/mbs/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.meiji.ac.jp/mbs/6t5h7p000001b6j0-img/OGP.jpg",
+  "w": 945,
+  "h": 630
+ },
+ "R0592": {
+  "page": "https://www.kaetsu.ac.jp/graduate/info.html",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://www.kaetsu.ac.jp/assets/images/common/ogp-img.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0593": {
+  "page": "https://eat-treat.jp/",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://s3-ap-northeast-1.amazonaws.com/eat-treat.jp/images/common/ogp.png?_t=1792992403",
+  "w": 960,
+  "h": 504
+ },
+ "R0594": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000284.000013597.html",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13597/284/13597-284-5099570aa1dd0e6336def7e0f3a8e617-900x540.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 900,
+  "h": 540
  }
 }
