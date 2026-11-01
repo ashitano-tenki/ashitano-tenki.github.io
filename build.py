@@ -365,8 +365,7 @@ def site_footer(ctx):
     return """<footer class="site-footer">
   <div class="wrap">
     <div class="community">
-      <p>この観測所は、黒田悠介が運営する「あしたの転機」プロジェクトの一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
-      <p class="community-links"><a href="/project/">「あしたの転機」のページを見る</a></p>
+      <p>この観測所は、黒田悠介が運営する「<a href="/project/">あしたの転機プロジェクト</a>」の一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
     </div>
     <div class="footer-bottom">
       <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
@@ -1281,9 +1280,8 @@ def build_guide(listed, ctx):
 # 観測所の一覧・検索・絞り込み・並び順には入れない。中身はスプレッドシートの「あしたの転機」タブ（config/site.json の project_csv_url）。
 
 # ページの冒頭の紹介文。直したいときはここを書き換える
-PROJECT_INTRO = ("「あしたの転機」は、あしたやってくるかもしれない人生の転機について、就職・転職・独立・複業など、"
-                 "これからの時代の働き方や生き方をテーマに語り合うコミュニティです。"
-                 "一人ひとりの「あれが転機だったな」という経験を持ち寄って、noteやイベントで分かち合っています。")
+PROJECT_INTRO = ("「あしたの転機プロジェクト」は、あしたやってくるかもしれない人生の転機について、"
+                 "これからの時代の働き方や生き方をテーマに考えていくプロジェクトです。")
 PROJECT_SNAPSHOT = os.path.join(ROOT, "data", "project.csv")  # 前回読めた中身（読めなかった日はこれを使う）
 PROJECT_TEXT = {}  # main() で読んだCSVの文字列（--save-data のとき data/project.csv に残す）
 
@@ -1380,9 +1378,15 @@ def build_project(ctx):
     ext = lambda href, label, cls="": '<a%s href="%s" rel="noopener" target="_blank">%s</a>' % (' class="%s"' % cls if cls else "", e(href), e(label))
     blocks = []
 
-    # note：マガジンへのリンクと、フィードの新しい記事5件
+    # コミュニティ（いちばん上に置く）
+    for r in by.get("コミュニティ", []):
+        blocks.append('<section class="pj-block"><h2 class="section-title">コミュニティ</h2>'
+                      '<p class="pj-lead">転機を迎えている人どうしで、%sで交流しています。</p><p class="pj-more">%s</p></section>'
+                      % (e(r["タイトル"]), ext(r["URL"], "Facebookグループを見る") if r.get("URL") else ""))
+
+    # note：マガジンへのリンクと、フィードの新しい記事3件
     for r in by.get("note", []):
-        posts = read_feed(r["フィードURL"], 5) if r.get("フィードURL") and r.get("表示") == "表示する" else []
+        posts = read_feed(r["フィードURL"], 3) if r.get("フィードURL") and r.get("表示") == "表示する" else []
         items = []
         for p in posts:
             img = project_thumb(p["thumb"])
@@ -1443,22 +1447,15 @@ def build_project(ctx):
         blocks.append('<section class="pj-block"><h2 class="section-title">グッズ</h2>'
                       '<p class="pj-lead">あしたの転機のオフィシャルグッズを、Tシャツトリニティで販売しています。</p>%s%s</section>' % (body, more))
 
-    # コミュニティ
-    for r in by.get("コミュニティ", []):
-        blocks.append('<section class="pj-block"><h2 class="section-title">コミュニティ</h2>'
-                      '<p class="pj-lead">転機を迎えている人どうしで、%sで交流しています。</p><p class="pj-more">%s</p></section>'
-                      % (e(r["タイトル"]), ext(r["URL"], "Facebookグループを見る") if r.get("URL") else ""))
-
     body = """
 {crumbs}
 <header class="page-head">
-  <h1>あしたの転機</h1>
+  <h1>あしたの転機プロジェクト</h1>
   <p class="lead">{intro}</p>
-  <p class="pj-note">この観測所の運営元のプロジェクトです。観測所の一覧や並び順には含めていません。</p>
 </header>
 {blocks}
-""".format(crumbs=breadcrumb([("あしたの転機", None)]), intro=e(PROJECT_INTRO), blocks="\n".join(blocks))
-    page("/project/", "あしたの転機", "この観測所を運営する「あしたの転機」プロジェクトのnoteマガジン、Podcast、イベント、グッズ、コミュニティ。", body, ctx=ctx)
+""".format(crumbs=breadcrumb([("あしたの転機プロジェクト", None)]), intro=e(PROJECT_INTRO), blocks="\n".join(blocks))
+    page("/project/", "あしたの転機プロジェクト", "この観測所を運営する「あしたの転機プロジェクト」のコミュニティ、noteマガジン、Podcast、イベント、グッズ。", body, ctx=ctx)
 
 
 def build_404(ctx):

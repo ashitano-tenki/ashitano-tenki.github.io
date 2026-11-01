@@ -245,7 +245,7 @@ button, .button {
 }
 /* スマホ：小さな文字のリンクも、見た目はそのままで押せる範囲を上下に広げる */
 @media (max-width: 759px) {
-  .shelf-all, .more a, .crumbs a, .footer-meta a, .community-links a, .rss-note a, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
+  .shelf-all, .more a, .crumbs a, .footer-meta a, .rss-note a, .report a, .stage-chips a { display: inline-block; padding-top: 10px; padding-bottom: 10px; margin-top: -10px; margin-bottom: -10px; }
 }
 .save-wide { display: inline-flex; align-items: center; gap: var(--space-2); }
 .save-wide[aria-pressed="true"] { border-color: var(--sky); color: var(--sky); }
@@ -595,8 +595,6 @@ button, .button {
 .site-footer a { color: var(--footer-strong); }
 .site-footer :focus-visible { outline-color: var(--footer-strong); }
 .community p { margin: 0 0 var(--space-3); }
-.community-links { display: flex; flex-direction: column; gap: 6px; }
-@media (min-width: 640px) { .community-links { flex-direction: row; gap: var(--space-6); } }
 .footer-meta { color: var(--footer-sub); font-size: 13px; margin: var(--space-6) 0 0; }
 .footer-meta a { color: var(--footer-text); }
 
@@ -622,7 +620,6 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .saved-empty-links span { font-size: 13px; color: var(--text-sub); }
 
 /* 「あしたの転機」のページ（/project/） */
-.pj-note { margin: var(--space-2) 0 0; font-size: 13px; color: var(--text-sub); }
 .pj-block { margin-top: var(--space-12); }
 .pj-lead { margin: 0 0 var(--space-4); color: var(--text-body); }
 .pj-more { margin: var(--space-4) 0 0; font-weight: 700; }
