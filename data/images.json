@@ -5009,5 +5009,13 @@
   "src": "https://prcdn.freetls.fastly.net/release_image/13597/284/13597-284-5099570aa1dd0e6336def7e0f3a8e617-900x540.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
   "w": 900,
   "h": 540
+ },
+ "R0595": {
+  "page": "https://pro-connect.jp",
+  "checked": "2026-11-01",
+  "status": "ok",
+  "src": "https://pro-connect.jp/meta/ogp.webp",
+  "w": 960,
+  "h": 504
  }
 }
