@@ -5027,5 +5027,52 @@
   "src": "https://pro-connect.jp/meta/ogp.webp",
   "w": 960,
   "h": 504
+ },
+ "R0596": {
+  "page": "https://lic-says.jp/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://lic-says.jp/cms/wp-content/themes/says/assets/img/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0597": {
+  "page": "https://jat.org/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://jat.org/assets/images/JAT-logo.png",
+  "w": 544,
+  "h": 185,
+  "small": true
+ },
+ "R0598": {
+  "page": "https://peraichi.com/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://peraichi.com/img/img_ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0599": {
+  "page": "https://www.high-performer.jp/career",
+  "checked": "2026-11-02",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+ },
+ "R0600": {
+  "page": "https://chef-link.com/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://chef-link.com/wp-content/uploads/2025/09/ogp.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0601": {
+  "page": "https://www.maruzenjunkudo.co.jp/products/9784767835853",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47678/4767835852.jpg",
+  "w": 702,
+  "h": 1000
  }
 }
