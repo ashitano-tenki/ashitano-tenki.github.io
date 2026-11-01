@@ -4132,6 +4132,16 @@
   "w": 960,
   "h": 540
  },
+ "R0489": {
+  "page": "https://paiza.jp/",
+  "checked": "2026-11-01",
+  "manual": true,
+  "fsize": 22881,
+  "status": "ok",
+  "src": "file:images/manual/R0489.jpg",
+  "w": 960,
+  "h": 504
+ },
  "R0492": {
   "page": "https://chip-career.com/",
   "checked": "2026-10-28",
