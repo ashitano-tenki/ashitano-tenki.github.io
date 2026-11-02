@@ -5131,6 +5131,11 @@
  "R0608": {
   "page": "https://cotree.jp/",
   "checked": "2026-11-02",
-  "status": "none"
+  "manual": true,
+  "fsize": 21056,
+  "status": "ok",
+  "src": "file:images/manual/R0608.jpg",
+  "w": 960,
+  "h": 540
  }
 }
