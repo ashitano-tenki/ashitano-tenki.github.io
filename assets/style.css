@@ -575,6 +575,15 @@ button, .button {
 .prose h1 { font-size: clamp(26px, 7vw, 32px); line-height: 1.4; margin: var(--space-6) 0 var(--space-2); }
 .prose h2 { font-size: clamp(20px, 5.5vw, 24px); margin: var(--space-12) 0 var(--space-3); padding-bottom: var(--space-2); border-bottom: var(--border-rule) solid var(--ink); }
 .prose p { margin: 0 0 var(--space-4); }
+/* 観測所について「運営者」：名前・肩書き・紹介・リンク集へのボタンをひとまとめにする */
+.operator-card { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
+.operator-card p { margin: 0 0 var(--space-3); }
+.operator-card .operator-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3); }
+.operator-name strong { font-family: var(--font-display); font-size: 22px; color: var(--ink); }
+.operator-name span { font-size: 14px; color: var(--text-sub); }
+.operator-card .operator-link { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); margin: var(--space-4) 0 0; }
+.operator-link .button { border-radius: var(--radius-pill); min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; }
+.operator-link span { font-size: 13px; color: var(--text-sub); }
 .prose li { margin-bottom: 6px; }
 
 /* 観測レポート */
@@ -620,6 +629,8 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .saved-empty-links span { font-size: 13px; color: var(--text-sub); }
 
 /* 「あしたの転機」のページ（/project/） */
+.pj-owner { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3); margin: var(--space-3) 0 0; font-size: 15px; color: var(--ink); }
+.pj-owner a { font-weight: 700; }
 .pj-block { margin-top: var(--space-12); }
 .pj-lead { margin: 0 0 var(--space-4); color: var(--text-body); }
 .pj-more { margin: var(--space-4) 0 0; font-weight: 700; }

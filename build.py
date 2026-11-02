@@ -365,7 +365,7 @@ def site_footer(ctx):
     return """<footer class="site-footer">
   <div class="wrap">
     <div class="community">
-      <p>この観測所は、黒田悠介が運営する「<a href="/project/">あしたの転機プロジェクト</a>」の一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
+      <p>この観測所は、<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>が運営する「<a href="/project/">あしたの転機プロジェクト</a>」の一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
     </div>
     <div class="footer-bottom">
       <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
@@ -373,7 +373,7 @@ def site_footer(ctx):
     </div>
   </div>
 </footer>
-<script src="/assets/site.js?v={ver}"></script>""".format(contact=e(CONF["contact_form_url"]),
+<script src="/assets/site.js?v={ver}"></script>""".format(contact=e(CONF["contact_form_url"]), operator=e(CONF.get("operator_url", "")),
                          updated=fmt_date(ctx["today"]), ver=ctx["version"]) + analytics_tag(ctx)
 
 
@@ -633,6 +633,8 @@ def build_home(listed, ctx):
            popular=start_words_html(popular_words(listed, ctx), "/search/?q="))
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": CONF["site_name"], "url": BASE + "/",
                "description": CONF["description"], "inLanguage": "ja",
+               "publisher": {"@type": "Person", "name": "黒田悠介", "jobTitle": "キャリア研究家",
+                             "url": CONF.get("operator_url", BASE + "/about/"), "sameAs": [CONF["operator_url"]] if CONF.get("operator_url") else []},
                "potentialAction": {"@type": "SearchAction", "target": BASE + "/search/?q={search_term_string}",
                                    "query-input": "required name=search_term_string"}}
     page("/", CONF["site_name"], CONF["description"], body, jsonld=[website],
@@ -1202,8 +1204,11 @@ def build_about(listed, ctx):
 
 {analytics}
 <h2>運営者</h2>
-<p>運営は黒田悠介です。キャリア研究家として、これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。</p>
-<p>ほかの活動や発信は、<a href="{operator_url}" rel="noopener" target="_blank">黒田悠介のリンク集（Linktree）</a>にまとめています。</p>
+<div class="operator-card">
+  <p class="operator-name"><strong>黒田悠介</strong><span>キャリア研究家</span></p>
+  <p>これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。この観測所のほか、転機について考えるnoteマガジンやコミュニティも運営しています。</p>
+  <p class="operator-link"><a class="button" href="{operator_url}" rel="noopener" target="_blank">黒田悠介のリンク集を見る</a><span>ほかの活動や発信をまとめています</span></p>
+</div>
 
 <h2>あしたの転機プロジェクトについて</h2>
 <p>「あしたの転機プロジェクト」は、あしたやってくるかもしれない人生の転機について、これからの時代の働き方や生き方をテーマに考えていくプロジェクトです。この観測所はその一部として運営しています。コミュニティ、noteマガジン、イベントなどは、<a href="/project/">あしたの転機プロジェクトのページ</a>にまとめています。</p>
@@ -1452,9 +1457,11 @@ def build_project(ctx):
 <header class="page-head">
   <h1>あしたの転機プロジェクト</h1>
   <p class="lead">{intro}</p>
+  <p class="pj-owner"><span>主宰：<strong>黒田悠介</strong>（キャリア研究家）</span><a href="{operator}" rel="noopener" target="_blank">活動や発信のリンク集</a></p>
 </header>
 {blocks}
-""".format(crumbs=breadcrumb([("あしたの転機プロジェクト", None)]), intro=e(PROJECT_INTRO), blocks="\n".join(blocks))
+""".format(crumbs=breadcrumb([("あしたの転機プロジェクト", None)]), intro=e(PROJECT_INTRO), blocks="\n".join(blocks),
+           operator=e(CONF.get("operator_url", "")))
     page("/project/", "あしたの転機プロジェクト", "この観測所を運営する「あしたの転機プロジェクト」のコミュニティ、noteマガジン、Podcast、イベント、グッズ。", body, ctx=ctx)
 
 
