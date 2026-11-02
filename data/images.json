@@ -5137,5 +5137,131 @@
   "src": "file:images/manual/R0608.jpg",
   "w": 960,
   "h": 540
+ },
+ "R0609": {
+  "page": "https://choice-career.com/",
+  "checked": "2026-11-02",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0610": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784910063225",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49100/4910063226.jpg",
+  "w": 698,
+  "h": 1000
+ },
+ "R0611": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784910053448",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49100/4910053441.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0612": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784805113257",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48051/4805113251.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R0613": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296119813",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42961/4296119818.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0614": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800721204",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48007/4800721202.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0615": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800720986",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48007/4800720982.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0616": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784471210670",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44712/447121067X.jpg",
+  "w": 674,
+  "h": 1000
+ },
+ "R0617": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784594098216",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45940/4594098215.jpg",
+  "w": 676,
+  "h": 1000
+ },
+ "R0618": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296112050",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42961/4296112058.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0619": {
+  "page": "https://rashicle.com/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://rashicle.com/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0620": {
+  "page": "https://hired.co.jp/fukavori",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://hired.co.jp/fukavori/fukavori-ogp-261013.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0621": {
+  "page": "https://www.rosebud.app",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.rosebud.app/og-image.png",
+  "w": 960,
+  "h": 543
+ },
+ "R0622": {
+  "page": "https://apps.apple.com/jp/app/%E3%82%B8%E3%83%A3%E3%83%BC%E3%83%8A%E3%83%AB/id6447391597",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/28/03/7e/28037eec-0e68-04e4-c0c5-c56c7588653d/Placeholder.mill/1200x630wa.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0623": {
+  "page": "https://dayoneapp.com",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://i0.wp.com/dayoneapp.com/wp-content/uploads/2024/01/day-one-journal.png?fit=2950%2C1674&quality=80&ssl=1",
+  "w": 960,
+  "h": 545
+ },
+ "R0624": {
+  "page": "https://apps.apple.com/jp/app/stoic/id1312926037",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/69/26/30/6926302a-4751-3962-bb1e-18f9b4aba8c4/Placeholder.mill/1200x630wa.jpg",
+  "w": 545,
+  "h": 285
  }
 }
