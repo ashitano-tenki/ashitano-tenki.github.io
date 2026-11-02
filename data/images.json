@@ -5039,11 +5039,12 @@
  "R0597": {
   "page": "https://jat.org/",
   "checked": "2026-11-02",
+  "manual": true,
+  "fsize": 102202,
   "status": "ok",
-  "src": "https://jat.org/assets/images/JAT-logo.png",
-  "w": 544,
-  "h": 185,
-  "small": true
+  "src": "file:images/manual/R0597.jpg",
+  "w": 960,
+  "h": 479
  },
  "R0598": {
   "page": "https://peraichi.com/",
@@ -5056,8 +5057,12 @@
  "R0599": {
   "page": "https://www.high-performer.jp/career",
   "checked": "2026-11-02",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+  "manual": true,
+  "fsize": 142032,
+  "status": "ok",
+  "src": "file:images/manual/R0599.jpg",
+  "w": 960,
+  "h": 512
  },
  "R0600": {
   "page": "https://chef-link.com/",
@@ -5074,5 +5079,58 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47678/4767835852.jpg",
   "w": 702,
   "h": 1000
+ },
+ "R0602": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784828310251",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48283/4828310258.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0603": {
+  "page": "https://kidsline.me/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://d1g4k4av3m79e8.cloudfront.net/uploads/server_image/image/11563/large_image_b8b61c9e-5c95-4f5a-a86c-03140fa77d8f.png",
+  "w": 800,
+  "h": 419
+ },
+ "R0604": {
+  "page": "https://taskaji.jp/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://taskaji.jp/taskaji_top_ogp.png",
+  "w": 960,
+  "h": 503
+ },
+ "R0605": {
+  "page": "https://casy.co.jp/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://casy.co.jp/assets/static/facebook_share-2d338bdfaad609368eb4cc53d7a7d15aba2576797c5500829ffd3bea9cfedb98.png",
+  "w": 600,
+  "h": 314
+ },
+ "R0606": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784827214888",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48272/4827214883.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R0607": {
+  "page": "https://eichie.jp/",
+  "checked": "2026-11-02",
+  "status": "ok",
+  "src": "https://d2y7wobpl1gqzn.cloudfront.net/public/images/eichie_sns_logo.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0608": {
+  "page": "https://cotree.jp/",
+  "checked": "2026-11-02",
+  "status": "none"
  }
 }
