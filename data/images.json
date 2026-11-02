@@ -231,9 +231,11 @@
  },
  "R0034": {
   "page": "https://anotherworks.co.jp/",
-  "checked": "2026-10-24",
+  "checked": "2026-11-02",
+  "manual": true,
+  "fsize": 34213,
   "status": "ok",
-  "src": "https://storage.googleapis.com/production-os-assets/assets/8b691731-7a11-4993-9fb7-439c65d1ef42",
+  "src": "file:images/manual/R0034.jpg",
   "w": 960,
   "h": 504
  },
