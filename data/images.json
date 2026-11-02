@@ -5265,5 +5265,307 @@
   "src": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/69/26/30/6926302a-4751-3962-bb1e-18f9b4aba8c4/Placeholder.mill/1200x630wa.jpg",
   "w": 545,
   "h": 285
+ },
+ "R0625": {
+  "page": "https://www.j-cda.jp/careerdock/",
+  "checked": "2026-11-03",
+  "status": "none"
+ },
+ "R0626": {
+  "page": "https://aile-ai.jp/jobs/",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://aile-ai.jp/brand/ogp.png",
+  "w": 960,
+  "h": 504,
+  "suspect": true
+ },
+ "R0627": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784065286050",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40652/4065286050.jpg",
+  "w": 612,
+  "h": 1000
+ },
+ "R0628": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784396117283",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43961/4396117280.jpg",
+  "w": 622,
+  "h": 1000
+ },
+ "R0629": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784837988786",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48379/4837988784.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R0630": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784426126926",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44261/4426126924.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0631": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784860295691",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48602/4860295692.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0632": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784046058874",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40460/4046058870.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0633": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784334045135",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43340/4334045138.jpg",
+  "w": 632,
+  "h": 1000
+ },
+ "R0634": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784804764290",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48047/4804764291.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R0635": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784479798248",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44797/4479798242.jpg",
+  "w": 694,
+  "h": 1000
+ },
+ "R0636": {
+  "page": "https://www.projectmint.net/",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/4f250a_a81b891dae4142009295ca1274f0d3f9~mv2.png/v1/fill/w_2400,h_1260,al_c/4f250a_a81b891dae4142009295ca1274f0d3f9~mv2.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0637": {
+  "page": "https://career-pocket.work/",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://career-pocket.work/wp-content/uploads/2026/06/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0638": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784479320173",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44793/4479320172.jpg",
+  "w": 707,
+  "h": 1000
+ },
+ "R0639": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798070803",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47980/4798070807.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0640": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756921161",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756921167.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0641": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784405104785",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44051/4405104786.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0642": {
+  "page": "https://books.rakuten.co.jp/rb/17770081/",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47980/479807229X.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R0643": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784774520407",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47745/4774520403.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0644": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784833440622",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48334/4833440628.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0645": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784799329214",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47993/4799329219.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0646": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784532324230",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45323/4532324238.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0647": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784495540111",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44955/4495540114.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R0648": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866802688",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48668/4866802685.jpg",
+  "w": 678,
+  "h": 1000
+ },
+ "R0649": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784794225245",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47942/4794225245.jpg",
+  "w": 710,
+  "h": 1000
+ },
+ "R0650": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784334103750",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43341/4334103758.jpg",
+  "w": 616,
+  "h": 1000
+ },
+ "R0651": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296202782",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42962/4296202782.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0652": {
+  "page": "https://casematch.jp/",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://casematch.jp/ogp/thumbnail.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0653": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784827215311",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48272/4827215316.jpg",
+  "w": 676,
+  "h": 1000
+ },
+ "R0654": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784532113520",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45321/4532113520.jpg",
+  "w": 616,
+  "h": 1000
+ },
+ "R0655": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296205295",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42962/4296205293.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R0656": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784484221205",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44842/4484221209.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0657": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784062194747",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40621/4062194740.jpg",
+  "w": 657,
+  "h": 1000
+ },
+ "R0658": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784781619439",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47816/4781619436.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0659": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784297143411",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42971/4297143410.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R0660": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756922793",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756922791.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0661": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784048113366",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40481/4048113364.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0662": {
+  "page": "https://apps.apple.com/jp/app/%E3%82%A2%E3%83%AB%E3%83%A0-%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2sns/id6791965625",
+  "checked": "2026-11-03",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/96/5a/e9/965ae98f-263a-1062-d207-42c8028f96ac/Placeholder.mill/1200x630wa.jpg",
+  "w": 750,
+  "h": 393
  }
 }
