@@ -290,7 +290,7 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
 
 
 # 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
-NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック")]
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック"), ("/notes/", "観測ノート")]
 
 
 def nav_links(current=None):
@@ -298,7 +298,7 @@ def nav_links(current=None):
     for href, label in NAV:
         cur = ' aria-current="page"' if href == current else ""
         out.append('      <a href="%s"%s>%s</a>' % (href, cur, e(label)))
-        if href == "/check/" and TENKI_AI:
+        if href == "/notes/" and TENKI_AI:
             out.append('      ' + ai_link(TENKI_AI, "転機AIに相談", "nav"))
     return "\n".join(out)
 
