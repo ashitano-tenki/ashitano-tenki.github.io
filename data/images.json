@@ -8524,9 +8524,13 @@
  },
  "R1029": {
   "page": "https://www.career-adv.jp/",
-  "checked": "2026-11-05",
-  "status": "error",
-  "note": "ValueError: 画像が小さすぎます"
+  "checked": "2026-11-06",
+  "manual": true,
+  "fsize": 121300,
+  "status": "ok",
+  "src": "file:images/manual/R1029.jpg",
+  "w": 960,
+  "h": 438
  },
  "R1030": {
   "page": "https://dr-agent.job-medley.com/",
@@ -8643,7 +8647,12 @@
  "R1046": {
   "page": "https://fiica-salon.com/",
   "checked": "2026-11-06",
-  "status": "none"
+  "manual": true,
+  "fsize": 82493,
+  "status": "ok",
+  "src": "file:images/manual/R1046.jpg",
+  "w": 960,
+  "h": 518
  },
  "R1047": {
   "page": "https://books.rakuten.co.jp/rb/17352641/",
@@ -8680,16 +8689,22 @@
  "R1051": {
   "page": "https://jtuc-network-support.com/",
   "checked": "2026-11-06",
-  "status": "none"
+  "manual": true,
+  "fsize": 28376,
+  "status": "ok",
+  "src": "file:images/manual/R1051.jpg",
+  "w": 630,
+  "h": 330
  },
  "R1052": {
   "page": "https://prtimes.jp/main/html/rd/p/000000022.000021857.html",
   "checked": "2026-11-06",
+  "manual": true,
+  "fsize": 135769,
   "status": "ok",
-  "src": "https://prcdn.freetls.fastly.net/release_image/21857/22/21857-22-e33148167e914b4d5cdff9e8a2a589c1-624x113.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
-  "w": 624,
-  "h": 113,
-  "small": true
+  "src": "file:images/manual/R1052.jpg",
+  "w": 960,
+  "h": 526
  },
  "R1053": {
   "page": "https://prtimes.jp/main/html/rd/p/000000020.000035559.html",
@@ -8734,12 +8749,22 @@
  "R1058": {
   "page": "https://senior-carwork.jp/",
   "checked": "2026-11-06",
-  "status": "none"
+  "manual": true,
+  "fsize": 115701,
+  "status": "ok",
+  "src": "file:images/manual/R1058.jpg",
+  "w": 960,
+  "h": 492
  },
  "R1059": {
   "page": "https://www.vet-freelance.com/",
   "checked": "2026-11-06",
-  "status": "none"
+  "manual": true,
+  "fsize": 112056,
+  "status": "ok",
+  "src": "file:images/manual/R1059.jpg",
+  "w": 960,
+  "h": 500
  },
  "R1060": {
   "page": "https://www.nakamar.jp/",
@@ -8760,7 +8785,12 @@
  "R1062": {
   "page": "https://mediklect.co.jp/freelance/service/",
   "checked": "2026-11-06",
-  "status": "none"
+  "manual": true,
+  "fsize": 91127,
+  "status": "ok",
+  "src": "file:images/manual/R1062.jpg",
+  "w": 960,
+  "h": 499
  },
  "R1063": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798135502",
@@ -8831,6 +8861,165 @@
   "checked": "2026-11-06",
   "status": "ok",
   "src": "https://jobs.japandesign.ne.jp/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1074": {
+  "page": "https://u-match.net/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://u-match.net/wp-content/uploads/2025/01/u-match_logo.png",
+  "w": 447,
+  "h": 111,
+  "small": true
+ },
+ "R1075": {
+  "page": "https://career.kantominto.com/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://career.kantominto.com/assets/images/ogp/og_top.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1076": {
+  "page": "https://beautyshare.jp/",
+  "checked": "2026-11-06",
+  "status": "error",
+  "note": "UnidentifiedImageError: cannot identify image file <_io.BytesIO object at 0x10d9af310>"
+ },
+ "R1077": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121508331",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41215/4121508335.jpg",
+  "w": 630,
+  "h": 1000
+ },
+ "R1078": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1754091815",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/b0/96/b7/b096b767-28c4-bed7-3005-b5a0933637f2/mza_10826889267544809552.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1079": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1584879008",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/aa/46/a0/aa46a0b8-d383-32a6-eaf0-070b216f5f88/mza_17103234859037414356.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1080": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1749874265",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/2e/38/ec/2e38ec0c-6508-d806-82e7-94e998cd8401/mza_3975868379416002215.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1081": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1274099039",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/86/20/9d/86209da8-1cf7-8687-1d83-d96929f843d8/mza_2625795747514973395.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1082": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1615177468",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/46/e8/df/46e8dfa9-92b0-9e0c-fdc1-a9d637d0b184/mza_3012922276174312392.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1083": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1459221933",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts116/v4/1d/fc/1b/1dfc1bb4-3851-cd7f-c78b-f01ecd465bc8/mza_12289684202056862392.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1084": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1498081812",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts123/v4/3c/96/2d/3c962d2b-4104-8f7d-65c0-c09ef0e5deff/mza_4803771439591481233.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1085": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000414.000013298.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13298/414/13298-414-abdb6f8784eb991dd2bec4973f169877-2000x680.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 326
+ },
+ "R1086": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000097.000060863.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/60863/97/60863-97-12e3fbb72c0ff672c0cc16e54531db67-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1087": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000396.000013298.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13298/396/13298-396-05ea27bdf481619511686b4bd93420f9-3900x1326.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 326
+ },
+ "R1088": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000002.000191062.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/191062/2/191062-2-ad09a7991d0a7e2d82cca6b2276f9524-1600x900.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1089": {
+  "page": "https://kurohon.jp/agent",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://kurohon.jp/agent/img/ogp_kokushia_logo.jpg",
+  "w": 960,
+  "h": 503
+ },
+ "R1090": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000435.000013298.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13298/435/13298-435-009fdb1a66af57474bccc6f0d5d8b4d9-2000x680.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 326
+ },
+ "R1091": {
+  "page": "https://www.arc-career.shikaku.co.jp/career/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.arc-career.shikaku.co.jp/img/ogp_career-20201215.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1092": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000254.000010407.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/10407/254/10407-254-163f352dd322679462899d05a73ef15e-960x540.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1093": {
+  "page": "https://encycle-agent.prossell.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://encycle-agent.prossell.jp/ogp.png?v=20261028",
   "w": 960,
   "h": 504
  }
