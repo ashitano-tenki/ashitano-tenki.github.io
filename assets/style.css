@@ -730,3 +730,19 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .note-ref { font-size: 14px; margin: var(--space-3) 0 0; }
 @media (prefers-reduced-motion: reduce) { .note-list a { transition: none; } .note-list a:hover { transform: none; } }
 @media (max-width: 479px) { .note-pick-media { width: 96px; } .note-pick-title { font-size: 16px; } }
+/* 紹介ページの下「あわせて見たいもの」：手段（タイプ）ごとに選ぶ */
+.related-choices { margin-top: var(--space-12); }
+.related-kicker { margin: 0; font-size: 13px; font-weight: 700; color: var(--text-sub); }
+.related-title { font-family: var(--font-display); font-size: 26px; line-height: 1.35; margin: 2px 0 var(--space-1); }
+.related-lead { margin: 0 0 var(--space-4); font-size: 14px; color: var(--text-body); }
+.js .related-choices .related-tabs { gap: var(--space-2); margin-bottom: var(--space-4); }
+.related-choices .related-tabs button { font-size: 15px; font-weight: 700; padding: 8px 16px; border-width: 1.5px; }
+.related-choices .related-tabs button:hover { border-color: var(--ink); }
+.related-choices .related-panel:not([hidden]) { animation: related-in .25s ease; }
+@keyframes related-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 639px) {
+  .related-title { font-size: 22px; }
+  .js .related-choices .related-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .related-choices .related-tabs button { white-space: nowrap; flex: none; }
+}
+@media (prefers-reduced-motion: reduce) { .related-choices .related-panel:not([hidden]) { animation: none; } }

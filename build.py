@@ -11,6 +11,7 @@ Python の標準ライブラリだけで動く。
 import argparse
 import csv
 import datetime
+import collections
 import email.utils
 import hashlib
 import html
@@ -831,36 +832,6 @@ def build_combo(t, s, items, ctx):
          jsonld=[collection_ld(title, combo_lead(t, s), path, items)])
 
 
-def similar_items(item, listed, limit=3):
-    def score(other):
-        tenki = len(set(item["tenki"]) & set(other["tenki"]))
-        stage = len(set(item["stages"]) & set(other["stages"]))
-        return tenki, stage
-    pool = []
-    for o in listed:
-        if o["id"] == item["id"]:
-            continue
-        tenki, stage = score(o)
-        if tenki and stage:
-            pool.append((0, -(tenki * 2 + stage), o["rank"], o))
-        elif tenki:
-            pool.append((1, -tenki, o["rank"], o))
-    pool.sort(key=lambda x: x[:3])
-    return [p[3] for p in pool[:limit]]
-
-
-def next_stage(item):
-    """その掲載情報の段階のうち、いちばん後ろの段階の次。安定の次は、次の転機の準備。"""
-    order = [s["name"] for s in STAGES]
-    idx = [order.index(st) for st in item["stages"] if st in order]
-    if not idx:
-        return None
-    last = max(idx)
-    if last == len(order) - 1:
-        return order[0], True
-    return order[last + 1], False
-
-
 def report_link(item):
     url = CONF.get("report_form_url", "")
     if not url:
@@ -880,16 +851,45 @@ def item_kind_phrase(item):
     return "%sの%s" % (tenki, kind) if tenki else "キャリアの転機に役立つ%s" % kind
 
 
-def related_section(panels):
-    """紹介ページの下の関連。1つならそのまま、2つなら切り替えボタン（JavaScript が使えないときは両方並べる）。"""
-    if not panels:
+def related_choices(item, listed, ctx, per=3, max_kinds=6):
+    """紹介ページの下の「あわせて見たいもの」。同じ転機・段階の掲載を、手段（タイプ）ごとに選べる形で出す。
+    いちばん左は同じタイプの「似た○○を比べる」、続けてほかのタイプをおすすめ順でいちばん上の掲載が上位のものから。
+    JavaScript が使えるときはボタンで切り替え、使えないときは全部を見出し付きで並べる。"""
+    pool = [o for o in listed if o["id"] != item["id"] and set(o["tenki"]) & set(item["tenki"]) and set(o["stages"]) & set(item["stages"])]
+    if not pool:
         return ""
-    if len(panels) == 1:
-        return '<section class="section related"><h2 class="section-title">%sで役立つもの</h2>%s</section>' % (e(panels[0][0]), panels[0][1])
-    tabs = "".join('<button type="button" aria-pressed="%s" data-panel="%d">%s</button>' % ("true" if i == 0 else "false", i, e(name)) for i, (name, _) in enumerate(panels))
-    bodies = "".join('<div class="related-panel" data-panel="%d"><h3 class="related-h">%sで役立つもの</h3>%s</div>' % (i, e(name), html) for i, (name, html) in enumerate(panels))
-    return ('<section class="section related"><h2 class="section-title">あわせて見たいもの</h2>'
-            '<div class="kind-tabs related-tabs" role="group" aria-label="関連の切り替え">%s</div>%s</section>' % (tabs, bodies))
+    pool.sort(key=lambda o: o["rank"])
+    groups = collections.OrderedDict()
+    for o in pool:
+        groups.setdefault(o["kind"], []).append(o)
+    tenki_param = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), item["tenki"][0] if item["tenki"] else "")
+    stage_param = item["stages"][0] if item["stages"] else ""
+    panels = []  # (ボタンの文字, パネルの見出し, 掲載, 一覧へのリンク)
+    if item["kind"] in groups:
+        group = groups.pop(item["kind"])
+        phrase = KIND_PHRASE.get(item["kind"], item["kind"])
+        panels.append(("%s 似た%sを比べる" % (KIND_BY_NAME.get(item["kind"], {}).get("emoji", ""), phrase), "似た%s" % phrase, group,
+                       search_url(tenki=tenki_param, stage=stage_param, kind=item["kind"])))
+    for kind, group in list(groups.items())[:max_kinds]:
+        panels.append(("%s %s" % (KIND_BY_NAME.get(kind, {}).get("emoji", ""), KIND_ACTION.get(kind, kind)), KIND_ACTION.get(kind, kind), group,
+                       search_url(tenki=tenki_param, stage=stage_param, kind=kind)))
+    where = "%s×%s" % (tenki_param, stage_param) if tenki_param and stage_param else (tenki_param or stage_param)
+    tabs = "".join('<button type="button" aria-pressed="%s" data-panel="%d">%s</button>' % ("true" if i == 0 else "false", i, e(label.strip()))
+                   for i, (label, _, _, _) in enumerate(panels))
+    bodies = "".join(
+        '<div class="related-panel" data-panel="%d"><h3 class="related-h">%s</h3>%s%s</div>'
+        % (i, e(head), sm_shelf("".join(card(it, ctx["today"]) for it in group[:per]), min(per, len(group)), head),
+           more_link(href, "%sの「%s」をすべて見る（%d件）" % (where, group[0]["kind"], len(group))) if len(group) > per else "")
+        for i, (_, head, group, href) in enumerate(panels))
+    tab_html = '<div class="kind-tabs related-tabs" role="group" aria-label="手段を選ぶ">%s</div>' % tabs if len(panels) > 1 else ""
+    lead = "%sの時期に役立つものを、手段ごとに選べます。" % ("%sの%s" % (tenki_param, stage_param) if tenki_param and stage_param else where)
+    return ('<section class="section related related-choices"><p class="related-kicker">あわせて見たいもの</p>'
+            '<h2 class="related-title">次はどの手で進める？</h2><p class="related-lead">%s</p>%s%s</section>' % (e(lead), tab_html, bodies))
+
+
+# 「あわせて見たいもの」のボタンの言葉（タイプごと）
+KIND_ACTION = {"相談": "相談してみる", "仕事": "仕事を探す", "学習": "学んでみる", "内省": "自分を見つめる", "実務": "手続きを知る",
+               "交流": "仲間と話す", "書籍": "本で考える", "媒体": "話を聞く", "調査": "データで知る"}
 
 
 def build_item(item, listed, ctx):
@@ -900,25 +900,7 @@ def build_item(item, listed, ctx):
             out.append('<a href="%s">%s</a>' % (e(make(n)), e(label)) if n in lookup else e(label))
         return "、".join(out) or "―"
 
-    similar = similar_items(item, listed)
-    panels = []  # 下の関連：（ボタンの名前, 中身）。2つあるときは切り替えボタンで1つの区切りにまとめる
-    if similar:
-        panels.append(("同じ転機・段階", sm_shelf("".join(card(it, ctx["today"]) for it in similar), len(similar), "同じ転機・段階で役立つもの")))
-
-    nxt = next_stage(item)
-    if item["listed"] and nxt:
-        stage, following = nxt
-        picks = [o for o in listed if o["id"] != item["id"] and stage in o["stages"]
-                 and any(matches_tenki(o, t) for t in item["tenki"])][:3]
-        if picks:
-            heading = ("次の転機の準備に役立つもの" if following else "次の段階（%s）で役立つもの" % stage)
-            tenki_param = next((t for t in item["tenki"] if t not in (COMMON, OTHER)), "")
-            panels.append(("次の転機の準備" if following else "次の段階（%s）" % stage,
-                           sm_shelf("".join(card(it, ctx["today"]) for it in picks), len(picks), heading)
-                           + more_link(search_url(tenki=tenki_param, stage=stage),
-                                       "%s×%sで役立つものをすべて見る" % (tenki_param, stage) if tenki_param
-                                       else "%sで役立つものをすべて見る" % stage)))
-    similar_html = related_section(panels)
+    similar_html = related_choices(item, listed, ctx)
 
     # パンくずは、その掲載のいちばん目の転機のページを通る（どの転機にもの掲載は「どの転機にも」）
     main = next((TENKI_BY_NAME[t] for t in item["tenki"] if t in TENKI_BY_NAME), None)

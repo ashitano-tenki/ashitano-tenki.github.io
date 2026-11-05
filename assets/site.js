@@ -383,7 +383,7 @@
   if (start && tabs.querySelector('button[data-tenki="' + start.replace(/"/g, "") + '"]')) apply(start);
 })();
 
-// 紹介ページの下の関連：「同じ転機・段階」と「次の段階」を切り替えボタンで1つにまとめる
+// 紹介ページの下の「あわせて見たいもの」：手段（タイプ）ごとのボタンで中身を切り替える
 (function () {
   var tabs = document.querySelector(".related-tabs");
   if (!tabs) return;
