@@ -8401,5 +8401,155 @@
   "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/c6/9c/5d/c69c5d4a-ab6c-6759-86d3-8f583ef7d53c/mza_14487770010425944779.jpeg/1200x1200bf-60.jpg",
   "w": 960,
   "h": 960
+ },
+ "R1014": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1759658953",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/63/8e/29/638e29ad-556e-bd16-adde-f2ce0b17b532/mza_4117901662580133016.jpeg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1015": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1818019572",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/02/3b/3b/023b3b8e-25e8-0339-2205-153163715c6d/mza_6275155717060516227.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1016": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000051.000061567.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/61567/51/61567-51-387e463db26bb069174b6864bf2f059e-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1017": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000052.000089580.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/89580/52/89580-52-ad987db3c2c937b11d0ebab4678c290f-1489x852.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 549
+ },
+ "R1018": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000318.000005749.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/5749/318/5749-318-d3e2d581a1d223018c6e0609465c8f5f-2126x591.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 267
+ },
+ "R1019": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000141.000002438.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/2438/141/2438-141-d08627670c9c9f28008e099c73be05dd-808x633.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 503
+ },
+ "R1020": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000013.000133453.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/133453/13/133453-13-3e0b36cb558d60c701c14a4a6530de1b-1920x1080.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1021": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000055.000068613.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/68613/55/68613-55-fc1375ade34b758c6c59bbd062abac46-960x720.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 503
+ },
+ "R1022": {
+  "page": "https://prtimes.jp/main/html/rd/p/000003767.000013640.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/13640/3767/13640-3767-3c3c4b825ddc1cd90cc6edd1bba40668-1200x675.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1023": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000053.000017834.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/17834/53/17834-53-1ff4ead4c569641f61f134234bf49b12-690x360.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 690,
+  "h": 360
+ },
+ "R1024": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000112.000014708.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/14708/112/14708-112-622e78e19fb67df03f30510fbba92601-1040x719.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 664
+ },
+ "R1025": {
+  "page": "https://prtimes.jp/main/html/rd/p/000001339.000043465.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prtimes.jp/i/43465/1339/resize/d43465-1339-513682-pixta_135162267-0.jpg",
+  "w": 640,
+  "h": 426
+ },
+ "R1026": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000088.000047449.html",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/47449/88/47449-88-19979a8badf9addf0d2d27c84eaff951-1920x1080.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1027": {
+  "page": "https://job-draft.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://job-draft.jp/assets/lp/ogp_draft-7e18f771.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1028": {
+  "page": "https://kikkakeagent.co.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://kikkakeagent.co.jp/images/kikkake-agent-ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1029": {
+  "page": "https://www.career-adv.jp/",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "ValueError: 画像が小さすぎます"
+ },
+ "R1030": {
+  "page": "https://dr-agent.job-medley.com/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://dr-agent.job-medley.com/include/assets/top/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1031": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784502459214",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45024/4502459216.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1033": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784434343971",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44343/4434343971.jpg",
+  "w": 680,
+  "h": 1000
  }
 }
