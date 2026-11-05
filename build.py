@@ -11,6 +11,7 @@ Python の標準ライブラリだけで動く。
 import argparse
 import csv
 import datetime
+import email.utils
 import hashlib
 import html
 import io
@@ -1322,8 +1323,9 @@ def read_feed(url, limit):
             continue
         date = None
         try:
-            date = datetime.datetime.strptime((it.findtext("pubDate") or "").strip(), "%a, %d %b %Y %H:%M:%S %z").astimezone(JST).date()
-        except ValueError:
+            # 「+0900」も「GMT」も読めるように（PodcastのRSSは GMT で書かれている）
+            date = email.utils.parsedate_to_datetime((it.findtext("pubDate") or "").strip()).astimezone(JST).date()
+        except (TypeError, ValueError):
             pass
         thumb = (it.findtext("{http://search.yahoo.com/mrss/}thumbnail") or "").strip()
         out.append({"title": title, "link": link, "date": date, "thumb": thumb})
