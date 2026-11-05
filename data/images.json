@@ -8551,5 +8551,287 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44343/4434343971.jpg",
   "w": 680,
   "h": 1000
+ },
+ "R1034": {
+  "page": "https://a-agent.co.jp/service/career-support/career-adviser/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://a-agent.co.jp/wp-content/uploads/2026/04/noname.png",
+  "w": 960,
+  "h": 470
+ },
+ "R1035": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000015.000133453.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/133453/15/133453-15-5a95210fd985558cffbcc5eb470766c1-1920x1080.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1036": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000014.000081918.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/81918/14/81918-14-2a1616f2cee6f6009fee1027a0246c01-1344x758.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 541
+ },
+ "R1038": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1708184985",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/44/45/08/44450895-5c09-9c1d-13ac-cc64045a1b1e/mza_12930726739057844319.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1039": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1890571115",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/c8/f7/69/c8f76909-9b1b-c587-959e-d35110c32911/mza_502814657698595060.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1040": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1542738141",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/54/ba/2d/54ba2de8-cc97-220e-9a33-4858c9469eac/mza_12112943845315475384.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1041": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784344037403",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43440/4344037405.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1042": {
+  "page": "https://honto.jp/ebook/pd_32110069.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40745/4074526018.jpg",
+  "w": 683,
+  "h": 1000
+ },
+ "R1043": {
+  "page": "https://www.utsu-rework.org/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://utsu-rework.org/cms/wp-content/uploads/2023/06/ogp-768x384.png",
+  "w": 768,
+  "h": 384
+ },
+ "R1044": {
+  "page": "https://book-career.com/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/9e2ba425-5043-4068-8af4-0a43d7e52d13",
+  "w": 960,
+  "h": 499
+ },
+ "R1045": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784815618476",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48156/481561847X.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R1046": {
+  "page": "https://fiica-salon.com/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1047": {
+  "page": "https://books.rakuten.co.jp/rb/17352641/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/9215/9784772419215_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 846
+ },
+ "R1048": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784865138290",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48651/4865138293.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1049": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784002711003",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40027/4002711005.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1050": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1760296057",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/2c/dc/8e/2cdc8efd-8d86-a354-3083-4ab5e274455b/mza_13968821933485250822.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1051": {
+  "page": "https://jtuc-network-support.com/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1052": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000022.000021857.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/21857/22/21857-22-e33148167e914b4d5cdff9e8a2a589c1-624x113.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 624,
+  "h": 113,
+  "small": true
+ },
+ "R1053": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000020.000035559.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/35559/20/35559-20-62ea2237617abc79a26d5d821b5938a5-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1054": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000981.000000725.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/725/981/725-981-1ade47e693411b6714131843ee7cba98-1467x790.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 517
+ },
+ "R1055": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000892.000010591.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/10591/892/10591-892-8bd10faedb1dd6716be27844e69db451-1200x630.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1056": {
+  "page": "https://prtimes.jp/main/html/rd/p/000003196.000011414.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/11414/3196/11414-3196-5145ba4d7a7b3d6ad8eaa8bc4817137f-1200x630.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1057": {
+  "page": "https://masters.campusmall.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://masters.campusmall.jp/bf753530-6f98-4a9a-ac95-727b9f63ccd3/assets/img/ogp-default.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1058": {
+  "page": "https://senior-carwork.jp/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1059": {
+  "page": "https://www.vet-freelance.com/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1060": {
+  "page": "https://www.nakamar.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://nakamar.jp/opengraph-v2.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R1061": {
+  "page": "https://miraiz-persol.jp",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/5147495f-7f1e-444a-8b34-8b7336e1babf",
+  "w": 960,
+  "h": 504
+ },
+ "R1062": {
+  "page": "https://mediklect.co.jp/freelance/service/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1063": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798135502",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47981/479813550X.jpg",
+  "w": 672,
+  "h": 1000
+ },
+ "R1064": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121507884",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41215/4121507886.jpg",
+  "w": 640,
+  "h": 1000
+ },
+ "R1065": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784838732708",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48387/4838732708.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R1066": {
+  "page": "https://www.sanno.ac.jp/tukyo/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.sanno.ac.jp/tukyo/img/common/tukyo_ogp202604.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1067": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784837940180",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48379/4837940188.jpg",
+  "w": 674,
+  "h": 1000
+ },
+ "R1068": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784863679696",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48636/4863679696.jpg",
+  "w": 666,
+  "h": 1000
+ },
+ "R1069": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784801400603",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48014/4801400604.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R1071": {
+  "page": "https://levjob.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://levjob.jp/images/brand/levjob.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1073": {
+  "page": "https://jobs.japandesign.ne.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://jobs.japandesign.ne.jp/img/ogp.png",
+  "w": 960,
+  "h": 504
  }
 }
