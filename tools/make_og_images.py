@@ -6,6 +6,7 @@ Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの�
 それらの名前や文面を変えたときにだけ実行し直して、できた画像をリポジトリに入れる。
 
   python3 tools/make_og_images.py
+  python3 tools/make_og_images.py --notes   # 観測ノートの共有画像だけを作る（記事を足したり題名を変えたりしたとき）
 
 見出しの書体 Zen Kaku Gothic New は、初回に tools/fonts/ へダウンロードする（リポジトリには入れない）。
 """
@@ -189,6 +190,70 @@ def antenna_svg():
     return re.search(r"<svg[^>]*>(.*)</svg>", src, re.S).group(1)
 
 
+def svg_note(note, fonts, antenna):
+    """観測ノートの共有画像。黄色の地に、転機の絵文字と記事タイトル。"""
+    title = note["title"]
+
+    def lines_for(width):  # 「。」のあとでは必ず改行し、右上の絵文字の円にかからない幅で折り返す
+        out = []
+        for part in [p for p in title.replace("。", "。\n").split("\n") if p]:
+            out += wrap(part, width)
+        return out
+    size, width = 56, 15
+    lines = lines_for(width)
+    if len(lines) > 3:
+        size, width = 50, 16
+        lines = lines_for(width)
+    line_h = int(size * 1.4)
+    block = line_h * (len(lines) - 1)
+    top = int(345 - block / 2 + size * 0.35)  # 見出しの塊を、上のラベルと下の署名の間の真ん中に置く
+    title_svg = "".join('<text x="96" y="%d" font-family="ZK" font-weight="900" font-size="%d" fill="#1a1d23">%s</text>'
+                        % (top + i * line_h, size, esc(line)) for i, line in enumerate(lines))
+    names = [t for t in note["tenki"] if t in build.TENKI_BY_NAME]
+    emo = build.TENKI_BY_NAME[names[0]].get("emoji", "") if names else ""
+    label = "観測ノート" + ("｜" + "・".join(names) if names else "")
+    pill_w = 40 + int(len(label) * 30)
+    return """<svg xmlns="http://www.w3.org/2000/svg" width="750" height="393.75" viewBox="0 0 1200 630">
+<style>
+@font-face{{font-family:ZK;font-weight:900;src:url(data:font/ttf;base64,{black}) format("truetype");}}
+@font-face{{font-family:ZK;font-weight:700;src:url(data:font/ttf;base64,{bold}) format("truetype");}}
+</style>
+<rect width="1200" height="630" fill="#f5c518"/>
+<circle cx="1070" cy="140" r="170" fill="#fbfaf5" opacity="0.55"/>
+<text x="1070" y="198" text-anchor="middle" font-family="Apple Color Emoji" font-size="150">{emo}</text>
+<rect x="96" y="96" width="{pill_w}" height="56" rx="28" fill="#1a1d23"/>
+<text x="{pill_x}" y="135" font-family="ZK" font-weight="700" font-size="30" fill="#f5c518">{label}</text>
+{title}
+<text x="96" y="560" font-family="ZK" font-weight="700" font-size="28" fill="#1a1d23">文：黒田悠介（キャリア研究家）</text>
+<text x="1104" y="560" text-anchor="end" font-family="ZK" font-weight="700" font-size="28" fill="#1a1d23">あしたの転機観測所</text>
+</svg>""".format(black=fonts[0], bold=fonts[1], emo=esc(emo), pill_w=pill_w, pill_x=116, label=esc(label), title=title_svg)
+
+
+def render(pages):
+    os.makedirs(OUT, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, title, body in pages:
+            src = os.path.join(tmp, name + ".svg")
+            with open(src, "w", encoding="utf-8") as f:
+                f.write(body)
+            subprocess.run(["qlmanage", "-t", "-s", "1200", "-o", tmp, src], check=True,
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            crop_top(src + ".png", os.path.join(OUT, name + ".png"))
+            print("作成:", name, "／", title)
+
+
+def main_notes():
+    """観測ノートの共有画像（assets/og/note-<スラッグ>.png）を、下書きも含めて全記事ぶん作り直す。"""
+    fonts = (font_b64("ZenKakuGothicNew-Black"), font_b64("ZenKakuGothicNew-Bold"))
+    antenna = antenna_svg()
+    pages = []
+    for name in sorted(os.listdir(build.NOTES_DIR)):
+        if name.endswith(".md") and not name.startswith("_"):
+            n = build.parse_note_file(os.path.join(build.NOTES_DIR, name))
+            pages.append(("note-" + n["slug"], n["title"], svg_note(n, fonts, antenna)))
+    render(pages)
+
+
 def main():
     fonts = (font_b64("ZenKakuGothicNew-Black"), font_b64("ZenKakuGothicNew-Bold"))
     antenna = antenna_svg()
@@ -218,4 +283,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if "--notes" in sys.argv:
+        main_notes()  # python3 tools/make_og_images.py --notes
+    else:
+        main()

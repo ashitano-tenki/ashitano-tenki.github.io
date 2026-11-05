@@ -750,7 +750,7 @@ def build_tenki(listed, ctx):
                                                                   more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
         tn = notes_for_tenki(ctx["notes"], t["name"])
         if tn:
-            main += '<section class="section note-section"><h2 class="section-title">%sについての%s</h2>%s</section>' % (e(t["name"]), NOTES_LABEL, note_list(tn))
+            main += '<section class="section note-section"><h2 class="section-title">%sについての%s</h2>%s</section>' % (e(t["name"]), NOTES_LABEL, note_list(tn, None, "note-list note-grid"))
         body = """
 {crumbs}
 <header class="page-head">
@@ -1561,13 +1561,13 @@ def note_blocks(text):
     return "".join(html_out)
 
 
-def note_pick(item, comment_html):
+def note_pick(item, comment_html, num=0):
     link_label = KIND_BY_NAME.get(item["kind"], {}).get("link", "公式サイトを見る")
     official = ('<a href="%s" rel="noopener" target="_blank">%s</a>' % (e(item["url"]), e(link_label))) if item["url"] else ""
-    return ('<section class="note-pick"><a class="note-pick-head linkcard" href="/item/%s/">%s<span class="note-pick-body">'
+    return ('<section class="note-pick" id="pick-%s"><span class="note-pick-num" aria-hidden="true">%02d</span><a class="note-pick-head linkcard" href="/item/%s/">%s<span class="note-pick-body">'
             '<span class="note-pick-kind">%s %s</span><span class="note-pick-title">%s</span><span class="note-pick-line">%s</span></span></a>'
             '%s<p class="note-pick-links"><a href="/item/%s/">紹介ページを見る</a>%s</p></section>'
-            % (e(item["id"]), item_media(item, "note-pick-media", True), kind_emoji(item["kind"]), e(item["kind"]), e(item["title"]), e(item["line"]),
+            % (e(item["id"]), num, e(item["id"]), item_media(item, "note-pick-media", True), kind_emoji(item["kind"]), e(item["kind"]), e(item["title"]), e(item["line"]),
                '<div class="note-pick-comment"><p class="note-pick-who">黒田のひとこと</p>%s</div>' % comment_html if comment_html else "",
                e(item["id"]), "・" + official if official else ""))
 
@@ -1576,10 +1576,12 @@ def note_html(n, by_id):
     """本文全体。:::item のかたまりは掲載のカードにする。"""
     parts = re.split(r"^:::item\s+(\S+)\s*\n(.*?)^:::\s*$", n["body"], flags=re.M | re.S)
     out = [note_blocks(parts[0])]
+    num = 0
     for i in range(1, len(parts), 3):
         item = by_id.get(parts[i])
         if item:
-            out.append(note_pick(item, note_blocks(parts[i + 1])))
+            num += 1
+            out.append(note_pick(item, note_blocks(parts[i + 1]), num))
         out.append(note_blocks(parts[i + 2]))
     return "".join(out)
 
@@ -1593,10 +1595,31 @@ def note_meta_line(n):
     return "・".join(bits)
 
 
-def note_list(notes, cls="note-list"):
-    return '<ul class="%s">%s</ul>' % (cls, "".join(
-        '<li><a href="%s"><span class="note-list-title">%s</span><span class="note-list-desc">%s</span></a></li>'
-        % (e(note_url(n)), e(n["title"]), e(n["description"])) for n in notes))
+def note_emoji(n):
+    t = next((TENKI_BY_NAME[t] for t in n["tenki"] if t in TENKI_BY_NAME), None)
+    return t.get("emoji", "") if t else ""
+
+
+def note_list(notes, by_id=None, cls="note-list"):
+    """記事のカード。上に記事ごとの共有画像、下に題名と説明、紹介している数。"""
+    def li(n):
+        count = len([i for i in n["ids"] if by_id is None or i in by_id])
+        meta = "・".join(x for x in [e("・".join(n["tenki"])), "%d件を紹介" % count if count else "", fmt_date(n["published"]) if n["published"] else ""] if x)
+        return ('<li><a href="%s"><span class="note-card-img"><img src="%s" alt="" loading="lazy" width="1200" height="630"></span>'
+                '<span class="note-card-body"><span class="note-list-title">%s</span><span class="note-list-desc">%s</span>'
+                '<span class="note-card-meta">%s</span></span></a></li>'
+                % (e(note_url(n)), e(og_image("note-" + n["slug"])), e(n["title"]), e(n["description"]), meta))
+    return '<ul class="%s">%s</ul>' % (cls, "".join(li(n) for n in notes))
+
+
+def note_strip(n, by_id):
+    """記事の頭に置く「この記事で紹介するもの」。小さな画像を並べ、押すとその紹介へ移る。"""
+    items = [by_id[i] for i in n["ids"] if i in by_id]
+    if not items:
+        return ""
+    return ('<nav class="note-strip" aria-label="この記事で紹介するもの"><p class="note-strip-head">この記事で紹介する<b>%d</b>件</p><ol>%s</ol></nav>'
+            % (len(items), "".join('<li><a href="#pick-%s" title="%s">%s<span>%s</span></a></li>'
+                                   % (e(it["id"]), e(it["title"]), item_media(it, "note-strip-media", True), e(it["title"])) for it in items)))
 
 
 def notes_for_tenki(notes, name):
@@ -1617,15 +1640,17 @@ def build_notes(notes, listed, ctx):
         others = [o for o in notes if o is not n and set(o["tenki"]) & set(n["tenki"])][:4]
         more = ""
         if others:
-            more += '<h2>ほかの観測ノート</h2>' + note_list(others)
+            more += '<h2>ほかの観測ノート</h2>' + note_list(others, by_id)
         body = """
 {crumbs}
-<article class="prose note">
-<header class="note-head">
+<header class="note-hero">
+  <span class="note-hero-emoji" aria-hidden="true">{emoji}</span>
   <p class="note-kicker">{label}{tenki}</p>
   <h1>{title}</h1>
   <p class="note-by">文：<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>（キャリア研究家）<span class="note-date">{date}</span></p>
 </header>
+<article class="prose note">
+{strip}
 {main}
 <div class="note-end">
   <p>掲載しているサービスや本の内容は変わることがあります。使う前に、公式サイトで最新の情報を確かめてください。</p>
@@ -1635,7 +1660,7 @@ def build_notes(notes, listed, ctx):
 </article>
 """.format(crumbs=breadcrumb([(NOTES_LABEL, "/notes/"), (n["title"], None)]), label=e(NOTES_LABEL),
            tenki="｜" + "・".join(e(t) for t in n["tenki"]) if n["tenki"] else "", title=e(n["title"]),
-           operator=e(operator), date=note_meta_line(n), main=note_html(n, by_id),
+           operator=e(operator), date=note_meta_line(n), main=note_html(n, by_id), emoji=note_emoji(n), strip=note_strip(n, by_id),
            tenki_more='<p>%sのサービスと情報は、%sのページにまとめています。</p>' % ("・".join(e(t) for t in n["tenki"]), tenki_links) if tenki_links else "",
            more=more)
         ld = {"@context": "https://schema.org", "@type": "Article", "headline": n["title"], "description": n["description"],
@@ -1651,12 +1676,14 @@ def build_notes(notes, listed, ctx):
     if public:
         body = """
 {crumbs}
-<header class="page-head">
+<header class="note-hero note-hero-index">
+  <span class="note-hero-emoji" aria-hidden="true">📓</span>
   <h1>{label}</h1>
-  <p class="lead">転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。</p>
+  <p class="note-hero-lead">転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。</p>
+  <p class="note-hero-count"><b>{count}</b>本の記事</p>
 </header>
 <section class="section">{list}</section>
-""".format(crumbs=breadcrumb([(NOTES_LABEL, None)]), label=e(NOTES_LABEL), list=note_list(public))
+""".format(crumbs=breadcrumb([(NOTES_LABEL, None)]), label=e(NOTES_LABEL), list=note_list(public, by_id, "note-list note-grid"), count=len(public))
         page("/notes/", NOTES_LABEL, "転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。", body, ctx=ctx)
 
 
