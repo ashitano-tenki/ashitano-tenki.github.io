@@ -7701,5 +7701,163 @@
   "src": "https://scout.re-career.net/ogp.jpg",
   "w": 960,
   "h": 504
+ },
+ "R0934": {
+  "page": "https://di-v.co.jp/agent/forteacher",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://ferret-one.akamaized.net/images/64d43012f31ea8383a6699d9/large.png?utime=1691627538",
+  "w": 960,
+  "h": 504
+ },
+ "R0935": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784801490536",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48014/4801490530.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0936": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784540231216",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45402/4540231219.jpg",
+  "w": 668,
+  "h": 1000
+ },
+ "R0937": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784480432063",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44804/448043206X.jpg",
+  "w": 711,
+  "h": 1000
+ },
+ "R0938": {
+  "page": "https://kigyojuku.etic.or.jp/index.html",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 500: Internal Server Error"
+ },
+ "R0939": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862511980",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48625/4862511988.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0940": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784939051609",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49390/4939051609.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R0941": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296070923",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42960/4296070924.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0942": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798188805",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47981/4798188808.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R0943": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862808332",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48628/4862808336.jpg",
+  "w": 666,
+  "h": 1000
+ },
+ "R0944": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784474054851",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44740/4474054857.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R0945": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798071725",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47980/4798071722.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R0946": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784344696129",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43446/4344696123.jpg",
+  "w": 612,
+  "h": 1000
+ },
+ "R0947": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784910364803",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49103/4910364803.jpg",
+  "w": 678,
+  "h": 1000
+ },
+ "R0948": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1510482058",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/cb/0a/8c/cb0a8c25-72ab-40e2-2efd-d7a0ee3cd6ff/mza_12872479409320987275.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0949": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1657950183",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/9a/98/51/9a9851c8-c626-8378-7f78-cb81ff110030/mza_5931541800450567970.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0950": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1860515453",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/93/ee/f6/93eef665-6250-99de-5ac6-a73ccb5a42de/mza_7491850155091903980.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0951": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1872345222",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/a9/7f/42/a97f4291-f1ab-9d85-f21f-fb954658094c/mza_12675240854341177495.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0952": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1678976969",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/c8/7d/ae/c87dae42-cf8d-61c4-a564-37ee805d27c2/mza_5674626695053299968.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R0953": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1627403145",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/9f/30/be/9f30be34-ae82-32ec-762c-9df9f0dc1fdd/mza_4872411761951626090.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
  }
 }
