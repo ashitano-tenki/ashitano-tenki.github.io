@@ -410,3 +410,20 @@
     words.forEach(function (a, k) { a.hidden = k >= n; box.appendChild(a); });
   });
 })();
+
+// トップの件数の大きな数字を0から数え上げる（動きを減らす設定の端末では、そのまま出す）
+(function () {
+  if (!window.requestAnimationFrame || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-count]"), function (el) {
+    var to = parseInt(el.getAttribute("data-count"), 10), t0 = null;
+    if (!to) return;
+    el.textContent = "0";
+    function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / 900);
+      el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+})();

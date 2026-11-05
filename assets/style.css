@@ -141,9 +141,11 @@ main.wrap { padding-bottom: var(--space-16); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-2); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
-.hero-count b { font-family: var(--font-display); font-weight: 900; font-size: 32px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+/* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
+.hero-count b { font-family: var(--font-display); font-weight: 900; font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
 .hero-count span { font-size: 13px; color: var(--text-sub); }
 .hero-count span::before { content: "・"; }
+@media (max-width: 600px) { .hero-count b { font-size: 36px; } }
 .check-link { margin: calc(-1 * var(--space-4)) 0 var(--space-6); font-size: 15px; }
 .check-link a { font-weight: 700; }
 .check-link a::after { content: " →"; }
@@ -171,7 +173,7 @@ button, .button {
 
 /* 3つの入口 */
 .entrances { display: grid; gap: var(--space-3); }
-@media (min-width: 760px) { .entrances { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .entrances { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .entrance { display: flex; flex-direction: column; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 20px; }
 .entrance h2 { font-size: 20px; line-height: 1.5; margin: 0 0 var(--space-3); }
 .entrance .chips { gap: 6px; }
@@ -181,6 +183,9 @@ button, .button {
 .chips a:hover { border-color: var(--sky); color: var(--sky); }
 .chips .emoji { margin-right: 0; }
 .chips .count { font-size: 12px; color: var(--text-sub); }
+/* 入口の件数（読み込むと0から数え上がる） */
+.chip-num { font-family: var(--font-display); font-weight: 900; font-size: 18px; line-height: 1; margin-left: 2px; font-variant-numeric: tabular-nums; color: var(--ink); }
+.chips a:hover .chip-num { color: var(--sky); }
 .stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .stages a { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--base); text-decoration: none; color: var(--ink); border: var(--border-hairline) solid var(--line); }
 .stages a:hover { border-color: var(--sky); }

@@ -560,19 +560,17 @@ def kind_sections(items, params, ctx, heading_level=2):
 
 def build_home(listed, ctx):
     new_items = sorted(ctx["new_items"], key=lambda it: (it["added"], -it["rank"]), reverse=True)
-    # 転機の入口：「転機から探す」のページと同じ絵文字を付け、件数は出さない（共通の掲載を含むと実態より大きく見えるため）。
-    # 共通・その他は「どの転機にも役立つもの」1つにまとめる
+    # 入口の件数：大きな数字で出し、読み込むと0から数え上げる（site.js）。
+    # 転機の件数は、その転機として載せているものだけ（どの転機にも役立つ「全般」の掲載は「全般」の件数に入れ、各転機には足さない）
+    num = lambda n: '<b class="chip-num" data-count="%d">%d</b>' % (n, n)
     tenki_links = "".join(
-        '<li><a href="%s">%s%s</a></li>' % (tenki_url(t), emoji(t.get("emoji", "")), e(t["name"]))
+        '<li><a href="%s">%s%s%s</a></li>' % (tenki_url(t), emoji(t.get("emoji", "")), e(t["name"]), num(sum(1 for it in listed if t["name"] in it["tenki"])))
         for t in TENKI if t["past"] and ctx["tenki_count"][t["name"]])
     common_t = next((t for t in TENKI if t["name"] == COMMON), None)
     if common_t and ctx["tenki_count"][COMMON]:
-        tenki_links += '<li><a href="%s">全般</a></li>' % tenki_url(common_t)
-    stage_links = "".join(
-        '<li><a href="%s"><strong>%s</strong><span>%s</span></a></li>' % (e(search_url(stage=s["name"])), e(s["name"]), e(s.get("short", "")))
-        for s in STAGES)
+        tenki_links += '<li><a href="%s">全般%s</a></li>' % (tenki_url(common_t), num(ctx["tenki_count"][COMMON]))
     kind_links = "".join(
-        '<li><a href="%s">%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k))
+        '<li><a href="%s">%s%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), num(len(g)))
         for k, g in by_kind(listed))
     if new_items:
         # 6件だけ見せ、続きは観測レポートへ（日付ごと・転機ごとに見られるため）。スマホでは横にスワイプする棚にする
@@ -585,7 +583,7 @@ def build_home(listed, ctx):
     body = """
 <section class="hero">
   <h1><span class="hero-mark">{site}</span></h1>
-  <p class="hero-count"><b>{count}</b>件を掲載<span>毎日更新</span></p>
+  <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
   {ai_check}
   <form class="search-box" action="/search/" method="get" role="search">
@@ -604,10 +602,6 @@ def build_home(listed, ctx):
     <ul class="chips">{tenki_links}</ul>
   </div>
   <div class="entrance">
-    <h2>{e_stage}今の段階から探す</h2>
-    <ul class="stages stage-grid">{stage_links}</ul>
-  </div>
-  <div class="entrance">
     <h2>{e_kind}タイプから探す</h2>
     <ul class="chips">{kind_links}</ul>
   </div>
@@ -624,10 +618,9 @@ def build_home(listed, ctx):
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_stage=emoji(CONF.get("entrance_emoji", {}).get("段階")),
-           e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
+""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
            ai_check='<p class="check-link">%s</p>' % ai_link(TENKI_AI, "転機AIに相談する", "home") if TENKI_AI else "",
-           stage_links=stage_links, kind_links=kind_links, news=news,
+           kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
            popular=start_words_html(popular_words(listed, ctx), "/search/?q="))
