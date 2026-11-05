@@ -4553,8 +4553,8 @@
   "h": 503
  },
  "R0539": {
-  "page": "https://20s-type.mynavi.jp/",
-  "checked": "2026-10-30",
+  "page": "https://mynavi-job20s.jp/",
+  "checked": "2026-11-05",
   "manual": true,
   "fsize": 27860,
   "status": "ok",
@@ -7339,8 +7339,12 @@
  "R0882": {
   "page": "https://splus.pe-bank.jp/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 503: Service Temporarily Unavailable"
+  "manual": true,
+  "fsize": 140321,
+  "status": "ok",
+  "src": "file:images/manual/R0882.jpg",
+  "w": 960,
+  "h": 541
  },
  "R0883": {
   "page": "https://bm-work.com",
