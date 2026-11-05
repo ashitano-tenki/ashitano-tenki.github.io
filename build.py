@@ -369,13 +369,14 @@ def site_footer(ctx):
       <p>この観測所は、<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>が運営する「<a href="/project/">あしたの転機プロジェクト</a>」の一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
     </div>
     <div class="footer-bottom">
-      <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
+      <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>{notes}・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
       <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">ダーク表示</button>
     </div>
   </div>
 </footer>
 <script src="/assets/site.js?v={ver}"></script>""".format(contact=e(CONF["contact_form_url"]), operator=e(CONF.get("operator_url", "")),
-                         updated=fmt_date(ctx["today"]), ver=ctx["version"]) + analytics_tag(ctx)
+                         updated=fmt_date(ctx["today"]), ver=ctx["version"],
+                         notes='・<a href="/notes/">%s</a>' % NOTES_LABEL if any(not n["draft"] for n in ctx.get("notes", [])) else "") + analytics_tag(ctx)
 
 
 def analytics_tag(ctx):
@@ -747,6 +748,9 @@ def build_tenki(listed, ctx):
         else:
             main = '<section class="section">%s%s%s</section>' % (kind_tabs(items), '<div class="kind-area">%s</div>' % kind_sections(items, {"tenki": t["name"]}, ctx, heading_level=2),
                                                                   more_link(search_url(tenki=t["name"]), "%sの掲載情報をすべて見る" % t["name"]))
+        tn = notes_for_tenki(ctx["notes"], t["name"])
+        if tn:
+            main += '<section class="section note-section"><h2 class="section-title">%sについての%s</h2>%s</section>' % (e(t["name"]), NOTES_LABEL, note_list(tn))
         body = """
 {crumbs}
 <header class="page-head">
@@ -973,7 +977,8 @@ def build_item(item, listed, ctx):
 """.format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
            hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
-           provider=e(item["provider"] or "―"), report=report_link(item),
+           provider=e(item["provider"] or "―"), report=report_link(item) + "".join(
+               '<p class="note-ref">%s：<a href="%s">%s</a></p>' % (NOTES_LABEL, e(note_url(n)), e(n["title"])) for n in notes_for_item(ctx["notes"], item["id"])),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            similar=similar_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
@@ -1460,6 +1465,201 @@ def build_project(ctx):
     page("/project/", "あしたの転機プロジェクト", "この観測所を運営する「あしたの転機プロジェクト」のコミュニティ、noteマガジン、Podcast、イベント、グッズ。", body, ctx=ctx)
 
 
+
+# ---------------------------------------------------------------- 観測ノート（転機ごとのまとめ記事）
+# 原稿は notes/<スラッグ>.md。先頭の --- で囲んだ部分に題名などを書き、本文は次の書き方だけを使う。
+#   ## 見出し / ### 小見出し / 空行で段落 / 「- 」で箇条書き / [文字](URL) でリンク / **強調**
+#   :::item R0123   ← 掲載を1件差し込む（名前・画像・リンクはデータから自動で入る）
+#   黒田さんのひとこと（次の ::: までの段落）
+#   :::
+# draft: true の原稿は公開しない（--drafts を付けたときだけ、検索に出ない形で作る）。
+NOTES_DIR = os.path.join(ROOT, "notes")
+NOTES_LABEL = "観測ノート"
+
+
+def parse_note_file(path):
+    with open(path, encoding="utf-8") as f:
+        text = f.read().replace("\r\n", "\n")
+    meta, body = {}, text
+    if text.startswith("---\n"):
+        head, _, body = text[4:].partition("\n---\n")
+        for line in head.split("\n"):
+            if ":" in line:
+                k, _, v = line.partition(":")
+                meta[k.strip()] = v.strip()
+    slug = os.path.splitext(os.path.basename(path))[0]
+    return {"slug": slug, "title": meta.get("title", slug), "description": meta.get("description", ""),
+            "tenki": split_list(meta.get("tenki", "")), "stage": meta.get("stage", ""),
+            "published": parse_date(meta.get("published", "")), "updated": parse_date(meta.get("updated", "")),
+            "draft": meta.get("draft", "").lower() in ("true", "yes", "1"), "body": body,
+            "ids": re.findall(r"^:::item\s+(\S+)", body, re.M)}
+
+
+def load_notes(listed, with_drafts):
+    """公開する観測ノート（新しい順）。掲載を終えた・見つからない掲載を差し込んでいたら知らせる。"""
+    if not os.path.isdir(NOTES_DIR):
+        return []
+    ids = {it["id"] for it in listed}
+    notes = []
+    for name in sorted(os.listdir(NOTES_DIR)):
+        if not name.endswith(".md") or name.startswith("_"):
+            continue
+        n = parse_note_file(os.path.join(NOTES_DIR, name))
+        if n["draft"] and not with_drafts:
+            continue
+        if not n["published"] and not n["draft"]:
+            print("注意: 観測ノート %s に published（公開日）がないので公開しません" % name, file=sys.stderr)
+            continue
+        for i in n["ids"]:
+            if i not in ids:
+                print("注意: 観測ノート %s の掲載 %s は掲載中ではないので、記事から外して表示します" % (name, i), file=sys.stderr)
+        notes.append(n)
+    notes.sort(key=lambda n: (n["published"] or datetime.date.max), reverse=True)
+    return notes
+
+
+def note_url(n):
+    return "/notes/%s/" % n["slug"]
+
+
+def note_inline(text):
+    """1行ぶんの文字をHTMLにする（リンクと強調だけ）。"""
+    out, pos = [], 0
+    for m in re.finditer(r"\[([^\]]+)\]\(([^)\s]+)\)|\*\*(.+?)\*\*", text):
+        out.append(e(text[pos:m.start()]))
+        if m.group(1):
+            href = m.group(2)
+            ext = href.startswith("http")
+            out.append('<a href="%s"%s>%s</a>' % (e(href), ' rel="noopener" target="_blank"' if ext else "", e(m.group(1))))
+        else:
+            out.append("<strong>%s</strong>" % e(m.group(3)))
+        pos = m.end()
+    out.append(e(text[pos:]))
+    return "".join(out)
+
+
+def note_blocks(text):
+    """段落・見出し・箇条書きをHTMLにする。"""
+    html_out = []
+    for block in re.split(r"\n\s*\n", text.strip()):
+        lines = [l for l in block.split("\n") if l.strip()]
+        if not lines:
+            continue
+        if lines[0].startswith("### "):
+            html_out.append("<h3>%s</h3>" % note_inline(lines[0][4:].strip()))
+            lines = lines[1:]
+        elif lines[0].startswith("## "):
+            title = lines[0][3:].strip()
+            html_out.append("<h2>%s</h2>" % note_inline(title))
+            lines = lines[1:]
+        if not lines:
+            continue
+        if all(l.startswith("- ") for l in lines):
+            html_out.append("<ul>%s</ul>" % "".join("<li>%s</li>" % note_inline(l[2:].strip()) for l in lines))
+        else:
+            html_out.append("<p>%s</p>" % "<br>".join(note_inline(l.strip()) for l in lines))
+    return "".join(html_out)
+
+
+def note_pick(item, comment_html):
+    link_label = KIND_BY_NAME.get(item["kind"], {}).get("link", "公式サイトを見る")
+    official = ('<a href="%s" rel="noopener" target="_blank">%s</a>' % (e(item["url"]), e(link_label))) if item["url"] else ""
+    return ('<section class="note-pick"><a class="note-pick-head linkcard" href="/item/%s/">%s<span class="note-pick-body">'
+            '<span class="note-pick-kind">%s %s</span><span class="note-pick-title">%s</span><span class="note-pick-line">%s</span></span></a>'
+            '%s<p class="note-pick-links"><a href="/item/%s/">紹介ページを見る</a>%s</p></section>'
+            % (e(item["id"]), item_media(item, "note-pick-media", True), kind_emoji(item["kind"]), e(item["kind"]), e(item["title"]), e(item["line"]),
+               '<div class="note-pick-comment"><p class="note-pick-who">黒田のひとこと</p>%s</div>' % comment_html if comment_html else "",
+               e(item["id"]), "・" + official if official else ""))
+
+
+def note_html(n, by_id):
+    """本文全体。:::item のかたまりは掲載のカードにする。"""
+    parts = re.split(r"^:::item\s+(\S+)\s*\n(.*?)^:::\s*$", n["body"], flags=re.M | re.S)
+    out = [note_blocks(parts[0])]
+    for i in range(1, len(parts), 3):
+        item = by_id.get(parts[i])
+        if item:
+            out.append(note_pick(item, note_blocks(parts[i + 1])))
+        out.append(note_blocks(parts[i + 2]))
+    return "".join(out)
+
+
+def note_meta_line(n):
+    bits = []
+    if n["published"]:
+        bits.append('<time datetime="%s">%s</time>公開' % (n["published"].isoformat(), fmt_date(n["published"])))
+    if n["updated"] and n["updated"] != n["published"]:
+        bits.append('<time datetime="%s">%s</time>更新' % (n["updated"].isoformat(), fmt_date(n["updated"])))
+    return "・".join(bits)
+
+
+def note_list(notes, cls="note-list"):
+    return '<ul class="%s">%s</ul>' % (cls, "".join(
+        '<li><a href="%s"><span class="note-list-title">%s</span><span class="note-list-desc">%s</span></a></li>'
+        % (e(note_url(n)), e(n["title"]), e(n["description"])) for n in notes))
+
+
+def notes_for_tenki(notes, name):
+    return [n for n in notes if name in n["tenki"]]
+
+
+def notes_for_item(notes, item_id):
+    return [n for n in notes if item_id in n["ids"]]
+
+
+def build_notes(notes, listed, ctx):
+    if not notes:
+        return
+    by_id = {it["id"]: it for it in listed}
+    operator = CONF.get("operator_url", "")
+    for n in notes:
+        tenki_links = "、".join('<a href="%s">%s</a>' % (e(tenki_url(TENKI_BY_NAME[t])), e(t)) for t in n["tenki"] if t in TENKI_BY_NAME)
+        others = [o for o in notes if o is not n and set(o["tenki"]) & set(n["tenki"])][:4]
+        more = ""
+        if others:
+            more += '<h2>ほかの観測ノート</h2>' + note_list(others)
+        body = """
+{crumbs}
+<article class="prose note">
+<header class="note-head">
+  <p class="note-kicker">{label}{tenki}</p>
+  <h1>{title}</h1>
+  <p class="note-by">文：<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>（キャリア研究家）<span class="note-date">{date}</span></p>
+</header>
+{main}
+<div class="note-end">
+  <p>掲載しているサービスや本の内容は変わることがあります。使う前に、公式サイトで最新の情報を確かめてください。</p>
+  {tenki_more}
+</div>
+{more}
+</article>
+""".format(crumbs=breadcrumb([(NOTES_LABEL, "/notes/"), (n["title"], None)]), label=e(NOTES_LABEL),
+           tenki="｜" + "・".join(e(t) for t in n["tenki"]) if n["tenki"] else "", title=e(n["title"]),
+           operator=e(operator), date=note_meta_line(n), main=note_html(n, by_id),
+           tenki_more='<p>%sのサービスと情報は、%sのページにまとめています。</p>' % ("・".join(e(t) for t in n["tenki"]), tenki_links) if tenki_links else "",
+           more=more)
+        ld = {"@context": "https://schema.org", "@type": "Article", "headline": n["title"], "description": n["description"],
+              "inLanguage": "ja", "url": BASE + note_url(n),
+              "author": {"@type": "Person", "name": "黒田悠介", "jobTitle": "キャリア研究家", "url": operator},
+              "publisher": {"@type": "Organization", "name": CONF["site_name"], "url": BASE + "/"}}
+        if n["published"]:
+            ld["datePublished"] = n["published"].isoformat()
+        ld["dateModified"] = (n["updated"] or n["published"] or ctx["today"]).isoformat()
+        page(note_url(n), n["title"], n["description"], body, ctx=ctx, noindex=n["draft"], jsonld=[ld],
+             image=og_image("note-" + n["slug"]), lastmod=n["updated"] or n["published"])
+    public = [n for n in notes if not n["draft"]]
+    if public:
+        body = """
+{crumbs}
+<header class="page-head">
+  <h1>{label}</h1>
+  <p class="lead">転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。</p>
+</header>
+<section class="section">{list}</section>
+""".format(crumbs=breadcrumb([(NOTES_LABEL, None)]), label=e(NOTES_LABEL), list=note_list(public))
+        page("/notes/", NOTES_LABEL, "転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。", body, ctx=ctx)
+
+
 def build_404(ctx):
     body = """
 <header class="page-head">
@@ -1695,6 +1895,7 @@ def main():
     ap.add_argument("--today", help="今日の日付（確認用。例: 2026-10-22）")
     ap.add_argument("--save-data", action="store_true",
                     help="読み込んだCSVを data/latest.csv に残す（毎日の自動更新で使い、変更の履歴にする）")
+    ap.add_argument("--drafts", action="store_true", help="観測ノートの下書き（draft: true）も、検索に出ない形で作る（確認用）")
     args = ap.parse_args()
 
     if args.csv:
@@ -1717,6 +1918,7 @@ def main():
         "new_items": new_items,
         "new_ids": {it["id"] for it in new_items},
         "tenki_count": {t["name"]: sum(1 for it in listed if matches_tenki(it, t["name"])) for t in TENKI},
+        "notes": load_notes(listed, args.drafts),
     }
 
     if os.path.exists(OUT):
@@ -1743,6 +1945,7 @@ def main():
     build_saved(ctx)
     build_guide(listed, ctx)
     build_project(ctx)
+    build_notes(ctx["notes"], listed, ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_feed(listed, ctx)

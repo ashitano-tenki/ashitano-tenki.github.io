@@ -664,3 +664,34 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .pj-goods li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--space-4); padding: var(--space-3) 0; border-bottom: var(--border-hairline) solid var(--line); }
 .pj-goods li:first-child { border-top: var(--border-hairline) solid var(--line); }
 .pj-price { color: var(--text-body); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* 観測ノート（転機ごとのまとめ記事） */
+.note-head { margin: var(--space-6) 0 var(--space-8); }
+.note-head h1 { margin-top: var(--space-2); }
+.note-kicker { margin: 0; font-size: 13px; font-weight: 700; color: var(--sky); letter-spacing: 0.04em; }
+.note-by { margin: 0; font-size: 14px; color: var(--text-sub); display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); }
+.note h3 { font-size: 18px; margin: var(--space-8) 0 var(--space-2); }
+.note-pick { margin: var(--space-6) 0; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-4); }
+.note-pick-head { display: flex; gap: var(--space-4); align-items: flex-start; text-decoration: none; color: var(--ink); }
+.note-pick-media { flex: none; width: 148px; aspect-ratio: 1.91 / 1; border-radius: 6px; background: var(--chip-bg); border: var(--border-hairline) solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.note-pick-media img { display: block; width: 100%; height: 100%; }
+.note-pick-media.media-none span { font-size: 28px; }
+.note-pick-body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.note-pick-kind { font-size: 12px; color: var(--text-sub); }
+.note-pick-title { font-family: var(--font-display); font-weight: 900; font-size: 18px; line-height: 1.5; }
+.note-pick-head:hover .note-pick-title { color: var(--sky); text-decoration: underline; }
+.note-pick-line { font-size: 14px; color: var(--text-body); line-height: 1.7; }
+.note-pick-comment { margin-top: var(--space-4); background: var(--chip-bg); border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); }
+.note-pick-comment p { margin: 0 0 var(--space-2); }
+.note-pick-comment p:last-child { margin-bottom: 0; }
+.note-pick-comment .note-pick-who { font-size: 12px; font-weight: 700; color: var(--text-sub); margin-bottom: 4px; }
+.note-pick-links { margin: var(--space-3) 0 0; font-size: 14px; }
+.note-end { margin-top: var(--space-12); padding-top: var(--space-4); border-top: var(--border-hairline) solid var(--line); font-size: 14px; color: var(--text-sub); }
+.note-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.note-list a { display: block; padding: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); text-decoration: none; color: var(--ink); }
+.note-list a:hover { border-color: var(--sky); }
+.note-list-title { display: block; font-weight: 700; line-height: 1.6; }
+.note-list a:hover .note-list-title { color: var(--sky); text-decoration: underline; }
+.note-list-desc { display: block; margin-top: 2px; font-size: 14px; color: var(--text-sub); line-height: 1.7; }
+.note-ref { font-size: 14px; margin: var(--space-3) 0 0; }
+@media (max-width: 479px) { .note-pick-media { width: 96px; } .note-pick-title { font-size: 16px; } }
