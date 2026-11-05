@@ -8017,5 +8017,157 @@
   "src": "https://prcdn.freetls.fastly.net/release_image/13298/442/13298-442-107040c4d79bcddc151818041465831a-2000x680.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
   "w": 960,
   "h": 326
+ },
+ "R0974": {
+  "page": "https://tenshoku.bar/",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 35-36: ordinal not in range(128)"
+ },
+ "R0975": {
+  "page": "https://100banch.com/garage-program/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://100banch.com/wp-content/uploads/2017/07/100banch_ogimage.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0976": {
+  "page": "https://school.dhw.co.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://school.dhw.co.jp/images/top/top_ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0977": {
+  "page": "https://benkyo-cafe.net/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.benkyo-cafe.net/wp-content/uploads/2022/11/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0978": {
+  "page": "https://rebitlgbt.org/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://rebitlgbt.org/wp/wp-content/uploads/2024/11/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0979": {
+  "page": "https://www.tech-street.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://cdn.image.st-hatena.com/image/scale/437c6aff2213cff7e0def5a0e9982b766681fe77/backend=imagemagick;enlarge=0;height=1000;version=1;width=1200/https%3A%2F%2Fcdn.user.blog.st-hatena.com%2Fdefault_entry_og_image%2F154662119%2F1574142100180449",
+  "w": 960,
+  "h": 550
+ },
+ "R0980": {
+  "page": "https://pasona-proshare.com/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://pasona-proshare.com/wp-content/themes/wcl/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0981": {
+  "page": "https://www.furusatokaiki.net/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.furusatokaiki.net/wp/wp-content/uploads/2025/07/ogp-3.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0982": {
+  "page": "https://www.reworker.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.reworker.jp/ogp.jpg",
+  "w": 960,
+  "h": 502
+ },
+ "R0983": {
+  "page": "https://tech-reach.jp",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0984": {
+  "page": "https://profuku.com/",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0985": {
+  "page": "https://www.udemy.com/course/second-career-school/",
+  "checked": "2026-11-05",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R0986": {
+  "page": "https://turning-career.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://turning-career.jp/og-turning.png?v=20261103b",
+  "w": 960,
+  "h": 504
+ },
+ "R0987": {
+  "page": "http://www.emix-study.com",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://emix-study.com/web/wp-content/uploads/2025/03/1115424_s-1.jpg",
+  "w": 640,
+  "h": 427
+ },
+ "R0988": {
+  "page": "https://activo.jp/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://static.activo.jp/assets/ogpImage-53be8ddd.jpg",
+  "w": 960,
+  "h": 640
+ },
+ "R0989": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784793125737",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47931/4793125735.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R0990": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784793126864",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47931/4793126863.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R0991": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534059703",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534059701.jpg",
+  "w": 710,
+  "h": 1000
+ },
+ "R0992": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784761270889",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47612/4761270888.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R0993": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784295409021",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42954/4295409022.jpg",
+  "w": 706,
+  "h": 1000
  }
 }
