@@ -7269,8 +7269,10 @@
  "R0875": {
   "page": "https://oshigotrip.com/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 35-36: ordinal not in range(128)"
+  "status": "ok",
+  "src": "https://oshigotrip.com/wp-content/uploads/2026/08/SNSロゴ_2606-.png",
+  "w": 960,
+  "h": 503
  },
  "R0876": {
   "page": "https://rasino.jp/",
@@ -7895,8 +7897,10 @@
  "R0958": {
   "page": "https://re-career.net/report/teacher-career-2026/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 36-41: ordinal not in range(128)"
+  "status": "ok",
+  "src": "https://re-career.net/wp-content/uploads/2026/05/OGP_調査レポート2026-1.png",
+  "w": 960,
+  "h": 504
  },
  "R0959": {
   "page": "https://podcasts.apple.com/jp/podcast/id1766667429",
@@ -8021,8 +8025,10 @@
  "R0974": {
   "page": "https://tenshoku.bar/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "UnicodeEncodeError: 'ascii' codec can't encode characters in position 35-36: ordinal not in range(128)"
+  "status": "ok",
+  "src": "https://tenshoku.bar/wp-content/uploads/2026/08/OGP画像-1.png",
+  "w": 960,
+  "h": 472
  },
  "R0975": {
   "page": "https://100banch.com/garage-program/",

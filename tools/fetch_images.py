@@ -81,7 +81,22 @@ def wait_for(host):
         time.sleep(0.3)
 
 
+def ascii_url(url):
+    """日本語などを含むURL（画像のファイル名や日本語ドメイン）を、送れる形に直す。"""
+    parts = urllib.parse.urlsplit(url)
+    host = parts.hostname or ""
+    try:
+        host.encode("ascii")
+    except UnicodeEncodeError:
+        host = host.encode("idna").decode("ascii")
+    netloc = host + (":%d" % parts.port if parts.port else "")
+    safe = "/:@!$&'()*+,;=%~-._"
+    return urllib.parse.urlunsplit((parts.scheme, netloc, urllib.parse.quote(parts.path, safe=safe),
+                                    urllib.parse.quote(parts.query, safe=safe + "?"), urllib.parse.quote(parts.fragment, safe=safe)))
+
+
 def fetch(url, limit):
+    url = ascii_url(url)
     wait_for(host_of(url))
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "ja,en;q=0.8"})
     with urllib.request.urlopen(req, timeout=TIMEOUT) as res:
