@@ -6859,7 +6859,12 @@
  "R0822": {
   "page": "https://2nd-pro.com/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 101258,
+  "status": "ok",
+  "src": "file:images/manual/R0822.jpg",
+  "w": 960,
+  "h": 511
  },
  "R0823": {
   "page": "https://actors-nippon.jp/",
