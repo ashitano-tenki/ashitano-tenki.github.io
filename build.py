@@ -1659,7 +1659,9 @@ def build_notes(notes, listed, ctx):
 {more}
 </article>
 """.format(crumbs=breadcrumb([(NOTES_LABEL, "/notes/"), (n["title"], None)]), label=e(NOTES_LABEL),
-           tenki="｜" + "・".join(e(t) for t in n["tenki"]) if n["tenki"] else "", title=e(n["title"]),
+           tenki="｜" + "・".join(e(t) for t in n["tenki"]) if n["tenki"] else "",
+           # 「。」と「、」のところで区切り、言葉の途中で折り返さないようにする
+           title="".join("<span>%s</span>" % e(x) for x in re.findall(r"[^。、]+[。、]?", n["title"])),
            operator=e(operator), date=note_meta_line(n), main=note_html(n, by_id), emoji=note_emoji(n), strip=note_strip(n, by_id),
            tenki_more='<p>%sのサービスと情報は、%sのページにまとめています。</p>' % ("・".join(e(t) for t in n["tenki"]), tenki_links) if tenki_links else "",
            more=more)
@@ -1679,7 +1681,7 @@ def build_notes(notes, listed, ctx):
 <header class="note-hero note-hero-index">
   <span class="note-hero-emoji" aria-hidden="true">📓</span>
   <h1>{label}</h1>
-  <p class="note-hero-lead">転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。</p>
+  <p class="note-hero-lead"><span>転機ごとのよくある迷いと、</span><span>そのときに役立つサービスや本を、</span><span>キャリア研究家の黒田悠介が</span><span>まとめた記事です。</span></p>
   <p class="note-hero-count"><b>{count}</b>本の記事</p>
 </header>
 <section class="section">{list}</section>

@@ -675,6 +675,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .note-by { margin: 0; font-size: 14px; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); color: #1a1d23; }
 .note-by a { color: #1a1d23; }
 .note-hero-lead { margin: 0; max-width: 34em; font-size: 15px; }
+.note-hero-lead span, .note-hero h1 span { display: inline-block; }  /* 「研／究家」のように言葉の途中で折り返さないよう、意味のまとまりごとに折り返す */
 .note-hero-count { margin: var(--space-4) 0 0; font-size: 14px; font-weight: 700; }
 .note-hero-count b { font-family: var(--font-display); font-weight: 900; font-size: 32px; margin-right: 2px; }
 @media (max-width: 599px) {
