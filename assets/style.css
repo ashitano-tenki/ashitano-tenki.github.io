@@ -142,7 +142,7 @@ main.wrap { padding-bottom: var(--space-16); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-2); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
-.hero-count b { font-family: var(--font-display); font-weight: 900; font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+.hero-count b { transition: opacity .2s; font-family: var(--font-display); font-weight: 900; font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
 .hero-count span { font-size: 13px; color: var(--text-sub); }
 .hero-count span::before { content: "・"; }
 @media (max-width: 600px) { .hero-count b { font-size: 36px; } }
@@ -184,7 +184,7 @@ button, .button {
 .chips .emoji { margin-right: 0; }
 .chips .count { font-size: 12px; color: var(--text-sub); }
 /* 入口の件数（読み込むと0から数え上がる） */
-.chip-num { font-family: var(--font-display); font-weight: 900; font-size: 18px; line-height: 1; margin-left: 2px; font-variant-numeric: tabular-nums; color: var(--ink); }
+.chip-num { display: inline-block; transition: opacity .2s; font-family: var(--font-display); font-weight: 900; font-size: 18px; line-height: 1; margin-left: 2px; font-variant-numeric: tabular-nums; color: var(--ink); }
 .chips a:hover .chip-num { color: var(--sky); }
 .stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .stages a { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius-md); background: var(--base); text-decoration: none; color: var(--ink); border: var(--border-hairline) solid var(--line); }

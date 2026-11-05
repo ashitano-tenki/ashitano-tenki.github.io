@@ -411,19 +411,37 @@
   });
 })();
 
-// トップの件数の大きな数字を0から数え上げる（動きを減らす設定の端末では、そのまま出す）
+// トップの件数の数字を0から数え上げる（動きを減らす設定の端末では、そのまま出す）
+// ページの読み込み（画像・見出しの書体）と重なると数字の増え方がカクカクするので、読み込みが終わってから始める。
+// 待っているあいだは数字を隠し、桁が増えても横にずれないよう幅を先に取っておく。すべての数字を1つの流れで動かす
 (function () {
-  if (!window.requestAnimationFrame || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  Array.prototype.forEach.call(document.querySelectorAll("[data-count]"), function (el) {
-    var to = parseInt(el.getAttribute("data-count"), 10), t0 = null;
-    if (!to) return;
-    el.textContent = "0";
+  var counters = Array.prototype.filter.call(document.querySelectorAll("[data-count]"), function (el) {
+    return parseInt(el.getAttribute("data-count"), 10) > 0;
+  });
+  if (!window.requestAnimationFrame || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !counters.length) return;
+  counters.forEach(function (el) {
+    el.style.minWidth = el.getAttribute("data-count").length + "ch";
+    el.style.opacity = "0";
+  });
+  var started = false;
+  function startCount() {
+    if (started) return;
+    started = true;
+    var t0 = null;
     function step(t) {
       if (t0 === null) t0 = t;
-      var p = Math.min(1, (t - t0) / 900);
-      el.textContent = String(Math.round(to * (1 - Math.pow(1 - p, 3))));
+      var p = Math.min(1, (t - t0) / 1000), k = 1 - Math.pow(1 - p, 3);
+      counters.forEach(function (el) { el.textContent = String(Math.round(parseInt(el.getAttribute("data-count"), 10) * k)); });
       if (p < 1) requestAnimationFrame(step);
     }
+    counters.forEach(function (el) { el.textContent = "0"; el.style.opacity = ""; });
     requestAnimationFrame(step);
+  }
+  var whenLoaded = new Promise(function (ok) {
+    if (document.readyState === "complete") ok(); else window.addEventListener("load", ok);
   });
+  var whenFonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  // 読み込みの直後のひと仕事が片づくのを2フレーム待ってから
+  Promise.all([whenLoaded, whenFonts]).then(function () { requestAnimationFrame(function () { requestAnimationFrame(startCount); }); });
+  setTimeout(startCount, 2500);  // 読み込みに時間がかかっても、2.5秒たったら始める
 })();
