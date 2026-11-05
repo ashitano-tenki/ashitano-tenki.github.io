@@ -7160,7 +7160,12 @@
  "R0861": {
   "page": "https://step50.s-life-design.com",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 226124,
+  "status": "ok",
+  "src": "file:images/manual/R0861.jpg",
+  "w": 960,
+  "h": 541
  },
  "R0862": {
   "page": "https://www.daily-trial.com/",
@@ -7285,7 +7290,12 @@
  "R0877": {
   "page": "https://nativ.media/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 22232,
+  "status": "ok",
+  "src": "file:images/manual/R0877.jpg",
+  "w": 595,
+  "h": 336
  },
  "R0878": {
   "page": "https://prtimes.jp/main/html/rd/p/000000050.000049256.html",
@@ -7314,9 +7324,12 @@
  "R0881": {
   "page": "https://www.freee.co.jp/launch/kigyo-dandori/",
   "checked": "2026-11-05",
-  "status": "generic",
-  "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
-  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
+  "manual": true,
+  "fsize": 93461,
+  "status": "ok",
+  "src": "file:images/manual/R0881.jpg",
+  "w": 960,
+  "h": 368
  },
  "R0882": {
   "page": "https://splus.pe-bank.jp/",
@@ -7327,8 +7340,12 @@
  "R0883": {
   "page": "https://bm-work.com",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 205168,
+  "status": "ok",
+  "src": "file:images/manual/R0883.jpg",
+  "w": 960,
+  "h": 619
  },
  "R0884": {
   "page": "https://shespath.com/",
@@ -7349,7 +7366,12 @@
  "R0886": {
   "page": "https://tenshoku.nurse-senka.com/special/otasukenurse",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 102838,
+  "status": "ok",
+  "src": "file:images/manual/R0886.jpg",
+  "w": 960,
+  "h": 504
  },
  "R0887": {
   "page": "https://prtimes.jp/main/html/rd/p/000000397.000012015.html",
@@ -7378,8 +7400,12 @@
  "R0891": {
   "page": "https://ssl.supernurse.co.jp/lp/bee-ns/staff/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 77328,
+  "status": "ok",
+  "src": "file:images/manual/R0891.jpg",
+  "w": 960,
+  "h": 501
  },
  "R0892": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784502464812",
@@ -7552,19 +7578,32 @@
  "R0913": {
   "page": "https://d-career-plus.jp/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 110270,
+  "status": "ok",
+  "src": "file:images/manual/R0913.jpg",
+  "w": 960,
+  "h": 535
  },
  "R0914": {
   "page": "https://coichigo.com/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 62702,
+  "status": "ok",
+  "src": "file:images/manual/R0914.jpg",
+  "w": 960,
+  "h": 577
  },
  "R0915": {
   "page": "https://www.freee.co.jp/invoice",
   "checked": "2026-11-05",
-  "status": "generic",
-  "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
-  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
+  "manual": true,
+  "fsize": 115978,
+  "status": "ok",
+  "src": "file:images/manual/R0915.jpg",
+  "w": 960,
+  "h": 502
  },
  "R0916": {
   "page": "https://lp.freelance-jp.org/keiyakusho-maker/",
@@ -7681,12 +7720,22 @@
  "R0930": {
   "page": "https://dentre.jp/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 116317,
+  "status": "ok",
+  "src": "file:images/manual/R0930.jpg",
+  "w": 960,
+  "h": 547
  },
  "R0931": {
   "page": "https://www.tb-net.jp/cosmetics/education/",
   "checked": "2026-11-05",
-  "status": "none"
+  "manual": true,
+  "fsize": 141224,
+  "status": "ok",
+  "src": "file:images/manual/R0931.jpg",
+  "w": 960,
+  "h": 530
  },
  "R0932": {
   "page": "https://kujilabo.jp/career-support/",
@@ -8097,20 +8146,32 @@
  "R0983": {
   "page": "https://tech-reach.jp",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 41113,
+  "status": "ok",
+  "src": "file:images/manual/R0983.jpg",
+  "w": 682,
+  "h": 449
  },
  "R0984": {
   "page": "https://profuku.com/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 154958,
+  "status": "ok",
+  "src": "file:images/manual/R0984.jpg",
+  "w": 960,
+  "h": 526
  },
  "R0985": {
   "page": "https://www.udemy.com/course/second-career-school/",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 74520,
+  "status": "ok",
+  "src": "file:images/manual/R0985.jpg",
+  "w": 960,
+  "h": 507
  },
  "R0986": {
   "page": "https://turning-career.jp/",
