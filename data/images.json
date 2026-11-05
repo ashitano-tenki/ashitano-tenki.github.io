@@ -7312,10 +7312,9 @@
  "R0881": {
   "page": "https://www.freee.co.jp/launch/kigyo-dandori/",
   "checked": "2026-11-05",
-  "status": "ok",
+  "status": "generic",
   "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
-  "w": 960,
-  "h": 503
+  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
  },
  "R0882": {
   "page": "https://splus.pe-bank.jp/",
@@ -7552,5 +7551,155 @@
   "page": "https://d-career-plus.jp/",
   "checked": "2026-11-05",
   "status": "none"
+ },
+ "R0914": {
+  "page": "https://coichigo.com/",
+  "checked": "2026-11-05",
+  "status": "none"
+ },
+ "R0915": {
+  "page": "https://www.freee.co.jp/invoice",
+  "checked": "2026-11-05",
+  "status": "generic",
+  "src": "https://www.freee.co.jp/assets/image/img_freee_201908.png",
+  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
+ },
+ "R0916": {
+  "page": "https://lp.freelance-jp.org/keiyakusho-maker/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://lp.freelance-jp.org/keiyakusho-maker/assets/img/LP/ogp.png",
+  "w": 960,
+  "h": 540
+ },
+ "R0917": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784344986480",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43449/4344986482.jpg",
+  "w": 620,
+  "h": 1000
+ },
+ "R0918": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784751114629",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47511/475111462X.jpg",
+  "w": 710,
+  "h": 1000
+ },
+ "R0919": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784761927202",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47619/4761927208.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R0920": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784883403530",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48834/488340353X.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R0921": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784761929107",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47619/4761929103.jpg",
+  "w": 786,
+  "h": 1000
+ },
+ "R0922": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784837940272",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48379/4837940277.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R0923": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784801306691",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48013/4801306691.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R0924": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756920195",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756920195.jpg",
+  "w": 714,
+  "h": 1000
+ },
+ "R0925": {
+  "page": "https://apps.apple.com/jp/app/1512361252",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/af/59/58/af595897-bc4e-92c9-8c87-ef52ac3caad0/Placeholder.mill/1200x630wa.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R0926": {
+  "page": "https://next-teachers.com/sensei-tensyoku",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/63f9dbf1-6a76-4fc8-8230-4bae20df975c",
+  "w": 960,
+  "h": 504
+ },
+ "R0927": {
+  "page": "https://localventures.jp/localventurelab",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/1f343fb0-15b7-4263-a431-a679fd861045",
+  "w": 960,
+  "h": 504
+ },
+ "R0928": {
+  "page": "https://www.crowdcare.jp/reha-staff-info/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://djkfyp4ap1txp.cloudfront.net/upload/2022/6/og_image.png",
+  "w": 960,
+  "h": 504
+ },
+ "R0929": {
+  "page": "https://kaigojob-academy.com/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://kaigojob-academy.com/wp-content/uploads/2018/11/top-sp-01.png",
+  "w": 568,
+  "h": 377
+ },
+ "R0930": {
+  "page": "https://dentre.jp/",
+  "checked": "2026-11-05",
+  "status": "none"
+ },
+ "R0931": {
+  "page": "https://www.tb-net.jp/cosmetics/education/",
+  "checked": "2026-11-05",
+  "status": "none"
+ },
+ "R0932": {
+  "page": "https://kujilabo.jp/career-support/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/525c7e1a-2126-442a-819f-b6ba26d1fa66",
+  "w": 960,
+  "h": 359
+ },
+ "R0933": {
+  "page": "https://scout.re-career.net/",
+  "checked": "2026-11-05",
+  "status": "ok",
+  "src": "https://scout.re-career.net/ogp.jpg",
+  "w": 960,
+  "h": 504
  }
 }
