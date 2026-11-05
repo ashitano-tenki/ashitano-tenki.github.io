@@ -389,7 +389,7 @@ def analytics_tag(ctx):
             % (e(code), ctx["version"]))
 
 
-def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None, lastmod=None):
+def page(path, title, description, body, *, full_title=None, noindex=False, ctx, image=None, jsonld=None, lastmod=None, extra_head=""):
     """1ページ分のHTMLを書き出す。path はサイト内のパス（例: /tenki/dokuritsu/）。"""
     site = CONF["site_name"]
     doc_title = full_title or ("%s｜%s" % (title, site))
@@ -426,7 +426,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="{site} 観測レポート" href="/feed.xml">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+{extra_head}<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 {head_script}<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,7 +446,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
            og_type="website" if path == "/" else "article", site=e(site),
            og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            contact=e(CONF["contact_form_url"]),
-           updated=fmt_date(ctx["today"]))
+           updated=fmt_date(ctx["today"]), extra_head=extra_head)
     write(path, html_text)
     if not noindex:
         ctx["sitemap"].append((url, lastmod or ctx["today"]))  # サイトマップの更新日（紹介ページは最終観測日、ほかは作った日）
@@ -1668,7 +1668,75 @@ def build_notes(notes, listed, ctx):
 </header>
 <section class="section">{list}</section>
 """.format(crumbs=breadcrumb([(NOTES_LABEL, None)]), label=e(NOTES_LABEL), list=note_list(public, by_id, "note-list note-grid"), count=len(public))
-        page("/notes/", NOTES_LABEL, "転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。", body, ctx=ctx)
+        page("/notes/", NOTES_LABEL, "転機ごとのよくある迷いと、そのときに役立つサービスや本を、キャリア研究家の黒田悠介がまとめた記事です。", body, ctx=ctx,
+             extra_head='<link rel="alternate" type="application/json" href="/notes/index.json" title="%s（JSON）">\n' % e(NOTES_LABEL))
+    write_notes_json(public, by_id, ctx)
+
+
+def note_plain(text):
+    """ノートの1行を、リンクと強調の記号を外した文字にする。"""
+    text = re.sub(r"\[([^\]]+)\]\([^)\s]+\)", r"\1", text)
+    return re.sub(r"\*\*(.+?)\*\*", r"\1", text).strip()
+
+
+def note_data(n, by_id):
+    """転機AIなどが読む、ノート1本分のデータ（notes/index.json の1件）。本文と同じ元のファイルから作る。"""
+    sections, items, worries, next_steps, related = [], [], [], [], []
+    heading, buf = "", []
+
+    def flush():
+        text = "\n".join(buf).strip()
+        if heading or text:
+            sections.append({"heading": heading, "text": text})
+
+    lines = n["body"].replace("\r\n", "\n").split("\n")
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        m = re.match(r"^:::item\s+(\S+)", line)
+        if m:
+            words = []
+            i += 1
+            while i < len(lines) and lines[i].strip() != ":::":
+                if lines[i].strip():
+                    words.append(note_plain(lines[i]))
+                i += 1
+            it = by_id.get(m.group(1), {})
+            items.append({"id": m.group(1), "title": it.get("title", ""), "kind": it.get("kind", ""),
+                          "url": "%s/item/%s/" % (BASE, m.group(1)), "section": heading, "hitokoto": "\n".join(words)})
+            i += 1
+            continue
+        if line.startswith("## "):
+            flush()
+            heading, buf = note_plain(line[3:]), []
+        elif line.startswith("### "):
+            buf.append(note_plain(line[4:]))
+        else:
+            if "迷い" in heading and line.startswith("- "):
+                worries.append(note_plain(line[2:]))
+            if heading == "次の一歩":
+                if line.startswith("- "):
+                    next_steps.append(note_plain(line[2:]))
+                elif line.strip():
+                    next_steps.extend(x + "。" for x in re.split(r"。", note_plain(line)) if x.strip())
+                related.extend(BASE + h if h.startswith("/") else h for h in re.findall(r"\]\(([^)\s]+)\)", line))
+            buf.append("・" + note_plain(line[2:]) if line.startswith("- ") else note_plain(line))
+        i += 1
+    flush()
+    for sec in sections:
+        sec["text"] = re.sub(r"\n{3,}", "\n\n", sec["text"]).strip()
+    return {"slug": n["slug"], "url": BASE + note_url(n), "title": n["title"],
+            "date": n["published"].isoformat() if n["published"] else "",
+            "updated": (n["updated"] or n["published"]).isoformat() if (n["updated"] or n["published"]) else "",
+            "author": "黒田悠介", "tenki": n["tenki"], "dankai": split_list(n["stage"]), "lead": n["description"],
+            "image": "%s/assets/og/note-%s.png" % (BASE, n["slug"]),
+            "worries": worries, "sections": sections, "items": items, "next_steps": next_steps, "related": related}
+
+
+def write_notes_json(public, by_id, ctx):
+    """公開している観測ノートの中身をまとめた /notes/index.json（転機AIが読む）。下書きは入れない。"""
+    data = {"updated": ctx["today"].isoformat(), "count": len(public), "notes": [note_data(n, by_id) for n in public]}
+    write("/notes/index.json", json.dumps(data, ensure_ascii=False, indent=1) + "\n")
 
 
 def build_404(ctx):
