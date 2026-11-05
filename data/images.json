@@ -7793,8 +7793,12 @@
  "R0938": {
   "page": "https://kigyojuku.etic.or.jp/index.html",
   "checked": "2026-11-05",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 500: Internal Server Error"
+  "manual": true,
+  "fsize": 40157,
+  "status": "ok",
+  "src": "file:images/manual/R0938.jpg",
+  "w": 960,
+  "h": 527
  },
  "R0939": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862511980",
