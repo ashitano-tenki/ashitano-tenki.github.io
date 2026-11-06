@@ -9086,5 +9086,77 @@
   "src": "https://storage.googleapis.com/production-os-assets/assets/708fc669-2e25-40d4-a2c7-4ac7a590360e",
   "w": 960,
   "h": 540
+ },
+ "R1104": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866515618",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48665/4866515619.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1105": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784434340000",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44343/443434000X.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1106": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121027047",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41210/4121027043.jpg",
+  "w": 642,
+  "h": 1000
+ },
+ "R1107": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784569860459",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45698/4569860451.jpg",
+  "w": 610,
+  "h": 1000
+ },
+ "R1109": {
+  "page": "https://www.shikaku.co.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.shikaku.co.jp/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1110": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784478065747",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44780/4478065748.jpg",
+  "w": 696,
+  "h": 1000
+ },
+ "R1111": {
+  "page": "https://books.rakuten.co.jp/rb/15723657/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478104212.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R1112": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062666",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534062664.jpg",
+  "w": 694,
+  "h": 1000
+ },
+ "R1113": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534060471",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534060475.jpg",
+  "w": 704,
+  "h": 1000
  }
 }
