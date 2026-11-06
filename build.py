@@ -291,7 +291,8 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
 
 
 # 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
-NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック"), ("/notes/", "観測ノート"), ("/voices/", "転機の声")]
+# セルフチェック（/check/）は 2026-11-06 にメニューから外した（ページは残す。トップやほかのページからのリンクはそのまま）
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/notes/", "観測ノート"), ("/voices/", "転機の声")]
 
 
 def nav_links(current=None):
