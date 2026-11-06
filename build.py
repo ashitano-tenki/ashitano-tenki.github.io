@@ -1843,7 +1843,8 @@ def voice_card(v, by_id):
         badges += '<span class="vc-age">%s</span>' % e(v["age"])
     big = next((tenki_emoji[t] for t in v["tenki"] if tenki_emoji.get(t)), "")
     icon = '<span class="vc-icon" aria-hidden="true">%s</span>' % e(big) if big else ""
-    before = '<p class="vc-from"><span class="vc-from-label">前</span>%s</p>' % e(v["before"]) if v["before"] else ""
+    # 「前」のラベルは付けない（見出しの矢印で前後が分かるため。2026-11-06 黒田さんの判断）。読み上げでは「転機の前：」と読む
+    before = '<p class="vc-from"><span class="visually-hidden">転機の前：</span>%s</p>' % e(v["before"]) if v["before"] else ""
     after = '<p class="vc-after"><span class="vc-after-arrow" aria-hidden="true">→</span>%s</p>' % e(v["after"] or v["title"])
     trig = ('<p class="vc-trig"><span class="visually-hidden">きっかけ：</span>%s</p>'
             % "".join('<span class="vc-chip">%s%s</span>' % (emoji(trig_emoji.get(t, "")), e(t)) for t in v["triggers"])) if v["triggers"] else ""

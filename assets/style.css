@@ -786,7 +786,6 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-tenki .emoji { margin-right: 5px; font-size: 16px; }
 .vc-age { padding: 2px 10px; border-radius: var(--radius-pill); border: 1.5px solid var(--ink); font-size: 13px; font-weight: 700; line-height: 1.5; }
 .vc-from { margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: var(--text-body); }
-.vc-from-label { display: inline-block; margin-right: 6px; padding: 0 7px; border-radius: var(--radius-sm); background: var(--card); font-size: 11px; font-weight: 700; color: var(--text-sub); }
 .vc-headline { margin: 6px 0 0; font-family: var(--font-display); font-weight: 900; font-size: 20px; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
 .vc-after-arrow { color: var(--sky); margin-right: 6px; }
 .vc-who { margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--text-body); overflow-wrap: anywhere; }
