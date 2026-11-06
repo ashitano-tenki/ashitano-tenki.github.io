@@ -774,14 +774,14 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 /* 転機の声（/voices/）：インタビュー記事のカード。記事は外のサイトで開く */
 .voices-empty { margin: var(--space-6) 0 var(--space-12); padding: var(--space-6); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); color: var(--text-body); text-align: center; }
 .voice-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
-.voice-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.voice-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: stretch; }  /* 同じ行のカードは高さをそろえる */
+.voice, .voice-card { height: 100%; }
 .voice-card { display: flex; flex-direction: column; gap: var(--space-3); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-4); min-width: 0; }
 .vc-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 .vc-tenki { display: inline-flex; align-items: center; padding: 3px 12px 3px 8px; border-radius: var(--radius-pill); background: var(--chip-bg); color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1.5; }
 .vc-tenki .emoji { font-size: 16px; }
 .vc-tenki .emoji { margin-right: 5px; }
 .vc-age { padding: 2px 10px; border-radius: var(--radius-pill); border: 1.5px solid var(--ink); font-size: 13px; font-weight: 700; line-height: 1.5; }
-.vc-stage { font-size: 12px; color: var(--text-sub); margin-left: 2px; }
 .vc-who { margin: 0; font-family: var(--font-display); font-size: 18px; line-height: 1.5; overflow-wrap: anywhere; }
 .vc-path { display: grid; justify-items: start; gap: 2px; }
 .vc-before, .vc-after { margin: 0; width: 100%; padding: 10px 14px; border-radius: var(--radius-md); font-size: 14px; line-height: 1.7; display: flex; gap: 10px; align-items: baseline; }
@@ -804,10 +804,6 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-meta { margin: 0; font-size: 12px; color: var(--text-sub); }
 .vc-title { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
 .vc-title:hover { color: var(--sky); text-decoration: underline; }
-.vc-note { margin: 0; font-size: 12px; color: var(--text-sub); }
-.vc-note::before { content: "※ "; }
-.vc-refs { margin: 2px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px var(--space-3); font-size: 13px; }
-.vc-refs span { font-size: 12px; color: var(--text-sub); }
 @media (prefers-reduced-motion: reduce) { .vc-more summary::before { transition: none; } }
 /* 数字で見る：件数の横棒 */
 .voice-stats { margin-top: var(--space-12); }
