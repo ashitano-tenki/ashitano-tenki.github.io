@@ -1851,7 +1851,10 @@ def voice_card(v, by_id):
     after = '<span class="vc-after-arrow" aria-hidden="true">→</span>%s' % e(v["after"] or v["title"])  # 見出し（h3）の中身。p で包まない（余白が付くため）
     trig = ('<p class="vc-trig"><span class="visually-hidden">きっかけ：</span>%s</p>'
             % "".join(tag("vc-chip", "trigger", t, emoji(trig_emoji.get(t, "")) + e(t)) for t in v["triggers"])) if v["triggers"] else ""
-    summary = ('<details class="vc-more"><summary>あらすじを読む</summary><p>%s</p></details>' % e(v["summary"])) if v["summary"] else ""
+    # あらすじは吹き出しで、カードの上に重ねて開く（カードの形を変えない。2026-11-06 黒田さんの判断）。開け閉めは voices.js
+    summary = ('<details class="vc-more"><summary>あらすじを読む</summary><div class="vc-bubble">'
+               '<span class="vc-bubble-head">あらすじ<button type="button" class="vc-bubble-x" aria-label="あらすじを閉じる">×</button></span>'
+               '<p>%s</p></div></details>' % e(v["summary"])) if v["summary"] else ""
     meta = "・".join(x for x in [e(v["media"]), e(voice_month(v))] if x)
     raw = " ".join([v["title"], v["who"], v["before"], v["after"], v["summary"], v["media"]] + v["keywords"])
     text = normalize(raw) + " " + reading(raw)  # 読み（ひらがなでも探せるように。pykakasi があるときだけ）

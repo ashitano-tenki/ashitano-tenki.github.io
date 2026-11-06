@@ -159,6 +159,28 @@
     if (input && input === wasChecked && ev.target === input) { setRadio(input.name, ""); wasChecked = null; run(); }
   });
   moreBtn.addEventListener("click", function () { render(false); });
+  // あらすじの吹き出し：1つだけ開く。三角をボタンの位置に合わせる。×・吹き出しの外・Esc で閉じる
+  list.addEventListener("toggle", function (ev) {
+    var d = ev.target;
+    if (!d.classList || !d.classList.contains("vc-more") || !d.open) return;
+    Array.prototype.forEach.call(list.querySelectorAll(".vc-more[open]"), function (o) { if (o !== d) o.open = false; });
+    var b = d.querySelector(".vc-bubble"), s = d.querySelector("summary");
+    var tip = s.getBoundingClientRect().left - b.getBoundingClientRect().left + 18;
+    b.style.setProperty("--tip", Math.max(16, tip) + "px");
+  }, true);
+  function closeBubbles(except) {
+    Array.prototype.forEach.call(list.querySelectorAll(".vc-more[open]"), function (o) { if (o !== except) o.open = false; });
+  }
+  document.addEventListener("click", function (ev) {
+    var x = ev.target.closest(".vc-bubble-x");
+    if (x) { var d = x.closest(".vc-more"); d.open = false; d.querySelector("summary").focus(); return; }
+    closeBubbles(ev.target.closest(".vc-more"));
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key !== "Escape") return;
+    var d = list.querySelector(".vc-more[open]");
+    if (d) { d.open = false; d.querySelector("summary").focus(); }
+  });
   // カードの札（転機の種類・年代・きっかけ）を押すと、その条件で絞り込み、一覧の頭に戻る
   list.addEventListener("click", function (ev) {
     var b = ev.target.closest("button[data-f]");

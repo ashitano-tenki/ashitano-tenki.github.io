@@ -806,7 +806,18 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-more summary::-webkit-details-marker { display: none; }
 .vc-more summary::before { content: "＋"; display: inline-block; margin-right: 4px; }
 .vc-more[open] summary::before { content: "－"; }
-.vc-more p { margin: var(--space-2) 0 0; font-size: 14px; line-height: 1.85; color: var(--text-body); }
+/* あらすじの吹き出し：ボタンの下に、カードやまわりの上に重ねて出す（ほかの要素は動かない） */
+.vc-more { position: relative; }
+.vc-bubble { position: absolute; z-index: 30; top: calc(100% + 12px); right: 0; width: min(460px, calc(100vw - 48px)); padding: 12px 18px 16px; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: 14px; box-shadow: 0 12px 32px rgba(26, 29, 35, .16), 0 2px 6px rgba(26, 29, 35, .08); }
+.vc-bubble::before { content: ""; position: absolute; top: -8px; left: var(--tip, 24px); width: 14px; height: 14px; background: var(--card); border-left: var(--border-hairline) solid var(--line); border-top: var(--border-hairline) solid var(--line); transform: rotate(45deg); }
+.vc-bubble-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 12px; font-weight: 700; color: var(--text-sub); }
+.vc-bubble-x { width: 28px; height: 28px; padding: 0; margin: -4px -8px -4px 0; border: 0; border-radius: 50%; background: none; color: var(--text-sub); font-size: 18px; font-weight: 400; line-height: 1; }
+.vc-bubble-x:hover { background: var(--chip-bg); color: var(--ink); }
+.vc-bubble p { margin: 0; font-size: 14px; line-height: 1.85; color: var(--text-body); }
+.voice-card { overflow: visible; }
+.vc-top { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+@media (max-width: 1023px) { .vc-bubble { left: 0; right: auto; width: 100%; } }
+@media (min-width: 1024px) { .vc-top { border-radius: var(--radius-lg) 0 0 var(--radius-lg); } }
 .vc-foot { margin-top: auto; padding-top: var(--space-3); border-top: var(--border-hairline) dashed var(--line); display: grid; gap: 2px; }
 .vc-meta { margin: 0; font-size: 12px; color: var(--text-sub); }
 .vc-title { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
