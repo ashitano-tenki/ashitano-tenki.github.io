@@ -1959,7 +1959,7 @@ def build_voices(voices, listed, ctx):
 <script>window.TENKI_PAGE_SIZE = {page_size};</script>
 <script src="/assets/voices.js?v={ver}" defer></script>
 """.format(filters=filters, n=len(voices), cards="".join(voice_card(v, by_id) for v in voices), stats=voice_stats(voices),
-           page_size=int(CONF["list_page_size"]), ver=ctx["version"])
+           page_size=int(VOICES.get("page_size", 8)), ver=ctx["version"])
     page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx, extra_head=VOICES_JSON_LINK)
 
 
