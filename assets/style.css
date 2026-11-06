@@ -788,7 +788,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-from { margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: var(--text-body); }
 .vc-headline { margin: 6px 0 0; font-family: var(--font-display); font-weight: 900; font-size: 20px; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
 .vc-after-arrow { color: var(--sky); margin-right: 6px; }
-.vc-who { margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--text-body); overflow-wrap: anywhere; }
+.vc-who { margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  /* 語り手は1行に収め、入らない分は「…」 */
 .vc-who::before { content: "― "; }
 /* 下半分：きっかけ・あらすじ・記事 */
 .vc-body { flex: 1; display: flex; flex-direction: column; gap: var(--space-3); padding: 14px 20px 18px; }

@@ -1855,12 +1855,12 @@ def voice_card(v, by_id):
     data = {"tenki": v["tenki"], "stage": v["stages"], "trigger": v["triggers"], "age": [v["age"]], "source": [v["source"]], "item": v["items"]}
     attrs = "".join(' data-%s="%s"' % (k, e("|".join(vals))) for k, vals in data.items())
     return ('<li class="voice" data-id="%s"%s data-month="%s" data-text="%s"><article class="voice-card">'
-            '<div class="vc-top">%s<div class="vc-head">%s</div>%s<h3 class="vc-headline">%s</h3><p class="vc-who">%s</p></div>'
+            '<div class="vc-top">%s<div class="vc-head">%s</div>%s<h3 class="vc-headline">%s</h3><p class="vc-who" title="%s">%s</p></div>'
             '<div class="vc-body">%s%s<div class="vc-foot"><p class="vc-meta">%s</p>'
             '<a class="vc-title" href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a></div></div>'
             '</article></li>'
             % (e(v["id"]), attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text),
-               icon, badges, before, after, e(v["who"]), trig, summary, meta, e(v["url"]), e(v["title"])))
+               icon, badges, before, after, e(v["who"]), e(v["who"]), trig, summary, meta, e(v["url"]), e(v["title"])))
 
 
 def voice_stats(voices):
