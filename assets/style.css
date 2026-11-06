@@ -769,3 +769,51 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
   .related-choices .related-tabs button { white-space: nowrap; flex: none; }
 }
 @media (prefers-reduced-motion: reduce) { .related-choices .related-panel:not([hidden]) { animation: none; } }
+
+/* 転機の声（/voices/）：インタビュー記事のカード。記事は外のサイトで開く */
+.voices-empty { margin: var(--space-6) 0 var(--space-12); padding: var(--space-6); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); color: var(--text-body); text-align: center; }
+.voice-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.voice-card { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: var(--space-4) var(--space-4) var(--space-4); min-width: 0; }
+.voice-meta { margin: 0; font-size: 12px; color: var(--text-sub); }
+.voice-title { font-size: 17px; line-height: 1.6; margin: 2px 0 var(--space-1); overflow-wrap: anywhere; }
+.voice-title a { color: var(--ink); text-decoration: none; }
+.voice-title a:hover { color: var(--sky); text-decoration: underline; }
+.voice-who { margin: 0 0 var(--space-2); font-size: 14px; font-weight: 700; color: var(--text-body); }
+.voice-path { margin: 0 0 var(--space-3); padding: var(--space-2) var(--space-3); background: var(--chip-bg); border-radius: var(--radius-md); font-size: 14px; line-height: 1.7; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--space-2); align-items: center; }
+.voice-arrow { font-weight: 700; color: var(--ink); }
+.voice-to { font-weight: 700; color: var(--ink); }
+.voice-from { color: var(--text-body); }
+.voice-card .tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.voice-summary { margin: var(--space-3) 0 0; font-size: 14px; line-height: 1.85; color: var(--text-body); }
+.voice-source { margin: var(--space-3) 0 0; font-size: 12px; color: var(--text-sub); }
+.voice-source::before { content: "発信元："; }
+.voice-source-note { display: block; margin-top: 2px; padding: 4px 10px; background: var(--base-yellow); border-radius: var(--radius-sm); color: var(--ink); width: fit-content; max-width: 100%; }
+.voice-refs { margin: var(--space-3) 0 0; padding-top: var(--space-3); border-top: var(--border-hairline) dashed var(--line); font-size: 14px; display: flex; flex-wrap: wrap; gap: 4px var(--space-3); align-items: baseline; }
+.voice-refs-label { font-size: 12px; font-weight: 700; color: var(--text-sub); flex-basis: 100%; }
+@media (max-width: 559px) {
+  .voice-path { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .voice-arrow { transform: rotate(90deg); width: fit-content; line-height: 1.2; }
+}
+/* 数字で見る：件数の横棒 */
+.voice-stats { margin-top: var(--space-12); }
+.vs-total { margin: 0 0 var(--space-4); color: var(--text-body); }
+.vs-total b { font-family: var(--font-display); font-size: 28px; color: var(--ink); margin-right: 2px; }
+.vs-grid { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.vs-group h3 { font-size: 16px; margin: 0 0 2px; }
+.vs-note { margin: 0 0 var(--space-2); font-size: 12px; color: var(--text-sub); }
+.vs-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.vs-rows li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr) 3em; gap: var(--space-2); align-items: center; font-size: 13px; }
+.vs-name { color: var(--text-body); }
+.vs-bar { height: 10px; background: var(--chip-bg); border-radius: var(--radius-pill); overflow: hidden; }
+.vs-bar i { display: block; height: 100%; background: var(--sky); border-radius: 0 4px 4px 0; }
+.vs-num { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+/* 紹介ページの「この情報が出てくる転機の声」 */
+.voice-band { margin-top: var(--space-12); }
+.voice-band-title { font-family: var(--font-display); font-size: 22px; line-height: 1.4; margin: 0 0 var(--space-1); }
+.voice-band-lead { margin: 0 0 var(--space-3); font-size: 14px; color: var(--text-body); }
+.voice-band-list { list-style: none; margin: 0; padding: 0; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
+.voice-band-list li { padding: var(--space-3) var(--space-4); border-top: var(--border-hairline) solid var(--line); overflow-wrap: anywhere; }
+.voice-band-list li:first-child { border-top: 0; }
+.voice-band-list a { font-weight: 700; line-height: 1.6; }
+.voice-band-who { display: block; font-size: 13px; color: var(--text-sub); }
+.voice-band-more { margin: var(--space-2) 0 0; font-size: 14px; }

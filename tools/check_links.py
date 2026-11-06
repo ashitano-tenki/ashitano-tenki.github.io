@@ -3,7 +3,8 @@
 
   python3 tools/check_links.py [report.md]
 
-- 対象：公開用CSVのうち「状態」が「確認済み」「要更新」の行の「URL」列。
+- 対象：公開用CSVのうち「状態」が「確認済み」「要更新」の行の「URL」列と、転機の声の公開用CSV（確認済みの記事だけが並ぶ）の「URL」列。
+- 結果の各行の kind で区別する（観測所の掲載は「観測所」、転機の声の記事は「声」）。summary は観測所の掲載だけ、voices_summary は転機の声だけの件数。
 - 結果は 正常／移転／拒否／要確認 の4つに分ける。linkcheck.json の items には「正常」以外だけを入れる。
 - 「要確認」があったときは、Issue 用の report.md も書く（引数で指定したとき）。
 - スプレッドシートやサイトの掲載は変えない。直すかどうかは、データ側の定期実行が判断する。
@@ -131,7 +132,16 @@ def main():
     for raw in reader:
         row = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
         if row.get("状態") in build.LISTED_STATES and row.get("URL", "").startswith(("http://", "https://")):
+            row["_kind"] = "観測所"
             rows.append(row)
+    # 転機の声の記事（公開用タブに出ている行はすべて確認済み）。読めなければ観測所の掲載だけを確かめる
+    try:
+        voice_text = build.fetch_csv(build.VOICES["csv_url"]) if build.VOICES.get("csv_url") else ""
+    except build.BuildError as ex:
+        print("注意: 転機の声のCSVを読めませんでした: %s" % ex, file=sys.stderr)
+        voice_text = ""
+    for v in build.parse_voices(voice_text):
+        rows.append({"ID": v["id"], "タイトル": v["title"], "URL": v["url"], "_kind": "声"})
 
     def run(batch):
         """ドメインごとにまとめ、ドメイン単位で並べて確かめる（同じドメインは順番に、間をあけて）。"""
@@ -153,32 +163,35 @@ def main():
         results.update(run(retry))
 
     summary = {"正常": 0, "移転": 0, "拒否": 0, "要確認": 0}
+    voices_summary = dict.fromkeys(summary, 0)
     items = []
     for row in rows:
         status, code, final, note, _ = results[row["ID"]]
-        summary[status] += 1
+        (voices_summary if row["_kind"] == "声" else summary)[status] += 1
         if status != "正常":
-            items.append({"id": row["ID"], "title": row["タイトル"], "url": row["URL"], "status": status,
+            items.append({"id": row["ID"], "kind": row["_kind"], "title": row["タイトル"], "url": row["URL"], "status": status,
                           "http_status": code, "final_url": final, "note": note})
     order = {"要確認": 0, "移転": 1, "拒否": 2}
     items.sort(key=lambda it: (order[it["status"]], it["id"]))
     data = {"checked_at": datetime.datetime.now(build.JST).replace(microsecond=0).isoformat(),
-            "summary": summary, "items": items}
+            "summary": summary, "voices_summary": voices_summary, "items": items}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    print("点検 %d件：%s" % (len(rows), "、".join("%s %d" % kv for kv in summary.items())))
+    print("点検 %d件：観測所 %s／転機の声 %s" % (len(rows), "、".join("%s %d" % kv for kv in summary.items()),
+                                          "、".join("%s %d" % kv for kv in voices_summary.items())))
 
     need = [it for it in items if it["status"] == "要確認"]
     if report_path and need:
         lines = ["掲載中のURLを %s に自動で開いて確かめました（%d件）。" % (build.fmt_date(datetime.datetime.now(build.JST).date()), len(rows)),
-                 "結果：" + "、".join("%s %d件" % kv for kv in summary.items()),
+                 "結果（観測所の掲載）：" + "、".join("%s %d件" % kv for kv in summary.items()),
+                 "結果（転機の声の記事）：" + "、".join("%s %d件" % kv for kv in voices_summary.items()),
                  "くわしい結果は %s/linkcheck.json でも見られます。サイトの掲載は自動では変えていません。" % build.BASE, "",
                  "## 要確認（ブラウザで開いて確かめてください）", "",
                  "自動の点検は GitHub のサーバーから開くため、ブラウザでは見られるのに「見つかりません」と出るサイトもあります。", "",
-                 "| ID | タイトル | URL | 内容 |", "|---|---|---|---|"]
-        lines += ["| %s | %s | %s | %s |" % (it["id"], it["title"], it["url"], it["note"]) for it in need]
+                 "| 種類 | ID | タイトル | URL | 内容 |", "|---|---|---|---|---|"]
+        lines += ["| %s | %s | %s | %s | %s |" % (it["kind"], it["id"], it["title"], it["url"], it["note"]) for it in need]
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines) + "\n")
 

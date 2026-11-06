@@ -291,12 +291,17 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
 
 
 # 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
-NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック"), ("/notes/", "観測ノート")]
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック"), ("/notes/", "観測ノート"), ("/voices/", "転機の声")]
+NAV_HIDE = set()  # 中身がまだないページ（main() で決める。転機の声は記事が0件のあいだメニューに出さない）
 
 
 def nav_links(current=None):
     out = []
     for href, label in NAV:
+        if href in NAV_HIDE:
+            continue
+        if href == "/voices/":
+            label = VOICES_LABEL
         cur = ' aria-current="page"' if href == current else ""
         out.append('      <a href="%s"%s>%s</a>' % (href, cur, e(label)))
         if href == "/notes/" and TENKI_AI:
@@ -915,8 +920,8 @@ def build_item(item, listed, ctx):
   <p class="ended-note">このサービスは提供を終了したか、掲載を終えました。</p>
   <p class="note">ほかのサービスは<a href="/search/">一覧ページ</a>から探せます。</p>
 </article>
-{note_band}{similar}
-""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), title=e(item["title"]), similar=similar_html)
+{note_band}{voice_band}{similar}
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), title=e(item["title"]), similar=similar_html)
         page("/item/%s/" % item["id"], item["title"], "このサービスは提供を終了したか、掲載を終えました。", body, noindex=True, ctx=ctx)
         return
 
@@ -955,8 +960,8 @@ def build_item(item, listed, ctx):
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
   </dl>
 </article>
-{note_band}{similar}
-""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
+{note_band}{voice_band}{similar}
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
            hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
            provider=e(item["provider"] or "―"), report=report_link(item),
@@ -1763,6 +1768,190 @@ def write_notes_json(public, by_id, ctx):
     write("/notes/index.json", json.dumps(data, ensure_ascii=False, indent=1) + "\n")
 
 
+# ---------------------------------------------------------------- 転機の声
+
+# 「転機の声」のページ（/voices/）。転機を経験した人のインタビュー記事を、別のスプレッドシートの「公開用」タブから読む。
+# 観測所の一覧・検索・並び順には混ぜない（search.json にも入れない）。記事の本文・写真は載せず、タイトル・リンク・分類・要約だけを出す
+VOICES = CONF.get("voices", {})
+VOICES_LABEL = VOICES.get("name", "転機の声")
+VOICES_SNAPSHOT = os.path.join(ROOT, "data", "voices.csv")  # 前回読めた中身（読めなかった日はこれを使う）
+VOICES_TEXT = {}  # main() で読んだCSVの文字列（--save-data のとき data/voices.csv に残す）
+VOICE_COLUMNS = ["ID", "タイトル", "語り手", "転機の前", "転機の後", "転機の種類", "段階", "きっかけ", "年代",
+                 "発信元の区分", "要約", "URL", "掲載媒体", "公開日", "観測所ID", "キーワード"]
+
+
+def voices_text(path=None):
+    """転機の声のCSVの文字列。手元のファイルを指定したときはそれを、なければネットから。読めなければ前回の中身、それもなければ空。"""
+    if path:
+        with open(path, encoding="utf-8-sig") as f:
+            return f.read()
+    url = VOICES.get("csv_url", "")
+    if url:
+        try:
+            text = fetch_csv(url)
+            if text.lstrip().startswith("<"):
+                raise BuildError("CSVの代わりにHTMLが返ってきました")
+            VOICES_TEXT["text"] = text
+            return text
+        except BuildError as ex:
+            print("注意: 転機の声のCSVを読めませんでした（前回の中身を使います）: %s" % ex, file=sys.stderr)
+    if os.path.exists(VOICES_SNAPSHOT):
+        with open(VOICES_SNAPSHOT, encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+
+def parse_voices(text):
+    """公開用タブの行を記事の一覧にする。列が足りないときは、サイト全体を止めずに0件として扱う。新しい公開日の順に並べる。"""
+    reader = csv.DictReader(io.StringIO(text or ""))
+    header = [h.strip() for h in (reader.fieldnames or [])]
+    missing = [c for c in VOICE_COLUMNS if c not in header]
+    if text.strip() and missing:
+        print("注意: 転機の声のCSVに必要な列がありません（0件として作ります）: %s" % "、".join(missing), file=sys.stderr)
+        return []
+    out, seen = [], set()
+    for raw in reader:
+        row = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
+        vid, url = row.get("ID", ""), row.get("URL", "")
+        if not valid_id(vid) or vid in seen or not row.get("タイトル") or not re.match(r"^https?://", url):
+            continue
+        seen.add(vid)
+        out.append({
+            "id": vid, "title": row["タイトル"], "who": row["語り手"], "before": row["転機の前"], "after": row["転機の後"],
+            "tenki": split_list(row["転機の種類"]), "stages": split_list(row["段階"]), "triggers": split_list(row["きっかけ"]),
+            "age": row["年代"] or "不明", "source": row["発信元の区分"], "summary": row["要約"], "url": url,
+            "media": row["掲載媒体"], "month": parse_month(row["公開日"]),
+            "items": [x for x in split_list(row["観測所ID"]) if valid_id(x)],
+            # キーワード（観測所の「向いている人」と同じ言葉）は検索にだけ使い、画面には出さない
+            "keywords": split_list(row["キーワード"]),
+        })
+    out.sort(key=lambda v: (v["month"] or (0, 0), v["id"]), reverse=True)
+    return out
+
+
+def voice_month(v):
+    return month_label(v["month"]) if v["month"] else ""
+
+
+def voice_card(v, by_id):
+    """転機の声の記事カード。data-* は voices.js の絞り込み・並び替えに使う。"""
+    tags = "".join('<span class="tag">%s</span>' % e(t) for t in v["tenki"] + v["stages"] + v["triggers"] + ([v["age"]] if v["age"] != "不明" else []))
+    refs = [by_id[i] for i in v["items"] if i in by_id]
+    refs_html = ('<p class="voice-refs"><span class="voice-refs-label">この話に出てくるもの</span>%s</p>'
+                 % "".join('<a href="/item/%s/">%s</a>' % (e(it["id"]), e(it["title"])) for it in refs)) if refs else ""
+    note = VOICES.get("source_notes", {}).get(v["source"], "")
+    source = ('<p class="voice-source">%s%s</p>' % (e(v["source"]), '<span class="voice-source-note">%s</span>' % e(note) if note else "")) if v["source"] else ""
+    meta = "・".join(x for x in [e(v["media"]), e(voice_month(v))] if x)
+    path_html = ""
+    if v["before"] or v["after"]:
+        path_html = ('<p class="voice-path"><span class="voice-from">%s</span><span class="voice-arrow" aria-hidden="true">→</span>'
+                     '<span class="visually-hidden">から</span><span class="voice-to">%s</span></p>' % (e(v["before"] or "―"), e(v["after"] or "―")))
+    raw = " ".join([v["title"], v["who"], v["before"], v["after"], v["summary"], v["media"]] + v["keywords"])
+    text = normalize(raw) + " " + reading(raw)  # 読み（ひらがなでも探せるように。pykakasi があるときだけ）
+    data = {"tenki": v["tenki"], "stage": v["stages"], "trigger": v["triggers"], "age": [v["age"]], "source": [v["source"]], "item": v["items"]}
+    attrs = "".join(' data-%s="%s"' % (k, e("|".join(vals))) for k, vals in data.items())
+    return ('<li class="voice"%s data-month="%s" data-text="%s"><article class="voice-card">'
+            '<p class="voice-meta">%s</p>'
+            '<h3 class="voice-title"><a href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a></h3>'
+            '<p class="voice-who">%s</p>%s<div class="tags">%s</div><p class="voice-summary">%s</p>%s%s</article></li>'
+            % (attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text), meta, e(v["url"]), e(v["title"]),
+               e(v["who"]), path_html, tags, e(v["summary"]), source, refs_html))
+
+
+def voice_stats(voices):
+    """数字で見る：転機の種類・段階・年代ごとの件数を、横向きの棒で。1件の記事が複数の転機に入るので、合計は件数より多くなる。"""
+    def group(title, names, counter, note=""):
+        top = max([counter.get(n, 0) for n in names] + [1])
+        rows = "".join('<li><span class="vs-name">%s</span><span class="vs-bar" aria-hidden="true"><i style="width:%.1f%%"></i></span><span class="vs-num">%d件</span></li>'
+                       % (e(n), 100.0 * counter.get(n, 0) / top, counter.get(n, 0)) for n in names if counter.get(n, 0) or n != "不明")
+        return '<div class="vs-group"><h3>%s</h3>%s<ul class="vs-rows">%s</ul></div>' % (e(title), '<p class="vs-note">%s</p>' % e(note) if note else "", rows)
+    tenki = collections.Counter(t for v in voices for t in v["tenki"])
+    stages = collections.Counter(s for v in voices for s in v["stages"])
+    ages = collections.Counter(v["age"] for v in voices)
+    return ('<section class="voice-stats" aria-labelledby="vs-h"><h2 class="section-title" id="vs-h">数字で見る</h2>'
+            '<p class="vs-total">確認して載せている記事 <b>%d</b>件</p><div class="vs-grid">%s%s%s</div></section>'
+            % (len(voices), group("転機の種類", VOICES.get("tenki", []), tenki, "1つの記事に2つ以上の転機があるときは、それぞれに数えます。"),
+               group("段階", VOICES.get("stages", []), stages, "語られている段階をすべて数えます。"),
+               group("年代", VOICES.get("ages", []), ages, "転機を迎えたときの年代です。")))
+
+
+def build_voices(voices, listed, ctx):
+    by_id = {it["id"]: it for it in listed}
+
+    def chip_group(name, label, values, counter):
+        values = [v for v in values if counter.get(v)]
+        if not values:
+            return ""
+        opts = [("", "すべて")] + [(v, v) for v in values]
+        return ('<fieldset class="chip-group"><legend>%s</legend><div class="fchips">%s</div></fieldset>'
+                % (e(label), "".join('<label class="fchip"><input type="radio" name="%s" value="%s"%s><span>%s<i></i></span></label>'
+                                     % (name, e(v), " checked" if not v else "", e(t)) for v, t in opts)))
+    head = ('%s\n<header class="page-head"><h1>%s</h1><p class="lead">%s</p></header>\n'
+            % (breadcrumb([(VOICES_LABEL, None)]), e(VOICES_LABEL), e(VOICES.get("lead", ""))))
+    if not voices:
+        body = head + '<p class="voices-empty">%s</p>\n' % e(VOICES.get("empty", "準備中です。"))
+        page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx, noindex=True)
+        return
+    count = lambda key: collections.Counter(x for v in voices for x in (v[key] if isinstance(v[key], list) else [v[key]]))
+    filters = "".join([
+        chip_group("tenki", "転機の種類", VOICES.get("tenki", []), count("tenki")),
+        chip_group("stage", "段階", VOICES.get("stages", []), count("stages")),
+        chip_group("trigger", "きっかけ", VOICES.get("triggers", []), count("triggers")),
+        chip_group("age", "年代", VOICES.get("ages", []), count("age")),
+        chip_group("source", "発信元", VOICES.get("sources", []), count("source")),
+    ])
+    body = head + """<form id="vfilters" class="filters voices-filters" action="/voices/" method="get" role="search">
+  <div class="search-q">
+    <label for="vq" class="visually-hidden">キーワード</label>
+    <input id="vq" type="search" name="q" placeholder="キーワードで探す（例：育児、エンジニア、地方）" autocomplete="off">
+  </div>
+  <div class="search-layout">
+    <div class="filter-col">
+      <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-panel">絞り込む<span id="filter-count"></span></button>
+      <div id="filter-panel" class="filter-panel">
+        {filters}
+      </div>
+    </div>
+    <div class="result-col">
+      <div class="result-bar">
+        <p id="result-count" aria-live="polite">{n}件</p>
+        <button type="button" class="bar-filter" id="bar-filter" aria-controls="filter-panel" aria-expanded="false">絞り込む</button>
+        <div class="sort-field"><label for="sort">並び順</label><select id="sort" name="sort"><option value="">公開日の新しい順</option><option value="old">公開日の古い順</option></select></div>
+      </div>
+      <div id="active-chips" class="active-chips" hidden></div>
+      <ol id="voices" class="voice-list">{cards}</ol>
+      <p class="more-wrap"><button type="button" id="more" class="button" hidden>もっと見る</button></p>
+    </div>
+  </div>
+</form>
+{stats}
+<script>window.TENKI_PAGE_SIZE = {page_size};</script>
+<script src="/assets/voices.js?v={ver}" defer></script>
+""".format(filters=filters, n=len(voices), cards="".join(voice_card(v, by_id) for v in voices), stats=voice_stats(voices),
+           page_size=int(CONF["list_page_size"]), ver=ctx["version"])
+    page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx)
+
+
+def voices_for_item(voices, item_id):
+    return [v for v in voices if item_id in v["items"]]
+
+
+def voice_band(item, ctx):
+    """紹介ページの「この情報が出てくる転機の声」。記事のタイトル（記事へ）と語り手を最大5件。0件なら何も出さない。"""
+    hits = voices_for_item(ctx.get("voices", []), item["id"])
+    if not hits:
+        return ""
+    limit = int(VOICES.get("item_max", 5))
+    lis = "".join('<li><a href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a>'
+                  '<span class="voice-band-who">%s</span></li>'
+                  % (e(v["url"]), e(v["title"]), e("・".join(x for x in [v["who"], v["media"]] if x))) for v in hits[:limit])
+    more = ('<a href="/voices/?item=%s">%sの一覧で見る（%d件）</a>' % (e(item["id"]), e(VOICES_LABEL), len(hits))) if len(hits) > limit \
+        else '<a href="/voices/">%sをもっと見る</a>' % e(VOICES_LABEL)
+    return ('<section class="voice-band"><h2 class="voice-band-title">この情報が出てくる%s</h2>'
+            '<p class="voice-band-lead">この掲載が話に出てくるインタビュー記事です。記事は各サイトで開きます。</p>'
+            '<ul class="voice-band-list">%s</ul><p class="voice-band-more">%s</p></section>\n' % (e(VOICES_LABEL), lis, more))
+
+
 def build_404(ctx):
     body = """
 <header class="page-head">
@@ -2002,6 +2191,7 @@ def main():
     ap.add_argument("--today", help="今日の日付（確認用。例: 2026-10-22）")
     ap.add_argument("--save-data", action="store_true",
                     help="読み込んだCSVを data/latest.csv に残す（毎日の自動更新で使い、変更の履歴にする）")
+    ap.add_argument("--voices-csv", help="転機の声に手元のCSVファイルを使う（確認用）")
     ap.add_argument("--drafts", action="store_true", help="観測ノートの下書き（draft: true）も、検索に出ない形で作る（確認用）")
     args = ap.parse_args()
 
@@ -2026,7 +2216,10 @@ def main():
         "new_ids": {it["id"] for it in new_items},
         "tenki_count": {t["name"]: sum(1 for it in listed if matches_tenki(it, t["name"])) for t in TENKI},
         "notes": load_notes(listed, args.drafts),
+        "voices": parse_voices(voices_text(args.voices_csv)),
     }
+    if not ctx["voices"]:
+        NAV_HIDE.add("/voices/")
 
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
@@ -2053,6 +2246,7 @@ def main():
     build_guide(listed, ctx)
     build_project(ctx)
     build_notes(ctx["notes"], listed, ctx)
+    build_voices(ctx["voices"], listed, ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     build_feed(listed, ctx)
@@ -2065,11 +2259,14 @@ def main():
         f.write("\n")
     if args.save_data:
         save_snapshot(text)
+        if VOICES_TEXT.get("text"):
+            with open(VOICES_SNAPSHOT, "w", encoding="utf-8") as f:
+                f.write(VOICES_TEXT["text"])
         if PROJECT_TEXT.get("text"):
             with open(PROJECT_SNAPSHOT, "w", encoding="utf-8") as f:
                 f.write(PROJECT_TEXT["text"])
-    print("作成しました: 全%d件（掲載中%d件、今週の新着%d件、ページ%d枚）"
-          % (len(items), len(listed), len(new_items), len(ctx["sitemap"])))
+    print("作成しました: 全%d件（掲載中%d件、今週の新着%d件、%s %d件、ページ%d枚）"
+          % (len(items), len(listed), len(new_items), VOICES_LABEL, len(ctx["voices"]), len(ctx["sitemap"])))
 
 
 if __name__ == "__main__":
