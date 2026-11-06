@@ -774,7 +774,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 /* 転機の声（/voices/）：インタビュー記事のカード。記事は外のサイトで開く */
 .voices-empty { margin: var(--space-6) 0 var(--space-12); padding: var(--space-6); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); color: var(--text-body); text-align: center; }
 .voice-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
-.voice-list { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: stretch; }  /* 同じ行のカードは高さをそろえる */
+.voice-list { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }  /* 1行に1枚（左右で高さがずれないように） */
 .voice { min-width: 0; }
 .voice, .voice-card { height: 100%; }  /* 同じ行のカードの高さをそろえる */
 .voice-card { display: flex; flex-direction: column; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow: hidden; min-width: 0; }
@@ -804,6 +804,16 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-meta { margin: 0; font-size: 12px; color: var(--text-sub); }
 .vc-title { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .vc-title:hover { color: var(--sky); text-decoration: underline; }
+/* パソコン：左に見出しの面、右にきっかけと記事の「左右2分割」（2026-11-06 黒田さんの判断。案1） */
+@media (min-width: 1024px) {
+  .voice-card { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+  .vc-top { padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+  .vc-icon { right: 18px; top: 14px; }
+  .vc-head { padding-right: 60px; }
+  .vc-from, .vc-headline, .vc-who { margin: 0; }
+  .vc-from { margin-top: 4px; }
+  .vc-body { padding: 20px 22px; }
+}
 @media (max-width: 479px) { .vc-top { padding: 16px 16px 14px; } .vc-body { padding: 12px 16px 16px; } .vc-headline { font-size: 19px; } .vc-icon { font-size: 40px; } }
 /* 数字で見る：件数の横棒 */
 .voice-stats { margin-top: var(--space-12); }
