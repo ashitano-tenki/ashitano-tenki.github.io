@@ -509,6 +509,7 @@ button, .button {
 .fchip { position: relative; }
 .fchip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .fchip span { display: inline-flex; align-items: baseline; gap: 5px; padding: 5px 12px; border-radius: var(--radius-pill); border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); font-size: 14px; line-height: 1.5; }
+.fchip span.emoji { display: inline; padding: 0; border: 0; border-radius: 0; background: none; margin: 0 -2px 0 0; font-size: 14px; }  /* 転機の声の「転機の種類」の頭の絵文字 */
 .fchip i { font-style: normal; font-size: 12px; color: var(--text-sub); font-variant-numeric: tabular-nums; }
 .fchip:hover span { border-color: var(--sky); }
 .fchip input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--base); font-weight: 700; }

@@ -1875,14 +1875,16 @@ def voice_stats(voices):
 def build_voices(voices, listed, ctx):
     by_id = {it["id"]: it for it in listed}
 
-    def chip_group(name, label, values, counter):
+    def chip_group(name, label, values, counter, emojis=None):
+        """emojis があれば、ボタンの頭に絵文字を付ける（転機の種類はトップページと同じ絵文字）"""
         values = [v for v in values if counter.get(v)]
         if not values:
             return ""
+        emojis = emojis or {}
         opts = [("", "すべて")] + [(v, v) for v in values]
         return ('<fieldset class="chip-group"><legend>%s</legend><div class="fchips">%s</div></fieldset>'
-                % (e(label), "".join('<label class="fchip"><input type="radio" name="%s" value="%s"%s><span>%s<i></i></span></label>'
-                                     % (name, e(v), " checked" if not v else "", e(t)) for v, t in opts)))
+                % (e(label), "".join('<label class="fchip"><input type="radio" name="%s" value="%s"%s><span>%s%s<i></i></span></label>'
+                                     % (name, e(v), " checked" if not v else "", emoji(emojis.get(v, "")), e(t)) for v, t in opts)))
     head = ('%s\n<header class="page-head"><h1>%s</h1><p class="lead">%s</p></header>\n'
             % (breadcrumb([(VOICES_LABEL, None)]), e(VOICES_LABEL), e(VOICES.get("lead", ""))))
     if not voices:
@@ -1891,7 +1893,7 @@ def build_voices(voices, listed, ctx):
         return
     count = lambda key: collections.Counter(x for v in voices for x in (v[key] if isinstance(v[key], list) else [v[key]]))
     filters = "".join([
-        chip_group("tenki", "転機の種類", VOICES.get("tenki", []), count("tenki")),
+        chip_group("tenki", "転機の種類", VOICES.get("tenki", []), count("tenki"), {t["name"]: t.get("emoji", "") for t in TENKI}),
         chip_group("stage", "段階", VOICES.get("stages", []), count("stages")),
         chip_group("trigger", "きっかけ", VOICES.get("triggers", []), count("triggers")),
         chip_group("age", "年代", VOICES.get("ages", []), count("age")),
