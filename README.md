@@ -33,6 +33,12 @@ https://ashitano-tenki.github.io/
 - おすすめ順は、画像があるものを先に、そのなかで観測スコアの高い順です（「観測所について」の並び順の考え方にも書いています）。
 - 掲載先から申し出があったときなど、画像を使いたくない掲載は `config/site.json` の `image_exclude` にIDを書きます（例：`["R0007"]`）。次の更新で画像が消えます。
 
+## AIのクローラー
+
+- `robots.txt` で、AIの学習用のクローラー（GPTBot・ClaudeBot・Google-Extended・CCBot など）だけを断っています（2026-11-06 黒田さんの判断。コミュニティ図鑑と同じ）。一覧は `build.py` の `AI_TRAINING` です。
+- AIの検索用のクローラー（OAI-SearchBot・Claude-SearchBot・PerplexityBot など）と、ふつうの検索エンジンは通します。AIの検索の答えに観測所が出典として出る道を残すためです。検索用まで断らないでください。
+- robots.txt はお願いなので、守らない相手は止められません。転機AIなど、利用者のブラウザからの読み込みには影響しません。
+
 ## ファイルの役割
 
 | ファイル | 中身 |

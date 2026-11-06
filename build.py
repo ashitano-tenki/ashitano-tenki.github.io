@@ -1944,7 +1944,11 @@ def build_meta_files(ctx):
     urls = "".join("<url><loc>%s</loc><lastmod>%s</lastmod></url>" % (e(u), d.isoformat()) for u, d in ctx["sitemap"])
     write("/sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">%s</urlset>\n' % urls)
-    write("/robots.txt", "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE)
+    # AI の学習用のクローラーだけを断る（2026-11-06 黒田さんの判断。コミュニティ図鑑と同じ）。検索用（OAI-SearchBot・Claude-SearchBot・PerplexityBot など）と
+    # ふつうの検索エンジンは通す。AI の検索の答えに観測所が出典として出る道は残すため。robots.txt はお願いで、守らない相手は止められない
+    AI_TRAINING = ["GPTBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "CCBot", "Applebot-Extended", "Meta-ExternalAgent", "Bytespider", "cohere-training-data-crawler"]
+    blocks = "".join("User-agent: %s\nDisallow: /\n\n" % b for b in AI_TRAINING)
+    write("/robots.txt", "%sUser-agent: *\nAllow: /\n\nSitemap: %s/sitemap.xml\n" % (blocks, BASE))
     write("/.nojekyll", "")
     # 毎週のリンク点検の結果（tools/check_links.py が data/linkcheck.json に書く）を、サイトのトップと同じ場所に置く
     linkcheck = os.path.join(ROOT, "data", "linkcheck.json")
