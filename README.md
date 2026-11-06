@@ -40,6 +40,7 @@ https://ashitano-tenki.github.io/
 - ページ名・紹介文・CSVのURL・発信元ごとの注記は `config/site.json` の `voices` にまとめています。ページ名を変えると、メニューや紹介ページの見出しも変わります。
 - メニューには記事の件数にかかわらず入口を出します。記事が0件のあいだはページに「準備中」と出し、検索エンジンには載せません（1件以上になると自動で載ります）。
 - 観測所IDがある記事は、観測所の紹介ページに「この情報が出てくる転機の声」として最大5件出ます（それより多いときは一覧へのリンク）。
+- サイトを作るたびに `/voices/index.json` も書き出します（転機AIが読む。/voices/ と同じ記事・同じ順。キーは id・title・speaker・before・after・tenki・dankai・trigger・age・job・industry・source・summary・url・media・published・items・keywords）。一覧ページの head にこの場所を書き、各カードに `data-id`（V番号）を持たせています。
 - 毎週のリンク点検で記事のURLも確かめ、`linkcheck.json` に `"kind": "声"` で出します（観測所の掲載は `"kind": "観測所"`。件数は `summary` が観測所、`voices_summary` が転機の声）。
 
 ## AIのクローラー

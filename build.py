@@ -1817,7 +1817,8 @@ def parse_voices(text):
         out.append({
             "id": vid, "title": row["タイトル"], "who": row["語り手"], "before": row["転機の前"], "after": row["転機の後"],
             "tenki": split_list(row["転機の種類"]), "stages": split_list(row["段階"]), "triggers": split_list(row["きっかけ"]),
-            "age": row["年代"] or "不明", "source": row["発信元の区分"], "summary": row["要約"], "url": url,
+            "age": row["年代"] or "不明", "age_raw": row["年代"], "job": row.get("職種", ""), "industry": row.get("業界", ""),
+            "source": row["発信元の区分"], "summary": row["要約"], "url": url,
             "media": row["掲載媒体"], "month": parse_month(row["公開日"]),
             "items": [x for x in split_list(row["観測所ID"]) if valid_id(x)],
             # キーワード（観測所の「向いている人」と同じ言葉）は検索にだけ使い、画面には出さない
@@ -1857,12 +1858,12 @@ def voice_card(v, by_id):
     text = normalize(raw) + " " + reading(raw)  # 読み（ひらがなでも探せるように。pykakasi があるときだけ）
     data = {"tenki": v["tenki"], "stage": v["stages"], "trigger": v["triggers"], "age": [v["age"]], "source": [v["source"]], "item": v["items"]}
     attrs = "".join(' data-%s="%s"' % (k, e("|".join(vals))) for k, vals in data.items())
-    return ('<li class="voice"%s data-month="%s" data-text="%s"><article class="voice-card">'
+    return ('<li class="voice" data-id="%s"%s data-month="%s" data-text="%s"><article class="voice-card">'
             '<div class="vc-head">%s%s</div><h3 class="vc-who">%s</h3>%s%s%s'
             '<div class="vc-foot"><p class="vc-meta">%s</p>'
             '<a class="vc-title" href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a>%s%s</div>'
             '</article></li>'
-            % (attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text), badges, stages, e(v["who"]), path_html, trig, summary,
+            % (e(v["id"]), attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text), badges, stages, e(v["who"]), path_html, trig, summary,
                meta, e(v["url"]), e(v["title"]), note_html, refs_html))
 
 
@@ -1883,8 +1884,25 @@ def voice_stats(voices):
                group("年代", VOICES.get("ages", []), ages, "転機を迎えたときの年代です。")))
 
 
+def write_voices_json(voices, ctx):
+    """転機の声の中身をまとめた /voices/index.json（転機AIが読む）。/voices/ と同じ記事を同じ順（公開日の新しい順）で入れる。
+    値が空のときもキーは残す（文字は空文字、一覧は空の配列）。items は観測所に紹介ページがあるIDだけ。"""
+    ids = ctx.get("item_ids", set())
+    data = {"updated": ctx["today"].isoformat(), "count": len(voices), "voices": [{
+        "id": v["id"], "title": v["title"], "speaker": v["who"], "before": v["before"], "after": v["after"],
+        "tenki": v["tenki"], "dankai": v["stages"], "trigger": v["triggers"], "age": v["age_raw"],
+        "job": v["job"], "industry": v["industry"], "source": v["source"], "summary": v["summary"], "url": v["url"],
+        "media": v["media"], "published": "%04d-%02d" % v["month"] if v["month"] else "",
+        "items": [i for i in v["items"] if i in ids], "keywords": v["keywords"]} for v in voices]}
+    write("/voices/index.json", json.dumps(data, ensure_ascii=False, indent=1) + "\n")
+
+
+VOICES_JSON_LINK = '<link rel="alternate" type="application/json" href="/voices/index.json" title="%s（JSON）">\n' % e(VOICES_LABEL)
+
+
 def build_voices(voices, listed, ctx):
     by_id = {it["id"]: it for it in listed}
+    write_voices_json(voices, ctx)
 
     def chip_group(name, label, values, counter, emojis=None):
         """emojis があれば、ボタンの頭に絵文字を付ける（転機の種類はトップページと同じ絵文字）"""
@@ -1900,7 +1918,7 @@ def build_voices(voices, listed, ctx):
             % (breadcrumb([(VOICES_LABEL, None)]), e(VOICES_LABEL), e(VOICES.get("lead", ""))))
     if not voices:
         body = head + '<p class="voices-empty">%s</p>\n' % e(VOICES.get("empty", "準備中です。"))
-        page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx, noindex=True)
+        page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx, noindex=True, extra_head=VOICES_JSON_LINK)
         return
     count = lambda key: collections.Counter(x for v in voices for x in (v[key] if isinstance(v[key], list) else [v[key]]))
     filters = "".join([
@@ -1939,7 +1957,7 @@ def build_voices(voices, listed, ctx):
 <script src="/assets/voices.js?v={ver}" defer></script>
 """.format(filters=filters, n=len(voices), cards="".join(voice_card(v, by_id) for v in voices), stats=voice_stats(voices),
            page_size=int(CONF["list_page_size"]), ver=ctx["version"])
-    page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx)
+    page("/voices/", VOICES_LABEL, VOICES.get("lead", ""), body, ctx=ctx, extra_head=VOICES_JSON_LINK)
 
 
 def voices_for_item(voices, item_id):
@@ -2227,6 +2245,7 @@ def main():
         "tenki_count": {t["name"]: sum(1 for it in listed if matches_tenki(it, t["name"])) for t in TENKI},
         "notes": load_notes(listed, args.drafts),
         "voices": parse_voices(voices_text(args.voices_csv)),
+        "item_ids": {it["id"] for it in items},  # 紹介ページがある掲載ID（転機の声の JSON の items に使う）
     }
 
 
