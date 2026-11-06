@@ -1831,28 +1831,38 @@ def voice_month(v):
 
 
 def voice_card(v, by_id):
-    """転機の声の記事カード。data-* は voices.js の絞り込み・並び替えに使う。"""
-    tags = "".join('<span class="tag">%s</span>' % e(t) for t in v["tenki"] + v["stages"] + v["triggers"] + ([v["age"]] if v["age"] != "不明" else []))
-    refs = [by_id[i] for i in v["items"] if i in by_id]
-    refs_html = ('<p class="voice-refs"><span class="voice-refs-label">この話に出てくるもの</span>%s</p>'
-                 % "".join('<a href="/item/%s/">%s</a>' % (e(it["id"]), e(it["title"])) for it in refs)) if refs else ""
-    note = VOICES.get("source_notes", {}).get(v["source"], "")
-    source = ('<p class="voice-source">%s%s</p>' % (e(v["source"]), '<span class="voice-source-note">%s</span>' % e(note) if note else "")) if v["source"] else ""
-    meta = "・".join(x for x in [e(v["media"]), e(voice_month(v))] if x)
+    """転機の声の記事カード。主役は「転機の前 → 転機の後」。要約は「あらすじを読む」で開く。data-* は voices.js の絞り込み・並び替えに使う。"""
+    tenki_emoji = {t["name"]: t.get("emoji", "") for t in TENKI}
+    trig_emoji = VOICES.get("trigger_emoji", {})
+    badges = "".join('<span class="vc-tenki">%s%s</span>' % (emoji(tenki_emoji.get(t, "")), e(t)) for t in v["tenki"])
+    if v["age"] != "不明":
+        badges += '<span class="vc-age">%s</span>' % e(v["age"])
+    stages = ('<span class="vc-stage">%s</span>' % e("・".join(v["stages"]))) if v["stages"] else ""
     path_html = ""
     if v["before"] or v["after"]:
-        path_html = ('<p class="voice-path"><span class="voice-from">%s</span><span class="voice-arrow" aria-hidden="true">→</span>'
-                     '<span class="visually-hidden">から</span><span class="voice-to">%s</span></p>' % (e(v["before"] or "―"), e(v["after"] or "―")))
+        path_html = ('<div class="vc-path"><p class="vc-before"><span class="vc-label">前</span>%s</p>'
+                     '<span class="vc-arrow" aria-hidden="true">↓</span><span class="visually-hidden">から</span>'
+                     '<p class="vc-after"><span class="vc-label">後</span>%s</p></div>' % (e(v["before"] or "―"), e(v["after"] or "―")))
+    trig = ('<p class="vc-trig"><span class="vc-trig-label">きっかけ</span>%s</p>'
+            % "".join('<span class="vc-chip">%s%s</span>' % (emoji(trig_emoji.get(t, "")), e(t)) for t in v["triggers"])) if v["triggers"] else ""
+    summary = ('<details class="vc-more"><summary>あらすじを読む</summary><p>%s</p></details>' % e(v["summary"])) if v["summary"] else ""
+    refs = [by_id[i] for i in v["items"] if i in by_id]
+    refs_html = ('<p class="vc-refs"><span>この話に出てくるもの</span>%s</p>'
+                 % "".join('<a href="/item/%s/">%s</a>' % (e(it["id"]), e(it["title"])) for it in refs)) if refs else ""
+    note = VOICES.get("source_notes", {}).get(v["source"], "")
+    note_html = '<p class="vc-note">%s</p>' % e(note) if note else ""
+    meta = "・".join(x for x in [e(v["media"]), e(voice_month(v))] if x)
     raw = " ".join([v["title"], v["who"], v["before"], v["after"], v["summary"], v["media"]] + v["keywords"])
     text = normalize(raw) + " " + reading(raw)  # 読み（ひらがなでも探せるように。pykakasi があるときだけ）
     data = {"tenki": v["tenki"], "stage": v["stages"], "trigger": v["triggers"], "age": [v["age"]], "source": [v["source"]], "item": v["items"]}
     attrs = "".join(' data-%s="%s"' % (k, e("|".join(vals))) for k, vals in data.items())
     return ('<li class="voice"%s data-month="%s" data-text="%s"><article class="voice-card">'
-            '<p class="voice-meta">%s</p>'
-            '<h3 class="voice-title"><a href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a></h3>'
-            '<p class="voice-who">%s</p>%s<div class="tags">%s</div><p class="voice-summary">%s</p>%s%s</article></li>'
-            % (attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text), meta, e(v["url"]), e(v["title"]),
-               e(v["who"]), path_html, tags, e(v["summary"]), source, refs_html))
+            '<div class="vc-head">%s%s</div><h3 class="vc-who">%s</h3>%s%s%s'
+            '<div class="vc-foot"><p class="vc-meta">%s</p>'
+            '<a class="vc-title" href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a>%s%s</div>'
+            '</article></li>'
+            % (attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text), badges, stages, e(v["who"]), path_html, trig, summary,
+               meta, e(v["url"]), e(v["title"]), note_html, refs_html))
 
 
 def voice_stats(voices):
