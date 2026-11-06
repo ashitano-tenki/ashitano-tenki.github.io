@@ -9022,5 +9022,69 @@
   "src": "https://encycle-agent.prossell.jp/ogp.png?v=20261028",
   "w": 960,
   "h": 504
+ },
+ "R1094": {
+  "page": "https://seibii.co.jp/career/spotwork/mechanic",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://seibii.co.jp/career/images/spotwork/ogp_mechanic.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1096": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784334046620",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43340/4334046622.jpg",
+  "w": 618,
+  "h": 1000
+ },
+ "R1097": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0691503",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47612/4761274107.jpg",
+  "w": 708,
+  "h": 1000
+ },
+ "R1098": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784384049602",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43840/4384049609.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1099": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062178",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534062176.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1100": {
+  "page": "https://note.com/hokulea_style",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://assets.st-note.com/production/uploads/images/70244048/1ef14fd73551491541e4cacc4e6c09e3.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+  "w": 960,
+  "h": 510
+ },
+ "R1101": {
+  "page": "https://umineco.org/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://umineco.org/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1102": {
+  "page": "https://nurse-matsuri.com/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/708fc669-2e25-40d4-a2c7-4ac7a590360e",
+  "w": 960,
+  "h": 540
  }
 }
