@@ -10542,5 +10542,69 @@
   "src": "https://shiba-kichi.com/images/og.jpg",
   "w": 960,
   "h": 504
+ },
+ "R1288": {
+  "page": "https://books.rakuten.co.jp/rb/17574721/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/447811532X.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1289": {
+  "page": "https://books.rakuten.co.jp/rb/18537223/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44960/4496058200.jpg",
+  "w": 696,
+  "h": 1000
+ },
+ "R1290": {
+  "page": "https://books.rakuten.co.jp/rb/17442736/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41639/4163916768.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R1291": {
+  "page": "https://books.rakuten.co.jp/rb/18278670/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44955/4495541919.jpg",
+  "w": 678,
+  "h": 1000
+ },
+ "R1292": {
+  "page": "https://books.rakuten.co.jp/rb/15602797/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48618/4861871557.jpg",
+  "w": 712,
+  "h": 1000
+ },
+ "R1293": {
+  "page": "https://books.rakuten.co.jp/rb/17777113/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/7595/9784120057595_1_3.jpg?downsize=600:*",
+  "w": 600,
+  "h": 881
+ },
+ "R1294": {
+  "page": "https://books.rakuten.co.jp/rb/17556733/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/1401/9784800591401_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 867
+ },
+ "R1295": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784297145248",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42971/4297145243.jpg",
+  "w": 681,
+  "h": 1000
  }
 }
