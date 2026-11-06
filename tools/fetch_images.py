@@ -6,7 +6,10 @@
 - 毎朝の「サイトを更新」で、サイトを作る前に動く。画像の縮小に Pillow を使う（ワークフローで入れる）。
 - 取得するのは、まだ画像を確かめていない掲載・取得から30日たったもの・取れなかったもので7日たったものだけ。
   相手のサイトに負担をかけないよう、1回に確かめる数を MAX_PER_RUN までにし、同じドメインには間をあける。
-- 本の表紙（URLのISBN、なければ書名から国立国会図書館サーチで引いたISBN）・Spotify・YouTube の動画は、ページを読まずに画像の場所を決める（derived_image_url）。取れなければページを読む。
+- 本の表紙（URLのISBN、なければ書名から国立国会図書館サーチで引いたISBN。紀伊國屋→Amazonの画像置き場の順）・Spotify・YouTube の動画は、
+  ページを読まずに画像の場所を決める（derived_image_urls）。取れなければページを読む。
+- それでも画像がない・取れない・サイト共通の画像だった掲載（本・Podcast を除く）は、公式ページを Chrome で開いた最初の画面を
+  キャプチャして使う（capture_page。data/images.json に capture: true）。それも取れなければ作業ページ「観測所の画像あつめ」で頼む。
 - 自動の取得を断るページは、同じものを載せた別のページに読み替えて画像を探す（page_for_image。楽天市場の本→楽天ブックス）。
 - 結果は data/images.json に書く（ID ごとに、状態・元の画像のURL・大きさ・確かめた日）。
 - 画像は2つ、軽い WebP 形式で書き出す：{ID}.webp（紹介ページ用、幅960まで）と {ID}-s.webp（カードの上の画像用、幅600ほど）。
@@ -26,7 +29,10 @@ import io
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.parse
@@ -113,35 +119,66 @@ def norm_title(t):
     return re.sub(r"[\s　・、。,.!！?？「」『』（）()［］\[\]〈〉<>:：/／\-－—―~〜]", "", unicodedata.normalize("NFKC", t or "")).lower()
 
 
+TITLE_SPLIT = re.compile(r"\s*[―—–‐:：（(「『]\s*|\s+[-－~〜]\s+")
+
+
 def isbn_from_title(title):
     """本のURLにISBNがないとき（電子書籍のページなど）、国立国会図書館サーチの公開検索で書名からISBNを引く。
-    国会図書館の書名は「本題 : 副題」の形で、掲載の書名と順番がちがうことがある。本題・副題のどれもが
-    掲載の書名に含まれるものだけを使う（ちがう本の表紙を出さないため）。見つからなければ空文字。
+    - 検索は書名の部分ごとに行う（「本題―副題」のまま送ると1件も返らない。2026年11月、R1144）。
+    - 照合は向きを問わない：国会図書館の部分がどれも掲載の書名に含まれる、または掲載の部分がどれも国会図書館の書名に
+      含まれる（国会図書館は「デキる二代目社長は知っている事業承継5つの鉄則」のように副題を前に付けることがある。R1145）。
+      短いほうが長いほうの6割以上あるとき、または本題がまったく同じとき（副題の有無だけのちがい）だけ使う
+      （ちがう本の表紙を出さないため）。見つからなければ空文字。
     （2026年10月、紀伊國屋の電子書籍2冊で、黒田さんが書名で探して表紙を渡してくれたのを自動にしたもの）"""
     if not title:
         return ""
-    body, _, _ = fetch("https://ndlsearch.ndl.go.jp/api/opensearch?cnt=5&title=" + urllib.parse.quote(title), 500_000)
-    text = body.decode("utf-8", "replace")
-    want = norm_title(title)
-    for item in re.findall(r"<item>(.*?)</item>", text, re.S):
-        t = re.search(r"<title>([^<]*)</title>", item)
-        isbn = re.search(r'<dc:identifier xsi:type="dcndl:ISBN(?:13)?">([\dX-]+)</dc:identifier>', item)
-        parts = [norm_title(x) for x in re.split(r"\s[:：]\s", html.unescape(t.group(1)))] if t else []
-        parts = [x for x in parts if len(x) >= 2]
-        if isbn and parts and want and all(x in want for x in parts) and len("".join(parts)) >= len(want) * 0.6:
-            digits = isbn.group(1).replace("-", "")
-            if len(digits) == 13 and digits.startswith("978"):
-                return digits
+    mine = [norm_title(x) for x in TITLE_SPLIT.split(title)]
+    mine = [x for x in mine if len(x) >= 2]
+    want = "".join(mine)
+    if not want:
+        return ""
+    queries = []
+    for q in [title] + sorted(TITLE_SPLIT.split(title), key=len, reverse=True):
+        q = q.strip()
+        if len(norm_title(q)) >= 4 and q not in queries:
+            queries.append(q)
+    for q in queries[:3]:
+        try:
+            body, _, _ = fetch("https://ndlsearch.ndl.go.jp/api/opensearch?cnt=10&title=" + urllib.parse.quote(q), 500_000)
+        except Exception:
+            continue
+        text = body.decode("utf-8", "replace")
+        for item in re.findall(r"<item>(.*?)</item>", text, re.S):
+            t = re.search(r"<title>([^<]*)</title>", item)
+            isbn = re.search(r'<dc:identifier xsi:type="dcndl:ISBN(?:13)?">([\dX-]+)</dc:identifier>', item)
+            if not (t and isbn):
+                continue
+            parts = [norm_title(x) for x in re.split(r"\s[:：]\s", html.unescape(t.group(1)))]
+            parts = [x for x in parts if len(x) >= 2]
+            theirs = "".join(parts)
+            if not parts:
+                continue
+            matched = all(x in want for x in parts) or all(x in theirs for x in mine)
+            same_main = parts[0] == want or parts[0] == mine[0] and len(mine[0]) >= 6  # 本題が同じ（副題の有無だけちがう）
+            if (matched and min(len(want), len(theirs)) >= max(len(want), len(theirs)) * 0.6) or same_main:
+                digits = isbn.group(1).replace("-", "")
+                if len(digits) == 13 and digits.startswith("978"):
+                    return digits
     return ""
 
 
-def kinokuniya_cover(isbn13):
+def cover_urls(isbn13):
+    """ISBNから決まる表紙画像の場所（先に試すものから順に）。
+    紀伊國屋の表紙（ISBN-10から場所が決まる）→ Amazon の画像置き場（ISBN-10＝紙の本のASINで場所が決まる）。
+    Amazon の検索ページは読まない（自動での読み込みを断る・規約の面）。画像のURLを組み立てるだけ。
+    （2026年11月、黒田さんの指摘「書籍は Amazon で探せたはず」から追加）"""
     isbn10 = isbn10_from_13(isbn13)
-    return "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10)
+    return ["https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/%s/%s.jpg" % (isbn10[:5], isbn10),
+            "https://m.media-amazon.com/images/P/%s.09.LZZZZZZZ.jpg" % isbn10]
 
 
-def derived_image_url(page_url, kind="", title=""):
-    """ページを読まなくても画像の場所がわかるものは、ここで画像のURLを決める。わからなければ空文字。
+def derived_image_urls(page_url, kind="", title=""):
+    """ページを読まなくても画像の場所がわかるものは、ここで画像のURLの候補を決める（先に試すものから順に）。わからなければ空のリスト。
     - 本（タイプが「書籍」で、URLにISBN-13がある）：どの書店のページでも、紀伊國屋書店の表紙画像を使う。
       表紙画像はISBN-10から場所が決まる。書店のページの og:image は店のロゴのことが多いので、本は先にこちらを見る
       （2026年10月、丸善ジュンク堂の5冊が店のロゴになっていた）
@@ -152,21 +189,22 @@ def derived_image_url(page_url, kind="", title=""):
     if kind == "書籍" or host == "kinokuniya.co.jp":
         m = re.search(r"(?<!\d)(978\d{10})(?!\d)", parts.path + "?" + parts.query)
         if m:
-            return kinokuniya_cover(m.group(1))
+            return cover_urls(m.group(1))
     if kind == "書籍":
         isbn = isbn_from_title(title)  # URLにISBNがない本は、書名からISBNを引く
         if isbn:
-            return kinokuniya_cover(isbn)
+            return cover_urls(isbn)
     if host == "open.spotify.com" and re.match(r"/(show|episode|album|playlist|track|artist)/", parts.path):
         body, _, _ = fetch("https://open.spotify.com/oembed?url=" + urllib.parse.quote(page_url, safe=""), 200_000)
-        return json.loads(body.decode("utf-8")).get("thumbnail_url", "")
+        thumb = json.loads(body.decode("utf-8")).get("thumbnail_url", "")
+        return [thumb] if thumb else []
     if host in ("youtube.com", "m.youtube.com") and parts.path == "/watch":
         vid = urllib.parse.parse_qs(parts.query).get("v", [""])[0]
         if re.fullmatch(r"[\w-]{6,20}", vid):
-            return "https://i.ytimg.com/vi/%s/hqdefault.jpg" % vid
+            return ["https://i.ytimg.com/vi/%s/hqdefault.jpg" % vid]
     if host == "youtu.be" and re.fullmatch(r"/[\w-]{6,20}", parts.path):
-        return "https://i.ytimg.com/vi/%s/hqdefault.jpg" % parts.path[1:]
-    return ""
+        return ["https://i.ytimg.com/vi/%s/hqdefault.jpg" % parts.path[1:]]
+    return []
 
 
 def page_for_image(page_url):
@@ -309,6 +347,59 @@ def remove_files(item_id):
             os.remove(path)
 
 
+CHROME_PATHS = ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser",
+                "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+
+
+def chrome_path():
+    for c in [os.environ.get("CHROME", "")] + list(CHROME_PATHS):
+        if c and (shutil.which(c) or os.path.exists(c)):
+            return shutil.which(c) or c
+    return ""
+
+
+def capture_page(url):
+    """公式ページを開いたときの最初の画面（パソコンの幅）をキャプチャして PNG のバイト列を返す。取れなければ None。
+    画像が見つからない・取れない・サイト共通の画像だった掲載で、黒田さんに頼む前に試す
+    （2026年11月、黒田さんの方針「取れなかったら、まずサイトのいちばん上をキャプチャして使う」）。
+    Chrome（GitHub の実行環境には入っている）を画面なしで動かす。ほぼ一色の画面（白紙・読み込み中・
+    ボット確認の画面など）は使わない。本・Podcast は表紙を使うのでキャプチャしない。"""
+    chrome = chrome_path()
+    if not chrome:
+        return None
+    with tempfile.TemporaryDirectory() as tmp:
+        out = os.path.join(tmp, "shot.png")
+        args = [chrome, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--mute-audio",
+                "--no-first-run", "--no-default-browser-check", "--user-data-dir=" + os.path.join(tmp, "profile"),
+                "--window-size=1440,820", "--virtual-time-budget=9000", "--lang=ja-JP",
+                "--user-agent=" + UA, "--screenshot=" + out, ascii_url(url)]
+        if os.environ.get("CI"):
+            args.insert(1, "--no-sandbox")  # GitHub の Ubuntu では Chrome のサンドボックスが使えない
+        try:
+            subprocess.run(args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60, check=False)
+        except Exception:
+            return None
+        if not os.path.exists(out):
+            return None
+        with open(out, "rb") as f:
+            data = f.read()
+    try:
+        im = Image.open(io.BytesIO(data)).convert("L").resize((160, 90))
+        px = list(im.getdata())
+        mean = sum(px) / len(px)
+        spread = (sum((v - mean) ** 2 for v in px) / len(px)) ** 0.5
+        common = collections.Counter(v // 8 for v in px).most_common(1)[0][1] / len(px)
+        if spread < 12 or common > 0.93:
+            return None  # ほぼ一色（白紙など）
+    except Exception:
+        return None
+    return data
+
+
+def can_capture(row):
+    return row.get("種類") != "書籍" and not any(h in row.get("URL", "") for h in COVER_HOSTS)
+
+
 def check(row, today, override=""):
     """1件を確かめて、manifest に入れる記録を返す。override があれば公式ページを読まずにその画像を使う。"""
     rec = {"page": row["URL"], "checked": today.isoformat()}
@@ -320,15 +411,34 @@ def check(row, today, override=""):
             # 決まった場所の画像（本の表紙など）を先に試し、取れなければふつうにページを読む
             # （ISBNがあっても紀伊國屋に表紙がない本もある）
             try:
-                src = derived_image_url(row["URL"], row.get("種類", ""), row.get("タイトル", ""))
-                if src:
-                    data, _, _ = fetch(src, MAX_BYTES + 1)
-                    Image.open(io.BytesIO(data)).verify()
+                candidates = derived_image_urls(row["URL"], row.get("種類", ""), row.get("タイトル", ""))
             except Exception:
-                src, data = "", None
+                candidates = []
+            for cand in candidates:
+                try:
+                    data, _, _ = fetch(cand, MAX_BYTES + 1)
+                    with Image.open(io.BytesIO(data)) as probe:
+                        if min(probe.size) < 50:  # 見つからないときの1ピクセルの画像など
+                            raise ValueError("画像が小さすぎます")
+                    src = cand
+                    break
+                except Exception:
+                    data = None
+        page_error = None
         if not src:
-            src = og_image_url(page_for_image(row["URL"]))
+            try:
+                src = og_image_url(page_for_image(row["URL"]))
+            except Exception as ex:
+                if not can_capture(row):
+                    raise
+                src, page_error = "", ex
         if not src:
+            shot = capture_page(row["URL"]) if can_capture(row) else None
+            if shot:
+                w, h = save_images(row["ID"], shot, fills_frame(row))
+                return dict(rec, status="ok", src="capture:" + row["URL"], capture=True, w=w, h=h)
+            if page_error:
+                raise page_error
             remove_files(row["ID"])
             return dict(rec, status="none")
         if data is None and src.startswith("file:"):
@@ -359,7 +469,7 @@ def is_suspect(page, src):
     """サイト共通の画像かもしれないもの：トップ以外のページなのに、画像がサイトの浅い場所にある ogp・logo・default などの名前。
     （2026年10月、Business Insider の「キャリアインサイダー」がサイト全体の /images/ogp.png になっていた）"""
     page_path = urllib.parse.urlsplit(page).path
-    if page_path in ("", "/") or not src or src.startswith("file:"):
+    if page_path in ("", "/") or not src or src.startswith(("file:", "capture:")):
         return False
     src_path = urllib.parse.urlsplit(src).path
     name = src_path.rsplit("/", 1)[-1]
@@ -480,6 +590,15 @@ def main():
                 manifest[item_id] = rec
 
     mark_generic(manifest, keep)
+    # サイト共通の画像だったもの（今回確かめた分）は、公式ページのキャプチャに切り替える
+    for r in todo:
+        rec = manifest.get(r["ID"], {})
+        if rec.get("status") == "generic" and can_capture(r):
+            shot = capture_page(r["URL"])
+            if shot:
+                w, h = save_images(r["ID"], shot, fills_frame(r))
+                manifest[r["ID"]] = {"page": r["URL"], "checked": rec.get("checked", today.isoformat()), "status": "ok",
+                                     "src": "capture:" + r["URL"], "capture": True, "w": w, "h": h}
     os.makedirs(os.path.dirname(MANIFEST), exist_ok=True)
     with open(MANIFEST, "w", encoding="utf-8") as f:
         json.dump(dict(sorted(manifest.items())), f, ensure_ascii=False, indent=1)
