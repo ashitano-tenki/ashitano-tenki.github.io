@@ -292,14 +292,11 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
 
 # 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
 NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/check/", "セルフチェック"), ("/notes/", "観測ノート"), ("/voices/", "転機の声")]
-NAV_HIDE = set()  # 中身がまだないページ（main() で決める。転機の声は記事が0件のあいだメニューに出さない）
 
 
 def nav_links(current=None):
     out = []
     for href, label in NAV:
-        if href in NAV_HIDE:
-            continue
         if href == "/voices/":
             label = VOICES_LABEL
         cur = ' aria-current="page"' if href == current else ""
@@ -2218,8 +2215,7 @@ def main():
         "notes": load_notes(listed, args.drafts),
         "voices": parse_voices(voices_text(args.voices_csv)),
     }
-    if not ctx["voices"]:
-        NAV_HIDE.add("/voices/")
+
 
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
