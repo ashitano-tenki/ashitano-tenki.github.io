@@ -9158,5 +9158,157 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534060475.jpg",
   "w": 704,
   "h": 1000
+ },
+ "R1114": {
+  "page": "https://www.eiyomirai.co.jp/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1115": {
+  "page": "https://job.sampolab-ad.com/",
+  "checked": "2026-11-06",
+  "status": "none"
+ },
+ "R1116": {
+  "page": "https://worker.care-link.website",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://worker.care-link.website/assets/images/ogp.png",
+  "w": 960,
+  "h": 505
+ },
+ "R1117": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000100.000045846.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/45846/100/45846-100-987509a4d3504695c99eb3cbbfe2156f-1800x945.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1118": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000003.000180047.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/180047/3/180047-3-4a7d9cd733c8245d38f815a472807e57-562x376.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 562,
+  "h": 376
+ },
+ "R1119": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000987.000010591.html",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/10591/987/10591-987-ee56fbd60ab2da9396ea10f29832ec66-1200x630.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1120": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1237067622",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/de/a2/8e/dea28e59-88ea-b158-7273-206f9c06822d/mza_2822098860684370895.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1121": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1821815733",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts221/v4/e8/b4/1c/e8b41cc1-6b4a-9b88-c6e6-2d45c09108d1/mza_3228410266349167480.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1122": {
+  "page": "https://relay.town/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://relay.town/assets/img/common/ogp.png?20250304",
+  "w": 960,
+  "h": 504
+ },
+ "R1123": {
+  "page": "https://www.tranbi.com/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.tranbi.com/img/ogp/ogp-tranbi.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1124": {
+  "page": "https://j-search.co.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://j-search.co.jp/assets/img/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1125": {
+  "page": "https://my-sherpa.jp/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://my-sherpa.jp/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1126": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1761065228",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/06/c1/b4/06c1b43f-5758-3537-6416-8093fbaceb8c/mza_11766998102128813444.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1127": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784804764511",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48047/4804764518.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R1128": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784866803579",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48668/4866803576.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1129": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798073026",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47980/4798073024.jpg",
+  "w": 674,
+  "h": 1000
+ },
+ "R1130": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784762832833",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47628/4762832839.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1131": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784344941328",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43449/4344941322.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R1132": {
+  "page": "https://kagyoaid.com/",
+  "checked": "2026-11-06",
+  "status": "ok",
+  "src": "https://kagyoaid.com/assets-v3/kagyoaid-ogp.webp",
+  "w": 960,
+  "h": 504
+ },
+ "R1133": {
+  "page": "https://mitsu-boshi.jp/takibico/",
+  "checked": "2026-11-06",
+  "status": "error",
+  "note": "URLError: <urlopen error timed out>"
  }
 }
