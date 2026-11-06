@@ -915,8 +915,8 @@ def build_item(item, listed, ctx):
   <p class="ended-note">このサービスは提供を終了したか、掲載を終えました。</p>
   <p class="note">ほかのサービスは<a href="/search/">一覧ページ</a>から探せます。</p>
 </article>
-{similar}
-""".format(crumbs=crumbs, title=e(item["title"]), similar=similar_html)
+{note_band}{similar}
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), title=e(item["title"]), similar=similar_html)
         page("/item/%s/" % item["id"], item["title"], "このサービスは提供を終了したか、掲載を終えました。", body, noindex=True, ctx=ctx)
         return
 
@@ -955,12 +955,11 @@ def build_item(item, listed, ctx):
     <div><dt>{provider_label}</dt><dd>{provider}</dd></div>
   </dl>
 </article>
-{similar}
-""".format(crumbs=crumbs, kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
+{note_band}{similar}
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
            hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
-           provider=e(item["provider"] or "―"), report=report_link(item) + "".join(
-               '<p class="note-ref">%s：<a href="%s">%s</a></p>' % (NOTES_LABEL, e(note_url(n)), e(n["title"])) for n in notes_for_item(ctx["notes"], item["id"])),
+           provider=e(item["provider"] or "―"), report=report_link(item),
            provider_label={"調査": "発表元", "書籍": "著者・出版社"}.get(item["kind"], "提供元"),
            similar=similar_html)
     desc = item["memo"][:110] or "%sの紹介ページです。" % item["title"]
@@ -1602,6 +1601,31 @@ def note_strip(n, by_id):
     return ('<nav class="note-strip" aria-label="この記事で紹介するもの"><p class="note-strip-head">この記事で紹介する<b>%d</b>件</p><ol>%s</ol></nav>'
             % (len(items), "".join('<li><a href="#pick-%s" title="%s">%s<span>%s</span></a></li>'
                                    % (e(it["id"]), e(it["title"]), item_media(it, "note-strip-media", True), e(it["title"])) for it in items)))
+
+
+def note_band(item, listed, ctx):
+    """紹介ページの枠の下に置く帯。この掲載を紹介した観測ノートを、シェア画像と紹介している掲載の画像で見せる。"""
+    notes = notes_for_item(ctx["notes"], item["id"])
+    if not notes:
+        return ""
+    by_id = ctx.get("_listed_by_id")
+    if by_id is None:
+        by_id = ctx["_listed_by_id"] = {it["id"]: it for it in listed}
+    out = []
+    for n in notes:
+        items = [by_id[i] for i in n["ids"] if i in by_id]
+        thumbs = "".join('<li%s><a href="/item/%s/" title="%s"%s>%s<span class="visually-hidden">%s</span></a></li>'
+                         % (' class="is-here"' if it["id"] == item["id"] else "", e(it["id"]), e(it["title"]),
+                            ' aria-current="page"' if it["id"] == item["id"] else "", item_media(it, "note-band-media", True), e(it["title"]))
+                         for it in items)
+        out.append('<section class="note-band"><a class="note-band-img" href="%s" tabindex="-1" aria-hidden="true">'
+                   '<img src="%s" alt="" width="1200" height="630" loading="lazy"></a><div class="note-band-body">'
+                   '<p class="note-band-kicker">この掲載が出てくる%s</p><h2 class="note-band-title"><a href="%s">%s</a></h2>'
+                   '<p class="note-band-lead">%s</p>%s<a class="note-band-btn" href="%s">記事を読む</a></div></section>'
+                   % (e(note_url(n)), e(og_image("note-" + n["slug"])), NOTES_LABEL, e(note_url(n)), e(n["title"]), e(n["description"]),
+                      '<ol class="note-band-items">%s</ol><p class="note-band-cap">記事で紹介している%d件（枠がこのページ）</p>' % (thumbs, len(items)) if items else "",
+                      e(note_url(n))))
+    return "\n".join(out) + "\n"
 
 
 def notes_for_tenki(notes, name):

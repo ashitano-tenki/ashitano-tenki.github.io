@@ -727,7 +727,30 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .note-list a:hover .note-list-title { color: var(--sky); text-decoration: underline; }
 .note-list-desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 14px; color: var(--text-sub); line-height: 1.7; }
 .note-card-meta { font-size: 12px; color: var(--text-sub); margin-top: auto; padding-top: 4px; }
-.note-ref { font-size: 14px; margin: var(--space-3) 0 0; }
+/* 紹介ページの枠の下「この掲載が出てくる観測ノート」の帯 */
+.note-band { margin-top: var(--space-12); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow: hidden; }
+.note-band + .note-band { margin-top: var(--space-4); }
+.note-band-img { display: flex; align-items: center; background: #f5c518; }
+.note-band-img img { display: block; width: 100%; height: auto; aspect-ratio: 1.91 / 1; object-fit: cover; }
+.note-band-body { padding: var(--space-6) 28px; min-width: 0; }
+.note-band-kicker { margin: 0; font-size: 13px; font-weight: 700; color: var(--text-sub); }
+.note-band-title { font-family: var(--font-display); font-size: 22px; line-height: 1.45; margin: var(--space-1) 0 var(--space-2); }
+.note-band-title a { color: var(--ink); text-decoration: none; }
+.note-band-title a:hover { color: var(--sky); text-decoration: underline; }
+.note-band-lead { margin: 0; font-size: 14px; color: var(--text-body); }
+.note-band-items { position: relative; list-style: none; margin: var(--space-4) 0 0; padding: 3px 3px 6px; display: flex; gap: var(--space-2); overflow-x: auto; }
+.note-band-items li { flex: none; }
+.note-band-items a { position: relative; display: block; border-radius: 6px; }
+.note-band-media { width: 88px; aspect-ratio: 1.91 / 1; border-radius: 6px; background: var(--chip-bg); border: var(--border-hairline) solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: border-color .15s ease; }
+.note-band-media img { display: block; width: 100%; height: 100%; }
+.note-band-media.media-none span { font-size: 20px; }
+.note-band-items a:hover .note-band-media { border-color: var(--sky); }
+.note-band-items .is-here .note-band-media { outline: var(--border-rule) solid var(--ink); outline-offset: 1px; }
+.note-band-cap { margin: var(--space-1) 0 0; font-size: 12px; color: var(--text-sub); }
+.note-band-btn { display: inline-block; margin-top: var(--space-4); background: var(--ink); color: var(--base); font-weight: 700; font-size: 15px; padding: 10px 22px; border-radius: var(--radius-pill); text-decoration: none; transition: opacity .15s ease; }
+.note-band-btn:hover { opacity: .85; }
+@media (max-width: 767px) { .note-band { grid-template-columns: minmax(0, 1fr); } .note-band-body { padding: 18px 18px 22px; } .note-band-title { font-size: 19px; } }
+@media (prefers-reduced-motion: reduce) { .note-band-media, .note-band-btn { transition: none; } }
 @media (prefers-reduced-motion: reduce) { .note-list a { transition: none; } .note-list a:hover { transform: none; } }
 @media (max-width: 479px) { .note-pick-media { width: 96px; } .note-pick-title { font-size: 16px; } }
 /* 紹介ページの下「あわせて見たいもの」：手段（タイプ）ごとに選ぶ */
