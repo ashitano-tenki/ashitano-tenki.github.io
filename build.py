@@ -301,7 +301,7 @@ def nav_links(current=None):
             label = VOICES_LABEL
         cur = ' aria-current="page"' if href == current else ""
         out.append('      <a href="%s"%s>%s</a>' % (href, cur, e(label)))
-        if href == "/notes/" and TENKI_AI:
+        if href == "/voices/" and TENKI_AI:  # 転機AIは観測所の外なので、サイト内の項目（転機の声まで）のあとに置く
             out.append('      ' + ai_link(TENKI_AI, "転機AIに相談", "nav"))
     return "\n".join(out)
 
