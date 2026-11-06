@@ -159,6 +159,15 @@
     if (input && input === wasChecked && ev.target === input) { setRadio(input.name, ""); wasChecked = null; run(); }
   });
   moreBtn.addEventListener("click", function () { render(false); });
+  // カードの札（転機の種類・年代・きっかけ）を押すと、その条件で絞り込み、一覧の頭に戻る
+  list.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-f]");
+    if (!b) return;
+    if (!setRadio(b.getAttribute("data-f"), b.getAttribute("data-v"))) return;
+    run();
+    var bar = document.querySelector(".result-bar");
+    if (bar) bar.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  });
   toggle.addEventListener("click", function () { setPanel(!panel.classList.contains("open")); });
   // スマホの帯の「絞り込む」は site.js が開け閉めする（探すページと同じ）
   chipsEl.addEventListener("click", function (ev) {

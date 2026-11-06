@@ -1838,16 +1838,19 @@ def voice_card(v, by_id):
     絞り込みと検索には残る）。data-* は voices.js の絞り込み・並び替えに使う。"""
     tenki_emoji = {t["name"]: t.get("emoji", "") for t in TENKI}
     trig_emoji = VOICES.get("trigger_emoji", {})
-    badges = "".join('<span class="vc-tenki">%s%s</span>' % (emoji(tenki_emoji.get(t, "")), e(t)) for t in v["tenki"])
+    # 札（転機の種類・年代・きっかけ）は押すとその条件で絞り込む（voices.js）
+    tag = lambda cls, f, val, label: ('<button type="button" class="%s" data-f="%s" data-v="%s" title="「%s」で絞り込む">%s</button>'
+                                      % (cls, f, e(val), e(val), label))
+    badges = "".join(tag("vc-tenki", "tenki", t, emoji(tenki_emoji.get(t, "")) + e(t)) for t in v["tenki"])
     if v["age"] != "不明":
-        badges += '<span class="vc-age">%s</span>' % e(v["age"])
+        badges += tag("vc-age", "age", v["age"], e(v["age"]))
     big = next((tenki_emoji[t] for t in v["tenki"] if tenki_emoji.get(t)), "")
     icon = '<span class="vc-icon" aria-hidden="true">%s</span>' % e(big) if big else ""
     # 「前」のラベルは付けない（見出しの矢印で前後が分かるため。2026-11-06 黒田さんの判断）。読み上げでは「転機の前：」と読む
     before = '<p class="vc-from"><span class="visually-hidden">転機の前：</span>%s</p>' % e(v["before"]) if v["before"] else ""
-    after = '<p class="vc-after"><span class="vc-after-arrow" aria-hidden="true">→</span>%s</p>' % e(v["after"] or v["title"])
+    after = '<span class="vc-after-arrow" aria-hidden="true">→</span>%s' % e(v["after"] or v["title"])  # 見出し（h3）の中身。p で包まない（余白が付くため）
     trig = ('<p class="vc-trig"><span class="visually-hidden">きっかけ：</span>%s</p>'
-            % "".join('<span class="vc-chip">%s%s</span>' % (emoji(trig_emoji.get(t, "")), e(t)) for t in v["triggers"])) if v["triggers"] else ""
+            % "".join(tag("vc-chip", "trigger", t, emoji(trig_emoji.get(t, "")) + e(t)) for t in v["triggers"])) if v["triggers"] else ""
     summary = ('<details class="vc-more"><summary>あらすじを読む</summary><p>%s</p></details>' % e(v["summary"])) if v["summary"] else ""
     meta = "・".join(x for x in [e(v["media"]), e(voice_month(v))] if x)
     raw = " ".join([v["title"], v["who"], v["before"], v["after"], v["summary"], v["media"]] + v["keywords"])
@@ -1857,10 +1860,11 @@ def voice_card(v, by_id):
     return ('<li class="voice" data-id="%s"%s data-month="%s" data-text="%s"><article class="voice-card">'
             '<div class="vc-top">%s<div class="vc-head">%s</div>%s<h3 class="vc-headline">%s</h3><p class="vc-who" title="%s">%s</p></div>'
             '<div class="vc-body">%s%s<div class="vc-foot"><p class="vc-meta">%s</p>'
-            '<a class="vc-title" href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a></div></div>'
+            '<a class="vc-title" href="%s" target="_blank" rel="noopener">%s<span class="visually-hidden">（新しいタブで開く）</span></a>'
+            '<a class="vc-go" href="%s" target="_blank" rel="noopener">記事を読む<span class="visually-hidden">（新しいタブで開く）</span></a></div></div>'
             '</article></li>'
             % (e(v["id"]), attrs, "%04d-%02d" % v["month"] if v["month"] else "", e(text),
-               icon, badges, before, after, e(v["who"]), e(v["who"]), trig, summary, meta, e(v["url"]), e(v["title"])))
+               icon, badges, before, after, e(v["who"]), e(v["who"]), trig, summary, meta, e(v["url"]), e(v["title"]), e(v["url"])))
 
 
 def voice_stats(voices):

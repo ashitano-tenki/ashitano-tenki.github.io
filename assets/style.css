@@ -790,6 +790,13 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-after-arrow { color: var(--sky); margin-right: 6px; }
 .vc-who { margin: 10px 0 0; font-size: 13px; font-weight: 700; color: var(--text-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }  /* 語り手は1行に収め、入らない分は「…」 */
 .vc-who::before { content: "― "; }
+/* 札はボタン（押すと絞り込む）。全体のボタンの見た目を打ち消して、札の形にする */
+.vc-tenki, .vc-age, .vc-chip { font-family: inherit; cursor: pointer; box-shadow: none; min-height: 0; transition: border-color .15s ease, background-color .15s ease; }
+.vc-tenki { border: 1.5px solid transparent; }
+.vc-chip { color: var(--ink); font-weight: 400; }
+.vc-tenki:hover { border-color: var(--sky); }
+.vc-age { background: transparent; color: var(--ink); }
+.vc-age:hover, .vc-chip:hover { border-color: var(--sky); color: var(--sky); }
 /* 下半分：きっかけ・あらすじ・記事 */
 .vc-body { flex: 1; display: flex; flex-direction: column; gap: var(--space-3); padding: 14px 20px 18px; }
 .vc-trig { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
@@ -804,6 +811,8 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .vc-meta { margin: 0; font-size: 12px; color: var(--text-sub); }
 .vc-title { font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .vc-title:hover { color: var(--sky); text-decoration: underline; }
+.vc-go { display: inline-flex; align-items: center; width: fit-content; margin-top: var(--space-2); padding: 6px 16px; border-radius: var(--radius-pill); border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); font-size: 14px; font-weight: 700; text-decoration: none; }
+.vc-go:hover { background: var(--ink); color: var(--base); }
 /* パソコン：左に見出しの面、右にきっかけと記事の「左右2分割」（2026-11-06 黒田さんの判断。案1） */
 @media (min-width: 1024px) {
   .voice-card { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
