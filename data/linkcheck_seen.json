@@ -178,10 +178,10 @@
 "声:V0023": {
 "date": "2026-11-07",
 "url": "https://doda.jp/consultant/case/005b.html",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "声:V0024": {
 "date": "2026-11-07",
@@ -1479,6 +1479,190 @@
 "final_url": "",
 "note": ""
 },
+"声:V0191": {
+"date": "2026-11-07",
+"url": "https://colocal.jp/shizuoka/20250228_169690.html",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0192": {
+"date": "2026-11-07",
+"url": "https://mi-mollet.com/articles/-/40913",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0193": {
+"date": "2026-11-07",
+"url": "https://wotopi.jp/archives/46940",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0194": {
+"date": "2026-11-07",
+"url": "https://wotopi.jp/archives/51049",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0195": {
+"date": "2026-11-07",
+"url": "https://joshi-spa.jp/1372855",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0196": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/people/5559",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0197": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/learning/4573",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0198": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/learning/5133",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0199": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/move_set/25003",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0200": {
+"date": "2026-11-07",
+"url": "https://www.lifehacker.jp/article/2501-work_theory_samansa/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0201": {
+"date": "2026-11-07",
+"url": "https://www.lifehacker.jp/article/2505-doless-focuson-shiota-interview/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0202": {
+"date": "2026-11-07",
+"url": "https://lifeshiftjapan.jp/interview/10485/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0203": {
+"date": "2026-11-07",
+"url": "https://lifeshiftjapan.jp/interview/8548/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0204": {
+"date": "2026-11-07",
+"url": "https://lifeshiftjapan.jp/interview/10428/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0205": {
+"date": "2026-11-07",
+"url": "https://lifeshiftjapan.jp/interview/9695/",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0206": {
+"date": "2026-11-07",
+"url": "https://toyokeizai.net/articles/-/803891",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0208": {
+"date": "2026-11-07",
+"url": "https://mi-mollet.com/articles/-/60747",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0209": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/learning/10646",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0210": {
+"date": "2026-11-07",
+"url": "https://sotokoto-online.jp/learning/11709",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0211": {
+"date": "2026-11-07",
+"url": "https://note.com/saratei1/n/n5115f44b9c1f",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0212": {
+"date": "2026-11-07",
+"url": "https://note.com/b_kaz/n/n245a9a2d0fc6",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0213": {
+"date": "2026-11-07",
+"url": "https://note.com/mumitam/n/n146fdc673641",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
+"声:V0214": {
+"date": "2026-11-07",
+"url": "https://note.com/kotokototo_/n/n598ae0d19b56",
+"status": "正常",
+"http_status": 200,
+"final_url": "",
+"note": ""
+},
 "観測所:R0005": {
 "date": "2026-11-07",
 "url": "https://www.lancers.jp/",
@@ -1658,18 +1842,18 @@
 "観測所:R0029": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784492533871",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0030": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295403746",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0031": {
 "date": "2026-11-07",
@@ -1754,18 +1938,18 @@
 "観測所:R0041": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121024312",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0042": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784594082727",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0043": {
 "date": "2026-11-07",
@@ -1778,10 +1962,10 @@
 "観測所:R0044": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295010883",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0045": {
 "date": "2026-11-07",
@@ -1818,18 +2002,18 @@
 "観測所:R0049": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1562501",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0050": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784911287064",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0051": {
 "date": "2026-11-07",
@@ -1914,18 +2098,18 @@
 "観測所:R0061": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784779519550",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0062": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866633336",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0063": {
 "date": "2026-11-07",
@@ -2018,18 +2202,18 @@
 "観測所:R0074": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784074621507",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0075": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784413114004",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0076": {
 "date": "2026-11-07",
@@ -2250,42 +2434,42 @@
 "観測所:R0104": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784478122167",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0105": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784101284514",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0106": {
 "date": "2026-11-07",
 "url": "https://doda.jp/guide/kyujin_bairitsu/data/",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0107": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569856209",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0108": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1395194",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0109": {
 "date": "2026-11-07",
@@ -2338,10 +2522,10 @@
 "観測所:R0115": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569858791",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0116": {
 "date": "2026-11-07",
@@ -2354,10 +2538,10 @@
 "観測所:R0117": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0499407",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0118": {
 "date": "2026-11-07",
@@ -2378,82 +2562,82 @@
 "観測所:R0120": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121508621",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0121": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784418206018",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0122": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1118037",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0123": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784413234184",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0124": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784828310251",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0125": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799332436",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0126": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761278649",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0127": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784772663021",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0128": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784883726387",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0129": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784820121770",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0130": {
 "date": "2026-11-07",
@@ -2490,10 +2674,10 @@
 "観測所:R0134": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866431611",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0135": {
 "date": "2026-11-07",
@@ -2506,18 +2690,18 @@
 "観測所:R0136": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1121660",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0137": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784041135709",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0138": {
 "date": "2026-11-07",
@@ -2538,10 +2722,10 @@
 "観測所:R0140": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534056313",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0141": {
 "date": "2026-11-07",
@@ -2570,26 +2754,26 @@
 "観測所:R0144": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1159046",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0145": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0982830",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0146": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-9975429408",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0147": {
 "date": "2026-11-07",
@@ -2642,26 +2826,26 @@
 "観測所:R0153": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2002954",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0154": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784757123908",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0155": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2229362",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0156": {
 "date": "2026-11-07",
@@ -2818,10 +3002,10 @@
 "観測所:R0176": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1304857",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0177": {
 "date": "2026-11-07",
@@ -2842,10 +3026,10 @@
 "観測所:R0179": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-9989260796",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0180": {
 "date": "2026-11-07",
@@ -2946,10 +3130,10 @@
 "観測所:R0192": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784833420167",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0193": {
 "date": "2026-11-07",
@@ -2962,18 +3146,18 @@
 "観測所:R0194": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784091231802",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0195": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2191262",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0196": {
 "date": "2026-11-07",
@@ -3010,10 +3194,10 @@
 "観測所:R0200": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478119600",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0201": {
 "date": "2026-11-07",
@@ -3050,26 +3234,26 @@
 "観測所:R0205": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798195384",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0206": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784334044039",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0207": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2224241",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0208": {
 "date": "2026-11-07",
@@ -3090,10 +3274,10 @@
 "観測所:R0210": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784829211090",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0211": {
 "date": "2026-11-07",
@@ -3106,18 +3290,18 @@
 "観測所:R0212": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784802135863",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0213": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784539732014",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0214": {
 "date": "2026-11-07",
@@ -3162,34 +3346,34 @@
 "観測所:R0219": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784833440851",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0220": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863679603",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0221": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784816369544",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0222": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784802615433",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0223": {
 "date": "2026-11-07",
@@ -3298,34 +3482,34 @@
 "観測所:R0236": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784754734619",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0237": {
 "date": "2026-11-07",
 "url": "https://maruzenjunkudo.co.jp/products/9784802135931",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0238": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784802216999",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0239": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569845586",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0240": {
 "date": "2026-11-07",
@@ -3338,10 +3522,10 @@
 "観測所:R0241": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569849751",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0242": {
 "date": "2026-11-07",
@@ -3370,10 +3554,10 @@
 "観測所:R0245": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784534062970",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0246": {
 "date": "2026-11-07",
@@ -3426,18 +3610,18 @@
 "観測所:R0252": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800721525",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0253": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784591189962",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0254": {
 "date": "2026-11-07",
@@ -3522,10 +3706,10 @@
 "観測所:R0265": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-2058156",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0266": {
 "date": "2026-11-07",
@@ -3546,10 +3730,10 @@
 "観測所:R0268": {
 "date": "2026-11-07",
 "url": "https://doda.jp/challenge/",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0269": {
 "date": "2026-11-07",
@@ -3562,18 +3746,18 @@
 "観測所:R0270": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784471035006",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0271": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784798192321",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0272": {
 "date": "2026-11-07",
@@ -3626,34 +3810,34 @@
 "観測所:R0278": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784756924964",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0279": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784781625218",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0280": {
 "date": "2026-11-07",
 "url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569859156",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0281": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784756924322",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0282": {
 "date": "2026-11-07",
@@ -3706,10 +3890,10 @@
 "観測所:R0288": {
 "date": "2026-11-07",
 "url": "https://doda.jp/woman/",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0289": {
 "date": "2026-11-07",
@@ -3718,6 +3902,14 @@
 "http_status": 403,
 "final_url": "",
 "note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"観測所:R0290": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1505707",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0291": {
 "date": "2026-11-07",
@@ -3831,6 +4023,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0305": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784418206056",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0306": {
 "date": "2026-11-07",
 "url": "https://www.amazon.co.jp/dp/4799108778",
@@ -3935,6 +4135,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0319": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756920522",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0320": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756922373",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0321": {
 "date": "2026-11-07",
 "url": "https://freelance-tensyoku.com/",
@@ -3962,10 +4178,10 @@
 "観測所:R0324": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784815637798",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0325": {
 "date": "2026-11-07",
@@ -4002,10 +4218,10 @@
 "観測所:R0329": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784815642068",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0330": {
 "date": "2026-11-07",
@@ -4031,6 +4247,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0333": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784087213195",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0334": {
 "date": "2026-11-07",
 "url": "https://doctorsfile.jp/jobs/",
@@ -4054,6 +4278,38 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0337": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046077783",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0338": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784897952987",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0339": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784845425518",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0340": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863545007",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0341": {
 "date": "2026-11-07",
@@ -4143,21 +4399,29 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0352": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784492534434",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0353": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784756924070",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0354": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784296070558",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0355": {
 "date": "2026-11-07",
@@ -4166,6 +4430,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0356": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0959120",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0358": {
 "date": "2026-11-07",
@@ -4178,10 +4450,10 @@
 "観測所:R0359": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784046078346",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0360": {
 "date": "2026-11-07",
@@ -4215,6 +4487,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0364": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296103300",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0366": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784413045964",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0367": {
 "date": "2026-11-07",
 "url": "https://career-research.mynavi.jp/reserch/20260414_109490/",
@@ -4231,6 +4519,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0369": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784763142894",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0370": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784054070875",
@@ -4238,6 +4534,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0371": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800594280",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0372": {
 "date": "2026-11-07",
@@ -4314,10 +4618,18 @@
 "観測所:R0381": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784875264651",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"観測所:R0382": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784492261248",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0383": {
 "date": "2026-11-07",
@@ -4326,6 +4638,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0384": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062710",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0385": {
 "date": "2026-11-07",
@@ -4342,6 +4662,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0387": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784883356515",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0388": {
 "date": "2026-11-07",
@@ -4447,13 +4775,29 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0403": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784396117276",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0404": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910534022",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0405": {
 "date": "2026-11-07",
 "url": "https://www.maruzenjunkudo.co.jp/products/9784416925225",
-"status": "正常",
-"http_status": 200,
+"status": "拒否",
+"http_status": 429,
 "final_url": "",
-"note": ""
+"note": "自動アクセスを断られました（壊れているとは限りません）"
 },
 "観測所:R0406": {
 "date": "2026-11-07",
@@ -4502,6 +4846,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0412": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784167904951",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0413": {
 "date": "2026-11-07",
@@ -4654,6 +5006,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0432": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799114209",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0433": {
 "date": "2026-11-07",
@@ -5191,6 +5551,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0504": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-1093955",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0505": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0954944",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0506": {
 "date": "2026-11-07",
 "url": "https://mo-wct.jp/",
@@ -5346,10 +5722,10 @@
 "観測所:R0525": {
 "date": "2026-11-07",
 "url": "https://doda.jp/",
-"status": "要確認",
+"status": "拒否",
 "http_status": null,
 "final_url": "",
-"note": "応答がありません"
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0526": {
 "date": "2026-11-07",
@@ -5951,6 +6327,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0606": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784827214888",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0607": {
 "date": "2026-11-07",
 "url": "https://eichie.jp/",
@@ -5974,6 +6358,78 @@
 "http_status": 403,
 "final_url": "",
 "note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"観測所:R0610": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910063225",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0611": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910053448",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0612": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784805113257",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0613": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296119813",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0614": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800721204",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0615": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800720986",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0616": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784471210670",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0617": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784594098216",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0618": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296112050",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0619": {
 "date": "2026-11-07",
@@ -6039,6 +6495,78 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0627": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065286050",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0628": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784396117283",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0629": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784837988786",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0630": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426126926",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0631": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784860295691",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0632": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046058874",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0633": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784334045135",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0634": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784804764290",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0635": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784479798248",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0636": {
 "date": "2026-11-07",
 "url": "https://www.projectmint.net/",
@@ -6055,6 +6583,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0638": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784479320173",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0639": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798070803",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0640": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756921161",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0641": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784405104785",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0642": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/17770081/",
@@ -6062,6 +6622,78 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0643": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784774520407",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0644": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784833440622",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0645": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799329214",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0646": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784532324230",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0647": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495540111",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0648": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866802688",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0649": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784794225245",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0650": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784334103750",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0651": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296202782",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0652": {
 "date": "2026-11-07",
@@ -6071,6 +6703,78 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0653": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784827215311",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0654": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784532113520",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0655": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296205295",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0656": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784484221205",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0657": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784062194747",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0658": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784781619439",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0659": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297143411",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0660": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756922793",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0661": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784048113366",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0662": {
 "date": "2026-11-07",
 "url": "https://apps.apple.com/jp/app/%E3%82%A2%E3%83%AB%E3%83%A0-%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2sns/id6791965625",
@@ -6078,6 +6782,94 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0663": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495540449",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0664": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478113806",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0665": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495534028",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0666": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478125656",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0667": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866675169",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0668": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784868510499",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0669": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426129477",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0670": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502476211",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0671": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800590961",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0672": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784781617336",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0673": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784309300085",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0674": {
 "date": "2026-11-07",
@@ -6111,6 +6903,62 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0678": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784837929840",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0679": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296207763",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0680": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784334105631",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0681": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784591168929",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0682": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784804719078",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0683": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426128609",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0684": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784839973780",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0685": {
 "date": "2026-11-07",
 "url": "https://workcircle.jp/",
@@ -6134,6 +6982,70 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0688": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426129811",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0689": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065446997",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0690": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297108298",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0691": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297126292",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0692": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784023341586",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0693": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046070012",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0694": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784814401215",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0695": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297133344",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0696": {
 "date": "2026-11-07",
@@ -6319,6 +7231,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0719": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296112647",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0720": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784875264545",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0721": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296121908",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0722": {
 "date": "2026-11-07",
 "url": "https://app.shufti.jp/",
@@ -6375,6 +7311,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0729": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784103529613",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0730": {
 "date": "2026-11-07",
 "url": "https://lifeshift-univ.com/",
@@ -6414,6 +7358,30 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0735": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784862762979",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0736": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784801485525",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0737": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434293153",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0738": {
 "date": "2026-11-07",
@@ -6495,6 +7463,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0748": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784299064974",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0749": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784905937906",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0750": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784873118482",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0751": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784839977177",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0752": {
 "date": "2026-11-07",
 "url": "https://prtimes.jp/main/html/rd/p/000007173.000002535.html",
@@ -6551,6 +7551,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0759": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784909090768",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0760": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784419069667",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0761": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065357262",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0762": {
 "date": "2026-11-07",
 "url": "https://www.finfin.jp/sp-kaikei/",
@@ -6591,6 +7615,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0767": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863678828",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0768": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784868510789",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0769": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910371030",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0770": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434334016",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0771": {
 "date": "2026-11-07",
 "url": "https://prtimes.jp/main/html/rd/p/000000021.000035559.html",
@@ -6614,6 +7670,78 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0774": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784780314298",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0775": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065346709",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0776": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495390952",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0777": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863676800",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0778": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863676411",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0779": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784911485002",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0780": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784865653151",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0781": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784788928503",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0782": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426127732",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0783": {
 "date": "2026-11-07",
@@ -6759,6 +7887,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0804": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296221004",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0805": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866803067",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0806": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799329955",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0807": {
 "date": "2026-11-07",
 "url": "https://lotsful.jp/",
@@ -6791,6 +7943,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0811": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784594624699",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0812": {
 "date": "2026-11-07",
 "url": "https://mamabono.org/",
@@ -6806,6 +7966,62 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0814": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756922441",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0815": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784413232043",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0816": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121507228",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0817": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296002726",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0818": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784763142177",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0819": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800590671",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0820": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784779129179",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0821": {
 "date": "2026-11-07",
@@ -6895,6 +8111,150 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0833": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434345784",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0834": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478122600",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0835": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297128364",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0836": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784865813586",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0837": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434353833",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0838": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502376016",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0839": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495540814",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0840": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784763420251",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0841": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296206919",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0842": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761277499",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0843": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296203086",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0844": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784313151376",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0845": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569854267",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0846": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478113820",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0847": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296000173",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0848": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784766138733",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0849": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784062915182",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0850": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784591169797",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0851": {
 "date": "2026-11-07",
 "url": "https://schoolforlifecompath.com",
@@ -6927,6 +8287,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0855": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065311943",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0856": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784845122004",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0857": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784783822622",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0858": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784792795924",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0859": {
 "date": "2026-11-07",
 "url": "https://rin-connect.com",
@@ -6958,6 +8350,78 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0863": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121507914",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0864": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784862763402",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0865": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784480436481",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0866": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121507983",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0867": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784828422800",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0868": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495540654",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0869": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784870357471",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0870": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784065373170",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0871": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784897952888",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0872": {
 "date": "2026-11-07",
@@ -7111,6 +8575,22 @@
 "final_url": "",
 "note": "自動アクセスを断られました（壊れているとは限りません）"
 },
+"観測所:R0892": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502464812",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0893": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495596521",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0894": {
 "date": "2026-11-07",
 "url": "https://careerbreak-lab.com/academy/",
@@ -7118,6 +8598,70 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0895": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046821751",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0896": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784814003303",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0897": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296202058",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0898": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784844136491",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0899": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784388154562",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0900": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495541323",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0901": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784396618056",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0902": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297123291",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0903": {
 "date": "2026-11-07",
@@ -7231,6 +8775,70 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0917": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344986480",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0918": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784751114629",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0919": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761927202",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0920": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784883403530",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0921": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761929107",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0922": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784837940272",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0923": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784801306691",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0924": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784756920195",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0925": {
 "date": "2026-11-07",
 "url": "https://apps.apple.com/jp/app/1512361252",
@@ -7311,6 +8919,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0935": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784801490536",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0936": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784540231216",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0937": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784480432063",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0938": {
 "date": "2026-11-07",
 "url": "https://etic.or.jp/project/1790",
@@ -7318,6 +8950,78 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0939": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784862511980",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0940": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784939051609",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0941": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296070923",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0942": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798188805",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0943": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784862808332",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0944": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784474054851",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0945": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798071725",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0946": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344696129",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0947": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910364803",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0948": {
 "date": "2026-11-07",
@@ -7375,6 +9079,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0955": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784862808363",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R0956": {
 "date": "2026-11-07",
 "url": "https://academy.borderless-japan.com/",
@@ -7414,6 +9126,70 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R0961": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784419069728",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0962": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784419069759",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0963": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784539730836",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0964": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798175300",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0965": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784793125072",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0966": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784496057571",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0967": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478108116",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0968": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784313512023",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R0969": {
 "date": "2026-11-07",
@@ -7575,6 +9351,94 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R0989": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784793125737",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0990": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784793126864",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0991": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534059703",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0992": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761270889",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0993": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295409021",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0994": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784800720771",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0996": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784847062261",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0997": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434347214",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0998": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784772662451",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R0999": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784415334233",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1000": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784827213126",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1001": {
 "date": "2026-11-07",
 "url": "https://podcasts.apple.com/jp/podcast/id1651549195",
@@ -7646,6 +9510,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1010": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784805881224",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1011": {
 "date": "2026-11-07",
@@ -7794,10 +9666,10 @@
 "観測所:R1029": {
 "date": "2026-11-07",
 "url": "https://www.career-adv.jp/",
-"status": "拒否",
-"http_status": 403,
+"status": "正常",
+"http_status": 200,
 "final_url": "",
-"note": "自動アクセスを断られました（壊れているとは限りません）"
+"note": ""
 },
 "観測所:R1030": {
 "date": "2026-11-07",
@@ -7806,6 +9678,22 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1031": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502459214",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1033": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434343971",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1034": {
 "date": "2026-11-07",
@@ -7855,6 +9743,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1041": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344037403",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1042": {
 "date": "2026-11-07",
 "url": "https://honto.jp/ebook/pd_32110069.html",
@@ -7879,6 +9775,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1045": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784815618476",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1046": {
 "date": "2026-11-07",
 "url": "https://fiica-salon.com/",
@@ -7894,6 +9798,22 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1048": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784865138290",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1049": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784002711003",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1050": {
 "date": "2026-11-07",
@@ -7999,6 +9919,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1063": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798135502",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1064": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121507884",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1065": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784838732708",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1066": {
 "date": "2026-11-07",
 "url": "https://www.sanno.ac.jp/tukyo/",
@@ -8006,6 +9950,30 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1067": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784837940180",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1068": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863679696",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1069": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784801400603",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1071": {
 "date": "2026-11-07",
@@ -8046,6 +10014,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1077": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121508331",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1078": {
 "date": "2026-11-07",
@@ -8183,6 +10159,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1096": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784334046620",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1097": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0691503",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1098": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784384049602",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1099": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062178",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1100": {
 "date": "2026-11-07",
 "url": "https://note.com/hokulea_style",
@@ -8207,6 +10215,38 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1104": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866515618",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1105": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784434340000",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1106": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784121027047",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1107": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784569860459",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1109": {
 "date": "2026-11-07",
 "url": "https://www.shikaku.co.jp/",
@@ -8215,6 +10255,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1110": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478065747",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1111": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/15723657/",
@@ -8222,6 +10270,22 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1112": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534062666",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1113": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534060471",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1114": {
 "date": "2026-11-07",
@@ -8327,6 +10391,46 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1127": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784804764511",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1128": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784866803579",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1129": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798073026",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1130": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784762832833",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1131": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344941328",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1132": {
 "date": "2026-11-07",
 "url": "https://kagyoaid.com/",
@@ -8342,6 +10446,14 @@
 "http_status": null,
 "final_url": "",
 "note": "応答がありません"
+},
+"観測所:R1134": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784837940562",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1137": {
 "date": "2026-11-07",
@@ -8399,6 +10511,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1144": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0592602",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1145": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0695462",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1146": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502351617",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1147": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/16934916/",
@@ -8406,6 +10542,46 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1148": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344933651",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1149": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784405104365",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1150": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784344946934",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1151": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784791630523",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1152": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784296108848",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1153": {
 "date": "2026-11-07",
@@ -8543,6 +10719,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1170": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502595110",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1171": {
 "date": "2026-11-07",
 "url": "https://producer-house.co.jp/academy/",
@@ -8550,6 +10734,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1172": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478110515",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1173": {
 "date": "2026-11-07",
@@ -8703,6 +10895,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1192": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784419072421",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1193": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/17835473/",
@@ -8710,6 +10910,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1194": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784804719290",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1195": {
 "date": "2026-11-07",
@@ -8783,6 +10991,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1204": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295025870",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1205": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046079824",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1206": {
 "date": "2026-11-07",
 "url": "https://www5.jwu.ac.jp/gp/recurrent/gaiyou.html",
@@ -8806,6 +11030,30 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1209": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784865284713",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1210": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297154745",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1211": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784391164268",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1212": {
 "date": "2026-11-07",
@@ -8838,6 +11086,38 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1216": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799333501",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1217": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478125755",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1218": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784868510932",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1219": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784863384835",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1220": {
 "date": "2026-11-07",
@@ -8983,6 +11263,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1238": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799333242",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1239": {
 "date": "2026-11-07",
 "url": "https://www.recurrent.co.jp/cc/",
@@ -8999,6 +11287,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1241": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784322146875",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1242": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478120705",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1243": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/18660491/",
@@ -9007,6 +11311,30 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1244": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784418266036",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1245": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784791634859",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1246": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784495390471",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1247": {
 "date": "2026-11-07",
 "url": "https://honto.jp/ebook/pd_34632499.html",
@@ -9014,6 +11342,14 @@
 "http_status": 403,
 "final_url": "",
 "note": "自動アクセスを断られました（壊れているとは限りません）"
+},
+"観測所:R1248": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784761278496",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1249": {
 "date": "2026-11-07",
@@ -9031,6 +11367,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1251": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798073347",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1252": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/17215406/",
@@ -9038,6 +11382,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1253": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784046071170",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1254": {
 "date": "2026-11-07",
@@ -9071,6 +11423,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1259": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784910286440",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1260": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784426131104",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1261": {
 "date": "2026-11-07",
 "url": "https://prtimes.jp/main/html/rd/p/000000005.000012528.html",
@@ -9078,6 +11446,38 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1262": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478124352",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1263": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295606000",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1264": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798189383",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1265": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478122402",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1266": {
 "date": "2026-11-07",
@@ -9207,6 +11607,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1282": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784534060662",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1283": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/17938003/",
@@ -9303,6 +11711,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1295": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784297145248",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1296": {
 "date": "2026-11-07",
 "url": "https://writingschool.pro/",
@@ -9335,6 +11751,22 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1301": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784058021392",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1302": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784861871573",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1303": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/18466507/",
@@ -9342,6 +11774,14 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1304": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784074629015",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1305": {
 "date": "2026-11-07",
@@ -9351,6 +11791,14 @@
 "final_url": "",
 "note": ""
 },
+"観測所:R1306": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784801484085",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
 "観測所:R1307": {
 "date": "2026-11-07",
 "url": "https://books.rakuten.co.jp/rb/18238466/",
@@ -9358,6 +11806,70 @@
 "http_status": 200,
 "final_url": "",
 "note": ""
+},
+"観測所:R1308": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798191539",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1309": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784478118221",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1310": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784074606931",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1311": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784295604570",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1312": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784798191652",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1313": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784419073152",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1314": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784502581816",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
+},
+"観測所:R1315": {
+"date": "2026-11-07",
+"url": "https://www.kinokuniya.co.jp/f/dsg-01-9784799332405",
+"status": "拒否",
+"http_status": null,
+"final_url": "",
+"note": "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）"
 },
 "観測所:R1316": {
 "date": "2026-11-07",
