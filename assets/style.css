@@ -858,3 +858,22 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .voice-band-list a { font-weight: 700; line-height: 1.6; }
 .voice-band-who { display: block; font-size: 13px; color: var(--text-sub); }
 .voice-band-more { margin: var(--space-2) 0 0; font-size: 14px; }
+
+/* 紹介ページの「ほかの情報をチェック」（2026-11-07 見本の案1。点線の箱で、めくった1件を横に出す） */
+.pick-box { margin-top: var(--space-8); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--space-4); align-items: center; background: var(--card); border: 1px dashed var(--sky); border-radius: var(--radius-lg); padding: var(--space-6); }
+.pick-box[hidden] { display: none; }
+@media (max-width: 720px) { .pick-box { grid-template-columns: 1fr; } }
+.pick-box h2 { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-size: 20px; margin: 0 0 var(--space-1); }
+.pick-box p { margin: 0 0 var(--space-3); font-size: 14px; color: var(--text-body); }
+.pick-button { font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; display: inline-flex; align-items: center; gap: var(--space-2); background: var(--sky); color: #fff; border: 0; border-radius: var(--radius-pill); padding: 10px 22px; min-height: 44px; white-space: nowrap; }
+.pick-button:hover { opacity: .92; }
+.pick-button:disabled { opacity: .6; cursor: default; }
+.pick-button span:first-child { display: inline-block; transition: transform .5s ease; }
+.pick-button.is-rolling span:first-child { transform: rotate(360deg); }
+.pick-card { list-style: none; margin: 0; padding: 0; max-width: 340px; width: 100%; justify-self: center; grid-template-columns: 1fr; }
+.pick-card:empty { display: none; }
+.pick-card .card { animation: pick-flip .5s ease; }
+.pick-error { font-size: 14px; color: var(--text-sub); }
+@keyframes pick-flip { from { opacity: 0; transform: rotateY(-60deg); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pick-card .card { animation: none; } .pick-button span:first-child { transition: none; } }
+

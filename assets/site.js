@@ -140,6 +140,7 @@
       "</div></div></div></a>" +
       window.TenkiSaved.button(it.id, it.title) + "</li>";
   }
+  window.TenkiCard = cardHtml;  // 紹介ページの「ほかの情報をチェック」でも同じカードを使う
   function endedHtml(id) {
     return '<li class="card"><a href="/item/' + encodeURIComponent(id) + '/"><h3>掲載を終えた情報（' + esc(id) + '）</h3><p class="card-line">提供が終わったか、掲載を終えました。</p></a>' +
       window.TenkiSaved.button(id, id) + "</li>";
@@ -450,4 +451,34 @@
   // 読み込みの直後のひと仕事が片づくのを2フレーム待ってから
   Promise.all([whenLoaded, whenFonts]).then(function () { requestAnimationFrame(function () { requestAnimationFrame(startCount); }); });
   setTimeout(startCount, 2500);  // 読み込みに時間がかかっても、2.5秒たったら始める
+})();
+
+// 紹介ページの「ほかの情報をチェック」：押すたびに、掲載中の全体から1件をランダムにめくる（いま見ている掲載と、直前に出したものは除く）。
+// 一覧は押したときに /search.json から読む（コミュニティ図鑑の「ほかの事例をひく」と同じ形。2026-11-07）
+(function () {
+  var box = document.getElementById("pick-box");
+  if (!box || !window.fetch || !window.TenkiCard) return;
+  var btn = document.getElementById("pick-button"), cardEl = document.getElementById("pick-card"), label = document.getElementById("pick-label");
+  var self = box.getAttribute("data-id"), list = null, last = "";
+  box.hidden = false;
+  function show() {
+    var pool = list.filter(function (it) { return it.id !== self && it.id !== last; });
+    if (!pool.length) return;
+    var it = pool[Math.floor(Math.random() * pool.length)];
+    last = it.id;
+    cardEl.innerHTML = window.TenkiCard(it);
+    label.textContent = "もう1件めくる";
+  }
+  btn.addEventListener("click", function () {
+    btn.classList.add("is-rolling");
+    setTimeout(function () { btn.classList.remove("is-rolling"); }, 500);
+    if (list) { show(); return; }
+    btn.disabled = true;
+    fetch("/search.json").then(function (r) { return r.json(); }).then(function (d) {
+      list = d.items || [];
+      show();
+    }).catch(function () {
+      cardEl.innerHTML = '<li class="pick-error">読み込めませんでした。時間をおいてもう一度押してください。</li>';
+    }).then(function () { btn.disabled = false; });
+  });
 })();

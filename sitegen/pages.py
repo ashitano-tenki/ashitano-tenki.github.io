@@ -9,7 +9,7 @@ from sitegen.parts import SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, br
 from sitegen.notes import note_band, note_list, notes_for_tenki
 from sitegen.voices import voice_band
 
-__all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN_WORDS", "ai_help_html", "build_404", "build_about", "build_combo", "build_guide", "build_home", "build_item", "build_report", "build_saved", "build_search", "build_tenki", "collection_ld", "combo_guide", "combo_lead", "combo_title", "common_section", "intro_html", "item_kind_phrase", "kind_tabs", "own_and_common", "own_section", "popular_words", "related_choices", "report_cards", "report_link", "stage_band", "start_words_html", "tenki_flow", "tenki_heading"]
+__all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN_WORDS", "ai_help_html", "build_404", "build_about", "build_combo", "build_guide", "build_home", "build_item", "build_report", "build_saved", "build_search", "build_tenki", "collection_ld", "combo_guide", "combo_lead", "combo_title", "common_section", "intro_html", "item_kind_phrase", "kind_tabs", "own_and_common", "own_section", "pick_box", "popular_words", "related_choices", "report_cards", "report_link", "stage_band", "start_words_html", "tenki_flow", "tenki_heading"]
 
 
 # ---------------------------------------------------------------- ページ
@@ -340,6 +340,17 @@ def related_choices(item, listed, ctx, per=3, max_kinds=6):
             '<h2 class="related-title">次はどの手で進める？</h2><p class="related-lead">%s</p>%s%s</section>' % (e(lead), tab_html, bodies))
 
 
+def pick_box(item):
+    """紹介ページの下の「ほかの情報をチェック」（2026-11-07 黒田さんが見本の案1を選んだ。コミュニティ図鑑の「ほかの事例をひく」と同じ形）。
+    押すたびに /search.json から掲載中の1件をランダムにめくる（site.js）。JavaScript が使えないときは出さない。"""
+    return ('<section class="pick-box" id="pick-box" data-id="%s" hidden><div class="pick-text">'
+            '<h2><span aria-hidden="true">🎲</span>ほかの情報をチェック</h2>'
+            '<p>観測所の全体からランダムに1件めくります。思いがけない情報に出会えるかもしれません。</p>'
+            '<button type="button" class="pick-button" id="pick-button" data-goatcounter-click="pick">'
+            '<span aria-hidden="true">🎲</span><span id="pick-label">1件めくる</span></button></div>'
+            '<ul class="cards pick-card" id="pick-card" aria-live="polite"></ul></section>' % e(item["id"]))
+
+
 # 「あわせて見たいもの」のボタンの言葉（タイプごと）
 KIND_ACTION = {"相談": "相談してみる", "仕事": "仕事を探す", "学習": "学んでみる", "内省": "自分を見つめる", "実務": "手続きを知る",
                "交流": "仲間と話す", "書籍": "本で考える", "媒体": "話を聞く", "調査": "データで知る"}
@@ -353,7 +364,7 @@ def build_item(item, listed, ctx):
             out.append('<a href="%s">%s</a>' % (e(make(n)), e(label)) if n in lookup else e(label))
         return "、".join(out) or "―"
 
-    similar_html = related_choices(item, listed, ctx)
+    similar_html = related_choices(item, listed, ctx) + pick_box(item)
 
     # パンくずは、その掲載のいちばん目の転機のページを通る（どの転機にもの掲載は「どの転機にも」）
     main = next((TENKI_BY_NAME[t] for t in item["tenki"] if t in TENKI_BY_NAME), None)
