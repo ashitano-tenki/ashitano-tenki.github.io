@@ -150,6 +150,10 @@ def build_meta_files(ctx):
     linkcheck = os.path.join(ROOT, "data", "linkcheck.json")
     if os.path.exists(linkcheck):
         shutil.copyfile(linkcheck, os.path.join(OUT, "linkcheck.json"))
+    # 週次の数字（tools/fetch_stats.py が毎週月曜に data/stats.json に書く。週次ふりかえりが読む）
+    stats = os.path.join(ROOT, "data", "stats.json")
+    if os.path.exists(stats):
+        shutil.copyfile(stats, os.path.join(OUT, "stats.json"))
 
 
 def assets_version():

@@ -72,6 +72,13 @@ https://ashitano-tenki.github.io/
 
 - GoatCounter（Cookie を使わない）で、見たページと、押されたもの（公式サイト・転機AI・あとで見る・共有・役に立った・探すページの検索語など）を数えます。`assets/count.js` は GoatCounter の公式のものに手を加え、URLの「?」以降は来た元（ref・utm）以外を送りません。
 
+## 週次の数字（stats.json）
+
+- 毎週月曜の朝8時、GitHub Actions の「週次の数字」が GoatCounter の API で直近7日と前の7日の数字を読み、`data/stats.json` に書きます（サイトでは `/stats.json`。週次ふりかえりが読む）。
+- 中身：訪問数、上位20ページ、探すページの検索語の上位20（結果あり・0件）、「役に立った／いまひとつ」の数と上位の掲載、/project/ の訪問数、公式サイト・転機AIの入口などのクリックの合計。個人を特定できる情報は入れません。
+- GoatCounter は訪問数（同じ人の同じページは1日1回）で数えるので、ページビューの数はありません。
+- API キーはリポジトリの Secrets の `GOATCOUNTER_API_KEY`（GoatCounter の権限は Read statistics）。キーがないときは何もしません。
+
 ## AIのクローラー
 
 - `robots.txt` で、AIの学習用のクローラー（GPTBot・ClaudeBot・Google-Extended・CCBot など）だけを断っています（2026-11-06 黒田さんの判断。コミュニティ図鑑と同じ）。一覧は `build.py` の `AI_TRAINING` です。
