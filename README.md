@@ -87,7 +87,7 @@ https://ashitano-tenki.github.io/
 | `config/tenki.json` | 転機の種類と段階の名前・URL・ページの文面 |
 | `config/tenki_notes.json` | 転機別ページと、転機×段階のページに載せる解説文 |
 | `config/synonyms.json` | 検索の言い換え表（毎朝の更新で、言葉と掲載に漢字の読みを足すので、ひらがなでも探せる） |
-| `build.py` | サイトを作るスクリプト（ページの文面の多くもここにあります） |
+| `build.py`・`sitegen/` | サイトを作るスクリプト。build.py は入口と全体の流れで、ページの作り方は sitegen/ に分けてあります（core：設定とデータの読み込み、parts：ヘッダー・カードなどの部品、pages：トップ・転機・紹介ページ・探すなど、notes・voices・project：観測ノート・転機の声・あしたの転機、output：検索用データ・RSS・サイトマップなど）。ページの文面の多くもここにあります |
 | `check/index.html`・`check/check.js`・`config/check.json` | 転機の段階セルフチェック（/check/）。ページの枠が index.html、動きが check.js、質問・判定・結果の文章が config/check.json です。結果画面のおすすめは、サイトを作るたびに書き出す `/check/picks.json` から選びます。2026-11-06 からメニューには出していません（ページと入口の一部は残す） |
 | `assets/` | 見た目（style.css）、探すページの動き（search.js。一覧は `/search.json`、キーワード検索用の文字は `/search-text.json` から）、転機の声の動き（voices.js）、全ページ共通の動き（site.js）、アクセス解析（count.js）、アイコン、SNS共有用の画像 |
 | `notes/` | 観測ノートの記事と、書き方の決めごと |
