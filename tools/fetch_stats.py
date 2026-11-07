@@ -36,6 +36,7 @@ def get(path, key, **params):
             if ex.code == 429 and attempt < 3:  # 呼びすぎ。少し待って試し直す
                 time.sleep(5 * (attempt + 1))
                 continue
+            print("GoatCounter の API：%s → %s %s" % (path, ex.code, ex.read(300).decode("utf-8", "replace")), file=sys.stderr)
             raise
 
 
@@ -114,7 +115,7 @@ def main():
     week = summarize(key, last - datetime.timedelta(days=6), last)
     prev = summarize(key, last - datetime.timedelta(days=13), last - datetime.timedelta(days=7))
     data = {"updated": datetime.datetime.now(JST).replace(microsecond=0).isoformat(),
-            "note": "GoatCounter の訪問数（同じ人の同じページは1日1回）。期間は日本時間の日付で、両端を含む。",
+            "note": "GoatCounter の訪問数（同じ人の同じページは1日1回）。期間は日本時間の日付で、両端を含む。visits はページの訪問数（クリックの記録を除く）。GoatCounter の画面の Totals はクリックの記録も含む数で、visits_including_events と同じ。",
             "this_week": week, "previous_week": prev}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
