@@ -10094,9 +10094,13 @@
  },
  "R1226": {
   "page": "https://localletter.jp/",
-  "checked": "2026-11-07",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 429: Too Many Requests"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 138730,
+  "status": "ok",
+  "src": "file:images/manual/R1226.jpg",
+  "w": 960,
+  "h": 504
  },
  "R1227": {
   "page": "https://lolll.jp/",
@@ -10196,8 +10200,13 @@
  },
  "R1239": {
   "page": "https://www.recurrent.co.jp/cc/",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 103446,
+  "status": "ok",
+  "src": "file:images/manual/R1239.jpg",
+  "w": 960,
+  "h": 487
  },
  "R1240": {
   "page": "https://cpa-net.jp/course/uscpa/",
@@ -10435,8 +10444,13 @@
  },
  "R1270": {
   "page": "https://hishobu.com/media/?p=48",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 39069,
+  "status": "ok",
+  "src": "file:images/manual/R1270.jpg",
+  "w": 960,
+  "h": 555
  },
  "R1271": {
   "page": "https://podcasts.apple.com/jp/podcast/id1692932063",
@@ -10504,8 +10518,13 @@
  },
  "R1279": {
   "page": "https://www.future-procurement.com/event/",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 49580,
+  "status": "ok",
+  "src": "file:images/manual/R1279.jpg",
+  "w": 718,
+  "h": 431
  },
  "R1280": {
   "page": "https://www.sendenkaigi.com/marketing/courses/editor_writer_s/",
@@ -10647,21 +10666,23 @@
  },
  "R1297": {
   "page": "https://yosca.jp/school/career/",
-  "checked": "2026-11-07",
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 183304,
   "status": "ok",
-  "src": "capture:https://yosca.jp/school/career/",
-  "capture": true,
+  "src": "file:images/manual/R1297.jpg",
   "w": 960,
-  "h": 547
+  "h": 536
  },
  "R1299": {
   "page": "http://www.editor.co.jp/",
-  "checked": "2026-11-07",
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 145999,
   "status": "ok",
-  "src": "capture:http://www.editor.co.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1299.jpg",
   "w": 960,
-  "h": 547
+  "h": 475
  },
  "R1300": {
   "page": "https://books.rakuten.co.jp/rb/18043648/",
@@ -10897,8 +10918,13 @@
  },
  "R1329": {
   "page": "https://kenjins.jp/",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 170458,
+  "status": "ok",
+  "src": "file:images/manual/R1329.jpg",
+  "w": 960,
+  "h": 454
  },
  "R1330": {
   "page": "https://www.foriio.com/",
@@ -10966,12 +10992,13 @@
  },
  "R1338": {
   "page": "https://www.tielec.net/ja/services",
-  "checked": "2026-11-07",
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 100980,
   "status": "ok",
-  "src": "https://www.tielec.net/og-default.png",
+  "src": "file:images/manual/R1338.jpg",
   "w": 960,
-  "h": 504,
-  "suspect": true
+  "h": 540
  },
  "R1339": {
   "page": "https://books.rakuten.co.jp/rb/18167116/",
@@ -11000,11 +11027,12 @@
  "R1342": {
   "page": "https://www.workingsurvivors.org/secondopinion.html",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 119775,
   "status": "ok",
-  "src": "capture:https://www.workingsurvivors.org/secondopinion.html",
-  "capture": true,
+  "src": "file:images/manual/R1342.jpg",
   "w": 960,
-  "h": 547
+  "h": 305
  },
  "R1343": {
   "page": "https://www.gh-ouendan.com/olinesoudan",
@@ -11025,11 +11053,12 @@
  "R1345": {
   "page": "https://www.counselor.or.jp/consultation/tabid/298/Default.aspx",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 48286,
   "status": "ok",
-  "src": "capture:https://www.counselor.or.jp/consultation/tabid/298/Default.aspx",
-  "capture": true,
+  "src": "file:images/manual/R1345.jpg",
   "w": 960,
-  "h": 547
+  "h": 238
  },
  "R1346": {
   "page": "https://kouhou47.com/",
@@ -11116,14 +11145,22 @@
  "R1357": {
   "page": "https://litalico-c.jp/",
   "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 20623,
+  "status": "ok",
+  "src": "file:images/manual/R1357.jpg",
+  "w": 960,
+  "h": 504
  },
  "R1358": {
   "page": "https://entrenet.jp/",
   "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "manual": true,
+  "fsize": 107059,
+  "status": "ok",
+  "src": "file:images/manual/R1358.jpg",
+  "w": 960,
+  "h": 427
  },
  "R1359": {
   "page": "https://pitin-coaching.com/",
@@ -11152,11 +11189,12 @@
  "R1363": {
   "page": "https://nakamura-editing.co.jp/webwriterlab-line/",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 258796,
   "status": "ok",
-  "src": "capture:https://nakamura-editing.co.jp/webwriterlab-line/",
-  "capture": true,
+  "src": "file:images/manual/R1363.jpg",
   "w": 960,
-  "h": 547
+  "h": 423
  },
  "R1364": {
   "page": "https://hitohata.co/",
@@ -11225,11 +11263,12 @@
  "R1372": {
   "page": "https://foods-labo.info/",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 217608,
   "status": "ok",
-  "src": "capture:https://foods-labo.info/",
-  "capture": true,
+  "src": "file:images/manual/R1372.jpg",
   "w": 960,
-  "h": 547
+  "h": 503
  },
  "R1373": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296126347",
@@ -11274,11 +11313,12 @@
  "R1378": {
   "page": "https://www.shikakyuujinscout.com/",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 54907,
   "status": "ok",
-  "src": "capture:https://www.shikakyuujinscout.com/",
-  "capture": true,
+  "src": "file:images/manual/R1378.jpg",
   "w": 960,
-  "h": 547
+  "h": 540
  },
  "R1379": {
   "page": "https://books.rakuten.co.jp/rb/16926792/",
@@ -11364,20 +11404,22 @@
  "R1393": {
   "page": "https://airsalon.net/",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 43295,
   "status": "ok",
-  "src": "capture:https://airsalon.net/",
-  "capture": true,
-  "w": 960,
-  "h": 547
+  "src": "file:images/manual/R1393.jpg",
+  "w": 796,
+  "h": 540
  },
  "R1394": {
   "page": "https://share-salon.com/",
   "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 162334,
   "status": "ok",
-  "src": "capture:https://share-salon.com/",
-  "capture": true,
+  "src": "file:images/manual/R1394.jpg",
   "w": 960,
-  "h": 547
+  "h": 573
  },
  "R1395": {
   "page": "https://jooi-design.io/",
