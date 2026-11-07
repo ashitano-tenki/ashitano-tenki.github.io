@@ -633,12 +633,17 @@ def build_about(listed, ctx):
   <li>個別のご返信はしていません。</li>
 </ul>
 
+<h2 id="takedown">掲載されている方へ</h2>
+<p>観測所は、公開されている情報をもとに、サービスや情報を紹介しています。内容の訂正や、掲載の取り下げをご希望の場合は、<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>からお知らせください。紹介ページの「この情報の誤りを知らせる」からも開けます。</p>
+<p>いただいたご連絡は、公式の情報と照らして確かめたうえで、訂正または取り下げを行います。画像だけを外すこともできます。取り下げた掲載は、サイトの毎日の更新で一覧と紹介ページから外れます。</p>
+
 {analytics}
 <h2>運営者</h2>
 <div class="operator-card">
   <p class="operator-name"><strong>黒田悠介</strong><span>キャリア研究家</span></p>
   <p>これまでに1,000人以上のキャリア相談を受けてきました。著書に『ライフピボット』などがあります。この観測所のほか、転機について考えるnoteマガジンやコミュニティも運営しています。</p>
-  <p class="operator-link"><a class="button" href="{operator_url}" rel="noopener" target="_blank">黒田悠介のリンク集を見る</a><span>ほかの活動や発信をまとめています</span></p>
+  <p>キャリアの転機についての相談（キャリア相談）も受けています。ご相談は、下のリンク集にある連絡先からお寄せください。</p>
+  <p class="operator-link"><a class="button" href="{operator_url}" rel="noopener" target="_blank" data-goatcounter-click="contact-operator/about">黒田悠介のリンク集を見る</a><span>連絡先や、ほかの活動・発信をまとめています</span></p>
 </div>
 
 <h2>あしたの転機プロジェクトについて</h2>
