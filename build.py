@@ -1944,6 +1944,7 @@ def build_voices(voices, listed, ctx):
       </div>
     </div>
     <div class="result-col">
+      <h2 class="visually-hidden">記事の一覧</h2>
       <div class="result-bar">
         <p id="result-count" aria-live="polite">{n}件</p>
         <button type="button" class="bar-filter" id="bar-filter" aria-controls="filter-panel" aria-expanded="false">絞り込む</button>
@@ -2048,6 +2049,17 @@ def reading(text):
 
 
 _KAKASI = None
+
+
+def write_items_json(listed, ctx):
+    """掲載中の一覧をまとめた /items.json（転機AIが読む）。おすすめ順（rank の小さい順）で入れる。
+    観測スコアと料金は入れない（サイトに出していないため）。並べ替えには rank を使う。値が空のときもキーは残す。"""
+    data = {"updated": ctx["today"].isoformat(), "count": len(listed), "items": [{
+        "id": it["id"], "title": it["title"], "kind": it["kind"], "tenki": it["tenki"], "stages": it["stages"],
+        "memo": it["memo"], "url": it["url"], "provider": it["provider"], "for": it["for"],
+        "added": it["added"].isoformat() if it["added"] else "", "rank": it["rank"],
+        "page": "%s/item/%s/" % (BASE, it["id"])} for it in sorted(listed, key=lambda it: it["rank"])]}
+    write("/items.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
 def build_search_json(listed, ctx):
@@ -2280,6 +2292,7 @@ def main():
     build_voices(ctx["voices"], listed, ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
+    write_items_json(listed, ctx)
     build_feed(listed, ctx)
     build_meta_files(ctx)
 

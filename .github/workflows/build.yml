@@ -26,6 +26,7 @@ jobs:
     permissions:
       contents: write   # 件数とデータの記録を保存するため
       pages: read       # 公開先の設定を読むため（configure-pages）
+      issues: write     # サイトの点検で問題があったとき Issue で知らせるため
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
@@ -54,6 +55,23 @@ jobs:
             $PY build.py --save-data --allow-decrease
           else
             $PY build.py --save-data
+          fi
+
+      # 作ったサイトを点検する（サイト内のリンク切れ・画像の抜け・見出しの飛びなど）。
+      # 問題があっても公開は止めず、Issue で知らせる（同じ日に何度作り直しても、開いている点検の Issue は1つだけにする）
+      - name: 作ったサイトを点検する
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/check_site.py site-report.md
+          TITLE="サイトの自動点検で問題が見つかりました"
+          OPEN=$(gh issue list --repo "${{ github.repository }}" --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -f site-report.md ]; then
+            if [ -n "$OPEN" ]; then gh issue edit "$OPEN" --repo "${{ github.repository }}" --body-file site-report.md
+            else gh issue create --repo "${{ github.repository }}" --title "$TITLE" --body-file site-report.md; fi
+          elif [ -n "$OPEN" ]; then
+            gh issue close "$OPEN" --repo "${{ github.repository }}" --comment "$(TZ=Asia/Tokyo date +%F) の点検では問題がなくなりました。"
           fi
 
       # 件数の記録（data/meta.json）と、読み込んだデータそのもの（data/latest.csv）を残す。
