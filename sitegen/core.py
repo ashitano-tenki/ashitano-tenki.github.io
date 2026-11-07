@@ -8,7 +8,7 @@ import re
 import unicodedata
 import urllib.request
 
-__all__ = ["BASE", "BuildError", "COMMON", "CONF", "COST_ORDER", "IMAGES", "JST", "KINDS", "KIND_BY_NAME", "LISTED_STATES", "NOTES", "NOTES_DIR", "NOTES_LABEL", "OTHER", "OUT", "REQUIRED_COLUMNS", "ROOT", "STAGES", "STAGE_BY_NAME", "TENKI", "TENKI_BY_NAME", "TENKI_CONF", "VOICES", "VOICES_LABEL", "by_kind", "fetch_csv", "fix_memo", "kinds_of", "load_images", "load_json", "matches_tenki", "month_label", "one_line", "parse_date", "parse_month", "parse_rows", "parse_score", "split_list", "valid_id"]
+__all__ = ["SPREAD_MAX", "spread_keys", "spread_line", "spread_order", "BASE", "BuildError", "COMMON", "CONF", "COST_ORDER", "IMAGES", "JST", "KINDS", "KIND_BY_NAME", "LISTED_STATES", "NOTES", "NOTES_DIR", "NOTES_LABEL", "OTHER", "OUT", "REQUIRED_COLUMNS", "ROOT", "STAGES", "STAGE_BY_NAME", "TENKI", "TENKI_BY_NAME", "TENKI_CONF", "VOICES", "VOICES_LABEL", "by_kind", "fetch_csv", "fix_memo", "kinds_of", "load_images", "load_json", "matches_tenki", "month_label", "one_line", "parse_date", "parse_month", "parse_rows", "parse_score", "split_list", "valid_id"]
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # リポジトリの一番上（build.py のある場所）
 OUT = os.path.join(ROOT, "_site")
@@ -171,13 +171,65 @@ def parse_rows(text):
         })
     if skipped:
         print("設定にない種類のため表示から外しました: %s" % "、".join(skipped))
-    # 並び順（おすすめ順）は、掲載先の画像があるものを先に、そのなかで観測スコアの高い順。
+    # 並び順（おすすめ順）は、掲載先の画像があるものを先に、そのなかで観測スコアの高い順。そのうえで spread_order で、
+    # 同じ主な転機・同じ提供元が3件続かないように並べ直す。
     # スコアは並べ替えにだけ使い、出力には rank（順位）だけを残す。トップの棚・転機のページ・探すページなど、
     # rank を使う並びはすべてこの順になる（新着の一覧は追加日の新しい順で、同じ日のなかがこの順）
     items.sort(key=lambda it: (it["id"] not in IMAGES, -it["score"], -(it["added"] or datetime.date.min).toordinal(), it["id"]))
+    # score_rank は観測スコアの順そのもの（キーワード検索の並びに使う。2026-11-07 から検索はこの順のまま）
     for i, it in enumerate(items):
+        it["score_rank"] = i + 1
+    # rank（一覧の並び）は、同じ転機・同じ提供元が上位で続かないように並べ直したもの（spread_order）
+    shown = [it for it in items if it["listed"]]
+    order = spread_order(shown) + [it for it in items if not it["listed"]]
+    for i, it in enumerate(order):
         it["rank"] = i + 1
+    items.sort(key=lambda it: it["rank"])
     return items
+
+
+SPREAD_MAX = 2  # 同じ「主な転機」・同じ「提供元・著者」が続いてよい数
+
+
+def spread_keys(it):
+    """並べ直しで比べる2つ：主な転機（転機の種類の最初の語）と提供元・著者。"""
+    return (it["tenki"][0] if it["tenki"] else "", it["provider"].strip())
+
+
+def spread_line(items):
+    """1本の並びを、上から順に、直前の2件と同じ主な転機・同じ提供元が3件目にならないものを先に出す形に並べ直す。
+    条件に合うものが残っていなければ、残りはそのままの順で並べる（2026-11-07 データ側の依頼。本の上位が定年ばかりになっていたため）。"""
+    rest, out = list(items), []
+    while rest:
+        def ok(it):
+            if len(out) < SPREAD_MAX:
+                return True
+            keys = spread_keys(it)
+            for k in range(2):
+                if keys[k] and all(spread_keys(o)[k] == keys[k] for o in out[-SPREAD_MAX:]):
+                    return False
+            return True
+        hit = next((it for it in rest if ok(it)), None)
+        if hit is None:
+            out += rest
+            break
+        out.append(hit)
+        rest.remove(hit)
+    return out
+
+
+def spread_order(items):
+    """一覧の並び。画像ありが先・画像なしが後の区切りは崩さない。
+    種類（タイプ）ごとに spread_line で並べ直し、その種類がもとの並びで占めていた位置に入れ直す。
+    こうすると、種類ごとの一覧（棚・タイプのページ）でも、全部を混ぜた一覧でも、それぞれの種類の中は並べ直した順になる。"""
+    out = []
+    for has_image in (True, False):
+        group = [it for it in items if (it["id"] in IMAGES) == has_image]
+        queues = {}
+        for kind in dict.fromkeys(it["kind"] for it in group):
+            queues[kind] = spread_line([it for it in group if it["kind"] == kind])
+        out += [queues[it["kind"]].pop(0) for it in group]
+    return out
 
 
 def matches_tenki(item, name):

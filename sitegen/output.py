@@ -30,7 +30,7 @@ def build_search_json(listed, ctx):
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"],
             "added": it["added"].isoformat() if it["added"] else "",
-            "rank": it["rank"], "img": image_ref(it),
+            "rank": it["rank"], "srank": it["score_rank"], "img": image_ref(it),
         } for it in listed],
         # 言い換え表。読みは「どのグループに当たるか」の判定にだけ使う（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）。
         # 読みで本文を探すと、同じ読みの別の言葉（障害と生涯）まで見つかるため、本文を探すのは words だけ

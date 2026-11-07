@@ -176,7 +176,9 @@
       // 転機で絞ったときは、その転機ならではの掲載を先に、どの転機にも役立つ共通の掲載を後に（転機のページと同じ並び）
       var t = state.tenki, split = t && t !== COMMON && t !== OTHER;
       var grp = function (it) { return split && it.tenki.indexOf(t) < 0 ? 1 : 0; };
-      out.sort(function (a, b) { return grp(a) - grp(b) || a._tier - b._tier || a.rank - b.rank; });
+      // キーワードがあるときは観測スコアの順（srank）のまま。ないときは、同じ転機・提供元が続かないよう並べ直した順（rank）
+      var key = terms.length ? function (it) { return it.srank || it.rank; } : function (it) { return it.rank; };
+      out.sort(function (a, b) { return grp(a) - grp(b) || a._tier - b._tier || key(a) - key(b); });
       if (split) {
         ownCount = out.filter(function (it) { return grp(it) === 0; }).length;
         if (ownCount === 0 || ownCount === out.length) ownCount = -1;
