@@ -12,6 +12,7 @@
   まだ一度も確かめていないもの・前回「正常」以外だったもの・残りのうち確かめた日が古いもの（全体の4分の1）。
   4週で全体を一巡する。確かめた日と結果は data/linkcheck_seen.json に残す。
 - 時間の上限（BUDGET 秒）を過ぎたら新しく開くのをやめ、そこまでの結果を保存する。残りは次回に回る。
+- 同じサイトが続けて3回応答しなければ、そのサイトの残りは開かずに「拒否」（自動の点検に応答しないサイト）とする。
 - linkcheck.json の items と summary は、今回確かめていないものも含めた「最後に確かめた結果」。
 """
 import collections
@@ -47,6 +48,8 @@ HEADERS = {"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,applicat
 TIMEOUT = 12          # 1件あたりの待ち時間（秒）
 WORKERS = 4           # 同時に確かめるドメインの数（相手に負担をかけないよう少なめ）
 DOMAIN_GAP = 2.0      # 同じドメインに続けてアクセスするときの間隔（秒）
+GIVE_UP = 3           # 同じサイトが続けてこの回数応答しなければ、そのサイトの残りは開かない
+NO_ANSWER = ("拒否", None, "", "自動の点検に応答しないサイトです（ブラウザでは開けることが多い）", False)
 RETRY_WAIT = 60       # 失敗したものを試し直すまでの待ち時間（秒）
 REFUSED = {401, 403, 405, 406, 429, 451, 999}  # 自動アクセスを断るときによく返る番号
 
@@ -177,11 +180,20 @@ def main():
             by_host[host_of(row["URL"])].append(row)
         out = {}
         def work(group):
-            done = []
+            # 同じサイトが続けて GIVE_UP 回応答しなければ、そのサイトは自動の点検を受け付けないとみなし、
+            # 残りは開かずに「拒否」として記録する（紀伊國屋書店など。ブラウザでは開けることが多い）
+            done, silent = [], 0
             for row in group:
+                if silent >= GIVE_UP:
+                    done.append((key(row), NO_ANSWER))
+                    continue
                 if time.monotonic() > deadline:
                     break
-                done.append((key(row), check_once(row["URL"])))
+                result = check_once(row["URL"])
+                silent = silent + 1 if result[3] in ("応答がありません",) else 0
+                done.append((key(row), result))
+            if silent >= GIVE_UP:  # 応答しなかった分も、試し直さずに「拒否」にそろえる
+                done = [(k, NO_ANSWER if r[3] == "応答がありません" else r) for k, r in done]
             return done
         with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
             for results in pool.map(work, by_host.values()):
