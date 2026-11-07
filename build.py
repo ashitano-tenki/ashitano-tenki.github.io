@@ -336,7 +336,7 @@ def og_image(name):
 
 
 def jsonld_tag(data):
-    text = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    text = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
     return '<script type="application/ld+json">%s</script>\n' % text
 
 

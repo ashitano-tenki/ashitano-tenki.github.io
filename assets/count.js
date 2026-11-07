@@ -29,7 +29,7 @@
 			e: !!(vars.event || goatcounter.event),
 			s: [window.screen.width, window.screen.height, (window.devicePixelRatio || 1)],
 			b: is_bot(),
-			q: location.search,
+			q: ref_query(),  // 観測所の変更：検索語などは送らず、来た元（ref・utm_*）だけを送る
 		}
 
 		var rcb, pcb, tcb  // Save callbacks to apply later.
@@ -89,6 +89,12 @@
 		return (goatcounter.endpoint || window.counter)  // counter is for compat; don't use.
 	}
 
+	// 観測所の変更：URLの「?」以降のうち、来た元を示す ref・utm_* だけを残す（探すページの検索語を送らないため）
+	var ref_query = function() {
+		var keep = location.search.substr(1).split('&').filter(function(kv) { return /^(ref|utm_[a-z]+)=/.test(kv) })
+		return keep.length ? '?' + keep.join('&') : ''
+	}
+
 	// Get current path.
 	var get_path = function() {
 		var loc = location,
@@ -99,7 +105,7 @@
 			if (a.hostname.replace(/^www\./, '') === location.hostname.replace(/^www\./, ''))
 				loc = a
 		}
-		return (loc.pathname + loc.search) || '/'
+		return loc.pathname || '/'  // 観測所の変更：「?」以降（検索語など）はページの記録に入れない
 	}
 
 	// Run function after DOM is loaded.
