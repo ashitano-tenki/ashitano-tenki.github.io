@@ -1,0 +1,322 @@
+{
+ "updated": "2026-11-07T11:32:42+09:00",
+ "note": "GoatCounter の訪問数（同じ人の同じページは1日1回）。期間は日本時間の日付で、両端を含む。",
+ "this_week": {
+  "start": "2026-10-31",
+  "end": "2026-11-06",
+  "visits": 288,
+  "visits_including_events": 340,
+  "top_pages": [
+   {
+    "path": "/",
+    "title": "あしたの転機観測所｜転機の種類と時期から探す、キャリアの転機に役立つサービス",
+    "count": 84
+   },
+   {
+    "path": "/notes/tenshoku-first-books",
+    "title": "転職を考え始めたら読みたい本。迷いの段階ごとに選ぶ8冊｜あしたの転機観測所",
+    "count": 24
+   },
+   {
+    "path": "/search",
+    "title": "探す｜あしたの転機観測所",
+    "count": 21
+   },
+   {
+    "path": "/tenki",
+    "title": "転機から探す｜あしたの転機観測所",
+    "count": 8
+   },
+   {
+    "path": "/notes",
+    "title": "観測ノート｜あしたの転機観測所",
+    "count": 7
+   },
+   {
+    "path": "/project",
+    "title": "あしたの転機｜あしたの転機観測所",
+    "count": 7
+   },
+   {
+    "path": "/check",
+    "title": "転機の段階セルフチェック｜あしたの転機観測所",
+    "count": 7
+   },
+   {
+    "path": "/saved",
+    "title": "あとで見る｜あしたの転機観測所",
+    "count": 6
+   },
+   {
+    "path": "/voices",
+    "title": "転機の声｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/tenki/tenshoku",
+    "title": "転職に役立つサービスと情報｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/item/R1089",
+    "title": "国試黒本治療家エージェント（転職の仕事サービス）｜あしたの転機観測所",
+    "count": 4
+   },
+   {
+    "path": "/notes/dokuritsu-first-year-work",
+    "title": "会社員からフリーランスへ。独立1年目の仕事の見つけ方｜あしたの転機観測所",
+    "count": 4
+   },
+   {
+    "path": "/item/R0522",
+    "title": "OpenWork（オープンワーク）（転職の仕事サービス）｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0766",
+    "title": "正社員女性の幸福度と働きやすさの実態調査（マイナビ転職）（キャリアの転機に役立つ調査レポート）｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/404.html",
+    "title": "ページが見つかりません｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0554",
+    "title": "グロービス経営大学院（転職の学びの場）｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/tenki/kigyo",
+    "title": "起業に役立つサービスと情報｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0089",
+    "title": "転職動向調査2026年版（2025年実績）｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/tenki/dokuritsu",
+    "title": "独立に役立つサービスと情報｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/report",
+    "title": "観測レポート｜あしたの転機観測所",
+    "count": 3
+   }
+  ],
+  "search_words": [
+   {
+    "word": "50代",
+    "count": 1
+   },
+   {
+    "word": "地方",
+    "count": 1
+   },
+   {
+    "word": "案件",
+    "count": 1
+   }
+  ],
+  "search_zero_words": [
+   {
+    "word": "背景美術",
+    "count": 1
+   }
+  ],
+  "helpful_yes": {
+   "total": 0,
+   "items": []
+  },
+  "helpful_no": {
+   "total": 0,
+   "items": []
+  },
+  "project_visits": 7,
+  "project_out": [],
+  "clicks": {
+   "公式サイトを見る": 18,
+   "転機AIへの入口": 28,
+   "あとで見る": 1,
+   "共有": 1,
+   "セルフチェックのおすすめ": 0,
+   "セルフチェックを始めた": 0,
+   "セルフチェックを終えた": 0
+  }
+ },
+ "previous_week": {
+  "start": "2026-10-24",
+  "end": "2026-10-30",
+  "visits": 413,
+  "visits_including_events": 470,
+  "top_pages": [
+   {
+    "path": "/",
+    "title": "あしたの転機観測所｜転機の種類と時期から探す、キャリアの転機に役立つサービス",
+    "count": 121
+   },
+   {
+    "path": "/search",
+    "title": "探す｜あしたの転機観測所",
+    "count": 32
+   },
+   {
+    "path": "/check",
+    "title": "転機の段階セルフチェック｜あしたの転機観測所",
+    "count": 21
+   },
+   {
+    "path": "/report",
+    "title": "観測レポート｜あしたの転機観測所",
+    "count": 15
+   },
+   {
+    "path": "/tenki",
+    "title": "転機から探す｜あしたの転機観測所",
+    "count": 13
+   },
+   {
+    "path": "/tenki/tenshoku",
+    "title": "転職に役立つサービスと情報｜あしたの転機観測所",
+    "count": 9
+   },
+   {
+    "path": "/saved",
+    "title": "あとで見る｜あしたの転機観測所",
+    "count": 8
+   },
+   {
+    "path": "/tenki/tenshoku/sogu",
+    "title": "転職した直後に役立つサービス｜あしたの転機観測所",
+    "count": 7
+   },
+   {
+    "path": "/tenki/fukugyo",
+    "title": "副業・複業に役立つサービスと情報｜あしたの転機観測所",
+    "count": 7
+   },
+   {
+    "path": "/item/R0157",
+    "title": "テックリードFM -AI時代の人生攻略｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/item/R0007",
+    "title": "YOUTRUST｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/tenki/dokuritsu",
+    "title": "独立に役立つサービスと情報｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/tenki/tenshoku/junbi",
+    "title": "転職の準備に役立つサービス｜あしたの転機観測所",
+    "count": 5
+   },
+   {
+    "path": "/item/R0183",
+    "title": "転職のサラタメさん｜あしたの転機観測所",
+    "count": 4
+   },
+   {
+    "path": "/item/R0032",
+    "title": "PIVOT CAREER｜あしたの転機観測所",
+    "count": 4
+   },
+   {
+    "path": "/tenki/kigyo",
+    "title": "起業に役立つサービスと情報｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0251",
+    "title": "日本仕事百貨｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0160",
+    "title": "ママ起業家コミュニティ「ママレ」｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0106",
+    "title": "doda転職求人倍率レポート｜あしたの転機観測所",
+    "count": 3
+   },
+   {
+    "path": "/item/R0162",
+    "title": "キャリスピ｜あしたの転機観測所",
+    "count": 3
+   }
+  ],
+  "search_words": [
+   {
+    "word": "学び直し",
+    "count": 2
+   },
+   {
+    "word": "LGBTQ",
+    "count": 1
+   },
+   {
+    "word": "子育て",
+    "count": 1
+   },
+   {
+    "word": "自己分析",
+    "count": 1
+   },
+   {
+    "word": "在宅",
+    "count": 1
+   },
+   {
+    "word": "年収",
+    "count": 1
+   },
+   {
+    "word": "コミュニティ",
+    "count": 1
+   },
+   {
+    "word": "AI",
+    "count": 1
+   },
+   {
+    "word": "セカンドキャリア",
+    "count": 1
+   }
+  ],
+  "search_zero_words": [
+   {
+    "word": "背景美術",
+    "count": 1
+   }
+  ],
+  "helpful_yes": {
+   "total": 0,
+   "items": []
+  },
+  "helpful_no": {
+   "total": 0,
+   "items": []
+  },
+  "project_visits": 0,
+  "project_out": [],
+  "clicks": {
+   "公式サイトを見る": 31,
+   "転機AIへの入口": 0,
+   "あとで見る": 2,
+   "共有": 0,
+   "セルフチェックのおすすめ": 1,
+   "セルフチェックを始めた": 6,
+   "セルフチェックを終えた": 6
+  }
+ }
+}
