@@ -3,7 +3,9 @@
    黄色は1画面に1〜2か所まで（トップの縦帯、フッターの区切り線）。 */
 :root {
   /* 色 */
-  --base: #fbfaf5;
+  --base: #f7f9fb;            /* 背景の地（青みのごく薄いグレー。入力欄や上に重なる帯もこの色） */
+  --bg-top: #ffffff;          /* 背景のグラデーションの上端（ページの上は白。2026-11-07 コミュニティ図鑑と同じ案B） */
+  --bg-bottom: #eef2f6;       /* 背景のグラデーションの下端（下へ行くほど少し青みのグレー） */
   --base-yellow: #fff3c4;
   --ink: #1a1d23;
   --sky: #1874b8;
@@ -40,7 +42,7 @@
 /* ダーク表示：ヘッダーのボタンで切り替える。役割ごとの名前はそのままに値だけを入れ替える
    （base＝背景、ink＝文字。ボタンやタグの塗りは自動で明暗が反転する） */
 :root[data-theme="dark"] {
-  --base: #15181d;
+  --base: #15181d; --bg-top: #15181d; --bg-bottom: #15181d;
   --base-yellow: #3a3320;
   --ink: #f3f1ea;
   --sky: #7cc0ee;
@@ -69,7 +71,9 @@ a[target="_blank"]:not(.card):not(.linkcard)::after { content: "↗"; display: i
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--base);
+  /* 背景：ページの上は白、420px あたりで地の色、下へ行くほど少し青みのグレー（2026-11-07。コミュニティ図鑑と同じ。暗い表示では一色） */
+  background-color: var(--base);
+  background-image: linear-gradient(180deg, var(--bg-top) 0, var(--base) 420px, var(--bg-bottom) 100%);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -88,7 +92,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--in
 
 
 /* ヘッダー */
-.site-header { background: var(--base); border-bottom: var(--border-hairline) solid var(--line); }
+.site-header { background: var(--bg-top); border-bottom: var(--border-hairline) solid var(--line); }
 .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-2); padding-top: var(--space-3); padding-bottom: var(--space-3); }
 .logo { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
 .logo-mark { width: 24px; height: 24px; flex: none; }
