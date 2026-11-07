@@ -8,7 +8,7 @@ import re
 import unicodedata
 import urllib.request
 
-__all__ = ["SPREAD_MAX", "spread_keys", "spread_line", "spread_order", "BASE", "BuildError", "COMMON", "CONF", "COST_ORDER", "IMAGES", "JST", "KINDS", "KIND_BY_NAME", "LISTED_STATES", "NOTES", "NOTES_DIR", "NOTES_LABEL", "OTHER", "OUT", "REQUIRED_COLUMNS", "ROOT", "STAGES", "STAGE_BY_NAME", "TENKI", "TENKI_BY_NAME", "TENKI_CONF", "VOICES", "VOICES_LABEL", "by_kind", "fetch_csv", "fix_memo", "kinds_of", "load_images", "load_json", "matches_tenki", "month_label", "one_line", "parse_date", "parse_month", "parse_rows", "parse_score", "split_list", "valid_id"]
+__all__ = ["SPREAD_SHIFT", "score_band", "SPREAD_MAX", "spread_keys", "spread_line", "spread_order", "BASE", "BuildError", "COMMON", "CONF", "COST_ORDER", "IMAGES", "JST", "KINDS", "KIND_BY_NAME", "LISTED_STATES", "NOTES", "NOTES_DIR", "NOTES_LABEL", "OTHER", "OUT", "REQUIRED_COLUMNS", "ROOT", "STAGES", "STAGE_BY_NAME", "TENKI", "TENKI_BY_NAME", "TENKI_CONF", "VOICES", "VOICES_LABEL", "by_kind", "fetch_csv", "fix_memo", "kinds_of", "load_images", "load_json", "matches_tenki", "month_label", "one_line", "parse_date", "parse_month", "parse_rows", "parse_score", "split_list", "valid_id"]
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # リポジトリの一番上（build.py のある場所）
 OUT = os.path.join(ROOT, "_site")
@@ -171,12 +171,12 @@ def parse_rows(text):
         })
     if skipped:
         print("設定にない種類のため表示から外しました: %s" % "、".join(skipped))
-    # 並び順（おすすめ順）は、掲載先の画像があるものを先に、そのなかで観測スコアの高い順。そのうえで spread_order で、
-    # 同じ主な転機・同じ提供元が3件続かないように並べ直す。
-    # スコアは並べ替えにだけ使い、出力には rank（順位）だけを残す。トップの棚・転機のページ・探すページなど、
-    # rank を使う並びはすべてこの順になる（新着の一覧は追加日の新しい順で、同じ日のなかがこの順）
-    items.sort(key=lambda it: (it["id"] not in IMAGES, -it["score"], -(it["added"] or datetime.date.min).toordinal(), it["id"]))
-    # score_rank は観測スコアの順そのもの（キーワード検索の並びに使う。2026-11-07 から検索はこの順のまま）
+    # 並び順（おすすめ順）は、観測スコアを5点刻みの帯（95〜100、90〜94 …）に分け、帯の高い順 → 同じ帯の中で画像ありを先 →
+    # 観測スコアの高い順（2026-11-07 黒田さんの決定。画像があるだけで点数の低いものが先頭に来ないように）。そのうえで spread_order で、
+    # 同じ主な転機・同じ提供元が3件続かないように並べ直す。スコアは並べ替えにだけ使い、出力には rank（順位）だけを残す。
+    items.sort(key=lambda it: (-score_band(it["score"]), it["id"] not in IMAGES, -it["score"],
+                               -(it["added"] or datetime.date.min).toordinal(), it["id"]))
+    # score_rank は並べ直す前の順（キーワード検索の並びに使う。検索では同じ転機・提供元を散らさない）
     for i, it in enumerate(items):
         it["score_rank"] = i + 1
     # rank（一覧の並び）は、同じ転機・同じ提供元が上位で続かないように並べ直したもの（spread_order）
@@ -188,7 +188,13 @@ def parse_rows(text):
     return items
 
 
-SPREAD_MAX = 2  # 同じ「主な転機」・同じ「提供元・著者」が続いてよい数
+def score_band(score):
+    """観測スコアの5点刻みの帯。95〜100 は同じ帯（19）、90〜94 は 18 …。"""
+    return min(int(score // 5), 19)
+
+
+SPREAD_MAX = 2    # 同じ「主な転機」・同じ「提供元・著者」が続いてよい数
+SPREAD_SHIFT = 3  # 並べ直しで後ろに回すのは、元の位置から最大でこの数まで
 
 
 def spread_keys(it):
@@ -197,39 +203,39 @@ def spread_keys(it):
 
 
 def spread_line(items):
-    """1本の並びを、上から順に、直前の2件と同じ主な転機・同じ提供元が3件目にならないものを先に出す形に並べ直す。
-    条件に合うものが残っていなければ、残りはそのままの順で並べる（2026-11-07 データ側の依頼。本の上位が定年ばかりになっていたため）。"""
-    rest, out = list(items), []
+    """1本の並びを、上から順に、直前の2件と同じ主な転機・同じ提供元が3件目にならないものを先に出す形に並べ直す
+    （2026-11-07 データ側の依頼。本の上位が定年ばかりになっていたため）。
+    後ろに回すのは元の位置から SPREAD_SHIFT 個下まで。それを超えそうなものは、条件に合わなくてもそこで出す。
+    前に出すのも元の位置から SPREAD_SHIFT 個上まで（実務のように同じ転機が多い種類で、点数の低いものが遠くから上がってこないように）。
+    条件に合うものがなければ、残りのいちばん上をそのまま出す。"""
+    rest, out = list(enumerate(items)), []
     while rest:
+        pos = len(out)
         def ok(it):
-            if len(out) < SPREAD_MAX:
+            if pos < SPREAD_MAX:
                 return True
             keys = spread_keys(it)
             for k in range(2):
                 if keys[k] and all(spread_keys(o)[k] == keys[k] for o in out[-SPREAD_MAX:]):
                     return False
             return True
-        hit = next((it for it in rest if ok(it)), None)
-        if hit is None:
-            out += rest
-            break
-        out.append(hit)
+        if rest[0][0] + SPREAD_SHIFT <= pos:  # これ以上は後ろに回せない
+            hit = rest[0]
+        else:
+            # 前に出すのも、元の位置から SPREAD_SHIFT 個上まで（点数の大きく違うものが入れ替わらないように）
+            hit = next((r for r in rest if r[0] <= pos + SPREAD_SHIFT and ok(r[1])), rest[0])
+        out.append(hit[1])
         rest.remove(hit)
     return out
 
 
 def spread_order(items):
-    """一覧の並び。画像ありが先・画像なしが後の区切りは崩さない。
-    種類（タイプ）ごとに spread_line で並べ直し、その種類がもとの並びで占めていた位置に入れ直す。
+    """一覧の並び。種類（タイプ）ごとに spread_line で並べ直し、その種類がもとの並びで占めていた位置に入れ直す。
     こうすると、種類ごとの一覧（棚・タイプのページ）でも、全部を混ぜた一覧でも、それぞれの種類の中は並べ直した順になる。"""
-    out = []
-    for has_image in (True, False):
-        group = [it for it in items if (it["id"] in IMAGES) == has_image]
-        queues = {}
-        for kind in dict.fromkeys(it["kind"] for it in group):
-            queues[kind] = spread_line([it for it in group if it["kind"] == kind])
-        out += [queues[it["kind"]].pop(0) for it in group]
-    return out
+    queues = {}
+    for kind in dict.fromkeys(it["kind"] for it in items):
+        queues[kind] = spread_line([it for it in items if it["kind"] == kind])
+    return [queues[it["kind"]].pop(0) for it in items]
 
 
 def matches_tenki(item, name):
