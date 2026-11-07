@@ -19,6 +19,7 @@
   --line: #e3e6ea;
   --card: #ffffff;
   --chip-bg: #e8eef5;
+  --tint-line: #cddcec;        /* 薄い空色の箱の線（背景のグラデーションに溶けないように。2026-11-07 見本の案C） */
   --sky-on-tint: #1568a6;  /* 薄い空色の箱の上の青い文字（読みやすさの目安を満たす濃さ） */
   /* 文字 */
   --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
@@ -54,6 +55,7 @@
   --line: #313640;
   --card: #1f232a;
   --chip-bg: #233042;
+  --tint-line: #2f415a;
   --sky-on-tint: #7cc0ee;
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
   --footer-bg: #0e1013;
@@ -336,7 +338,7 @@ button, .button {
   .cards.sm-shelf h3, .cards.sm-shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .sm-shelf-block + .more { margin-top: var(--space-2); }
   /* 転機のページのタイプ別は、トップの棚と同じ薄い空色の箱に入れる */
-  .kind-block.sm-box { margin-top: var(--space-4); background: var(--chip-bg); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+  .kind-block.sm-box { margin-top: var(--space-4); background: var(--chip-bg); border: var(--border-hairline) solid var(--tint-line); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
   .kind-block.sm-box .card-more a { background: var(--card); }
   .kind-block.sm-box .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
   .kind-block.sm-box .shelf-dots i.on { background: var(--sky); opacity: 1; }
@@ -376,7 +378,7 @@ button, .button {
 @media (prefers-reduced-motion: reduce) { .shelf-dots i { transition: none; } }
 /* 1タイプずつ薄い空色の箱に入れて、タイプの境目をわかりやすくする（カードは白のまま）。
    箱の左右の余白は棚のはみ出し幅（space-4）と同じにして、カードを箱の端まで流す */
-.kind-block.shelf-block { margin-top: var(--space-4); background: var(--chip-bg); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+.kind-block.shelf-block { margin-top: var(--space-4); background: var(--chip-bg); border: var(--border-hairline) solid var(--tint-line); border-radius: var(--radius-lg); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
 .shelf-block .card-more a { background: var(--card); }
 .shelf-block .shelf-all, .kind-block.sm-box .shelf-all { color: var(--sky-on-tint); }
 .shelf-block .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
@@ -887,3 +889,6 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 /* 画像の枠は、中の画像の大きさに引っぱられて高くなることがあったので、中身を見ずに比率だけで高さを決める（contain: size） */
 .pick-card .card-media { position: relative; width: 100%; min-height: 0; contain: size; }
 .pick-card .card-media img { position: absolute; inset: 0; }
+
+/* 「転機から探す」の下の丸いリンクは、背景と同じ地にならないよう白い地にする（2026-11-07） */
+.tenki-extra a { background: var(--card); }
