@@ -20,7 +20,7 @@
   --card: #ffffff;
   --chip-bg: #e8eef5;
   --tint-line: #cddcec;        /* 薄い空色の箱の線（背景のグラデーションに溶けないように。2026-11-07 見本の案C） */
-  --rule-line: #d7dde4;        /* トップのタイプごとの棚の上の区切り線（背景のグレーの上でも見える濃さ。2026-11-07 見本の案B） */
+  --line-soft: #e9ecef;        /* トップのタイプごとの白い棚の中のカードの線（棚の線より薄く。2026-11-08 見本の案A） */
   --sky-on-tint: #1568a6;  /* 薄い空色の箱の上の青い文字（読みやすさの目安を満たす濃さ） */
   /* 文字 */
   --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Color Emoji", sans-serif;
@@ -59,7 +59,7 @@
   --card: #1f232a;
   --chip-bg: #233042;
   --tint-line: #2f415a;
-  --rule-line: #3a414c;
+  --line-soft: #2a2f37;
   --sky-on-tint: #7cc0ee;
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
   --footer-bg: #0e1013;
@@ -341,8 +341,10 @@ button, .button {
   .cards.sm-shelf .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .cards.sm-shelf h3, .cards.sm-shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .sm-shelf-block + .more { margin-top: var(--space-2); }
-  /* 転機のページのタイプ別は、トップの棚と同じく、見出しの上の区切り線で分ける */
-  .kind-block.sm-box { margin-top: var(--space-4); border-top: var(--border-hairline) solid var(--rule-line); padding: 20px 0 var(--space-3); overflow: hidden; }
+  /* 転機のページのタイプ別は、トップの棚と同じ白い箱に入れる */
+  .kind-block.sm-box { margin-top: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+  .kind-block.sm-box .card a { border-color: var(--line-soft); }
+  .kind-block.sm-box .card a:hover { border-color: var(--sky); }
   .kind-block.sm-box .card-more a { background: var(--card); }
   .kind-block.sm-box .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
   .kind-block.sm-box .shelf-dots i.on { background: var(--sky); opacity: 1; }
@@ -382,8 +384,10 @@ button, .button {
 @media (prefers-reduced-motion: reduce) { .shelf-dots i { transition: none; } }
 /* 1タイプずつ薄い空色の箱に入れて、タイプの境目をわかりやすくする（カードは白のまま）。
    箱の左右の余白は棚のはみ出し幅（space-4）と同じにして、カードを箱の端まで流す */
-/* トップのタイプごとの棚：箱をなくし、見出しの上に細い区切り線だけを引く（カードは背景の上に直接並べる。2026-11-07 見本の案B） */
-.kind-block.shelf-block { margin-top: var(--space-4); border-top: var(--border-hairline) solid var(--rule-line); padding: 20px 0 var(--space-3); overflow: hidden; }
+/* トップのタイプごとの棚：白い箱に細い線とごく薄い影（ほかのカードと同じ扱い）。中のカードは線を薄くして区切る（2026-11-08 見本の案A） */
+.kind-block.shelf-block { margin-top: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
+.shelf-block .card a { border-color: var(--line-soft); }
+.shelf-block .card a:hover { border-color: var(--sky); }
 .shelf-block .card-more a { background: var(--card); }
 .shelf-block .shelf-all, .kind-block.sm-box .shelf-all { color: var(--sky-on-tint); }
 .shelf-block .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
