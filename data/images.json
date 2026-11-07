@@ -10840,5 +10840,115 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44951/4495199056.jpg",
   "w": 696,
   "h": 1000
+ },
+ "R1326": {
+  "page": "https://www.bengo4.com/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.bengo4.com/img/citizen/common/bengo4-ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1327": {
+  "page": "https://www.yayoi-kk.co.jp/shinkoku/aoiroshinkoku/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.yayoi-kk.co.jp/content/dam/yayoi-corp/shinkoku/aoiroshinkoku/common/img/acq/og.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1328": {
+  "page": "https://progate.com/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://progate.com/images/ogp/default.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1329": {
+  "page": "https://kenjins.jp/",
+  "checked": "2026-11-07",
+  "status": "none"
+ },
+ "R1330": {
+  "page": "https://www.foriio.com/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://img.foriio.com/static/og/foriio_default_ogp_03052019.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1331": {
+  "page": "https://rirekisho.yagish.jp/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://rirekisho.yagish.jp/static/renew_img/yagish_ogp20211103.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1332": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784297143695",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42971/4297143690.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1333": {
+  "page": "https://books.rakuten.co.jp/rb/17018615/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/3464/9784295013464_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 881
+ },
+ "R1335": {
+  "page": "https://books.rakuten.co.jp/rb/16812193/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40006/4000614835.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1336": {
+  "page": "https://books.rakuten.co.jp/rb/17987228/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47581/4758122733.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1337": {
+  "page": "https://books.rakuten.co.jp/rb/17626041/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42634/4263446941.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1338": {
+  "page": "https://www.tielec.net/ja/services",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.tielec.net/og-default.png",
+  "w": 960,
+  "h": 504,
+  "suspect": true
+ },
+ "R1339": {
+  "page": "https://books.rakuten.co.jp/rb/18167116/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/4793/9784065394793_1_2.jpg?downsize=600:*",
+  "w": 599,
+  "h": 874
+ },
+ "R1340": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784781620855",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47816/478162085X.jpg",
+  "w": 680,
+  "h": 1000
  }
 }
