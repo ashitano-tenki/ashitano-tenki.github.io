@@ -10776,5 +10776,69 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45025/4502544310.jpg",
   "w": 705,
   "h": 1000
+ },
+ "R1318": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784313162037",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43131/4313162038.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1319": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784785728809",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47857/4785728809.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1320": {
+  "page": "https://books.rakuten.co.jp/rb/16972458/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45023/4502397717.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R1321": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862806390",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48628/4862806392.jpg",
+  "w": 688,
+  "h": 1000
+ },
+ "R1322": {
+  "page": "https://books.rakuten.co.jp/rb/15850749/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://m.media-amazon.com/images/P/4805858656.09.LZZZZZZZ.jpg",
+  "w": 358,
+  "h": 500
+ },
+ "R1323": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784824304971",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48243/4824304970.jpg",
+  "w": 781,
+  "h": 1000
+ },
+ "R1324": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784788931886",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47889/4788931885.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1325": {
+  "page": "https://books.rakuten.co.jp/rb/17778163/",
+  "checked": "2026-11-07",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44951/4495199056.jpg",
+  "w": 696,
+  "h": 1000
  }
 }
