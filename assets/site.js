@@ -459,15 +459,14 @@
   var box = document.getElementById("pick-box");
   if (!box || !window.fetch || !window.TenkiCard) return;
   var btn = document.getElementById("pick-button"), cardEl = document.getElementById("pick-card"), label = document.getElementById("pick-label");
-  var self = box.getAttribute("data-id"), list = null, last = "";
-  box.hidden = false;
+  var self = box.getAttribute("data-id"), list = null, last = box.getAttribute("data-first") || "";
+  btn.hidden = false;  // 最初の1件はページに書いてある。めくるボタンは JavaScript が使えるときだけ出す
   function show() {
     var pool = list.filter(function (it) { return it.id !== self && it.id !== last; });
     if (!pool.length) return;
     var it = pool[Math.floor(Math.random() * pool.length)];
     last = it.id;
     cardEl.innerHTML = window.TenkiCard(it);
-    label.textContent = "もう1件めくる";
   }
   btn.addEventListener("click", function () {
     btn.classList.add("is-rolling");

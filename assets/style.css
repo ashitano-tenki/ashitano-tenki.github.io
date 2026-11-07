@@ -861,7 +861,6 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 
 /* 紹介ページの「ほかの情報をチェック」（2026-11-07 見本の案1。点線の箱で、めくった1件を横に出す） */
 .pick-box { margin-top: var(--space-8); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--space-4); align-items: center; background: var(--card); border: 1px dashed var(--sky); border-radius: var(--radius-lg); padding: var(--space-6); }
-.pick-box[hidden] { display: none; }
 @media (max-width: 720px) { .pick-box { grid-template-columns: 1fr; } }
 .pick-box h2 { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-size: 20px; margin: 0 0 var(--space-1); }
 .pick-box p { margin: 0 0 var(--space-3); font-size: 14px; color: var(--text-body); }
@@ -871,9 +870,16 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .pick-button span:first-child { display: inline-block; transition: transform .5s ease; }
 .pick-button.is-rolling span:first-child { transform: rotate(360deg); }
 .pick-card { list-style: none; margin: 0; padding: 0; max-width: 340px; width: 100%; justify-self: center; grid-template-columns: 1fr; }
-.pick-card:empty { display: none; }
 .pick-card .card { animation: pick-flip .5s ease; }
 .pick-error { font-size: 14px; color: var(--text-sub); }
 @keyframes pick-flip { from { opacity: 0; transform: rotateY(-60deg); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .pick-card .card { animation: none; } .pick-button span:first-child { transition: none; } }
 
+/* めくっても箱の高さが変わらないよう、カードの中の行数をそろえる（転機と段階は1行、題名・説明は2行ぶんの高さを取り、超えた分は…。画像の枠は比率が決まっている。2026-11-07 黒田さんの指摘） */
+.pick-card .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 30px; }
+.pick-card .card h3 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3em; }
+.pick-card .card .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.4em; }
+.pick-card .card-foot { flex-wrap: nowrap; overflow: hidden; }
+/* 画像の枠は、中の画像の大きさに引っぱられて高くなることがあったので、中身を見ずに比率だけで高さを決める（contain: size） */
+.pick-card .card-media { position: relative; width: 100%; min-height: 0; contain: size; }
+.pick-card .card-media img { position: absolute; inset: 0; }

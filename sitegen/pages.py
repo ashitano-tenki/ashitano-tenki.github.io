@@ -3,6 +3,7 @@ import datetime
 import collections
 import json
 import os
+import random
 from urllib.parse import quote
 from sitegen.core import BASE, COMMON, CONF, KINDS, KIND_BY_NAME, NOTES, NOTES_LABEL, OTHER, ROOT, STAGES, STAGE_BY_NAME, TENKI, TENKI_BY_NAME, by_kind, kinds_of, load_json, matches_tenki
 from sitegen.parts import SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, breadcrumb, card, e, emoji, image_credit, image_info, item_media, kind_emoji, kind_sections, kind_shelves, more_link, og_image, page, search_url, sm_shelf, tenki_url
@@ -340,15 +341,21 @@ def related_choices(item, listed, ctx, per=3, max_kinds=6):
             '<h2 class="related-title">次はどの手で進める？</h2><p class="related-lead">%s</p>%s%s</section>' % (e(lead), tab_html, bodies))
 
 
-def pick_box(item):
+def pick_box(item, listed, ctx):
     """紹介ページの下の「ほかの情報をチェック」（2026-11-07 黒田さんが見本の案1を選んだ。コミュニティ図鑑の「ほかの事例をひく」と同じ形）。
-    押すたびに /search.json から掲載中の1件をランダムにめくる（site.js）。JavaScript が使えないときは出さない。"""
-    return ('<section class="pick-box" id="pick-box" data-id="%s" hidden><div class="pick-text">'
+    最初の1件はサイトを作るときに選んで書き込んでおく（掲載ごと・日ごとに変わる。開くたびに一覧を読まずに済む）。
+    「もう1件めくる」を押すと、/search.json から掲載中の1件をランダムにめくる（site.js）。ボタンは JavaScript が使えるときだけ出す。"""
+    others = [it for it in listed if it["id"] != item["id"]]
+    if not others:
+        return ""
+    first = random.Random("%s-%s" % (item["id"], ctx["today"].isoformat())).choice(others)
+    return ('<section class="pick-box" id="pick-box" data-id="%s" data-first="%s"><div class="pick-text">'
             '<h2><span aria-hidden="true">🎲</span>ほかの情報をチェック</h2>'
             '<p>観測所の全体からランダムに1件めくります。思いがけない情報に出会えるかもしれません。</p>'
-            '<button type="button" class="pick-button" id="pick-button" data-goatcounter-click="pick">'
-            '<span aria-hidden="true">🎲</span><span id="pick-label">1件めくる</span></button></div>'
-            '<ul class="cards pick-card" id="pick-card" aria-live="polite"></ul></section>' % e(item["id"]))
+            '<button type="button" class="pick-button" id="pick-button" data-goatcounter-click="pick" hidden>'
+            '<span aria-hidden="true">🎲</span><span id="pick-label">もう1件めくる</span></button></div>'
+            '<ul class="cards pick-card" id="pick-card" aria-live="polite">%s</ul></section>'
+            % (e(item["id"]), e(first["id"]), card(first, ctx["today"])))
 
 
 # 「あわせて見たいもの」のボタンの言葉（タイプごと）
@@ -364,7 +371,7 @@ def build_item(item, listed, ctx):
             out.append('<a href="%s">%s</a>' % (e(make(n)), e(label)) if n in lookup else e(label))
         return "、".join(out) or "―"
 
-    similar_html = related_choices(item, listed, ctx) + pick_box(item)
+    similar_html = related_choices(item, listed, ctx) + pick_box(item, listed, ctx)
 
     # パンくずは、その掲載のいちばん目の転機のページを通る（どの転機にもの掲載は「どの転機にも」）
     main = next((TENKI_BY_NAME[t] for t in item["tenki"] if t in TENKI_BY_NAME), None)
