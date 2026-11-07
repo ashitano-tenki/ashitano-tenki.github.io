@@ -10076,8 +10076,13 @@
  },
  "R1224": {
   "page": "https://weca.jp/",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 53246,
+  "status": "ok",
+  "src": "file:images/manual/R1224.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1225": {
   "page": "https://books.rakuten.co.jp/rb/18489493/",
@@ -10372,9 +10377,13 @@
  },
  "R1263": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784295606000",
-  "checked": "2026-11-07",
-  "status": "error",
-  "note": "timeout: The read operation timed out"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 26852,
+  "status": "ok",
+  "src": "file:images/manual/R1263.jpg",
+  "w": 352,
+  "h": 500
  },
  "R1264": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798189383",
@@ -10532,8 +10541,13 @@
  },
  "R1284": {
   "page": "https://optemo.co.jp/lp/is_ken/",
-  "checked": "2026-11-07",
-  "status": "none"
+  "checked": "2026-11-08",
+  "manual": true,
+  "fsize": 186655,
+  "status": "ok",
+  "src": "file:images/manual/R1284.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1285": {
   "page": "https://books.rakuten.co.jp/rb/16859319/",
@@ -11028,8 +11042,12 @@
  "R1347": {
   "page": "https://www.global-jinji.org/",
   "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 189703,
+  "status": "ok",
+  "src": "file:images/manual/R1347.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1348": {
   "page": "https://eventregist.com/p/CMC_Meetup",
@@ -11448,6 +11466,89 @@
   "checked": "2026-11-08",
   "status": "ok",
   "src": "https://8card.net/contents_assets/img/ogp_1200_630.png",
+  "w": 960,
+  "h": 540
+ },
+ "R1407": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784313161962",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43131/4313161961.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1408": {
+  "page": "https://tenshoku-agent.acaric.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://cdn.acaric.jp/career/career-ogp-image-lp-02.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1409": {
+  "page": "https://career-trail.net/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://career-trail.net/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1410": {
+  "page": "https://kaigocafe.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://kaigocafe.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1411": {
+  "page": "https://minagine.jp/lab/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://minagine.jp/lab/img/og.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1412": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800592415",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48005/4800592410.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1413": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296204519",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42962/4296204513.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1414": {
+  "page": "https://ekkyosensei.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "http://ekkyosensei.jp/wp-content/uploads/2025/03/青-白-シンプル-ビジネス-会社紹介資料-採用資料セミナー資料-会社説明会-企業-プレゼンテーション_20250313_205355_0000.png",
+  "w": 960,
+  "h": 540
+ },
+ "R1415": {
+  "page": "https://1doyukai.club/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://1doyukai.club/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1416": {
+  "page": "https://active-sp-salon.fants.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/379a45f9-1fa6-4aae-ac44-1866d2cde3d4",
   "w": 960,
   "h": 540
  }
