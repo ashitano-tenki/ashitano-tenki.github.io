@@ -7,7 +7,7 @@ import json
 import os
 import shutil
 from sitegen.core import BASE, BuildError, CONF, JST, OUT, ROOT, STAGES, load_json
-from sitegen.parts import HEAD_SCRIPT, e, image_info, image_ref, normalize, reading, site_footer, site_header, when_line, write
+from sitegen.parts import EMOJI_TEXT, HEAD_SCRIPT, e, image_info, image_ref, normalize, reading, site_footer, site_header, when_line, write
 
 __all__ = ["assets_version", "build_check", "build_feed", "build_meta_files", "build_search_json", "check_counts", "feed_image", "save_snapshot", "write_items_json"]
 
@@ -58,7 +58,8 @@ def build_check(listed, ctx):
     for mark in ("<!--SITE_HEAD-->", "<!--SITE_HEADER-->", "<!--SITE_FOOTER-->"):
         assert mark in text, mark
     head = (HEAD_SCRIPT + '<link rel="alternate" type="application/rss+xml" title="%s 観測レポート" href="/feed.xml">\n'
-            '<link rel="stylesheet" href="/assets/style.css?v=%s">' % (e(CONF["site_name"]), ctx["version"]))
+            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text=%s">\n'
+            '<link rel="stylesheet" href="/assets/style.css?v=%s">' % (e(CONF["site_name"]), EMOJI_TEXT, ctx["version"]))
     # 質問と結果の文章（config/check.json）と、動きの JavaScript（check/check.js）をページに埋め込む
     with open(os.path.join(ROOT, "check", "check.js"), encoding="utf-8") as f:
         js = f.read()

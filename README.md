@@ -120,3 +120,4 @@ python3 -m http.server 8765 --directory _site
 ## 画像の出典
 
 ロゴ・ファビコン・SNS共有用画像の📡は、Google の [Noto Emoji](https://github.com/googlefonts/noto-emoji)（Apache License 2.0）の画像を使っています。
+サイトの絵文字は、どの端末でも Google の [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)（Apache License 2.0）で表示します。Google Fonts から、サイトで使っている絵文字だけを読み込みます（`sitegen/parts.py` の used_emoji。新しい絵文字を足すと、次に作るときに自動で入ります）。

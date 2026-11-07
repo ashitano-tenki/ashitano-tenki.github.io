@@ -23,9 +23,11 @@
   --rule-line: #d7dde4;        /* トップのタイプごとの棚の上の区切り線（背景のグレーの上でも見える濃さ。2026-11-07 見本の案B） */
   --sky-on-tint: #1568a6;  /* 薄い空色の箱の上の青い文字（読みやすさの目安を満たす濃さ） */
   /* 文字 */
-  --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
+  --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Color Emoji", sans-serif;
   /* 本文は端末の標準フォント（読み込みが要らず表示が速い）。見出しだけ Zen Kaku Gothic New を読み込む */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", "Noto Color Emoji", system-ui, sans-serif;
+  /* 絵文字はどの端末でも Google の Noto Color Emoji にそろえる（Apache License 2.0。サイトで使う絵文字だけを Google Fonts から読む） */
+  --font-emoji: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
   /* 余白 */
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
   --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
@@ -91,7 +93,7 @@ a:hover { text-decoration-thickness: 2px; }
 img { max-width: 100%; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--ink); word-break: auto-phrase; text-wrap: balance; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 var(--space-4); }
-.emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-weight: 400; margin-right: 0.35em; }
+.emoji { font-family: var(--font-emoji); font-weight: 400; margin-right: 0.35em; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 
@@ -280,7 +282,7 @@ button, .button {
 .card-media img, .detail-hero img { display: block; width: 100%; height: 100%; }
 .media-wide img { object-fit: cover; }
 .media-fit img { object-fit: contain; padding: var(--space-2); }
-.media-none span { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 40px; line-height: 1; }
+.media-none span { font-family: var(--font-emoji); font-size: 40px; line-height: 1; }
 .hero-credit { margin: calc(-1 * var(--space-3)) 0 var(--space-3); font-size: 12px; color: var(--text-sub); }
 .detail-hero { aspect-ratio: 1.91 / 1; max-width: 640px; border-radius: 12px; margin: 0 0 var(--space-4); }
 .detail-hero.media-fit img { padding: var(--space-3); }
@@ -678,7 +680,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 /* 観測ノート（転機ごとのまとめ記事）：シェア画像と同じ黄色の帯で始め、紹介する掲載を番号付きで並べる */
 .note-hero { position: relative; overflow: hidden; margin: var(--space-4) 0 var(--space-6); padding: var(--space-8) var(--space-6) var(--space-6); background: var(--yellow); color: #1a1d23; border-radius: var(--radius-lg); }
 .note-hero::before { content: ""; position: absolute; right: -70px; top: -90px; width: 260px; height: 260px; border-radius: 50%; background: rgba(251, 250, 245, .55); }
-.note-hero-emoji { position: absolute; right: 26px; top: 18px; font-size: 76px; line-height: 1; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.note-hero-emoji { position: absolute; right: 26px; top: 18px; font-size: 76px; line-height: 1; font-family: var(--font-emoji); }
 .note-hero > *:not(.note-hero-emoji) { position: relative; }
 .note-hero h1 { font-size: clamp(26px, 6.4vw, 38px); line-height: 1.45; margin: var(--space-4) 0 var(--space-4); max-width: 22em; color: #1a1d23; }
 .note-kicker { display: inline-block; margin: 0; padding: 4px 14px; border-radius: var(--radius-pill); background: #1a1d23; color: var(--yellow); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
@@ -789,7 +791,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .voice-card { display: flex; flex-direction: column; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); overflow: hidden; min-width: 0; }
 /* 上半分：転機の後を見出しに（雑誌風） */
 .vc-top { position: relative; padding: 18px 20px 16px; background: var(--chip-bg); }
-.vc-icon { position: absolute; right: 14px; top: 10px; font-size: 46px; line-height: 1; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.vc-icon { position: absolute; right: 14px; top: 10px; font-size: 46px; line-height: 1; font-family: var(--font-emoji); }
 .vc-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-right: 58px; }
 .vc-tenki { display: inline-flex; align-items: center; padding: 3px 12px 3px 8px; border-radius: var(--radius-pill); background: var(--card); color: var(--ink); font-size: 14px; font-weight: 700; line-height: 1.5; }
 .vc-tenki .emoji { margin-right: 5px; font-size: 16px; }

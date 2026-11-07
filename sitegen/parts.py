@@ -3,11 +3,12 @@ import hashlib
 import html
 import json
 import os
+import re
 import unicodedata
-from urllib.parse import urlencode
+from urllib.parse import quote, urlencode
 from sitegen.core import BASE, COMMON, CONF, IMAGES, KIND_BY_NAME, NOTES_LABEL, OTHER, OUT, ROOT, VOICES_LABEL, by_kind
 
-__all__ = ["HEAD_SCRIPT", "NAV", "SAVE_ICON", "SHARE_ICON", "TENKI_AI", "WEEKDAYS", "_CRUMBS", "_KAKASI", "added_label", "ai_link", "analytics_tag", "breadcrumb", "card", "cards", "e", "emoji", "fmt_date", "image_credit", "image_info", "image_ref", "item_media", "jsonld_tag", "kind_emoji", "kind_sections", "kind_shelves", "more_link", "nav_links", "normalize", "og_image", "page", "reading", "save_button", "search_url", "site_footer", "site_header", "sm_shelf", "tag_list", "tenki_url", "when_line", "write"]
+__all__ = ["EMOJI_TEXT", "used_emoji", "HEAD_SCRIPT", "NAV", "SAVE_ICON", "SHARE_ICON", "TENKI_AI", "WEEKDAYS", "_CRUMBS", "_KAKASI", "added_label", "ai_link", "analytics_tag", "breadcrumb", "card", "cards", "e", "emoji", "fmt_date", "image_credit", "image_info", "image_ref", "item_media", "jsonld_tag", "kind_emoji", "kind_sections", "kind_shelves", "more_link", "nav_links", "normalize", "og_image", "page", "reading", "save_button", "search_url", "site_footer", "site_header", "sm_shelf", "tag_list", "tenki_url", "when_line", "write"]
 
 
 # ---------------------------------------------------------------- HTML部品
@@ -231,6 +232,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 {head_script}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text={emoji_text}">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
 {ld}</head>
 <body>
@@ -243,7 +245,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body, emoji_text=EMOJI_TEXT,
            contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]), extra_head=extra_head)
     write(path, html_text)
@@ -262,6 +264,23 @@ def write(path, text):
 
 def more_link(href, label):
     return '<p class="more"><a href="%s">%s</a></p>' % (e(href), e(label))
+
+
+def used_emoji():
+    """サイトで使う絵文字の一覧（Google Fonts から Noto Color Emoji のその文字だけを読むため）。
+    ページの作り方・動き・設定・観測ノートの原稿に書いてある絵文字を集める。新しい絵文字を足しても、次に作るときに自動で入る。"""
+    pat = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF\uFE0F\u200D]")
+    chars = set()
+    for folder, exts in (("sitegen", ".py"), ("assets", ".js"), ("check", ".js"), ("config", ".json"), ("notes", ".md")):
+        base = os.path.join(ROOT, folder)
+        for name in sorted(os.listdir(base)) if os.path.isdir(base) else []:
+            if name.endswith(exts):
+                with open(os.path.join(base, name), encoding="utf-8") as f:
+                    chars.update(pat.findall(f.read()))
+    return quote("".join(sorted(chars)))
+
+
+EMOJI_TEXT = used_emoji()
 
 
 def emoji(char):
