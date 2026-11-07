@@ -301,6 +301,11 @@
   function run() {
     var state = readForm();
     updateUrl(state);
+    // キーワード検索用の文字（search-text.json）がまだ届いていないときは、届いてから探す
+    if (state.q && !textReady) {
+      countEl.textContent = "読み込んでいます…";
+      return;
+    }
     results = filter(state);
     byNew = state.sort === "new";
     renderChips(state);
@@ -402,12 +407,26 @@
   chipsEl.addEventListener("click", onRemove);
   zeroHelp.addEventListener("click", onRemove);
 
+  // 一覧に出すデータ（search.json）と、キーワード検索に使う文字（search-text.json、説明の全文と読み）を分けて読む。
+  // 一覧は search.json だけで先に出し、キーワードがあるときは search-text.json が届いてから探す
+  // （回線を取り合わないよう、search-text.json は一覧を出したあとに読み始める）
+  var textReady = false;
   fetch("/search.json")
     .then(function (r) { return r.json(); })
     .then(function (json) {
       data = json;
       writeForm(readParams());
       run();
+      return fetch("/search-text.json").then(function (r) { return r.json(); })
+        .then(function (json) { return json.text || {}; }, function () { return null; })
+        .then(function (text) {
+          data.items.forEach(function (it) {
+            // 前の形の search.json（text 入り）がブラウザに残っていればそれを使う。検索用の文字が読めなければタイトルと説明の1文目で探す
+            if (it.text === undefined) it.text = text && text[it.id] !== undefined ? text[it.id] : normalize(it.title + " " + it.line);
+          });
+          textReady = true;
+          if (readForm().q) run();
+        });
     })
     .catch(function () { countEl.textContent = "データを読み込めませんでした。時間をおいて開き直してください。"; });
 })();

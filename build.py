@@ -2069,18 +2069,21 @@ def build_search_json(listed, ctx):
             "id": it["id"], "title": it["title"], "line": it["line"], "kind": it["kind"],
             "tenki": it["tenki"], "stages": it["stages"],
             "added": it["added"].isoformat() if it["added"] else "",
-            "rank": it["rank"], "new": it["id"] in ctx["new_ids"], "img": image_ref(it),
-            "text": normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
-                                        " ".join(it["tenki"]), " ".join(it["stages"])]))
-                    + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])),
+            "rank": it["rank"], "img": image_ref(it),
         } for it in listed],
         # 言い換え表。読みは「どのグループに当たるか」の判定にだけ使う（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）。
         # 読みで本文を探すと、同じ読みの別の言葉（障害と生涯）まで見つかるため、本文を探すのは words だけ
         "synonyms": [{"words": sorted({normalize(w) for w in g if w.strip()}),
                       "readings": sorted({reading(w) for w in g if w.strip()} - {""})} for g in synonyms if isinstance(g, list)],
     }
+    # キーワード検索に使う文字（説明の全文と読み）は、データの4分の3を占めるので別のファイル /search-text.json に分ける。
+    # 探すページは search.json だけで一覧を先に出し、キーワードで探すときだけ search-text.json を待つ（探せる言葉や結果は変わらない）
+    text_by_id = {it["id"]: normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
+                                                 " ".join(it["tenki"]), " ".join(it["stages"])]))
+                             + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])) for it in listed}
+    write("/search-text.json", json.dumps({"text": text_by_id}, ensure_ascii=False, separators=(",", ":")))
     # 入力中の候補（言い換え表の言葉のうち、掲載に1件以上あるもの）。読みを添えて、ひらがなでも候補に出す
-    texts = [i["text"] for i in data["items"]]
+    texts = list(text_by_id.values())
     words = list(dict.fromkeys(w.strip() for g in synonyms if isinstance(g, list) for w in g if w.strip()))
     data["suggest"] = [{"w": w, "r": reading(w)} for w in words if any(normalize(w) in t for t in texts)]
     write("/search.json", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
