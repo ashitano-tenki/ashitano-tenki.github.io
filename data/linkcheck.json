@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-07T11:14:56+09:00",
+  "checked_at": "2026-11-07T11:44:57+09:00",
   "summary": {
     "正常": 884,
     "移転": 2,
@@ -13,8 +13,8 @@
     "要確認": 5
   },
   "this_run": {
-    "checked": 1172,
-    "planned": 1463,
+    "checked": 474,
+    "planned": 765,
     "minutes": 26.8
   },
   "unchecked": 291,
