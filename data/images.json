@@ -8258,6 +8258,14 @@
   "w": 700,
   "h": 1000
  },
+ "R0995": {
+  "page": "https://books.rakuten.co.jp/rb/17962789/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/6094/9784911226094_1_88.jpg?downsize=600:*",
+  "w": 600,
+  "h": 862
+ },
  "R0996": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784847062261",
   "checked": "2026-11-05",
@@ -9335,6 +9343,14 @@
   "checked": "2026-11-06",
   "status": "ok",
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48379/4837940560.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R1135": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798199955",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47981/4798199958.jpg",
   "w": 704,
   "h": 1000
  },
@@ -10958,5 +10974,481 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47816/478162085X.jpg",
   "w": 680,
   "h": 1000
+ },
+ "R1341": {
+  "page": "https://www.career-merise.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://image.jimcdn.com/app/cms/image/transf/none/path/s77abbb30bd1107cd/backgroundarea/icb862ddcf3a61b34/version/1681602867/image.png",
+  "w": 960,
+  "h": 354
+ },
+ "R1342": {
+  "page": "https://www.workingsurvivors.org/secondopinion.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://www.workingsurvivors.org/secondopinion.html",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1343": {
+  "page": "https://www.gh-ouendan.com/olinesoudan",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/294e8a_c15ab4c883bb4b9f93260ad106c0dce3%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/294e8a_c15ab4c883bb4b9f93260ad106c0dce3%7Emv2.jpg",
+  "w": 600,
+  "h": 315
+ },
+ "R1344": {
+  "page": "https://www.jcancer.jp/consultion_and_support/work_support",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.jcancer.jp/wp-content/uploads/ogp_shurou.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1345": {
+  "page": "https://www.counselor.or.jp/consultation/tabid/298/Default.aspx",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://www.counselor.or.jp/consultation/tabid/298/Default.aspx",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1346": {
+  "page": "https://kouhou47.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://kouhou47.com/wp-content/uploads/2023/06/47_mainimg6.png",
+  "w": 960,
+  "h": 492
+ },
+ "R1347": {
+  "page": "https://www.global-jinji.org/",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R1348": {
+  "page": "https://eventregist.com/p/CMC_Meetup",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://er-static.s3.amazonaws.com/uploads/hosts/0b91dcfb480b664b5f950187990c7b3707f95ebf.jpg",
+  "w": 955,
+  "h": 500
+ },
+ "R1349": {
+  "page": "https://yeale-by-cerebrix.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://yeale-by-cerebrix.com/opengraph-image.jpg?e717e5da960dcc4e",
+  "w": 800,
+  "h": 450
+ },
+ "R1350": {
+  "page": "https://yakumi.space/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://yakumi.space/wp-content/uploads/2021/09/cropped-N-s-1.jpg",
+  "w": 640,
+  "h": 211
+ },
+ "R1351": {
+  "page": "https://books.rakuten.co.jp/rb/16058312/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48979/489795231X.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R1352": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784897952727",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48979/4897952727.jpg",
+  "w": 708,
+  "h": 1000
+ },
+ "R1353": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784758118644",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47581/4758118647.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1354": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784845263936",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48452/4845263939.jpg",
+  "w": 708,
+  "h": 1000
+ },
+ "R1355": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784845234721",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48452/4845234726.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1357": {
+  "page": "https://litalico-c.jp/",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R1358": {
+  "page": "https://entrenet.jp/",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R1359": {
+  "page": "https://pitin-coaching.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/aef65ee4-badd-4c74-a6f3-be02e552698f",
+  "w": 960,
+  "h": 504
+ },
+ "R1360": {
+  "page": "https://books.rakuten.co.jp/rb/17930528/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49108/4910822054.jpg",
+  "w": 683,
+  "h": 1000
+ },
+ "R1362": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000085.000111116.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/111116/85/111116-85-6f7902e67313971f18e25b46d71151d1-1250x630.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 484
+ },
+ "R1363": {
+  "page": "https://nakamura-editing.co.jp/webwriterlab-line/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://nakamura-editing.co.jp/webwriterlab-line/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1364": {
+  "page": "https://hitohata.co/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://hitohata.co/wp-content/uploads/2026/09/OGP.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1365": {
+  "page": "https://www.neo-career.co.jp/careertrus/about",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.neo-career.co.jp/careertrus/assets/user/static/ogp.png",
+  "w": 960,
+  "h": 502
+ },
+ "R1366": {
+  "page": "https://tryt-worker.jp/eiyoushi/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://tryt-worker.jp/image/ogp/tryt_service_logo_eiyoushi.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1367": {
+  "page": "https://agreegate-tech.jp/worker-lp1",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/e2200e29-0b8b-4250-a66d-f8bf735bfa9c",
+  "w": 960,
+  "h": 504
+ },
+ "R1368": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000011.000109583.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/109583/11/109583-11-ce708a5aead73b1bdff12263c4b09c80-960x540.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1369": {
+  "page": "https://books.rakuten.co.jp/rb/17765452/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48243/4824300096.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R1370": {
+  "page": "https://books.rakuten.co.jp/rb/18279804/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48636/4863679688.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R1371": {
+  "page": "https://toragirl.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://toragirl.com/ogp.png",
+  "w": 960,
+  "h": 540
+ },
+ "R1372": {
+  "page": "https://foods-labo.info/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://foods-labo.info/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1373": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784296126347",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42961/4296126342.jpg",
+  "w": 616,
+  "h": 1000
+ },
+ "R1374": {
+  "page": "https://books.rakuten.co.jp/rb/18591516/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/9451/9784779519451_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 850
+ },
+ "R1375": {
+  "page": "https://books.rakuten.co.jp/rb/15657841/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48999/4899920547.jpg",
+  "w": 650,
+  "h": 1000
+ },
+ "R1376": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000023.000076314.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://prtimes.jp/i/76314/23/resize/d76314-23-352786-pixta_72438676-0.jpg",
+  "w": 640,
+  "h": 409
+ },
+ "R1377": {
+  "page": "https://books.rakuten.co.jp/rb/17667676/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43440/4344042069.jpg",
+  "w": 684,
+  "h": 1000
+ },
+ "R1378": {
+  "page": "https://www.shikakyuujinscout.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://www.shikakyuujinscout.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1379": {
+  "page": "https://books.rakuten.co.jp/rb/16926792/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47724/477241861X.jpg",
+  "w": 714,
+  "h": 1000
+ },
+ "R1380": {
+  "page": "https://career.prismy.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://career.prismy.jp/images/lib/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1381": {
+  "page": "https://yolicareer.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://yolicareer.jp/ogp/ogp-top.png",
+  "w": 960,
+  "h": 540
+ },
+ "R1382": {
+  "page": "https://books.rakuten.co.jp/rb/18441043/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49100/4910053700.jpg",
+  "w": 703,
+  "h": 1000
+ },
+ "R1383": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000134.000028842.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/28842/134/28842-134-269fd1329a7a4a0fabf428b9a679eeef-763x454.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 763,
+  "h": 454
+ },
+ "R1384": {
+  "page": "https://www.ojisan-mirai.jp/bootcamp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.ojisan-mirai.jp/wp-content/themes/ojisan-mirai/images/og-bootcamp.jpg",
+  "w": 960,
+  "h": 638
+ },
+ "R1385": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784415337234",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44153/4415337236.jpg",
+  "w": 764,
+  "h": 1000
+ },
+ "R1387": {
+  "page": "https://consultant.abilitycrowd.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://consultant.abilitycrowd.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1388": {
+  "page": "https://twenty-career.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://twenty-career.com/ogp.png?v=1",
+  "w": 960,
+  "h": 504
+ },
+ "R1390": {
+  "page": "https://books.rakuten.co.jp/rb/17644685/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47522/4752290278.jpg",
+  "w": 678,
+  "h": 1000
+ },
+ "R1393": {
+  "page": "https://airsalon.net/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://airsalon.net/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1394": {
+  "page": "https://share-salon.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://share-salon.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1395": {
+  "page": "https://jooi-design.io/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://framerusercontent.com/assets/J6sGtdsgrOWYkHe6CMrkr6WdHA.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1396": {
+  "page": "https://enchord.co.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://enchord.co.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1397": {
+  "page": "https://engagement-card.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://engagement-card.com/img/sns.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1398": {
+  "page": "https://arajin-care.net/caregiver-center/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://arajin-care.net/caregiver-center/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1399": {
+  "page": "https://medi-jump.com/mediweblab/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://medi-jump.com/wp-content/uploads/2023/09/MediJump記名記事アイキャッチ.png",
+  "w": 760,
+  "h": 428
+ },
+ "R1400": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784309300504",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43093/4309300502.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R1401": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784800594877",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48005/4800594871.jpg",
+  "w": 693,
+  "h": 1000
+ },
+ "R1402": {
+  "page": "https://books.rakuten.co.jp/rb/18420670",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45941/4594100988.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R1404": {
+  "page": "https://devrel-guild.connpass.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://media.connpass.com/thumbs/d7/ca/d7ca8d098a5df06f96fb4eb66d5c5650.png",
+  "w": 960,
+  "h": 503
+ },
+ "R1405": {
+  "page": "https://gmo-aozora.com/smallbusiness/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://gmo-aozora.com/assets/common/img/ogp-180717.png",
+  "w": 960,
+  "h": 511
+ },
+ "R1406": {
+  "page": "https://8card.net/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://8card.net/contents_assets/img/ogp_1200_630.png",
+  "w": 960,
+  "h": 540
  }
 }
