@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
-      # 掲載中のURLを開いて確かめ、data/linkcheck.json に書く。要確認があれば report.md もできる
+      # 掲載中のURLを開いて確かめ、data/linkcheck.json に書く（毎回は全体の一部だけ。20分で打ち切り、そこまでを保存）。要確認があれば report.md もできる
       - name: 掲載中のURLを開いて確かめる
         run: python3 tools/check_links.py report.md
 
@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/linkcheck.json
+          git add data/linkcheck.json data/linkcheck_seen.json
           git diff --cached --quiet || git commit -m "リンク点検の結果 $(TZ=Asia/Tokyo date +%F)"
           git pull --rebase -q
           git push

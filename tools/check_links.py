@@ -8,6 +8,11 @@
 - 結果は 正常／移転／拒否／要確認 の4つに分ける。linkcheck.json の items には「正常」以外だけを入れる。
 - 「要確認」があったときは、Issue 用の report.md も書く（引数で指定したとき）。
 - スプレッドシートやサイトの掲載は変えない。直すかどうかは、データ側の定期実行が判断する。
+- 1回ですべてを開かない（掲載が増えて30分の時間切れで止まったため）。毎回確かめるのは、
+  まだ一度も確かめていないもの・前回「正常」以外だったもの・残りのうち確かめた日が古いもの（全体の4分の1）。
+  4週で全体を一巡する。確かめた日と結果は data/linkcheck_seen.json に残す。
+- 時間の上限（BUDGET 秒）を過ぎたら新しく開くのをやめ、そこまでの結果を保存する。残りは次回に回る。
+- linkcheck.json の items と summary は、今回確かめていないものも含めた「最後に確かめた結果」。
 """
 import collections
 import concurrent.futures
@@ -31,11 +36,15 @@ sys.path.insert(0, ROOT)
 import build  # noqa: E402  CSVの取得と設定は build.py と同じものを使う
 
 OUT = os.path.join(ROOT, "data", "linkcheck.json")
+SEEN = os.path.join(ROOT, "data", "linkcheck_seen.json")  # 掲載ごとの、最後に確かめた日・URL・結果
+BUDGET = int(os.environ.get("LINKCHECK_BUDGET", "1200"))  # 新しく開くのをやめるまでの秒数（試し直しは含まない）
+RETRY_BUDGET = 300                                       # 試し直しに使ってよい秒数
+ROTATION = 4                                             # 何週で全体を一巡するか
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
       "Chrome/126.0.0.0 Safari/537.36")
 HEADERS = {"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
            "Accept-Language": "ja,en-US;q=0.8,en;q=0.6"}
-TIMEOUT = 15          # 1件あたりの待ち時間（秒）
+TIMEOUT = 12          # 1件あたりの待ち時間（秒）
 WORKERS = 4           # 同時に確かめるドメインの数（相手に負担をかけないよう少なめ）
 DOMAIN_GAP = 2.0      # 同じドメインに続けてアクセスするときの間隔（秒）
 RETRY_WAIT = 60       # 失敗したものを試し直すまでの待ち時間（秒）
@@ -143,55 +152,97 @@ def main():
     for v in build.parse_voices(voice_text):
         rows.append({"ID": v["id"], "タイトル": v["title"], "URL": v["url"], "_kind": "声"})
 
-    def run(batch):
-        """ドメインごとにまとめ、ドメイン単位で並べて確かめる（同じドメインは順番に、間をあけて）。"""
+    try:
+        with open(SEEN, encoding="utf-8") as f:
+            seen = json.load(f)
+    except (OSError, ValueError):
+        seen = {}
+    key = lambda row: row["_kind"] + ":" + row["ID"]
+    rows = list({key(r): r for r in rows}.values())  # 同じIDが2行あっても1回だけ
+
+    # 今回確かめるもの：一度も確かめていない・URLが変わった・前回「正常」以外 は必ず。残りは確かめた日が古い順に全体の4分の1
+    must, rest = [], []
+    for row in rows:
+        old = seen.get(key(row))
+        (must if not old or old.get("url") != row["URL"] or old.get("status") != "正常" else rest).append(row)
+    rest.sort(key=lambda r: (seen[key(r)].get("date", ""), r["ID"]))
+    quota = -(-len(rows) // ROTATION)  # 全体の4分の1（切り上げ）
+    todo = must + rest[:quota]
+
+    def run(batch, budget):
+        """ドメインごとにまとめ、ドメイン単位で並べて確かめる（同じドメインは順番に、間をあけて）。時間を過ぎたら開くのをやめる。"""
+        deadline = time.monotonic() + budget
         by_host = collections.defaultdict(list)
         for row in batch:
             by_host[host_of(row["URL"])].append(row)
         out = {}
         def work(group):
-            return [(row["ID"], check_once(row["URL"])) for row in group]
+            done = []
+            for row in group:
+                if time.monotonic() > deadline:
+                    break
+                done.append((key(row), check_once(row["URL"])))
+            return done
         with concurrent.futures.ThreadPoolExecutor(max_workers=WORKERS) as pool:
             for results in pool.map(work, by_host.values()):
                 out.update(dict(results))
         return out
 
-    results = run(rows)
-    retry = [row for row in rows if results[row["ID"]][4]]
+    started = time.monotonic()
+    results = run(todo, BUDGET)
+    retry = [row for row in todo if key(row) in results and results[key(row)][4]]
     if retry:  # 応答がない・サーバーの不具合だったものは、時間をおいてもう1回
         time.sleep(RETRY_WAIT)
-        results.update(run(retry))
+        results.update(run(retry, RETRY_BUDGET))
+    today = datetime.datetime.now(build.JST).date().isoformat()
+    for row in todo:
+        if key(row) in results:
+            status, code, final, note, _ = results[key(row)]
+            seen[key(row)] = {"date": today, "url": row["URL"], "status": status, "http_status": code, "final_url": final, "note": note}
+    listed = {key(r) for r in rows}
+    seen = {k: v for k, v in sorted(seen.items()) if k in listed}  # 掲載から外れたものは忘れる
+    with open(SEEN, "w", encoding="utf-8") as f:
+        json.dump(seen, f, ensure_ascii=False, indent=0)
+        f.write("\n")
 
     summary = {"正常": 0, "移転": 0, "拒否": 0, "要確認": 0}
     voices_summary = dict.fromkeys(summary, 0)
-    items = []
+    items, unchecked = [], 0
     for row in rows:
-        status, code, final, note, _ = results[row["ID"]]
-        (voices_summary if row["_kind"] == "声" else summary)[status] += 1
-        if status != "正常":
-            items.append({"id": row["ID"], "kind": row["_kind"], "title": row["タイトル"], "url": row["URL"], "status": status,
-                          "http_status": code, "final_url": final, "note": note})
+        rec = seen.get(key(row))
+        if not rec or rec.get("url") != row["URL"]:
+            unchecked += 1
+            continue
+        (voices_summary if row["_kind"] == "声" else summary)[rec["status"]] += 1
+        if rec["status"] != "正常":
+            items.append({"id": row["ID"], "kind": row["_kind"], "title": row["タイトル"], "url": row["URL"], "status": rec["status"],
+                          "http_status": rec.get("http_status"), "final_url": rec.get("final_url", ""), "note": rec.get("note", ""),
+                          "checked": rec["date"]})
     order = {"要確認": 0, "移転": 1, "拒否": 2}
     items.sort(key=lambda it: (order[it["status"]], it["id"]))
     data = {"checked_at": datetime.datetime.now(build.JST).replace(microsecond=0).isoformat(),
-            "summary": summary, "voices_summary": voices_summary, "items": items}
+            "summary": summary, "voices_summary": voices_summary,
+            "this_run": {"checked": sum(1 for r in todo if key(r) in results), "planned": len(todo),
+                         "minutes": round((time.monotonic() - started) / 60, 1)},
+            "unchecked": unchecked, "items": items}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write("\n")
-    print("点検 %d件：観測所 %s／転機の声 %s" % (len(rows), "、".join("%s %d" % kv for kv in summary.items()),
-                                          "、".join("%s %d" % kv for kv in voices_summary.items())))
+    print("点検：今回 %d件（予定 %d件、%.1f分）、まだ一度も確かめていないもの %d件。最後に確かめた結果：観測所 %s／転機の声 %s"
+          % (data["this_run"]["checked"], len(todo), data["this_run"]["minutes"], unchecked,
+             "、".join("%s %d" % kv for kv in summary.items()), "、".join("%s %d" % kv for kv in voices_summary.items())))
 
     need = [it for it in items if it["status"] == "要確認"]
     if report_path and need:
-        lines = ["掲載中のURLを %s に自動で開いて確かめました（%d件）。" % (build.fmt_date(datetime.datetime.now(build.JST).date()), len(rows)),
+        lines = ["掲載中のURLを %s に自動で開いて確かめました（今回 %d件。残りは週ごとに順番に確かめます）。" % (build.fmt_date(datetime.datetime.now(build.JST).date()), data["this_run"]["checked"]),
                  "結果（観測所の掲載）：" + "、".join("%s %d件" % kv for kv in summary.items()),
                  "結果（転機の声の記事）：" + "、".join("%s %d件" % kv for kv in voices_summary.items()),
                  "くわしい結果は %s/linkcheck.json でも見られます。サイトの掲載は自動では変えていません。" % build.BASE, "",
                  "## 要確認（ブラウザで開いて確かめてください）", "",
                  "自動の点検は GitHub のサーバーから開くため、ブラウザでは見られるのに「見つかりません」と出るサイトもあります。", "",
-                 "| 種類 | ID | タイトル | URL | 内容 |", "|---|---|---|---|---|"]
-        lines += ["| %s | %s | %s | %s | %s |" % (it["kind"], it["id"], it["title"], it["url"], it["note"]) for it in need]
+                 "| 種類 | ID | タイトル | URL | 内容 | 確かめた日 |", "|---|---|---|---|---|---|"]
+        lines += ["| %s | %s | %s | %s | %s | %s |" % (it["kind"], it["id"], it["title"], it["url"], it["note"], it["checked"]) for it in need]
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines) + "\n")
 
