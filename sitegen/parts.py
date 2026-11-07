@@ -269,14 +269,17 @@ def more_link(href, label):
 def used_emoji():
     """サイトで使う絵文字の一覧（Google Fonts から Noto Color Emoji のその文字だけを読むため）。
     ページの作り方・動き・設定・観測ノートの原稿に書いてある絵文字を集める。新しい絵文字を足しても、次に作るときに自動で入る。"""
-    pat = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF\uFE0F\u200D]")
+    # U+1F000 以降はそのまま。それより前の記号（♪ ☆ など）は、ふつうの文字として使うことも多いので、
+    # 絵文字として書いたもの（直後に U+FE0F がある）と、もともと絵文字で表示される少数（✨ など）だけを入れる。
+    # こうしないと、原稿や設定に「♪」が入ったとき、それがカラーの絵文字に変わってしまう（2026-11-08 図鑑のセッションの指摘）
+    pat = re.compile("[\U0001F000-\U0001FAFF]|[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF]\uFE0F|[\u2728\u2705\u274C\u2B50\u23F0\u231B\u2615\u26A1\u2753\u2757]|\u200D")
     chars = set()
     for folder, exts in (("sitegen", ".py"), ("assets", ".js"), ("check", ".js"), ("config", ".json"), ("notes", ".md")):
         base = os.path.join(ROOT, folder)
         for name in sorted(os.listdir(base)) if os.path.isdir(base) else []:
             if name.endswith(exts):
                 with open(os.path.join(base, name), encoding="utf-8") as f:
-                    chars.update(pat.findall(f.read()))
+                    chars.update("".join(pat.findall(f.read())))
     return quote("".join(sorted(chars)))
 
 
