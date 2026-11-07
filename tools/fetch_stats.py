@@ -98,6 +98,8 @@ def summarize(key, first, last):
         "helpful_yes": helpful("yes"),
         "helpful_no": helpful("no"),
         "project_visits": path_count("/project/"),
+        # /project/ から外のページへ移った数（行き先のサイトごと。note.com・facebook.com など。2026-11-07 から）
+        "project_out": [{"site": h["path"][len("project-out/"):], "count": h["count"]} for h in ev("project-out/")],
         "clicks": clicks,
     }
 

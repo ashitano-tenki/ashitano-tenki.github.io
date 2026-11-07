@@ -279,7 +279,7 @@
   });
 })();
 
-// アクセス解析：「あとで見る」「共有」が押された掲載を数える（「公式サイトを見る」は data-goatcounter-click で数える）
+// アクセス解析：「あとで見る」「共有」が押された掲載と、あしたの転機のページから外へ移った数を数える（「公式サイトを見る」は data-goatcounter-click で数える）
 (function () {
   function count(path, title) {
     if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title, event: true });
@@ -289,6 +289,12 @@
     if (save && save.getAttribute("aria-pressed") === "true") count("save/" + save.getAttribute("data-save"), save.getAttribute("data-title") || "");
     var share = ev.target.closest(".share-btn");
     if (share) count("share/" + location.pathname.split("/")[2], share.getAttribute("data-share-title") || "");
+    // あしたの転機のページ（/project/）から外のページ（note・Facebookグループ・Podcast など）へ移った数。行き先のサイト名だけを送る
+    var out = location.pathname.indexOf("/project/") === 0 && ev.target.closest("main a[href^='http']");
+    if (out && !out.hasAttribute("data-goatcounter-click")) {
+      var host = out.hostname.replace(/^www\./, "");
+      count("project-out/" + host, "あしたの転機から：" + host);
+    }
   });
 })();
 
