@@ -82,6 +82,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/meta.json data/latest.csv data/project.csv data/voices.csv data/images.json images/items
           git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
+          # 作っているあいだに別の変更が push されていても押し返されないよう、先に取り込む
+          git pull --rebase -q
           git push
 
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d  # v6
