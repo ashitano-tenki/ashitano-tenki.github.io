@@ -23,11 +23,12 @@
   --line-soft: #e9ecef;        /* トップのタイプごとの白い棚の中のカードの線（棚の線より薄く。2026-11-08 見本の案A） */
   --sky-on-tint: #1568a6;  /* 薄い空色の箱の上の青い文字（読みやすさの目安を満たす濃さ） */
   /* 文字 */
-  --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Color Emoji", sans-serif;
+  --font-display: "Zen Kaku Gothic New", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", sans-serif;
   /* 本文は端末の標準フォント（読み込みが要らず表示が速い）。見出しだけ Zen Kaku Gothic New を読み込む */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", "Noto Color Emoji", system-ui, sans-serif;
-  /* 絵文字はどの端末でも Google の Noto Color Emoji にそろえる（Apache License 2.0。サイトで使う絵文字だけを Google Fonts から読む） */
-  --font-emoji: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+  /* 絵文字はどの端末でも Google の Noto Color Emoji の絵にそろえる。build.py が文字の絵文字を assets/emoji/ の画像（img.emo）に置き換える。
+     画像にできなかったときだけ、端末の絵文字で出る */
+  --font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
   /* 余白 */
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
   --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
@@ -93,6 +94,7 @@ a:hover { text-decoration-thickness: 2px; }
 img { max-width: 100%; }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; color: var(--ink); word-break: auto-phrase; text-wrap: balance; }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 var(--space-4); }
+img.emo { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: -0.2em; margin: 0; }  /* Noto の絵文字の画像。文字と同じ大きさで並べる */
 .emoji { font-family: var(--font-emoji); font-weight: 400; margin-right: 0.35em; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 

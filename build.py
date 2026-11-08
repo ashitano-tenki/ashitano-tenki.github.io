@@ -36,6 +36,7 @@ def main():
     ap.add_argument("--voices-csv", help="転機の声に手元のCSVファイルを使う（確認用）")
     ap.add_argument("--drafts", action="store_true", help="観測ノートの下書き（draft: true）も、検索に出ない形で作る（確認用）")
     args = ap.parse_args()
+    prepare_emoji()  # 絵文字の Noto の画像を assets/emoji/ にそろえる（ないものだけ取ってくる）
 
     if args.csv:
         with open(args.csv, encoding="utf-8-sig") as f:

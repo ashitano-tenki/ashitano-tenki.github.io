@@ -37,6 +37,13 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  // 絵文字を Noto の画像で出す（build.py の emoji_img と同じファイル名。assets/emoji/ に置いてある）
+  function emoImg(s) {
+    if (!s) return "";
+    var cps = [];
+    Array.from(s).forEach(function (ch) { var c = ch.codePointAt(0); if (c === 0xfe0f) return; var h = c.toString(16); cps.push(h.length < 4 ? ("000" + h).slice(-4) : h); });
+    return '<img class="emo" src="/assets/emoji/' + cps.join("_") + '.svg" alt="' + esc(s) + '" draggable="false">';
+  }
 
   // 言い換え表を使って、検索語ごとに一緒に探す言葉を集める
   function alternatives(term) {
@@ -203,7 +210,7 @@
   function mediaHtml(img) {
     img = img || {};
     if (img.src) return '<div class="card-media media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
-    return '<div class="card-media media-none" aria-hidden="true"><span>' + esc(img.emoji || "") + "</span></div>";
+    return '<div class="card-media media-none" aria-hidden="true"><span>' + emoImg(img.emoji) + "</span></div>";
   }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";

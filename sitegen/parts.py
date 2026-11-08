@@ -8,7 +8,7 @@ import unicodedata
 from urllib.parse import quote, urlencode
 from sitegen.core import BASE, COMMON, CONF, IMAGES, KIND_BY_NAME, NOTES_LABEL, OTHER, OUT, ROOT, VOICES_LABEL, by_kind
 
-__all__ = ["EMOJI_TEXT", "used_emoji", "HEAD_SCRIPT", "NAV", "SAVE_ICON", "SHARE_ICON", "TENKI_AI", "WEEKDAYS", "_CRUMBS", "_KAKASI", "added_label", "ai_link", "analytics_tag", "breadcrumb", "card", "cards", "e", "emoji", "fmt_date", "image_credit", "image_info", "image_ref", "item_media", "jsonld_tag", "kind_emoji", "kind_sections", "kind_shelves", "more_link", "nav_links", "normalize", "og_image", "page", "reading", "save_button", "search_url", "site_footer", "site_header", "sm_shelf", "tag_list", "tenki_url", "when_line", "write"]
+__all__ = ["EMOJI_RE", "emoji_name", "emoji_file", "emoji_img", "emoji_images", "prepare_emoji", "HEAD_SCRIPT", "NAV", "SAVE_ICON", "SHARE_ICON", "TENKI_AI", "WEEKDAYS", "_CRUMBS", "_KAKASI", "added_label", "ai_link", "analytics_tag", "breadcrumb", "card", "cards", "e", "emoji", "fmt_date", "image_credit", "image_info", "image_ref", "item_media", "jsonld_tag", "kind_emoji", "kind_sections", "kind_shelves", "more_link", "nav_links", "normalize", "og_image", "page", "reading", "save_button", "search_url", "site_footer", "site_header", "sm_shelf", "tag_list", "tenki_url", "when_line", "write"]
 
 
 # ---------------------------------------------------------------- HTML部品
@@ -232,7 +232,6 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 {head_script}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text={emoji_text}">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
 {ld}</head>
 <body>
@@ -245,7 +244,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body, emoji_text=EMOJI_TEXT,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
            contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]), extra_head=extra_head)
     write(path, html_text)
@@ -258,6 +257,8 @@ def write(path, text):
     if path.endswith("/"):
         target = os.path.join(target, "index.html")
     os.makedirs(os.path.dirname(target), exist_ok=True)
+    if target.endswith(".html"):
+        text = emoji_images(text)
     with open(target, "w", encoding="utf-8") as f:
         f.write(text)
 
@@ -266,24 +267,82 @@ def more_link(href, label):
     return '<p class="more"><a href="%s">%s</a></p>' % (e(href), e(label))
 
 
-def used_emoji():
-    """サイトで使う絵文字の一覧（Google Fonts から Noto Color Emoji のその文字だけを読むため）。
-    ページの作り方・動き・設定・観測ノートの原稿に書いてある絵文字を集める。新しい絵文字を足しても、次に作るときに自動で入る。"""
-    # U+1F000 以降はそのまま。それより前の記号（♪ ☆ など）は、ふつうの文字として使うことも多いので、
-    # 絵文字として書いたもの（直後に U+FE0F がある）と、もともと絵文字で表示される少数（✨ など）だけを入れる。
-    # こうしないと、原稿や設定に「♪」が入ったとき、それがカラーの絵文字に変わってしまう（2026-11-08 図鑑のセッションの指摘）
-    pat = re.compile("[\U0001F000-\U0001FAFF]|[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF]\uFE0F|[\u2728\u2705\u274C\u2B50\u23F0\u231B\u2615\u26A1\u2753\u2757]|\u200D")
-    chars = set()
+# 絵文字は、どの端末でも Google の Noto Color Emoji の絵（Apache License 2.0）にそろえる。
+# 書体（Google Fonts）で配ると iPhone の Safari では空白になる（Safari が読めない形式で届く。2026-11-08）ので、
+# コミュニティ図鑑と同じく、Noto の SVG 画像を assets/emoji/ に置き、ページの文字の絵文字を <img> に置き換える。
+# U+1F000 以降はそのまま。それより前の記号（♪ ☆ など）は、ふつうの文字として使うことも多いので、
+# 絵文字として書いたもの（直後に U+FE0F がある）と、もともと絵文字で表示される少数（✨ など）だけを絵にする（2026-11-08 図鑑のセッションの指摘）。
+_EMOJI_ONE = "(?:[\U0001F000-\U0001FAFF]|[\u2300-\u23FF\u2600-\u27BF\u2B00-\u2BFF]\uFE0F|[\u2728\u2705\u274C\u2B50\u23F0\u231B\u2615\u26A1\u2753\u2757])\uFE0F?"
+EMOJI_RE = re.compile("[\U0001F1E6-\U0001F1FF]{2}|%s(?:\u200D%s|\u200D[\u2640\u2642\u2695\u2696\u2708\u2764]\uFE0F?)*" % (_EMOJI_ONE, _EMOJI_ONE))
+EMOJI_DIR = os.path.join(ROOT, "assets", "emoji")
+# noto-emoji の版を固定する（2026-11-08 時点の main。2D の絵）
+NOTO_SVG = "https://raw.githubusercontent.com/googlefonts/noto-emoji/99701e07d3d1fe1bdbcdb14964547f0fd592966f/2D/svg/emoji_u%s.svg"
+_EMOJI_OK = {}
+
+
+def emoji_name(seq):
+    """Noto の画像のファイル名（異体字セレクタ U+FE0F を除いた符号位置を _ でつなぐ）。"""
+    return "_".join("%04x" % ord(c) for c in seq if c != "\ufe0f")
+
+
+def emoji_file(seq):
+    """その絵文字の画像が assets/emoji/ にあるか。なければ noto-emoji から取ってくる。取れなければ文字のまま出す。"""
+    name = emoji_name(seq)
+    if name not in _EMOJI_OK:
+        path = os.path.join(EMOJI_DIR, name + ".svg")
+        if not os.path.exists(path):
+            import urllib.request
+            try:
+                with urllib.request.urlopen(NOTO_SVG % name, timeout=20) as r:
+                    data = r.read()
+                os.makedirs(EMOJI_DIR, exist_ok=True)
+                with open(path, "wb") as f:
+                    f.write(data)
+            except Exception as err:
+                print("注意: 絵文字 %s（%s）の画像を取れなかったので、文字のまま出します: %s" % (seq, name, err))
+        _EMOJI_OK[name] = os.path.exists(path)
+    return name if _EMOJI_OK[name] else None
+
+
+def emoji_img(seq):
+    name = emoji_file(seq)
+    if not name:
+        return seq
+    return '<img class="emo" src="/assets/emoji/%s.svg" alt="%s" draggable="false">' % (name, seq)
+
+
+_EMOJI_SKIP = ("script", "style", "title", "textarea")
+
+
+def emoji_images(text):
+    """HTML の文字の部分（タグの中や script・style・title を除く）の絵文字を、Noto の画像に置き換える。"""
+    out, skip = [], None
+    for part in re.split(r"(<[^>]*>)", text):
+        if part.startswith("<"):
+            m = re.match(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)", part)
+            if m:
+                tag = m.group(2).lower()
+                if skip and m.group(1) and tag == skip:
+                    skip = None
+                elif not skip and not m.group(1) and tag in _EMOJI_SKIP:
+                    skip = tag
+            out.append(part)
+        elif skip or not part:
+            out.append(part)
+        else:
+            out.append(EMOJI_RE.sub(lambda m: emoji_img(m.group(0)), part))
+    return "".join(out)
+
+
+def prepare_emoji():
+    """ページの作り方・動き（JS が出す絵文字も）・設定・観測ノートの原稿にある絵文字の画像を、先にそろえておく。"""
     for folder, exts in (("sitegen", ".py"), ("assets", ".js"), ("check", ".js"), ("config", ".json"), ("notes", ".md")):
         base = os.path.join(ROOT, folder)
         for name in sorted(os.listdir(base)) if os.path.isdir(base) else []:
             if name.endswith(exts):
                 with open(os.path.join(base, name), encoding="utf-8") as f:
-                    chars.update("".join(pat.findall(f.read())))
-    return quote("".join(sorted(chars)))
-
-
-EMOJI_TEXT = used_emoji()
+                    for seq in EMOJI_RE.findall(f.read()):
+                        emoji_file(seq)
 
 
 def emoji(char):

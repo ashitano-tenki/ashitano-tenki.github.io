@@ -52,6 +52,13 @@
   let idx = -1; // -1: はじめ、questions().length: 結果
   const app = document.getElementById("app");
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  // 絵文字を Noto の画像で出す（build.py の emoji_img と同じファイル名。assets/emoji/ に置いてある）
+  function emoImg(s) {
+    if (!s) return "";
+    var cps = [];
+    Array.from(s).forEach(function (ch) { var c = ch.codePointAt(0); if (c === 0xfe0f) return; var h = c.toString(16); cps.push(h.length < 4 ? ("000" + h).slice(-4) : h); });
+    return '<img class="emo" src="/assets/emoji/' + cps.join("_") + '.svg" alt="' + esc(s) + '" draggable="false">';
+  }
   const count = (path, title) => { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path, title: title || path, event: true }); };
 
   function loadHistory() { try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]") || []; } catch (e) { return []; } }
@@ -198,7 +205,7 @@
   function mediaHtml(img) {
     img = img || {};
     if (img.src) return `<div class="card-media media-${esc(img.fit)}" aria-hidden="true"><img src="${esc(img.src)}" alt="" loading="lazy" decoding="async"></div>`;
-    return `<div class="card-media media-none" aria-hidden="true"><span>${esc(img.emoji || "")}</span></div>`;
+    return `<div class="card-media media-none" aria-hidden="true"><span>${emoImg(img.emoji)}</span></div>`;
   }
 
   // アクセス解析：結果に出たおすすめが押されたら、どの掲載かを数える（回答や結果は送らない）
