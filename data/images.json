@@ -11627,9 +11627,13 @@
  },
  "R1420": {
   "page": "https://shinro-soudan.com/",
-  "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 63508,
+  "status": "ok",
+  "src": "file:images/manual/R1420.jpg",
+  "w": 960,
+  "h": 391
  },
  "R1421": {
   "page": "https://tvsecondcareer.com/",
@@ -11788,9 +11792,13 @@
  },
  "R1440": {
   "page": "https://reflectioncard.shop/items/5d2c219108382953ee82907c",
-  "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 403: Forbidden"
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 105815,
+  "status": "ok",
+  "src": "file:images/manual/R1440.jpg",
+  "w": 960,
+  "h": 503
  },
  "R1441": {
   "page": "https://www.ninkatsucareer.com/",
