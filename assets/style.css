@@ -11,7 +11,7 @@
   --sky: #1874b8;
   --sky-bright: #2f95d6;
   --yellow: #f5c518;
-  --marker: #f5c518;          /* トップの見出しに引く蛍光ペンの色 */
+  /* マーカー（蛍光ペン）は使わない（2026-11-08 黒田さん）。サイト名は文字だけにし、下の件数の数字を主役にする */
   --text-body: #4a4f57;
   --text-sub: #5e636b;
   --text-on-ink: #d6d9de;
@@ -53,7 +53,6 @@
   --sky: #7cc0ee;
   --sky-bright: #4aa8e4;
   --yellow: #f5c518;
-  --marker: rgba(245, 197, 24, 0.42);  /* 暗い表示では明るい文字が読めるよう薄める */
   --text-body: #c9cdd3;
   --text-sub: #a3a9b1;
   --line: #313640;
@@ -148,7 +147,6 @@ main.wrap { padding-bottom: var(--space-16); }
 /* トップ：表紙と同じく左端に黄色の縦帯 */
 .hero { position: relative; padding: var(--space-12) 0 var(--space-8); }
 /* 見出しの文字の下のほうに、蛍光ペンで引いたような黄色を敷く（2行になっても行ごとに引く） */
-.hero-mark { background: linear-gradient(transparent 70%, var(--marker) 70%, var(--marker) 90%, transparent 90%); padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
