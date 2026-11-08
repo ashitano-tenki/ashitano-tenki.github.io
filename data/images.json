@@ -11746,6 +11746,14 @@
   "w": 960,
   "h": 547
  },
+ "R1435": {
+  "page": "https://color-variation.com/value_card/value_card.html",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://color-variation.com/bdflashinfo/thumbnail.png",
+  "w": 960,
+  "h": 503
+ },
  "R1436": {
   "page": "https://books.rakuten.co.jp/rb/17407929/",
   "checked": "2026-11-08",
@@ -11783,5 +11791,38 @@
   "checked": "2026-11-08",
   "status": "error",
   "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R1441": {
+  "page": "https://www.ninkatsucareer.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.ninkatsucareer.com/images/ogp-v2.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1442": {
+  "page": "https://cardsort.raku-uru.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://cardsort.raku-uru.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1443": {
+  "page": "https://ventureforjapan.or.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://ventureforjapan.or.jp/assets/images/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1444": {
+  "page": "https://www.ofne.net/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/351f5a_507a0aa1d21e4489ab7ec71968e85728%7Emv2.jpg/v1/fit/w_2500,h_1330,al_c/351f5a_507a0aa1d21e4489ab7ec71968e85728%7Emv2.jpg",
+  "w": 960,
+  "h": 503
  }
 }
