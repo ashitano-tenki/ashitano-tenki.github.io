@@ -99,7 +99,9 @@ img.emo { display: inline-block; width: 1.15em; height: 1.15em; vertical-align: 
 
 
 /* ヘッダー */
-.site-header { background: var(--bg-top); border-bottom: var(--border-hairline) solid var(--line); }
+/* ヘッダーは上に固定し、背面を少し透かす（2026-11-08 現代曖昧単語辞典にそろえる） */
+.site-header { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--bg-top) 88%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px); border-bottom: var(--border-hairline) solid var(--line); }
+html { scroll-padding-top: 76px; }
 .header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-1) var(--space-2); padding-top: var(--space-3); padding-bottom: var(--space-3); }
 .logo { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
 .logo-mark { width: 24px; height: 24px; flex: none; }
@@ -147,10 +149,10 @@ main.wrap { padding-bottom: var(--space-16); }
 /* トップ：表紙と同じく左端に黄色の縦帯 */
 .hero { position: relative; padding: var(--space-12) 0 var(--space-8); }
 /* 見出しの文字の下のほうに、蛍光ペンで引いたような黄色を敷く（2行になっても行ごとに引く） */
-.hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-2); }
+.hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-4); }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
-.hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-2); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
+.hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
 .hero-count b { transition: opacity .2s; font-family: var(--font-display); font-weight: 900; font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
 .hero-count span { font-size: 13px; color: var(--text-sub); }
@@ -363,16 +365,10 @@ button, .button {
   .list-compact .card-foot { margin-top: 6px; }
   .list-compact .save-btn { top: 6px; right: 6px; width: 28px; height: 28px; }
 }
-/* スマホ・タブレット：下に読むときはヘッダーを隠し、上に戻すと出す */
-@media (max-width: 759px) {
-  .site-header { position: sticky; top: 0; z-index: 30; transition: transform .2s ease; }
-  .site-header.is-hidden { transform: translateY(-100%); }
-}
-@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
 /* 探すページ（スマホ）：件数・絞り込む・並び順の帯を上に残す */
 .bar-filter { display: none; }
 @media (max-width: 639px) {
-  .result-bar { position: sticky; top: var(--header-h, 0px); z-index: 10; background: var(--base); padding: var(--space-2) 0; margin-bottom: var(--space-2); border-bottom: var(--border-hairline) solid var(--line); transition: top .2s ease; }
+  .result-bar { position: sticky; top: var(--header-h, 0px); z-index: 10; background: var(--base); padding: var(--space-2) 0; margin-bottom: var(--space-2); border-bottom: var(--border-hairline) solid var(--line); }
   .bar-filter { display: inline-flex; align-items: center; padding: 4px 12px; font-size: 13px; font-weight: 700; border-radius: 999px; border: var(--border-hairline) solid var(--line); background: var(--card); color: var(--ink); }
   .filter-col > .filter-toggle { display: none; }  /* スマホは帯の「絞り込む」に一本化する */
   .filter-col .filter-panel { margin-top: 0; scroll-margin-top: 140px; }

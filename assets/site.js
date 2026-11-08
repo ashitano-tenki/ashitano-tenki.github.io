@@ -240,23 +240,12 @@
   });
 })();
 
-// スマホ・タブレット：下に読むときはヘッダーを隠し、上に少し戻すと出す。探すページの帯はヘッダーの下に付いていく
+// ヘッダーは上に固定。探すページの帯はヘッダーのすぐ下に付ける
 (function () {
   var header = document.querySelector(".site-header");
   if (!header) return;
-  var mq = window.matchMedia("(max-width: 759px)"), last = window.scrollY, ticking = false;
-  function apply() {
-    ticking = false;
-    var y = window.scrollY, hidden = header.classList.contains("is-hidden");
-    if (!mq.matches || y < 80 || header.querySelector(".open, [aria-expanded=\"true\"]")) hidden = false;
-    else if (y > last + 6) hidden = true;
-    else if (y < last - 6) hidden = false;
-    header.classList.toggle("is-hidden", hidden);
-    document.documentElement.style.setProperty("--header-h", hidden || !mq.matches ? "0px" : header.offsetHeight + "px");
-    last = y;
-  }
-  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }, { passive: true });
-  window.addEventListener("resize", apply);
+  function apply() { document.documentElement.style.setProperty("--header-h", header.offsetHeight + "px"); }
+  if (window.ResizeObserver) new ResizeObserver(apply).observe(header); else window.addEventListener("resize", apply);
   apply();
 })();
 
@@ -434,7 +423,6 @@
   });
   if (!window.requestAnimationFrame || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !counters.length) return;
   counters.forEach(function (el) {
-    el.style.minWidth = el.getAttribute("data-count").length + "ch";
     el.style.opacity = "0";
   });
   var started = false;
@@ -447,8 +435,10 @@
       var p = Math.min(1, (t - t0) / 1000), k = 1 - Math.pow(1 - p, 3);
       counters.forEach(function (el) { el.textContent = String(Math.round(parseInt(el.getAttribute("data-count"), 10) * k)); });
       if (p < 1) requestAnimationFrame(step);
+      else counters.forEach(function (el) { el.style.minWidth = ""; });
     }
-    counters.forEach(function (el) { el.textContent = "0"; el.style.opacity = ""; });
+    /* 数え上げ中に横の文字が動かないよう、書体を読み込んだあとの最後の数字の幅をとり、終わったら外す */
+    counters.forEach(function (el) { el.style.minWidth = Math.ceil(el.getBoundingClientRect().width) + "px"; el.textContent = "0"; el.style.opacity = ""; });
     requestAnimationFrame(step);
   }
   var whenLoaded = new Promise(function (ok) {
