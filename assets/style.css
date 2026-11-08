@@ -221,6 +221,7 @@ button, .button {
 .note { font-size: 14px; color: var(--text-body); }
 .empty { color: var(--text-body); }
 .count { font-family: var(--font-sans); font-weight: 400; font-size: 13px; color: var(--text-sub); }
+.kind-name, h1 .count, h2 .count, h3 .count { white-space: nowrap; }
 .more { margin: var(--space-3) 0 0; font-size: 15px; }
 .more a::after { content: " →"; }
 .crumbs { font-size: 13px; color: var(--text-sub); padding-top: var(--space-4); display: flex; align-items: baseline; gap: 0.35em; white-space: nowrap; }

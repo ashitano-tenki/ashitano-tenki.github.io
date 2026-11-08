@@ -397,7 +397,7 @@ def kind_shelves(items, ctx):
                 % (e(url), e(kind), len(group))) if len(group) > len(shown) else ""
         out.append("""<section class="kind-block shelf-block">
   <div class="shelf-head">
-    <div class="shelf-title"><h3>%s%s <span class="count">%d件</span></h3>%s</div>
+    <div class="shelf-title"><h3><span class="kind-name">%s%s</span> <span class="count">%d件</span></h3>%s</div>
     <div class="shelf-tools">
       <span class="shelf-arrows" hidden><button type="button" class="shelf-arrow" data-dir="-1" aria-controls="%s" aria-label="%sの前へ">←</button><button type="button" class="shelf-arrow" data-dir="1" aria-controls="%s" aria-label="%sの次へ">→</button></span>
       <a class="shelf-all" href="%s">すべて見る</a>
@@ -423,7 +423,7 @@ def kind_sections(items, params, ctx, heading_level=2):
     out = []
     for kind, group in by_kind(items):
         h = "h%d" % heading_level
-        sec = ['<section class="kind-block sm-box" data-kind="%s"><%s>%s%s <span class="count">%d件</span></%s>' % (e(kind), h, kind_emoji(kind), e(kind), len(group), h)]
+        sec = ['<section class="kind-block sm-box" data-kind="%s"><%s><span class="kind-name">%s%s</span> <span class="count">%d件</span></%s>' % (e(kind), h, kind_emoji(kind), e(kind), len(group), h)]
         about = KIND_BY_NAME.get(kind, {}).get("about", "")
         if about:
             sec.append('<p class="kind-about">%s</p>' % e(about))
