@@ -158,9 +158,9 @@ main.wrap { padding-bottom: var(--space-16); }
     linear-gradient(var(--tick), var(--tick)) left bottom / 100% 1px no-repeat,
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 40px) left bottom / 100% 12px no-repeat,
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 8px) left bottom / 100% 5px no-repeat; }
-.hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
+.hero .lead { color: var(--text-body); margin: 0 0 var(--space-4); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
-.hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
+.hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-4); color: var(--text-body); font-size: 15px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
 .hero-count b { transition: opacity .2s; font-family: var(--font-display); font-weight: 900; font-size: 44px; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
 .hero-count span { font-size: 13px; color: var(--text-sub); }

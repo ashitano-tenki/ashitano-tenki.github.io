@@ -41,8 +41,8 @@ def build_home(listed, ctx):
 <section class="hero">
   <h1>{site}</h1>
   <div class="hero-ruler" aria-hidden="true"></div>
-  <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
+  <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
   {ai_check}
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
