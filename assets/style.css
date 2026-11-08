@@ -159,6 +159,17 @@ main.wrap { padding-bottom: var(--space-16); }
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 40px) left bottom / 100% 12px no-repeat,
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 8px) left bottom / 100% 5px no-repeat; }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-4); }
+/* 見出しの右側に種類の絵文字を浮かべる（パソコンの幅だけ） */
+.hero-floats { display: none; }
+@media (min-width: 900px) {
+  .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 34%); gap: var(--space-6); align-items: center; margin-bottom: var(--space-4); }
+  .hero-main { min-width: 0; }
+  .hero-floats { display: block; position: relative; height: 240px; }
+  .hero-floats span { position: absolute; line-height: 1; transform: rotate(var(--r)); animation: hero-bob 5s ease-in-out var(--d) infinite; user-select: none; }
+  .hero-floats img.emo { width: 1.15em; height: 1.15em; vertical-align: top; }
+}
+@keyframes hero-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+@media (prefers-reduced-motion: reduce) { .hero-floats span { animation: none; } }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-4); color: var(--text-body); font-size: 15px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */

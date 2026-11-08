@@ -6,7 +6,7 @@ import os
 import random
 from urllib.parse import quote
 from sitegen.core import BASE, COMMON, CONF, KINDS, KIND_BY_NAME, NOTES, NOTES_LABEL, OTHER, ROOT, STAGES, STAGE_BY_NAME, TENKI, TENKI_BY_NAME, by_kind, kinds_of, load_json, matches_tenki
-from sitegen.parts import SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, breadcrumb, card, e, emoji, image_credit, image_info, item_media, kind_emoji, kind_sections, kind_shelves, more_link, og_image, page, search_url, sm_shelf, tenki_url
+from sitegen.parts import emoji_img, SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, breadcrumb, card, e, emoji, image_credit, image_info, item_media, kind_emoji, kind_sections, kind_shelves, more_link, og_image, page, search_url, sm_shelf, tenki_url
 from sitegen.notes import note_band, note_list, notes_for_tenki
 from sitegen.voices import voice_band
 
@@ -14,6 +14,21 @@ __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN
 
 
 # ---------------------------------------------------------------- ページ
+
+
+# トップの見出しの右側に浮かべる種類の絵文字（パソコンの幅だけ。2026-11-08 見本の案A、現代曖昧単語辞典にならう）
+# 位置（左%, 上%）・大きさ(px)・傾き(度)
+HERO_FLOAT_POS = [(6, 4, 60, -8), (42, 0, 50, 6), (76, 6, 66, -4), (20, 36, 54, 10), (56, 32, 78, -6),
+                  (86, 42, 46, 8), (2, 68, 48, 4), (38, 70, 56, -10), (72, 72, 52, 6)]
+
+
+def hero_floats():
+    spans = []
+    for i, (k, (x, y, size, r)) in enumerate(zip(KINDS, HERO_FLOAT_POS)):
+        if not k.get("emoji"):
+            continue
+        spans.append('<span style="left:%d%%;top:%d%%;font-size:%dpx;--r:%ddeg;--d:%.1fs">%s</span>' % (x, y, round(size / 1.15), r, i * 0.4, emoji_img(k["emoji"]).replace("<img ", '<img loading="lazy" ', 1)))
+    return '<div class="hero-floats" aria-hidden="true">%s</div>' % "".join(spans)
 
 def build_home(listed, ctx):
     new_items = sorted(ctx["new_items"], key=lambda it: (it["added"], -it["rank"]), reverse=True)
@@ -39,10 +54,15 @@ def build_home(listed, ctx):
         news = '<p class="empty">この1週間に追加されたものはありません。</p>'
     body = """
 <section class="hero">
+  <div class="hero-top">
+  <div class="hero-main">
   <h1>{site}</h1>
   <div class="hero-ruler" aria-hidden="true"></div>
   <p class="lead">{lead}</p>
   <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
+  </div>
+  {floats}
+  </div>
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -75,7 +95,7 @@ def build_home(listed, ctx):
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
+""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), floats=hero_floats(), count=len(listed), tenki_links=tenki_links,
            kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
