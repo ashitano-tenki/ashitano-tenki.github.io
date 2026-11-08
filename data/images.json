@@ -11378,12 +11378,13 @@
  },
  "R1386": {
   "page": "https://levwell.jp/profession/rd/",
-  "checked": "2026-11-08",
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 89964,
   "status": "ok",
-  "src": "capture:https://levwell.jp/profession/rd/",
-  "capture": true,
+  "src": "file:images/manual/R1386.jpg",
   "w": 960,
-  "h": 547
+  "h": 427
  },
  "R1387": {
   "page": "https://consultant.abilitycrowd.com/",
@@ -11613,9 +11614,13 @@
  },
  "R1418": {
   "page": "https://www.growthlete.jp/",
-  "checked": "2026-11-08",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 29902,
+  "status": "ok",
+  "src": "file:images/manual/R1418.jpg",
+  "w": 960,
+  "h": 640
  },
  "R1419": {
   "page": "https://kc.ritsu-sr.com/",
@@ -11669,12 +11674,13 @@
  },
  "R1425": {
   "page": "https://www.zenaoirobr.jp/",
-  "checked": "2026-11-08",
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 133546,
   "status": "ok",
-  "src": "capture:https://www.zenaoirobr.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1425.jpg",
   "w": 960,
-  "h": 547
+  "h": 343
  },
  "R1426": {
   "page": "https://zeirisee.so-labo.co.jp/U39/",
@@ -11726,12 +11732,13 @@
  },
  "R1432": {
   "page": "https://freelance-nova.com/",
-  "checked": "2026-11-08",
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 202654,
   "status": "ok",
-  "src": "capture:https://freelance-nova.com/",
-  "capture": true,
+  "src": "file:images/manual/R1432.jpg",
   "w": 960,
-  "h": 547
+  "h": 526
  },
  "R1433": {
   "page": "https://in-house-designers.connpass.com/",
@@ -11743,12 +11750,13 @@
  },
  "R1434": {
   "page": "https://japan.iiba.org/",
-  "checked": "2026-11-08",
+  "checked": "2026-11-09",
+  "manual": true,
+  "fsize": 106827,
   "status": "ok",
-  "src": "capture:https://japan.iiba.org/",
-  "capture": true,
+  "src": "file:images/manual/R1434.jpg",
   "w": 960,
-  "h": 547
+  "h": 436
  },
  "R1435": {
   "page": "https://color-variation.com/value_card/value_card.html",
