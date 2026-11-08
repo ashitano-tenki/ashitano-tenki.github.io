@@ -167,7 +167,7 @@ def site_footer(ctx):
   <div class="wrap">
     <div class="community">
       <p>この観測所は、<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>が運営する「<a href="/project/">あしたの転機プロジェクト</a>」の一部です。転機について考えるnoteマガジン、語り合うイベントやコミュニティなどを、プロジェクトのページにまとめています。</p>
-      <p>運営者のほかのサイト：<a href="https://community-zukan.github.io/" rel="noopener" target="_blank" data-goatcounter-click="sister/zukan">コミュニティ図鑑</a>・<a href="https://gendai-aimai-tango-jiten.github.io/" rel="noopener" target="_blank" data-goatcounter-click="sister/jiten">現代曖昧単語辞典</a></p>
+      <p>運営者のほかのサイト：<a href="https://community-zukan.github.io/" rel="noopener" target="_blank" data-goatcounter-click="sister/zukan">コミュニティ図鑑</a>・<a href="https://gendai-aimai-tango-jiten.github.io/" rel="noopener" target="_blank" data-goatcounter-click="sister/jiten">現代曖昧単語辞典</a>・<a href="https://kotoba-kenkyujo.github.io/" rel="noopener" target="_blank" data-goatcounter-click="sister/kotoba">会社のことば研究所</a></p>
     </div>
     <div class="footer-bottom">
       <p class="footer-meta"><a href="/about/">観測所について</a>・<a href="/guide/">支援者の方へ</a>・<a href="/report/">観測レポート</a>{notes}・<a href="{contact}" rel="noopener" target="_blank">観測所へのご連絡</a>・最終更新 {updated}</p>
