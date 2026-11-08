@@ -43,7 +43,6 @@ def build_home(listed, ctx):
   <div class="hero-ruler" aria-hidden="true"></div>
   <p class="lead">{lead}</p>
   <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
-  {ai_check}
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -77,7 +76,6 @@ def build_home(listed, ctx):
   {kinds}
 </section>
 """.format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), count=len(listed), tenki_links=tenki_links,
-           ai_check='<p class="check-link">%s</p>' % ai_link(TENKI_AI, "転機AIに相談する", "home") if TENKI_AI else "",
            kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
