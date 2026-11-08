@@ -40,6 +40,7 @@ def build_home(listed, ctx):
     body = """
 <section class="hero">
   <h1>{site}</h1>
+  <div class="hero-ruler" aria-hidden="true"></div>
   <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
   <p class="lead">{lead}</p>
   {ai_check}

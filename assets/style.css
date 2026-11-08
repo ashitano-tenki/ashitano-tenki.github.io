@@ -20,6 +20,7 @@
   --card: #ffffff;
   --chip-bg: #e8eef5;
   --tint-line: #cddcec;        /* 薄い空色の箱の線（背景のグラデーションに溶けないように。2026-11-07 見本の案C） */
+  --tick: #9fb3c8;            /* トップのサイト名の下の目盛り */
   --line-soft: #e9ecef;        /* トップのタイプごとの白い棚の中のカードの線（棚の線より薄く。2026-11-08 見本の案A） */
   --sky-on-tint: #1568a6;  /* 薄い空色の箱の上の青い文字（読みやすさの目安を満たす濃さ） */
   /* 文字 */
@@ -56,6 +57,7 @@
   --text-body: #c9cdd3;
   --text-sub: #a3a9b1;
   --line: #313640;
+  --tick: #4a5a6c;
   --card: #1f232a;
   --chip-bg: #233042;
   --tint-line: #2f415a;
@@ -149,7 +151,13 @@ main.wrap { padding-bottom: var(--space-16); }
 /* トップ：表紙と同じく左端に黄色の縦帯 */
 .hero { position: relative; padding: var(--space-12) 0 var(--space-8); }
 /* 見出しの文字の下のほうに、蛍光ペンで引いたような黄色を敷く（2行になっても行ごとに引く） */
-.hero h1 { font-weight: 900; font-size: clamp(30px, 8vw, 40px); line-height: 1.35; letter-spacing: 0.02em; margin: 0 0 var(--space-4); }
+/* サイト名（2026-11-08 見本の案5：太さを一段下げ、字間を詰め、下に観測の目盛りを敷く） */
+.hero h1 { font-weight: 700; font-size: clamp(30px, 8vw, 44px); line-height: 1.3; letter-spacing: -0.005em; word-break: keep-all; margin: 0; }
+.hero-ruler { height: 12px; max-width: 34em; margin: var(--space-3) 0 var(--space-4);
+  background:
+    linear-gradient(var(--tick), var(--tick)) left bottom / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 40px) left bottom / 100% 12px no-repeat,
+    repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 8px) left bottom / 100% 5px no-repeat; }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-6); }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-3); color: var(--text-body); font-size: 15px; }
