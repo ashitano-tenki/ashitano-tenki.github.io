@@ -11376,6 +11376,15 @@
   "w": 764,
   "h": 1000
  },
+ "R1386": {
+  "page": "https://levwell.jp/profession/rd/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://levwell.jp/profession/rd/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
  "R1387": {
   "page": "https://consultant.abilitycrowd.com/",
   "checked": "2026-11-08",
@@ -11593,5 +11602,186 @@
   "src": "https://storage.googleapis.com/production-os-assets/assets/379a45f9-1fa6-4aae-ac44-1866d2cde3d4",
   "w": 960,
   "h": 540
+ },
+ "R1417": {
+  "page": "https://coached.jp/mental",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/a83ebb89-990b-485f-9987-f3687fb1b654",
+  "w": 960,
+  "h": 504
+ },
+ "R1418": {
+  "page": "https://www.growthlete.jp/",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R1419": {
+  "page": "https://kc.ritsu-sr.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://kc.ritsu-sr.com/wp-content/uploads/2025/04/eyecatch.png",
+  "w": 928,
+  "h": 480
+ },
+ "R1420": {
+  "page": "https://shinro-soudan.com/",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
+ },
+ "R1421": {
+  "page": "https://tvsecondcareer.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://tvsecondcareer.com/img/sc-ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1422": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784758322270",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47583/4758322279.jpg",
+  "w": 566,
+  "h": 1000
+ },
+ "R1423": {
+  "page": "https://stores.fun/reserve",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://stores.fun/images/ogp/OGP_reserve.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1424": {
+  "page": "https://thebase.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://thebase.com/static-asset/ogp_01.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1425": {
+  "page": "https://www.zenaoirobr.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://www.zenaoirobr.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1426": {
+  "page": "https://zeirisee.so-labo.co.jp/U39/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://zeirisee.so-labo.co.jp/U39/wp-content/uploads/2024/04/ogp_renewal.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1427": {
+  "page": "https://fourth.newme-inc.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://fourth.newme-inc.jp/ogp.jpg",
+  "w": 545,
+  "h": 285
+ },
+ "R1428": {
+  "page": "https://emo.evem-management.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/d9e5af09-1c62-4ea9-bbb5-1ec66321a60d",
+  "w": 960,
+  "h": 504
+ },
+ "R1429": {
+  "page": "https://product-manager-kansai.connpass.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://media.connpass.com/thumbs/b2/60/b260e3519d671d59f881993615eb210b.png",
+  "w": 960,
+  "h": 503
+ },
+ "R1430": {
+  "page": "https://mentorme.co.jp/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://cdn.peraichi.com/userData/5fcde482-16c4-40df-a858-4f7b0a000054/img/5fe2ae3d0b833/original.png",
+  "w": 640,
+  "h": 360
+ },
+ "R1431": {
+  "page": "https://www.lacique-card.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://image.jimcdn.com/app/cms/image/transf/dimension=1980x10000:format=png/path/s379ac345e6a7d749/image/icaf0c080e9fedb1d/version/1767974544/image.png",
+  "w": 960,
+  "h": 317
+ },
+ "R1432": {
+  "page": "https://freelance-nova.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://freelance-nova.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1433": {
+  "page": "https://in-house-designers.connpass.com/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://media.connpass.com/thumbs/23/69/236955863778f94270fe413280065c47.png",
+  "w": 340,
+  "h": 224
+ },
+ "R1434": {
+  "page": "https://japan.iiba.org/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "capture:https://japan.iiba.org/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1436": {
+  "page": "https://books.rakuten.co.jp/rb/17407929/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43131/4313161848.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R1437": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784313162068",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43131/4313162062.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1438": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784313161986",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/43131/4313161988.jpg",
+  "w": 742,
+  "h": 1000
+ },
+ "R1439": {
+  "page": "https://books.rakuten.co.jp/rb/16675284/",
+  "checked": "2026-11-08",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48058/4805882980.jpg",
+  "w": 710,
+  "h": 1000
+ },
+ "R1440": {
+  "page": "https://reflectioncard.shop/items/5d2c219108382953ee82907c",
+  "checked": "2026-11-08",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 403: Forbidden"
  }
 }
