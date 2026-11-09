@@ -11844,7 +11844,12 @@
  "R1445": {
   "page": "https://finder.ictus.co.jp",
   "checked": "2026-11-10",
-  "status": "none"
+  "manual": true,
+  "fsize": 78862,
+  "status": "ok",
+  "src": "file:images/manual/R1445.jpg",
+  "w": 960,
+  "h": 540
  },
  "R1446": {
   "page": "https://www.weavex.co.jp/laife",
@@ -11919,19 +11924,24 @@
   "h": 503
  },
  "R1456": {
-  "page": "https://cdle.jp/",
+  "page": "https://www.jdla.org/cdle/",
   "checked": "2026-11-10",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 401: Unauthorized"
+  "manual": true,
+  "fsize": 343258,
+  "status": "ok",
+  "src": "file:images/manual/R1456.jpg",
+  "w": 960,
+  "h": 558
  },
  "R1457": {
   "page": "https://www.cfo.jp/",
   "checked": "2026-11-10",
+  "manual": true,
+  "fsize": 158645,
   "status": "ok",
-  "src": "capture:https://www.cfo.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1457.jpg",
   "w": 960,
-  "h": 547
+  "h": 508
  },
  "R1458": {
   "page": "https://prsj.or.jp/",
@@ -11986,11 +11996,12 @@
  "R1464": {
   "page": "https://sites.google.com/isc2chapter.jp/chapter/home",
   "checked": "2026-11-10",
+  "manual": true,
+  "fsize": 186590,
   "status": "ok",
-  "src": "https://sites.google.com/sitesv-images-rt/APXyLQeUwRg5icnU9UEZepK4wJjkL1p2zB2UbgqQXYYHcJpvepoZ7jWyBn1NF-Gg0WtmYNrktKVY8xFKRpjtz4nFHK7FM11ZV_pIcJ00flQh5WbW8rCAd9_gHIhwD-bYx5t3lwBe6pNpj5Isz3UpNLbW-TotD_VVuB0MfyEcQXWH1aVUFfD-Wi07VegESRZ6fb8X1Y9akuKE3lkSjrhyRHDxXnqyzBASRfdbT-YXsu5m=w1280",
-  "w": 457,
-  "h": 111,
-  "small": true
+  "src": "file:images/manual/R1464.jpg",
+  "w": 960,
+  "h": 538
  },
  "R1465": {
   "page": "https://ww2.jista.org/",
@@ -12080,11 +12091,12 @@
  "R1477": {
   "page": "https://fincs.jp/plan/3865638385927628577",
   "checked": "2026-11-10",
+  "manual": true,
+  "fsize": 131786,
   "status": "ok",
-  "src": "https://fincs-web-api-prd.s3.ap-northeast-1.amazonaws.com/ogp/fincsogp.jpg",
+  "src": "file:images/manual/R1477.jpg",
   "w": 960,
-  "h": 504,
-  "suspect": true
+  "h": 540
  },
  "R1478": {
   "page": "https://icfjapan.com/memberships",
@@ -12178,11 +12190,12 @@
  "R1489": {
   "page": "https://www.career-design.org/",
   "checked": "2026-11-10",
+  "manual": true,
+  "fsize": 170647,
   "status": "ok",
-  "src": "capture:https://www.career-design.org/",
-  "capture": true,
+  "src": "file:images/manual/R1489.jpg",
   "w": 960,
-  "h": 547
+  "h": 320
  },
  "R1490": {
   "page": "https://www.jida.or.jp/",
@@ -12365,8 +12378,7 @@
   "status": "ok",
   "src": "http://www.japanpt.or.jp/image/og_image.jpg",
   "w": 746,
-  "h": 428,
-  "suspect": true
+  "h": 428
  },
  "R1512": {
   "page": "https://www.jaot.or.jp/nyukai/",
@@ -12499,6 +12511,14 @@
   "capture": true,
   "w": 960,
   "h": 547
+ },
+ "R1528": {
+  "page": "https://bizfit.jp/main/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://bizfit.jp/main/wp-content/uploads/2026/01/bizfit.png",
+  "w": 960,
+  "h": 537
  },
  "R1529": {
   "page": "https://www.nurse.or.jp/nursing/promote/nyukai/",
