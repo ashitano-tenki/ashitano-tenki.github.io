@@ -11995,8 +11995,12 @@
  "R1465": {
   "page": "https://ww2.jista.org/",
   "checked": "2026-11-10",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 81457,
+  "status": "ok",
+  "src": "file:images/manual/R1465.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1466": {
   "page": "https://www.saaj.or.jp/",
@@ -12469,5 +12473,104 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44955/4495598929.jpg",
   "w": 682,
   "h": 1000
+ },
+ "R1525": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784798071886",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47980/4798071889.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R1526": {
+  "page": "https://cariharmo.jp/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://cariharmo.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1527": {
+  "page": "https://www.mkn.or.jp/senior.html",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://www.mkn.or.jp/senior.html",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1529": {
+  "page": "https://www.nurse.or.jp/nursing/promote/nyukai/",
+  "checked": "2026-11-10",
+  "status": "none"
+ },
+ "R1530": {
+  "page": "https://www.jaco.or.jp/kyokai/annai/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://www.jaco.or.jp/kyokai/annai/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1531": {
+  "page": "https://www.hishokyokai.or.jp/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://www.hishokyokai.or.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1532": {
+  "page": "https://www.midwife.or.jp/midwife/nyukai.html",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://www.midwife.or.jp/user/media/midwife/common/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1533": {
+  "page": "https://enregion.jp/st-ance/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://enregion.jp/wp/wp-content/uploads/2026/05/83365f0c080c84f5ce0d66ecaa4156f5.jpg",
+  "w": 960,
+  "h": 480
+ },
+ "R1534": {
+  "page": "https://kokoromi-base.com/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://kokoromi-base.com/assets/images/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1535": {
+  "page": "https://agrijob.jp/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "https://agrijob.jp/assets/home/img/OGP_1200×630-3b29978e85889016fd0fca874cc97bd56c7e56163304b19b5ed0d0952ae7431f.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1536": {
+  "page": "https://liberatebeauty.co.jp/career-top/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://liberatebeauty.co.jp/career-top/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1537": {
+  "page": "https://shokunin.or.jp/",
+  "checked": "2026-11-10",
+  "status": "ok",
+  "src": "capture:https://shokunin.or.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
  }
 }
