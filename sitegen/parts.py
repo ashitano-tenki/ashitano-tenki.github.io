@@ -231,7 +231,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 {head_script}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap">
 <link rel="stylesheet" href="/assets/style.css?v={ver}">
 {ld}</head>
 <body>
