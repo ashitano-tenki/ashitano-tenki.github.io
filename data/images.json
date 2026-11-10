@@ -11818,10 +11818,11 @@
  },
  "R1442": {
   "page": "https://cardsort.raku-uru.jp/",
-  "checked": "2026-11-08",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 98550,
   "status": "ok",
-  "src": "capture:https://cardsort.raku-uru.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1442.jpg",
   "w": 960,
   "h": 547
  },
@@ -12253,19 +12254,21 @@
  },
  "R1496": {
   "page": "https://www.sign.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 150034,
   "status": "ok",
-  "src": "capture:https://www.sign.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1496.jpg",
   "w": 960,
   "h": 547
  },
  "R1497": {
   "page": "https://jvca2001.org/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 222445,
   "status": "ok",
-  "src": "capture:https://jvca2001.org/",
-  "capture": true,
+  "src": "file:images/manual/R1497.jpg",
   "w": 960,
   "h": 547
  },
@@ -12432,12 +12435,13 @@
  },
  "R1517": {
   "page": "https://infoex.co.jp/next-act/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 173821,
   "status": "ok",
-  "src": "capture:https://infoex.co.jp/next-act/",
-  "capture": true,
+  "src": "file:images/manual/R1517.jpg",
   "w": 960,
-  "h": 547
+  "h": 540
  },
  "R1518": {
   "page": "https://zesda.jp/",
