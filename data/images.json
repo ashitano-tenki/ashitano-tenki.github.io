@@ -11970,10 +11970,11 @@
  },
  "R1461": {
   "page": "https://www.pmaj.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 150254,
   "status": "ok",
-  "src": "capture:https://www.pmaj.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1461.jpg",
   "w": 960,
   "h": 547
  },
@@ -12015,21 +12016,23 @@
  },
  "R1466": {
   "page": "https://www.saaj.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 149087,
   "status": "ok",
-  "src": "capture:https://www.saaj.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1466.jpg",
   "w": 960,
   "h": 547
  },
  "R1467": {
   "page": "https://www.iiajapan.com/leg/iia/nyukai.html",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 93543,
   "status": "ok",
-  "src": "capture:https://www.iiajapan.com/leg/iia/nyukai.html",
-  "capture": true,
+  "src": "file:images/manual/R1467.jpg",
   "w": 960,
-  "h": 547
+  "h": 328
  },
  "R1468": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784295020448",
@@ -12057,12 +12060,13 @@
  },
  "R1472": {
   "page": "https://www.onerank.co.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 64328,
   "status": "ok",
-  "src": "capture:https://www.onerank.co.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1472.jpg",
   "w": 960,
-  "h": 547
+  "h": 328
  },
  "R1473": {
   "page": "https://cocolabo.club/hataraku",
@@ -12172,10 +12176,11 @@
  },
  "R1487": {
   "page": "https://www.nal-lib.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 124675,
   "status": "ok",
-  "src": "capture:https://www.nal-lib.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1487.jpg",
   "w": 960,
   "h": 547
  },
@@ -12290,10 +12295,11 @@
  },
  "R1501": {
   "page": "https://www.jaswhs.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 178516,
   "status": "ok",
-  "src": "capture:https://www.jaswhs.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1501.jpg",
   "w": 960,
   "h": 547
  },
@@ -12356,19 +12362,21 @@
  },
  "R1509": {
   "page": "https://www.jacpp.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 173828,
   "status": "ok",
-  "src": "capture:https://www.jacpp.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1509.jpg",
   "w": 960,
   "h": 547
  },
  "R1510": {
   "page": "https://www.jamhsw.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 123401,
   "status": "ok",
-  "src": "capture:https://www.jamhsw.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1510.jpg",
   "w": 960,
   "h": 547
  },
@@ -12390,10 +12398,11 @@
  },
  "R1513": {
   "page": "https://www.japanslht.or.jp/",
-  "checked": "2026-11-10",
+  "checked": "2026-11-11",
+  "manual": true,
+  "fsize": 165909,
   "status": "ok",
-  "src": "capture:https://www.japanslht.or.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1513.jpg",
   "w": 960,
   "h": 547
  },
