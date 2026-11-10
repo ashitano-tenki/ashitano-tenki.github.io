@@ -12597,5 +12597,54 @@
   "capture": true,
   "w": 960,
   "h": 547
+ },
+ "R1539": {
+  "page": "https://oo-community.ooo/minamo/",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "capture:https://oo-community.ooo/minamo/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1540": {
+  "page": "https://onlinejoshi.studio.site/",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/541a159c-01ef-48b9-a0c6-f7ebe695ceff",
+  "w": 960,
+  "h": 504
+ },
+ "R1541": {
+  "page": "https://www.ijuplanner.com",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/84b720_06cf0f54965644b3b2461d7d2ecd24b5~mv2.jpg/v1/fill/w_1280,h_853,al_c/84b720_06cf0f54965644b3b2461d7d2ecd24b5~mv2.jpg",
+  "w": 960,
+  "h": 640
+ },
+ "R1542": {
+  "page": "https://granty.me/agent",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "https://granty.me/granty-agent-ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1543": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862808578",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48628/4862808573.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R1544": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784784949113",
+  "checked": "2026-11-11",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47849/4784949119.jpg",
+  "w": 726,
+  "h": 1000
  }
 }
