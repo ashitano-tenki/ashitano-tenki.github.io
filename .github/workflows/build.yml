@@ -30,10 +30,23 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
+      # 公式ページのキャプチャ（tools/fetch_images.py の capture_page）で日本語が「□」に化けないように、
+      # Chrome を動かす前に日本語フォントを入れる（GitHub の Ubuntu には入っていない。2026-11-10 に10件化けた）。
+      # 入れられなくても画像の取得とサイトの更新は続ける（その場合、キャプチャはしない）
+      - name: 日本語フォントを入れる
+        id: jpfont
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends fonts-noto-cjk
+          fc-list :lang=ja | grep -q .
+
       # 掲載先の公式ページからシェア用の画像を取得して縮小する（新しい掲載と、取得から日がたったものだけ。1回150件まで）。
       # 画像の縮小に Pillow を使う。ここで失敗しても、前回までの画像のままサイトの更新は続ける
       - name: 掲載先の画像を取得する
         continue-on-error: true
+        env:
+          JP_FONT_READY: ${{ steps.jpfont.outcome == 'success' }}
         run: |
           python3 -m venv .venv
           .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0"

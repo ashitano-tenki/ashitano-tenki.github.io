@@ -367,6 +367,8 @@ def capture_page(url):
     chrome = chrome_path()
     if not chrome:
         return None
+    if os.environ.get("CI") and os.environ.get("JP_FONT_READY") != "true":
+        return None  # 日本語フォントが入っていないと文字が「□」に化けるので撮らない（build.yml の「日本語フォントを入れる」）
     with tempfile.TemporaryDirectory() as tmp:
         out = os.path.join(tmp, "shot.png")
         args = [chrome, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--mute-audio",
