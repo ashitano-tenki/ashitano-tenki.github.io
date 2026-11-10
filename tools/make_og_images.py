@@ -207,7 +207,8 @@ def svg_note(note, fonts, antenna):
     line_h = int(size * 1.4)
     block = line_h * (len(lines) - 1)
     top = int(345 - block / 2 + size * 0.35)  # 見出しの塊を、上のラベルと下の署名の間の真ん中に置く
-    title_svg = "".join('<text x="96" y="%d" font-family="ZK" font-weight="900" font-size="%d" fill="#1a1d23">%s</text>'
+    # 2026-11-10 unslop の見直しでサイトの見出しを太さ500にしたので、画像の題名も 500（Medium）にそろえる（もとは 900）
+    title_svg = "".join('<text x="96" y="%d" font-family="ZK" font-weight="500" font-size="%d" fill="#1a1d23">%s</text>'
                         % (top + i * line_h, size, esc(line)) for i, line in enumerate(lines))
     names = [t for t in note["tenki"] if t in build.TENKI_BY_NAME]
     emo = build.TENKI_BY_NAME[names[0]].get("emoji", "") if names else ""
@@ -215,16 +216,16 @@ def svg_note(note, fonts, antenna):
     pill_w = 40 + int(len(label) * 30)
     return """<svg xmlns="http://www.w3.org/2000/svg" width="750" height="393.75" viewBox="0 0 1200 630">
 <style>
-@font-face{{font-family:ZK;font-weight:900;src:url(data:font/ttf;base64,{black}) format("truetype");}}
+@font-face{{font-family:ZK;font-weight:500;src:url(data:font/ttf;base64,{black}) format("truetype");}}
 @font-face{{font-family:ZK;font-weight:700;src:url(data:font/ttf;base64,{bold}) format("truetype");}}
 </style>
 <rect width="1200" height="630" fill="#f5c518"/>
 <circle cx="1070" cy="140" r="170" fill="#fbfaf5" opacity="0.55"/>
 <text x="1070" y="198" text-anchor="middle" font-family="Apple Color Emoji" font-size="150">{emo}</text>
-<rect x="96" y="96" width="{pill_w}" height="56" rx="28" fill="#1a1d23"/>
+<rect x="96" y="96" width="{pill_w}" height="56" rx="12" fill="#1a1d23"/>
 <text x="{pill_x}" y="135" font-family="ZK" font-weight="700" font-size="30" fill="#f5c518">{label}</text>
 {title}
-<text x="96" y="560" font-family="ZK" font-weight="700" font-size="28" fill="#1a1d23">文：黒田悠介（キャリア研究家）</text>
+<text x="96" y="560" font-family="ZK" font-weight="500" font-size="28" fill="#1a1d23">文：黒田悠介（キャリア研究家）</text>
 <text x="1104" y="560" text-anchor="end" font-family="ZK" font-weight="700" font-size="28" fill="#1a1d23">あしたの転機観測所</text>
 </svg>""".format(black=fonts[0], bold=fonts[1], emo=esc(emo), pill_w=pill_w, pill_x=116, label=esc(label), title=title_svg)
 
@@ -243,8 +244,9 @@ def render(pages):
 
 
 def main_notes():
-    """観測ノートの共有画像（assets/og/note-<スラッグ>.png）を、下書きも含めて全記事ぶん作り直す。"""
-    fonts = (font_b64("ZenKakuGothicNew-Black"), font_b64("ZenKakuGothicNew-Bold"))
+    """観測ノートの共有画像（assets/og/note-<スラッグ>.png）を、下書きも含めて全記事ぶん作り直す。
+    題名と署名は Medium（500）、札とサイト名は Bold（700）。札の角は小さく（サイトの札と同じ考え方。2026-11-10）"""
+    fonts = (font_b64("ZenKakuGothicNew-Medium"), font_b64("ZenKakuGothicNew-Bold"))
     antenna = antenna_svg()
     pages = []
     for name in sorted(os.listdir(build.NOTES_DIR)):
