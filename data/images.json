@@ -12523,7 +12523,12 @@
  "R1529": {
   "page": "https://www.nurse.or.jp/nursing/promote/nyukai/",
   "checked": "2026-11-10",
-  "status": "none"
+  "manual": true,
+  "fsize": 230072,
+  "status": "ok",
+  "src": "file:images/manual/R1529.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1530": {
   "page": "https://www.jaco.or.jp/kyokai/annai/",
