@@ -22,6 +22,7 @@ from sitegen.parts import *  # noqa: F401,F403
 from sitegen.project import *  # noqa: F401,F403
 from sitegen.notes import *  # noqa: F401,F403
 from sitegen.voices import *  # noqa: F401,F403
+from sitegen.yoho import build_yoho
 from sitegen.pages import *  # noqa: F401,F403
 from sitegen.output import *  # noqa: F401,F403
 
@@ -90,6 +91,7 @@ def main():
     build_project(ctx)
     build_notes(ctx["notes"], listed, ctx)
     build_voices(ctx["voices"], listed, ctx)
+    build_yoho(ctx)
     build_check(listed, ctx)
     build_search_json(listed, ctx)
     write_items_json(listed, ctx)

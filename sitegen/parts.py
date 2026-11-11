@@ -88,7 +88,8 @@ def sm_shelf(items_html, n, label, more_href="", more_label="", more_count=0, ex
 
 # 観測レポートはフッターから、あとで見るはヘッダーのしおりの絵から開く
 # セルフチェック（/check/）は 2026-11-06 にメニューから外した（ページは残す。トップやほかのページからのリンクはそのまま）
-NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/notes/", "観測ノート"), ("/voices/", "転機の声")]
+# 転機の天気予報（/yoho/）は 2026-11-11 に足した（国の統計から転機の種類ごとの天気を出すページ）
+NAV = [("/search/", "探す"), ("/tenki/", "転機から"), ("/notes/", "観測ノート"), ("/voices/", "転機の声"), ("/yoho/", "天気予報")]
 
 
 def nav_links(current=None):
@@ -98,7 +99,7 @@ def nav_links(current=None):
             label = VOICES_LABEL
         cur = ' aria-current="page"' if href == current else ""
         out.append('      <a href="%s"%s>%s</a>' % (href, cur, e(label)))
-        if href == "/voices/" and TENKI_AI:  # 転機AIは観測所の外なので、サイト内の項目（転機の声まで）のあとに置く
+        if href == NAV[-1][0] and TENKI_AI:  # 転機AIは観測所の外なので、サイト内の項目のあとに置く
             out.append('      ' + ai_link(TENKI_AI, "転機AIに相談", "nav"))
     return "\n".join(out)
 

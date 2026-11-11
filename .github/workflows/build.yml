@@ -57,6 +57,14 @@ jobs:
         continue-on-error: true
         run: .venv/bin/python tools/make_item_og.py
 
+      # 「転機の天気予報」（/yoho/）に使う国の統計を取る（e-Stat のIDは Secrets の ESTAT_APP_ID）。
+      # 取れなかった指標は前回の値のまま。ここで失敗してもサイトの更新は続ける
+      - name: 国の統計を取得する
+        continue-on-error: true
+        env:
+          ESTAT_APP_ID: ${{ secrets.ESTAT_APP_ID }}
+        run: python3 tools/fetch_yoho.py
+
       # 検索用のデータに漢字の読みを入れる（ひらがなでも探せるように）ため、pykakasi の入った .venv の Python で作る。
       # .venv が作れなかったときは、ふつうの python3 で作る（ひらがな検索ができないだけで、サイトの更新は続く）
       # CSVの取得に失敗したとき、0件のとき、前回の半分未満のときは、ここで止まり公開しない（前回のサイトがそのまま残る）
@@ -93,7 +101,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/meta.json data/latest.csv data/project.csv data/voices.csv data/images.json images/items
+          git add data/meta.json data/latest.csv data/project.csv data/voices.csv data/images.json images/items data/yoho.json
           git diff --cached --quiet || git commit -m "サイト更新の記録 $(date -u +%F)"
           # 作っているあいだに別の変更が push されていても押し返されないよう、先に取り込む
           git pull --rebase -q
