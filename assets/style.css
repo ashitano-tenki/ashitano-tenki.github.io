@@ -920,8 +920,8 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .tenki-extra a { background: var(--card); }
 
 /* 転機の天気予報（/yoho/）。2026-11-11。雨の札も強い色にしない（不安をあおらないため） */
-:root { --yr-old: #c9d3dd; --yr-prev: #8395a8; --yx-1: #1874b8; --yx-2: #c9731d; --yx-3: #23845c; --yx-4: #b83e73; --yx-5: #6f52b8; --wx-sunny: #fff3c4; --wx-sunny-ink: #7a5a00; --wx-cloudy: #e8eef5; --wx-cloudy-ink: #4a4f57; --wx-rainy: #e3ecf6; --wx-rainy-ink: #2f5578; }
-:root[data-theme="dark"] { --yr-old: #39424e; --yr-prev: #6c7a8a; --yx-1: #6fb6ea; --yx-2: #f0a04b; --yx-3: #4cc08e; --yx-4: #e27aa8; --yx-5: #a48ce6; --wx-sunny: #3a3320; --wx-sunny-ink: #f5d76e; --wx-cloudy: #262c35; --wx-cloudy-ink: #c9cdd3; --wx-rainy: #1f2c3b; --wx-rainy-ink: #9cc3e6; }
+:root { --yr-old: #c9d3dd; --yr-prev: #8395a8; --wx-sunny: #fff3c4; --wx-sunny-ink: #7a5a00; --wx-cloudy: #e8eef5; --wx-cloudy-ink: #4a4f57; --wx-rainy: #e3ecf6; --wx-rainy-ink: #2f5578; }
+:root[data-theme="dark"] { --yr-old: #39424e; --yr-prev: #6c7a8a; --wx-sunny: #3a3320; --wx-sunny-ink: #f5d76e; --wx-cloudy: #262c35; --wx-cloudy-ink: #c9cdd3; --wx-rainy: #1f2c3b; --wx-rainy-ink: #9cc3e6; }
 .yoho-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--space-4); margin: var(--space-6) 0 var(--space-4); }
 .yoho-card { background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); padding: var(--space-4); box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
 .yoho-card p { margin: 0; }
@@ -953,35 +953,14 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .yoho-how ul { padding-left: 1.2em; }
 .yoho-credit { border-top: var(--border-hairline) solid var(--line); padding-top: var(--space-4); }
 .yoho-credit p { color: var(--text-sub); font-size: 13px; margin: 0 0 var(--space-2); }
-.yoho-years, .yoho-overview { margin: 0; }
-.yoho-years svg, .yoho-overview svg { display: block; width: 100%; height: auto; overflow: visible; }
+.yoho-years { margin: 0; }
+.yoho-years svg { display: block; width: 100%; height: auto; overflow: visible; }
+.yoho-years .g { stroke: var(--line); stroke-width: 1; }
+.yoho-years polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.yoho-years figcaption { color: var(--text-sub); font-size: 12px; margin-top: var(--space-1); }
 .yoho-years text { font-size: 11px; fill: var(--text-sub); font-family: var(--font-sans); }
-.yoho-overview text { font-size: 14px; fill: var(--text-sub); font-family: var(--font-sans); }
 .yoho-years text.cur { fill: var(--ink); font-weight: 700; }
-.yoho-years .g, .yoho-overview .g { stroke: var(--line); stroke-width: 1; }
-.yoho-overview .zero { stroke: var(--text-sub); stroke-width: 1; }
-.yoho-years polyline, .yoho-overview polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .yoho-years .y2 { stroke: var(--yr-old); stroke-width: 1.4; }
 .yoho-years .y1 { stroke: var(--yr-prev); stroke-width: 1.6; }
 .yoho-years .y0 { stroke: var(--sky); stroke-width: 2.6; }
 .yoho-years .dot { fill: var(--sky); }
-.yoho-years figcaption, .yoho-overview-cap { color: var(--text-sub); font-size: 12px; margin-top: var(--space-1); }
-.yoho-overview { margin-top: var(--space-6); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); padding: var(--space-4); }
-.yoho-overview h2 { font-size: 18px; margin: 0 0 var(--space-2); }
-.yoho-overview-scroll { overflow-x: auto; }
-.yoho-overview-scroll svg { min-width: 560px; }
-.yoho-overview .sun { fill: var(--wx-sunny); }
-.yoho-overview .rain { fill: var(--wx-rainy); }
-.yoho-overview polyline { stroke-width: 2; }
-.yoho-overview text.end { font-size: 15px; font-weight: 700; }
-.yoho-overview .s1 { stroke: var(--yx-1); fill: var(--yx-1); } .yoho-overview polyline.s1 { fill: none; }
-.yoho-overview .s2 { stroke: var(--yx-2); fill: var(--yx-2); } .yoho-overview polyline.s2 { fill: none; }
-.yoho-overview .s3 { stroke: var(--yx-3); fill: var(--yx-3); } .yoho-overview polyline.s3 { fill: none; }
-.yoho-overview .s4 { stroke: var(--yx-4); fill: var(--yx-4); } .yoho-overview polyline.s4 { fill: none; }
-.yoho-overview .s5 { stroke: var(--yx-5); fill: var(--yx-5); } .yoho-overview polyline.s5 { fill: none; }
-.yoho-overview text.end { stroke: none; }
-.yoho-legend { list-style: none; padding: 0; margin: var(--space-2) 0 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: 13px; color: var(--text-body); }
-.yoho-legend i { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: var(--space-1); }
-.yoho-legend .s1 { background: var(--yx-1); } .yoho-legend .s2 { background: var(--yx-2); } .yoho-legend .s3 { background: var(--yx-3); } .yoho-legend .s4 { background: var(--yx-4); } .yoho-legend .s5 { background: var(--yx-5); }
-.yoho-scroll-hint { display: none; color: var(--text-sub); font-size: 12px; margin: var(--space-1) 0 0; }
-@media (max-width: 640px) { .yoho-scroll-hint { display: block; } }

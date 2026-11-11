@@ -139,68 +139,6 @@ def spark(series, latest, ind):
             % (W, H, e(ind["label"]), years[0], ly, "".join(out), ly))
 
 
-def yoy_avg3(ind, rec):
-    """前の年の同じ月と比べた増減（%）を、直近3か月で平均した値（案Cの1枚に使う）"""
-    s = rec.get("series") or {}
-    g = {k: (v - s[prev_year(k)]) / s[prev_year(k)] * 100 for k, v in s.items() if s.get(prev_year(k))}
-    ks = sorted(g)
-    return {ks[i]: sum(g[ks[j]] for j in (i, i - 1, i - 2)) / 3 for i in range(2, len(ks))}
-
-
-def overview(recs):
-    """ページの最初に置く1枚（案C、2026-11-11 黒田さんが選んだ）。5つの転機の「前の年との差」を同じ目盛りで重ねる。
-    月ごとのぶれ（とくに起業）に引っぱられないよう、直近3か月で平均する。色だけに頼らないよう、線の端に転機の名前を付ける。"""
-    lines = []
-    for i, ind in enumerate(YOHO.get("indicators", [])):
-        g = yoy_avg3(ind, recs.get(ind["key"], {}))
-        if g:
-            lines.append((ind, g, "s%d" % (i + 1)))
-    if not lines:
-        return ""
-    ks = sorted({k for _, g, _ in lines for k in g})[-24:]
-    vals = [g[k] for _, g, _ in lines for k in ks if k in g] + [5, -5]
-    ticks = nice_ticks(min(vals), max(vals), 6)
-    lo, hi = ticks[0], ticks[-1]
-    W, H, L, R, T, B = 960, 360, 56, 120, 12, 30
-    X = lambda i: L + i * (W - L - R) / (len(ks) - 1)
-    Y = lambda v: T + (hi - v) / (hi - lo) * (H - T - B)
-    sun = min(r["rule"]["sunny"] for r in [l[0] for l in lines] if r["rule"]["mode"] == "yoy_pct")
-    rain = max(r["rule"]["rainy"] for r in [l[0] for l in lines] if r["rule"]["mode"] == "yoy_pct")
-    out = ['<rect class="sun" x="%d" y="%.1f" width="%d" height="%.1f"/>' % (L, Y(hi), W - L - R, Y(sun) - Y(hi)),
-           '<rect class="rain" x="%d" y="%.1f" width="%d" height="%.1f"/>' % (L, Y(rain), W - L - R, Y(lo) - Y(rain)),
-           '<text x="%d" y="%.1f">晴れの目安（＋%s%%より上）</text>' % (L + 8, Y(hi) + 16, num(sun, 0)),
-           '<text x="%d" y="%.1f">雨の目安（−%s%%より下）</text>' % (L + 8, Y(lo) - 8, num(abs(rain), 0))]
-    for t in ticks:
-        out.append('<line class="%s" x1="%d" x2="%d" y1="%.1f" y2="%.1f"/><text x="%d" y="%.1f" text-anchor="end">%s%s%%</text>'
-                   % ("zero" if t == 0 else "g", L, W - R, Y(t), Y(t), L - 6, Y(t) + 4, "+" if t > 0 else "", tick_label(t)))
-    for i, k in enumerate(ks):
-        if i == 0 or k.endswith("-01"):
-            out.append('<text x="%.1f" y="%d" text-anchor="middle">%s</text>' % (X(i), H - 6, month_label(k)))
-    ends = []
-    for ind, g, cls in lines:
-        pts = [(i, g[k], k) for i, k in enumerate(ks) if k in g]
-        out.append('<polyline class="%s" points="%s"/>' % (cls, " ".join("%.1f,%.1f" % (X(i), Y(v)) for i, v, _ in pts)))
-        i, v, _ = pts[-1]
-        out.append('<circle class="dot %s" cx="%.1f" cy="%.1f" r="3.5"/>' % (cls, X(i), Y(v)))
-        ends.append([Y(v) + 4, ind["tenki"], cls])
-    ends.sort()
-    for i in range(1, len(ends)):
-        if ends[i][0] - ends[i - 1][0] < 18:
-            ends[i][0] = ends[i - 1][0] + 18
-    for yy, name, cls in ends:
-        out.append('<text class="end %s" x="%d" y="%.1f">%s</text>' % (cls, W - R + 10, yy, e(name)))
-    legend = "".join('<li><i class="%s"></i>%s：%s</li>' % (cls, e(ind["tenki"]), e(ind["label"].replace("（季節調整値）", ""))) for ind, _, cls in lines)
-    return """<section class="yoho-overview" aria-labelledby="yoho-overview-h">
-<h2 id="yoho-overview-h">転機ごとの動きを重ねて見る</h2>
-<div class="yoho-overview-scroll"><svg viewBox="0 0 %d %d" role="img" aria-label="5つの転機の前の年との差（%s〜%s）">%s</svg></div>
-<p class="yoho-scroll-hint">いちばん新しい月を表示しています。左へずらすと前の月を見られます。</p>
-<script>document.querySelectorAll(".yoho-overview-scroll").forEach(function (el) { el.scrollLeft = el.scrollWidth; });</script>
-<ul class="yoho-legend">%s</ul>
-<p class="yoho-overview-cap">%s〜%s。どれも前の年の同じ月と比べた増減（%%）を、月ごとのぶれをならすため直近3か月で平均しています。有効求人倍率も、倍率の増減を%%に直しています。</p>
-</section>
-""" % (W, H, month_label(ks[0]), month_label(ks[-1]), "".join(out), legend, month_label(ks[0]), month_label(ks[-1]))
-
-
 def source_line(ind, rec):
     src = ind["source"]
     if src["api"] == "estat":
@@ -305,7 +243,6 @@ def build_yoho(ctx):
     rules = "".join("<li>%s</li>" % e(rule_text(i)) for i in YOHO.get("indicators", []) + ([mood] if mood else []))
     body = """%s
 <header class="page-head"><h1>%s</h1><p class="lead">%s</p></header>
-%s
 <section class="yoho-grid-wrap" aria-labelledby="yoho-grid-h">
 <h2 id="yoho-grid-h" class="visually-hidden">転機の種類ごとの天気</h2>
 <div class="yoho-grid">
@@ -323,7 +260,7 @@ def build_yoho(ctx):
 <p>各カードの数値は、出典に書いた統計をもとに作成したものです。前の年との差や天気は、観測所が計算しています。</p>
 %s%s
 </section>
-""" % (breadcrumb([(YOHO_LABEL, None)]), e(YOHO_LABEL), e(YOHO.get("lead", "")), overview(recs), cards,
+""" % (breadcrumb([(YOHO_LABEL, None)]), e(YOHO_LABEL), e(YOHO.get("lead", "")), cards,
        ('<div class="yoho-later"><p>%s</p><ul>%s</ul></div>' % (e(YOHO.get("later_note", "")), later)) if later else "",
        mood_html, rules,
        ('<p>%s</p>' % e(ESTAT_CREDIT)) if uses_estat else "", ('<p>%s</p>' % e(DASH_CREDIT)) if uses_dash else "")
