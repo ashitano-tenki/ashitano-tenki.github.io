@@ -14,7 +14,6 @@ __all__ = ["YOHO", "YOHO_LABEL", "build_yoho", "yoho_weather"]
 YOHO = load_json("yoho.json") if os.path.exists(os.path.join(ROOT, "config", "yoho.json")) else {}
 YOHO_LABEL = YOHO.get("name", "転機の天気予報")
 YOHO_DATA = os.path.join(ROOT, "data", "yoho.json")
-NOTE_URL = "https://note.com/chlorine0528/m/m206813f097e5"
 
 WEATHER = {  # 天気の札（雨も強い色にしない）
     "sunny": ("☀️", "晴れ"),
@@ -224,10 +223,9 @@ def build_yoho(ctx):
 <p>各カードの数値は、出典に書いた統計をもとに作成したものです。前の年との差や天気は、観測所が計算しています。</p>
 %s%s
 </section>
-<p class="yoho-note-link">転機について考える文章は、noteマガジン「<a href="%s" rel="noopener" target="_blank" data-goatcounter-click="yoho/note">あしたの転機</a>」で書いています。</p>
 """ % (breadcrumb([(YOHO_LABEL, None)]), e(YOHO_LABEL), e(YOHO.get("lead", "")), cards,
        ('<div class="yoho-later"><p>%s</p><ul>%s</ul></div>' % (e(YOHO.get("later_note", "")), later)) if later else "",
        mood_html, rules,
-       ('<p>%s</p>' % e(ESTAT_CREDIT)) if uses_estat else "", ('<p>%s</p>' % e(DASH_CREDIT)) if uses_dash else "", e(NOTE_URL))
+       ('<p>%s</p>' % e(ESTAT_CREDIT)) if uses_estat else "", ('<p>%s</p>' % e(DASH_CREDIT)) if uses_dash else "")
     page("/yoho/", YOHO_LABEL, YOHO.get("lead", ""), body, ctx=ctx,
          extra_head='<link rel="alternate" type="application/json" href="/yoho/latest.json" title="%s（JSON）">\n' % e(YOHO_LABEL))
