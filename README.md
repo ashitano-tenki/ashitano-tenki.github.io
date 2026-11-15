@@ -71,6 +71,7 @@ https://ashitano-tenki.github.io/
 ## アクセス解析
 
 - GoatCounter（Cookie を使わない）で、見たページと、押されたもの（公式サイト・転機AI・あとで見る・共有・役に立った・探すページの検索語・/project/ から外へ移った先のサイト名など）を数えます。`assets/count.js` は GoatCounter の公式のものに手を加え、URLの「?」以降は来た元（ref・utm）以外を送りません。
+- フッターの「運営者のほかのサイト」は、コミュニティ図鑑・現代曖昧単語辞典・会社のことば研究所・散歩対話「Walk, Talk, Fork.」の4つ（`sitegen/parts.py` の site_footer()）。押されると `sister/zukan`・`sister/jiten`・`sister/kotoba`・`sister/wtf` として数えます。Walk, Talk, Fork. は「散歩対話」という言葉で検索に出るようにしているので、リンクの文字にこの言葉を入れています（2026-11-15 黒田さん）。
 
 ## 週次の数字（stats.json）
 
