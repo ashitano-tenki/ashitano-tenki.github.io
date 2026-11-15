@@ -20,6 +20,7 @@ __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN
 # トップの見出しの右側（パソコンの幅だけ）：観測ノートの新しい3本の目次。
 # 2026-11-15 観測ノートの入口の見本の案B。転機の絵文字・題名・転機と公開日を並べ、右上に観測ノートの一覧へのリンク。
 # 見出しは「新着の観測ノート」（「新しい順」だと並び替えられそうに見えるため。2026-11-15 黒田さん）
+# 検索は見出しの列（.hero-main）の中、件数のすぐ下に置く。左の列が右の箱とほぼ同じ高さになり、上下の空きがなくなる（2026-11-15 配置の見本の案B）
 # もとは種類の絵文字をレーダーの形に並べた飾り（同じ日の案A。その前は 2026-11-08 の散らした絵文字）。押しても何も起きず、
 # 実用のある中身にしたいという判断で置き換えた。ノートがまだなければ何も出さない
 def hero_notes(notes):
@@ -68,9 +69,6 @@ def build_home(listed, ctx):
   <div class="hero-ruler" aria-hidden="true"></div>
   <p class="lead">{lead}</p>
   <p class="hero-count"><b data-count="{count}">{count}</b>件を掲載<span>毎日更新</span></p>
-  </div>
-  {floats}
-  </div>
   <form class="search-box" action="/search/" method="get" role="search">
     <label for="home-q" class="visually-hidden">キーワード</label>
     <input id="home-q" type="search" name="q" placeholder="キーワードで探す（例：フリーランス、確定申告）">
@@ -78,6 +76,9 @@ def build_home(listed, ctx):
   </form>
   <div class="start-help">
     <div class="start-words" data-shown="8" role="group" aria-label="検索の例">{popular}</div>
+  </div>
+  </div>
+  {floats}
   </div>
 </section>
 

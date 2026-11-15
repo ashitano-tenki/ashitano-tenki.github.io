@@ -164,7 +164,9 @@ main.wrap { padding-bottom: var(--space-16); }
    白い箱に3行。行ごとに転機の絵文字・題名（2行まで）・転機と公開日。目盛りと同じ色の線で区切る */
 .hero-notes { display: none; }
 @media (min-width: 900px) {
-  .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36%); gap: var(--space-6); align-items: center; margin-bottom: var(--space-4); }
+  /* 検索を左の列に入れ（2026-11-15 配置の見本の案B）、左右の下端をそろえる。下の検索の段がなくなるので、下の余白も要らない */
+  .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36%); gap: var(--space-6); align-items: end; }
+  .hero-main .hero-count { margin-bottom: var(--space-5); }
   .hero-main { min-width: 0; }
   .hero-notes { display: block; min-width: 0; }
   .hero-notes-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); margin: 0 0 var(--space-2); font-size: 13px; }
