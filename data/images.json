@@ -12715,5 +12715,70 @@
   "src": "https://static.wixstatic.com/media/94d0be_27134960edbe4da3be147dbf0c9abae9~mv2.jpg/v1/fill/w_1200,h_630,al_c/94d0be_27134960edbe4da3be147dbf0c9abae9~mv2.jpg",
   "w": 960,
   "h": 504
+ },
+ "R1551": {
+  "page": "https://www.pasona.co.jp/pr/youth-palette/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "capture:https://www.pasona.co.jp/pr/youth-palette/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1552": {
+  "page": "https://marutaku.ai-front.com/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/c9407bca-3f2a-4b7d-8131-d85f0e4e7535",
+  "w": 960,
+  "h": 504
+ },
+ "R1553": {
+  "page": "https://yournurse.jp/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://yournurse.jp/img/img_ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1555": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784991335167",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49913/4991335167.jpg",
+  "w": 680,
+  "h": 1000
+ },
+ "R1556": {
+  "page": "https://atotorimusume.com/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://atotorimusume.com/wp-content/uploads/2024/04/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1557": {
+  "page": "https://ad.fants.jp/portalink/jibun-career",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/c53c1f84-00fb-46cb-aafb-ea8f89022f1d",
+  "w": 960,
+  "h": 504
+ },
+ "R1558": {
+  "page": "https://newpasscareer.com/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/92acef71-cb93-41c5-bf22-2550a45ee6cd",
+  "w": 960,
+  "h": 504
+ },
+ "R1559": {
+  "page": "https://ouchi-hisyo-salon.com/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/a483408f-3ca6-4e57-843b-3bf5e4c79977",
+  "w": 960,
+  "h": 504
  }
 }
