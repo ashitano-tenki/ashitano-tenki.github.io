@@ -108,6 +108,7 @@ https://ashitano-tenki.github.io/
     - 15：題名と見出しを、BudouX で文節に分けて `<wbr>` を入れ、keep-all で折り返す（Safari・Firefox でも言葉の途中で折り返さない）。BudouX は中黒（・）で切らないので、中黒のあとも切れ目にする。JS で作るカードは search.json の `wb`（切れ目の位置）を使う。BudouX は毎朝の更新で .venv に入れる（`budoux==0.7.0`）。入らなかったときは文節に分けずに作る。14 と 15 は一緒に入れる（約物を span で包むと Chrome の auto-phrase が効かなくなるため）。
     - 16（A）：観測ノートの記事で、広い画面では右に目次を固定し、いま読んでいる節に空色の線。狭い画面では本文の上に畳んだ目次（`sitegen/notes.py` の note_toc()）。
 - 不採用：8 カードの画像と題名が紹介ページへ移る（ページをまたぐ View Transitions）／12 件数の数字の動きを変える（今の数え上げのまま）／13 転機の流れを線でつないだ図にする。
+- トップの見出しの右側の種類の絵文字は「観測のレーダー」（2026-11-15 の別の見本 https://claude.ai/artifact/NvQ6ERRCaxtif4cv94CsD7 で黒田さんが案Aを選んだ）。目盛りと同じ色の同心円と十字の上に、同じ大きさの絵文字を白い丸に入れて置き、空色の光が9秒で1周する。置き場所は `sitegen/pages.py` の HERO_RADAR_POS。札の並び（案B）と星座（案C）は不採用。
 - 「共通（どの転機にも）」の絵文字は 🔭（2026-11-15 黒田さん。観測ノートの右上と共有画像、トップの「全般」に出る。`config/tenki.json`）。
 - 動きはすべて `@media (prefers-reduced-motion: no-preference)` の中に書き、スクロール連動は `@supports (animation-timeline: …)` で囲む。止まった姿で全部見えていること（JS がないとき・非対応のブラウザでも）。
 

@@ -17,19 +17,25 @@ __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN
 # ---------------------------------------------------------------- ページ
 
 
-# トップの見出しの右側に浮かべる種類の絵文字（パソコンの幅だけ。2026-11-08 見本の案A、現代曖昧単語辞典にならう）
-# 位置（左%, 上%）・大きさ(px)・傾き(度)
-HERO_FLOAT_POS = [(6, 4, 60, -8), (42, 0, 50, 6), (76, 6, 66, -4), (20, 36, 54, 10), (56, 32, 78, -6),
-                  (86, 42, 46, 8), (2, 68, 48, 4), (38, 70, 56, -10), (72, 72, 52, 6)]
+# トップの見出しの右側の、種類の絵文字（パソコンの幅だけ）。
+# 2026-11-15 見本の案A「観測のレーダー」：サイト名の下の目盛りと同じ色の同心円と十字の上に、同じ大きさの絵文字を白い丸に入れて置く。
+# 空色の光がゆっくり回るだけで、絵文字そのものは動かさない（もとは 2026-11-08 の案A。位置・大きさ・傾きを手で決めて散らしていた）。
+# 置き場所は（円の半径, 角度）。内側の円から順に3つずつ。種類が増えたら、ここに足す
+HERO_RADAR_POS = [(46, -100), (46, 140), (46, 20), (84, -35), (84, -150), (84, 85), (112, -80), (112, 190), (112, 10)]
 
 
 def hero_floats():
+    import math
+    cx, cy, w, h = 160, 120, 320, 240
     spans = []
-    for i, (k, (x, y, size, r)) in enumerate(zip(KINDS, HERO_FLOAT_POS)):
-        if not k.get("emoji"):
-            continue
-        spans.append('<span style="left:%d%%;top:%d%%;font-size:%dpx;--r:%ddeg;--d:%.1fs">%s</span>' % (x, y, round(size / 1.15), r, i * 0.4, emoji_img(k["emoji"]).replace("<img ", '<img loading="lazy" ', 1)))
-    return '<div class="hero-floats" aria-hidden="true">%s</div>' % "".join(spans)
+    for i, (k, (r, a)) in enumerate(zip([k for k in KINDS if k.get("emoji")], HERO_RADAR_POS)):
+        x = (cx + r * math.cos(math.radians(a))) / w * 100
+        y = (cy + r * math.sin(math.radians(a))) / h * 100
+        spans.append('<span style="left:%.1f%%;top:%.1f%%;--i:%d">%s</span>' % (x, y, i, emoji_img(k["emoji"]).replace("<img ", '<img loading="lazy" ', 1)))
+    rings = ('<svg class="hero-rings" viewBox="0 0 320 240"><circle cx="160" cy="120" r="46"/><circle cx="160" cy="120" r="84"/>'
+             '<circle class="dash" cx="160" cy="120" r="112"/><line x1="160" y1="4" x2="160" y2="236"/><line x1="44" y1="120" x2="276" y2="120"/>'
+             '<circle class="c" cx="160" cy="120" r="3"/></svg><span class="hero-sweep"></span>')
+    return '<div class="hero-floats" aria-hidden="true">%s%s</div>' % (rings, "".join(spans))
 
 def build_home(listed, ctx):
     new_items = sorted(ctx["new_items"], key=lambda it: (it["added"], -it["rank"]), reverse=True)

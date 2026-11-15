@@ -160,17 +160,28 @@ main.wrap { padding-bottom: var(--space-16); }
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 40px) left bottom / 100% 12px no-repeat,
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 8px) left bottom / 100% 5px no-repeat; }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-4); }
-/* 見出しの右側に種類の絵文字を浮かべる（パソコンの幅だけ） */
+/* 見出しの右側の種類の絵文字（パソコンの幅だけ）。2026-11-15 見本の案A「観測のレーダー」：目盛りと同じ色の同心円と十字の上に、同じ大きさの絵文字を白い丸に入れて置く */
 .hero-floats { display: none; }
 @media (min-width: 900px) {
   .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 34%); gap: var(--space-6); align-items: center; margin-bottom: var(--space-4); }
   .hero-main { min-width: 0; }
   .hero-floats { display: block; position: relative; height: 240px; }
-  .hero-floats span { position: absolute; line-height: 1; transform: rotate(var(--r)); animation: hero-bob 5s ease-in-out var(--d) infinite; user-select: none; }
-  .hero-floats img.emo { width: 1.15em; height: 1.15em; vertical-align: top; }
+  .hero-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .hero-rings circle, .hero-rings line { fill: none; stroke: var(--tick); stroke-width: 1; }
+  .hero-rings .dash { stroke-dasharray: 2 4; }
+  .hero-rings .c { fill: var(--sky); stroke: none; }
+  .hero-sweep { position: absolute; left: 50%; top: 50%; width: 224px; height: 224px; margin: -112px 0 0 -112px; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from 0deg, rgba(47, 149, 214, 0) 0deg, rgba(47, 149, 214, .16) 50deg, rgba(47, 149, 214, 0) 52deg); }
+  .hero-floats > span:not(.hero-sweep) { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; padding: 6px; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: 50%; box-shadow: var(--shadow-card); user-select: none; }
+  .hero-floats img.emo { display: block; width: 100%; height: 100%; }
 }
-@keyframes hero-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
-@media (prefers-reduced-motion: reduce) { .hero-floats span { animation: none; } }
+/* 空色の光が9秒で1周する。開いたとき、絵文字が順にぽんと現れる（動きを減らす設定では、光は止まり、絵文字は最初から見えている） */
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  .hero-sweep { animation: hero-spin 9s linear infinite; }
+  .hero-floats > span:not(.hero-sweep) { animation: hero-ping .5s cubic-bezier(.2, .8, .3, 1.2) calc(.2s + var(--i) * 90ms) both; }
+}
+@keyframes hero-spin { to { transform: rotate(1turn); } }
+@keyframes hero-ping { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-4); color: var(--text-body); font-size: 16px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
