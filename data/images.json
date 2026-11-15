@@ -12780,5 +12780,80 @@
   "src": "https://storage.googleapis.com/production-os-assets/assets/a483408f-3ca6-4e57-843b-3bf5e4c79977",
   "w": 960,
   "h": 504
+ },
+ "R1560": {
+  "page": "https://tsukushi-style-salon.fants.jp",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/cae70f_5809aef84f004e40a4c46df15325ddf4~mv2.png/v1/fill/w_2500,h_1359,al_c/cae70f_5809aef84f004e40a4c46df15325ddf4~mv2.png",
+  "w": 960,
+  "h": 522
+ },
+ "R1561": {
+  "page": "https://forsight.work/forvipeople",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "capture:https://forsight.work/forvipeople",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1562": {
+  "page": "https://stellavia.yumcom.net/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "capture:https://stellavia.yumcom.net/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1563": {
+  "page": "https://career-akashi.jp/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://career-akashi.jp/assets/ogp-member.png?v=20261028a",
+  "w": 960,
+  "h": 504
+ },
+ "R1564": {
+  "page": "https://www.umitto-kyujin.com/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "capture:https://www.umitto-kyujin.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1565": {
+  "page": "https://bluecompass.co.jp/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://bluecompass.co.jp/bluewp1/wp-content/uploads/2017/11/cover1.png",
+  "w": 820,
+  "h": 312
+ },
+ "R1566": {
+  "page": "https://books.rakuten.co.jp/rb/17198689/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/8649/9784344938649_1_2.jpg?downsize=600:*",
+  "w": 499,
+  "h": 800
+ },
+ "R1568": {
+  "page": "https://books.rakuten.co.jp/rb/18463271/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/9877/9784491059877_1_3.jpg?downsize=600:*",
+  "w": 566,
+  "h": 800
+ },
+ "R1570": {
+  "page": "https://books.rakuten.co.jp/rb/17436164/",
+  "checked": "2026-11-16",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41819/4181959155.jpg",
+  "w": 700,
+  "h": 1000
  }
 }
