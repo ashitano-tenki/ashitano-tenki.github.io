@@ -254,8 +254,13 @@ button, .button {
 .cards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
 @media (min-width: 640px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 900px) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.card a { display: flex; flex-direction: column; height: 100%; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-4); text-decoration: none; color: var(--ink); }
-.card a:hover { border-color: var(--sky); }
+/* 2026-11-15：カード全体をリンクにせず、箱（card-box）の中の題名のリンク（card-link）の範囲を ::after で箱全体に広げる（段階の言葉のボタンを中に置くため）。「すべて見る」のカード（card-more）は今までどおり a が箱 */
+.card-box, .card-more a { position: relative; display: flex; flex-direction: column; height: 100%; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-4); text-decoration: none; color: var(--ink); }
+.card-box:hover, .card-more a:hover { border-color: var(--sky); }
+.card-link { color: inherit; text-decoration: none; }
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 0; }
+.card-link:focus-visible { outline: none; }
+.card-box:has(.card-link:focus-visible) { outline: 3px solid var(--sky); outline-offset: -3px; }
 /* あとで見る */
 .card { position: relative; }
 /* 「あとで見る」ボタンはカードの右上（画像の上）に重ねる */
@@ -291,14 +296,14 @@ button, .button {
 .save-inline svg path { fill: transparent; stroke: var(--text-sub); }
 .saved-status { margin: var(--space-4) 0 var(--space-3); }
 .card h3 { font-size: 18px; line-height: 1.5; margin: 0 0 var(--space-1); overflow-wrap: anywhere; }
-.card a:hover h3 { color: var(--sky); }
+.card-box:hover h3 { color: var(--sky); }
 .card .card-when { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--sky); margin: 0 0 var(--space-1); }
 .card .card-line { font-size: 14px; line-height: 1.7; color: var(--text-body); margin: 0 0 var(--space-3); }
 .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .card-date { font-size: 12px; color: var(--text-sub); }
 /* 掲載先の公式ページのシェア用画像（tools/fetch_images.py が取得・縮小）。カードは上に横長の枠、紹介ページはタイトルの上。
    横長は枠いっぱいに切り抜き、正方形・縦長（本の表紙など）は枠の中に収める。画像がなければタイプの絵文字を同じ枠に出す */
-.card a { padding: 0; overflow: hidden; }
+.card-box, .card-more a { padding: 0; overflow: hidden; }
 .card-body { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: var(--space-4); }
 .card-media, .detail-hero { background: var(--chip-bg); border: var(--border-hairline) solid var(--line); overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .card-media { aspect-ratio: 1.91 / 1; border-width: 0 0 var(--border-hairline); flex: none; }
@@ -336,7 +341,7 @@ button, .button {
 .cards.shelf > li { scroll-snap-align: start; min-width: 0; }
 .cards.shelf:focus-visible { outline: 2px solid var(--sky); outline-offset: -2px; }
 /* キーボードで選んだカードの枠は内側に出す（箱や横スワイプの棚の端で切れないように） */
-.card a:focus-visible, .card .save-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: -3px; }
+.card-more a:focus-visible, .card .save-btn:focus-visible { outline: 3px solid var(--sky); outline-offset: -3px; }
 .cards.shelf .card-when { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cards.shelf .card-date { white-space: nowrap; }
 .cards.shelf h3, .cards.shelf .card-line { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -366,15 +371,15 @@ button, .button {
   .sm-shelf-block + .more { margin-top: var(--space-2); }
   /* 転機のページのタイプ別は、トップの棚と同じ白い箱に入れる */
   .kind-block.sm-box { margin-top: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
-  .kind-block.sm-box .card a { border-color: var(--line-soft); }
-  .kind-block.sm-box .card a:hover { border-color: var(--sky); }
+  .kind-block.sm-box .card-box, .kind-block.sm-box .card-more a { border-color: var(--line-soft); }
+  .kind-block.sm-box .card-box:hover, .kind-block.sm-box .card-more a:hover { border-color: var(--sky); }
   .kind-block.sm-box .card-more a { background: var(--card); }
   .kind-block.sm-box .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
   .kind-block.sm-box .shelf-dots i.on { background: var(--sky); opacity: 1; }
   .kind-block.sm-box .more { display: none; }
   /* 長い一覧（探す・観測レポート・あとで見る）は、左に小さな画像の横長カード */
   .cards.list-compact { gap: var(--space-2); }
-  .list-compact .card a { flex-direction: row; align-items: stretch; gap: 10px; padding: 10px; }
+  .list-compact .card-box { flex-direction: row; align-items: stretch; gap: 10px; padding: 10px; }
   .list-compact .card-media { width: 96px; align-self: flex-start; border-width: var(--border-hairline); border-radius: var(--radius-tag); }
   .list-compact .media-fit img { padding: 3px; }
   .list-compact .media-none span { font-size: 24px; }
@@ -403,8 +408,8 @@ button, .button {
    箱の左右の余白は棚のはみ出し幅（space-4）と同じにして、カードを箱の端まで流す */
 /* トップのタイプごとの棚：白い箱に細い線とごく薄い影（ほかのカードと同じ扱い）。中のカードは線を薄くして区切る（2026-11-08 見本の案A） */
 .kind-block.shelf-block { margin-top: var(--space-4); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 20px var(--space-4) var(--space-3); overflow: hidden; }
-.shelf-block .card a { border-color: var(--line-soft); }
-.shelf-block .card a:hover { border-color: var(--sky); }
+.shelf-block .card-box, .shelf-block .card-more a { border-color: var(--line-soft); }
+.shelf-block .card-box:hover, .shelf-block .card-more a:hover { border-color: var(--sky); }
 .shelf-block .card-more a { background: var(--card); }
 .shelf-block .shelf-all, .kind-block.sm-box .shelf-all { color: var(--sky-on-tint); }
 .shelf-block .shelf-dots i { background: var(--text-sub); opacity: 0.35; }
@@ -571,7 +576,7 @@ button, .button {
   .view-switch button:hover { color: var(--sky); }
   .view-switch button[aria-pressed="true"] { background: var(--chip-bg); color: var(--ink); }
   .result-col .cards.view-list { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
-  .view-list .card a { flex-direction: row; align-items: stretch; gap: 16px; padding: 10px; }
+  .view-list .card-box { flex-direction: row; align-items: stretch; gap: 16px; padding: 10px; }
   .view-list .card-media { width: 150px; flex: none; align-self: flex-start; border-width: var(--border-hairline); border-radius: var(--radius-tag); }
   .view-list .media-none span { font-size: 24px; }
   .view-list .card-body { padding: 0 30px 0 0; }
@@ -646,12 +651,12 @@ button, .button {
 .footer-meta a { color: var(--footer-text); }
 
 /* 押したときの手応え：マウスを乗せたときの色の変化をなめらかにし、押した瞬間は少し沈ませる */
-a, button, .button, .card a, select, input[type="search"] { transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .1s ease; }
+a, button, .button, .card-box, select, input[type="search"] { transition: color .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease, transform .1s ease; }
 button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active { transform: translateY(1px); }
-.card a:active { transform: translateY(1px); border-color: var(--sky); }
+.card-box:has(.card-link:active), .card-more a:active { transform: translateY(1px); border-color: var(--sky); }
 @media (prefers-reduced-motion: reduce) {
-  a, button, .button, .card a, select, input[type="search"] { transition: none; }
-  button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active, .card a:active { transform: none; }
+  a, button, .button, .card-box, select, input[type="search"] { transition: none; }
+  button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a:active, .card-box:has(.card-link:active), .card-more a:active { transform: none; }
 }
 /* 紹介ページの下の関連（切り替えボタンがあるときは、パネルの見出しを隠す） */
 .js .related-tabs + .related-panel .related-h, .js .related-panel .related-h { display: none; }
@@ -708,7 +713,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .note-by { margin: 0; font-size: 14px; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); color: #1a1d23; }
 .note-by a { color: #1a1d23; }
 .note-hero-lead { margin: 0; max-width: 34em; font-size: 16px; }
-.note-hero-lead span, .note-hero h1 span { display: inline-block; }  /* 「研／究家」のように言葉の途中で折り返さないよう、意味のまとまりごとに折り返す */
+.note-hero-lead > span, .note-hero h1 > span { display: inline-block; }  /* 「研／究家」のように言葉の途中で折り返さないよう、意味のまとまりごとに折り返す */
 .note-hero-count { margin: var(--space-4) 0 0; font-size: 14px; font-weight: 600; }
 .note-hero-count b { font-family: var(--font-display); font-weight: 500; font-size: 32px; margin-right: 2px; }
 @media (max-width: 599px) {
@@ -956,7 +961,7 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .yoho-years { margin: 0; }
 .yoho-years svg { display: block; width: 100%; height: auto; overflow: visible; }
 .yoho-years .g { stroke: var(--line); stroke-width: 1; }
-.yoho-years polyline { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.yoho-years polyline, .yoho-years path { fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .yoho-years figcaption { color: var(--text-sub); font-size: 12px; margin-top: var(--space-1); }
 .yoho-years text { font-size: 11px; fill: var(--text-sub); font-family: var(--font-sans); }
 .yoho-years text.cur { fill: var(--ink); font-weight: 700; }
@@ -964,3 +969,202 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .yoho-years .y1 { stroke: var(--yr-prev); stroke-width: 1.6; }
 .yoho-years .y0 { stroke: var(--sky); stroke-width: 2.6; }
 .yoho-years .dot { fill: var(--sky); }
+/* 2026-11-15 の改善の見本で採用（案1〜4） */
+/* 前の年の同じ月との差：白い丸・青い点と結ぶ細い縦線・差の文字（案3） */
+.yoho-years .yoho-link { stroke: var(--text-sub); stroke-width: 1; }
+.yoho-years .yoho-prev { fill: var(--card); stroke: var(--yr-prev); stroke-width: 1.6; }
+.yoho-years text.yoho-diff { fill: var(--ink); font-weight: 600; paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+/* 今年の線を、画面に入ったら一度だけ左から描く（案1のB）。site.js が .play を付けたときだけ動く。止まった姿は全部見えている */
+.yoho-years .yoho-end { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .yoho-years.play .yoho-line { stroke-dasharray: 1; animation: yoho-draw 1.2s cubic-bezier(.33, 0, .2, 1) both; }
+  .yoho-years.play .yoho-end { animation: yoho-pop .32s 1.1s cubic-bezier(.2, .8, .3, 1.15) both; }
+}
+@keyframes yoho-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes yoho-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+/* なぞると月ごとの数字が吹き出しで出る（案2のB）。ふだんは縦線と点を隠し、今と同じ見た目 */
+.yoho-plot { position: relative; touch-action: pan-y; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.yoho-plot:focus-visible { outline: 2px solid var(--sky); outline-offset: 4px; border-radius: var(--radius-sm); }
+.yoho-cursor { visibility: hidden; }
+.yoho-on .yoho-cursor { visibility: visible; }
+.yoho-years .yoho-vline { stroke: var(--text-sub); stroke-width: 1; stroke-dasharray: 2 2; }
+.yoho-years circle.yoho-pt { stroke: var(--card); stroke-width: 1.5; }
+.yoho-years circle.yoho-pt.y0 { fill: var(--sky); }
+.yoho-years circle.yoho-pt.y1 { fill: var(--yr-prev); }
+.yoho-years circle.yoho-pt.y2 { fill: var(--yr-old); stroke: var(--tick); stroke-width: 1; }
+.yoho-tip { position: absolute; z-index: 1; min-width: 8em; padding: 6px var(--space-2); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-md); box-shadow: 0 2px 8px rgba(26, 29, 35, .12); font-size: 12px; line-height: 1.55; white-space: nowrap; pointer-events: none; font-variant-numeric: tabular-nums; }
+.yoho-tip b { display: block; font-weight: 600; color: var(--ink); }
+.yoho-tip span { display: flex; align-items: center; gap: var(--space-1); color: var(--text-sub); }
+.yoho-tip em { margin-left: auto; padding-left: var(--space-3); font-style: normal; color: var(--ink); }
+.yoho-sw { display: inline-block; width: 10px; height: 3px; border-radius: 2px; flex: none; }
+.yoho-sw.y0 { background: var(--sky); height: 4px; }
+.yoho-sw.y1 { background: var(--yr-prev); }
+.yoho-sw.y2 { background: var(--yr-old); }
+/* ページの上の、転機ごとの天気の帯（案4）。広い画面は1行、中くらいは3つずつ、スマホは横にスクロール */
+.yoho-strip { margin: var(--space-4) 0 0; }
+.yoho-strip ul { list-style: none; margin: 0 calc(-1 * var(--space-4)); padding: 2px var(--space-4) var(--space-2); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(132px, 40%); gap: var(--space-2);
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.yoho-strip ul::-webkit-scrollbar { display: none; }
+.yoho-strip li { scroll-snap-align: start; min-width: 0; }
+@media (min-width: 560px) { .yoho-strip ul { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; margin: 0; padding: 0; } }
+@media (min-width: 800px) { .yoho-strip ul { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.yoho-tile { display: grid; gap: 6px; align-content: start; height: 100%; padding: var(--space-3); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); color: var(--ink); text-decoration: none; }
+.yoho-tile:hover { border-color: var(--sky); }
+.yoho-tile-kind { font-family: var(--font-display); font-weight: 500; font-size: 16px; line-height: 1.4; white-space: nowrap; }
+.yoho-tile .yoho-weather { justify-self: start; padding: 1px var(--space-2) 1px 6px; font-size: 12px; font-weight: 600; line-height: 1.6; }
+.yoho-tile .yoho-icon .emo, .yoho-tile .yoho-icon img { width: 16px; height: 16px; vertical-align: -3px; }
+.yoho-tile.yoho-sunny .yoho-weather { background: var(--wx-sunny); color: var(--wx-sunny-ink); }
+.yoho-tile.yoho-cloudy .yoho-weather { background: var(--wx-cloudy); color: var(--wx-cloudy-ink); }
+.yoho-tile.yoho-rainy .yoho-weather { background: var(--wx-rainy); color: var(--wx-rainy-ink); }
+.yoho-tile-val { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 6px; line-height: 1.4; }
+.yoho-tile-val b { font-family: var(--font-display); font-weight: 500; font-size: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.yoho-tile-val small { font-size: 12px; color: var(--text-sub); white-space: nowrap; }
+/* 帯から移った先のカード：枠を青くし、少しのあいだ外側を青く縁取る */
+.yoho-card:target, .yoho-mood:target .yoho-card { border-color: var(--sky); }
+.yoho-card:focus, .yoho-mood:focus { outline: none; }
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.yoho-strip) { scroll-behavior: smooth; }  /* 天気予報のページだけ */
+  .yoho-card:target, .yoho-mood:target .yoho-card { outline: 4px solid rgba(47, 149, 214, 0); outline-offset: 2px; animation: yoho-ring 1.6s ease-out .25s both; }
+}
+@keyframes yoho-ring { from { outline-color: rgba(47, 149, 214, .45); } to { outline-color: rgba(47, 149, 214, 0); } }
+
+/* 探すページ（2026-11-15 の改善の見本で採用） */
+/* 探した言葉が当たったところ：太字と空色の下線（案5。黄色の蛍光ペンは使わない） */
+.hit { font-weight: 600; color: inherit; text-decoration-line: underline; text-decoration-color: var(--sky-bright); text-decoration-thickness: 2px; text-underline-offset: .24em; text-decoration-skip-ink: none; }
+.card h3 .hit { font-weight: 700; }
+.syn-note .hit { color: var(--ink); text-decoration-thickness: 1.5px; }
+/* 絞り込みを変えたときの入れ替え（案6）。入れ替えのあいだだけカードと件数に名前を付ける（search.js の runMoving） */
+.vt-moving .card, .vt-moving .list-divider { view-transition-name: var(--vt, none); view-transition-class: vt-card; }
+#result-count.vt-moving { view-transition-name: result-count; }
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*.vt-card) { animation-duration: .36s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
+  ::view-transition-old(*.vt-card):only-child { animation: vt-out .24s ease both; }
+  ::view-transition-new(*.vt-card):only-child { animation: vt-in .32s cubic-bezier(.2, .7, .2, 1) .08s both; }
+  ::view-transition-group(result-count) { animation-duration: .36s; }
+  ::view-transition-old(result-count) { animation: vt-num-out .2s ease-in both; }
+  ::view-transition-new(result-count) { animation: vt-num-in .3s cubic-bezier(.2, .7, .2, 1) .06s both; }
+}
+@keyframes vt-out { to { opacity: 0; transform: scale(.97); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes vt-num-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes vt-num-in { from { opacity: 0; transform: translateY(6px); } }
+
+/* 段階の言葉の説明（2026-11-15 見本の案7のA）。カードの段階の言葉は点線の下線のボタンで、題名のリンクの範囲（::after）より上に重ねる */
+.stage-term { position: relative; z-index: 1; appearance: none; display: inline; margin: 0; padding: 0; border: 0; border-radius: 2px; background: none;
+  font: inherit; color: inherit; cursor: help; text-decoration-line: underline; text-decoration-style: dotted; text-decoration-thickness: 1.5px; text-underline-offset: .3em; }
+.stage-term::before { content: ""; position: absolute; inset: -8px -3px; }  /* 見た目はそのまま、指で押せる範囲を上下に広げる */
+.stage-term:hover, .stage-term[data-open] { text-decoration-style: solid; }
+.stage-term:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+.card .save-btn { z-index: 1; }
+@media (max-width: 639px) { .list-compact .card-when { white-space: normal; } }  /* スマホの一覧では段階の言葉が「…」で切れないよう折り返す */
+/* 説明の小窓。アンカー配置が使えないブラウザでは画面の下に横長で出す */
+.stage-pop { position: fixed; inset: auto var(--space-4) var(--space-4); margin: 0 auto; width: auto; max-width: 320px; height: auto; overflow: visible;
+  padding: var(--space-3) var(--space-4); background: var(--card); color: var(--ink); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); box-shadow: 0 4px 16px rgba(26, 29, 35, .12);
+  font-family: var(--font-sans); font-size: 14px; font-weight: 400; line-height: 1.7; text-align: left; white-space: normal; }
+@supports (position-area: block-end) and (anchor-name: --a) {
+  .stage-pop.anchored { inset: auto; margin: 6px 0; max-width: min(320px, calc(100vw - 32px)); position-area: block-end span-inline-end; position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline; }
+}
+.stage-pop p { margin: 0; }
+.stage-pop-name { display: flex; align-items: baseline; gap: var(--space-2); margin-bottom: 2px; }
+.stage-pop-name b { font-family: var(--font-display); font-weight: 500; font-size: 16px; }
+.stage-pop-name span { font-size: 13px; color: var(--text-sub); }
+.stage-pop-text { color: var(--text-body); }
+@media (prefers-reduced-motion: no-preference) {
+  .stage-pop { transition: opacity .15s ease, translate .15s ease; }
+  @starting-style { .stage-pop:popover-open { opacity: 0; translate: 0 -4px; } }
+}
+
+/* 一覧と棚（2026-11-15 の改善の見本で採用） */
+/* 棚の両端を薄くし、続きがあると分かるようにする（案9）。棚の横スクロールの位置に合わせて、薄くする幅を 0 から --fade-l・--fade-r まで動かす。
+   左端にいるときは右だけ、途中では両方、右端では左だけ。スクロール連動に対応していないブラウザ・動かせない棚では何も付かない（動きではないので、動きを減らす設定でも出す） */
+@property --fl { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fr { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@keyframes fade-l { from { --fl: 0px; } to { --fl: var(--fade-l); } }
+@keyframes fade-r { from { --fr: var(--fade-r); } to { --fr: 0px; } }
+@supports (animation-timeline: scroll(x self)) {
+  .cards.shelf {
+    --fade-l: 28px; --fade-r: 40px;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+    animation: fade-l linear both, fade-r linear both; animation-timeline: scroll(x self), scroll(x self);
+    animation-range: 0px var(--fade-l), calc(100% - var(--fade-r)) 100%;
+  }
+  @media (min-width: 640px) { .cards.shelf { --fade-r: 56px; } }
+  @media (max-width: 639px) {
+    .cards.sm-shelf {
+      --fade-l: 28px; --fade-r: 40px;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+      mask-image: linear-gradient(to right, transparent, #000 var(--fl), #000 calc(100% - var(--fr)), transparent);
+      animation: fade-l linear both, fade-r linear both; animation-timeline: scroll(x self), scroll(x self);
+      animation-range: 0px var(--fade-l), calc(100% - var(--fade-r)) 100%;
+    }
+  }
+}
+
+/* あとで見るを押したときの手応え（案10）。しおりが塗られて小さく跳ね、周りに薄い輪が広がる。ヘッダーの数がぽんと大きくなり、新しい数字が下から入る。
+   外すときは塗りが静かに抜けるだけ（site.js が save-pop・saved-bump・saved-in・saved-flash を付け直す） */
+.saved-n { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .save-btn svg path, .save-wide svg path { transition: fill .2s ease, stroke .2s ease; }
+  .save-btn.save-pop svg, .save-wide.save-pop svg { animation: save-hop .44s cubic-bezier(.3, .7, .4, 1) both; }
+  .save-btn.save-pop::before { content: ""; position: absolute; inset: -1px; border-radius: 50%; border: 2px solid var(--sky); pointer-events: none; animation: save-ring .5s ease-out both; }
+  .header-saved-count.saved-bump { animation: saved-bump .46s cubic-bezier(.3, 1.4, .5, 1) both; }
+  .header-saved-count.saved-in { animation: saved-in .46s cubic-bezier(.3, 1.4, .5, 1) both; }
+  .header-saved-count.saved-bump .saved-n { animation: saved-num .32s cubic-bezier(.2, .7, .2, 1) both; }
+  .header-saved-btn.saved-flash { animation: saved-flash .7s ease-out; }
+}
+@keyframes save-hop { 0% { transform: none; } 35% { transform: translateY(-3px) scale(1.2); } 65% { transform: translateY(0) scale(.94); } 100% { transform: none; } }
+@keyframes save-ring { from { opacity: .55; transform: scale(1); } to { opacity: 0; transform: scale(1.65); } }
+@keyframes saved-bump { 0% { transform: scale(1); } 35% { transform: scale(1.45); } 100% { transform: scale(1); } }
+@keyframes saved-in { 0% { transform: scale(.3); opacity: 0; } 55% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes saved-num { from { transform: translateY(.7em); opacity: .2; } to { transform: none; opacity: 1; } }
+@keyframes saved-flash { from { color: var(--sky); border-color: var(--sky); } to { color: var(--text-body); border-color: var(--line); } }
+
+/* カードが画面に入るときにそっと現れる（案11のA）。カード1枚ずつ、少し下から上がって濃くなる（opacity 0.4 から、14px まで）。見出しは動かさない。
+   横にスワイプする棚の中では、棚そのものがスクロールの基準になってしまうので、棚を囲む箱の位置を基準にする（名前付きのタイムライン）。
+   対応していないブラウザ・動きを減らす設定では、最初から全部見えている */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes card-rise { from { opacity: .4; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .kind-block { view-timeline: --kind-block block; }
+    .sm-shelf-block { view-timeline: --shelf-block block; }
+    .sm-shelf > .card { animation: card-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+    .shelf > .card { animation: card-rise linear both; animation-timeline: --kind-block; animation-range: entry 22% entry 70%; }
+    @media (max-width: 639px) {
+      .sm-shelf > .card { animation-timeline: --shelf-block; animation-range: entry 10% entry 70%; }
+    }
+  }
+}
+
+/* 見出しの組み方（2026-11-15 の改善の見本で採用。sitegen/typeset.py） */
+/* 文節で改行する（案15）：文節の切れ目に <wbr> を入れ、keep-all で折り返す。切れ目のない長い英数字だけは途中で折り返す */
+.wb, .note-hero h1 > span { word-break: keep-all; overflow-wrap: anywhere; }
+/* 約物を詰める（案14）：見出しの書体に字詰めの機能がないため、閉じ括弧は右を、句読点は右を少し控えめに、開き括弧は左を半分詰める */
+.yk { margin-right: -.5em; }
+.yk.yk-p { margin-right: -.4em; }
+.yk.yk-o { margin-right: 0; margin-left: -.5em; }
+/* 観測ノートの見出しは1文ずつのまとまり（inline-block）。まとまりの最後の句読点は、中で詰めると幅が足りなくなって中で折り返すので、まとまりの外側で詰める */
+.note-hero h1 > span > .yk:last-child { margin-right: 0; }
+.note-hero h1 > span:has(> .yk-p:last-child) { margin-right: -.4em; }
+
+/* 観測ノートの目次といま読んでいるところ（2026-11-15 の改善の見本で採用した案16のA）。
+   広い画面では本文の右に目次を固定し、いま読んでいる節に空色の線と濃い文字。狭い画面では本文の上に畳んだ目次 */
+.note-toc ol { list-style: none; margin: 0; padding: 0; border-left: var(--border-rule) solid var(--line); }
+.note-toc li { margin: 0; }
+.note-toc a { display: block; margin-left: -2px; padding: 6px 0 6px var(--space-3); border-left: var(--border-rule) solid transparent; font-size: 14px; line-height: 1.5; color: var(--text-sub); text-decoration: none; }
+.note-toc a:hover { color: var(--sky); }
+.note-toc a[aria-current] { border-left-color: var(--sky); color: var(--ink); font-weight: 600; }
+.note-toc-side { display: none; }
+.note-toc-title { margin: 0 0 var(--space-2); font-size: 13px; font-weight: 600; color: var(--text-sub); }
+.note-toc-fold { max-width: 680px; margin: 0 0 var(--space-6); background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); }
+.note-toc-fold summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); min-height: 44px; padding: 0 var(--space-4); font-size: 14px; font-weight: 600; white-space: nowrap; }
+.note-toc-fold summary::-webkit-details-marker { display: none; }
+.note-toc-fold summary::after { content: ""; width: 8px; height: 8px; margin-top: -4px; border-right: 2px solid var(--text-sub); border-bottom: 2px solid var(--text-sub); transform: rotate(45deg); }
+.note-toc-fold[open] summary::after { margin-top: 4px; transform: rotate(-135deg); }
+.note-toc-fold .note-toc { padding: 0 var(--space-4) var(--space-3); }
+@media (min-width: 900px) {
+  .note-layout { display: grid; grid-template-columns: minmax(0, 680px) minmax(0, 1fr); column-gap: var(--space-8); align-items: start; }
+  .note-layout > .note-toc-fold { display: none; }
+  .note-toc-side { display: block; position: sticky; top: calc(var(--header-h, 60px) + var(--space-6)); }
+}
+@media (prefers-reduced-motion: no-preference) { .note-toc a { transition: color .2s ease, border-color .2s ease; } }

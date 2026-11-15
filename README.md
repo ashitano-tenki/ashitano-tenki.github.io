@@ -85,6 +85,31 @@ https://ashitano-tenki.github.io/
 - AIの検索用のクローラー（OAI-SearchBot・Claude-SearchBot・PerplexityBot など）と、ふつうの検索エンジンは通します。AIの検索の答えに観測所が出典として出る道を残すためです。検索用まで断らないでください。
 - robots.txt はお願いなので、守らない相手は止められません。転機AIなど、利用者のブラウザからの読み込みには影響しません。
 
+## 見た目と動きの判断（2026-11-15 の改善の見本）
+
+改善案16件を「今」と「変えた後」を並べた見本（https://claude.ai/artifact/2mGj4Ay3vLn3kiTdj5Fu9X ）にし、黒田さんが選んだ13件を入れました。不採用の3件は入れないでください。
+
+- 採用した案（番号は見本の番号）
+  - 天気予報のグラフ（`sitegen/yoho.py` の spark()）
+    - 1（B）：今年の線は、グラフが画面に入ったら一度だけ左から描く（site.js が `.play` を付ける）。
+    - 2（B）：グラフをなぞる（Tab で入って左右の矢印キーでも）と、その月の各年の数字を吹き出しで出す。値は `data-yoho` に書く。
+    - 3：前の年の同じ月の白い丸・青い点と結ぶ縦線・差の文字を図に書き込む（目安の50と比べる「全体の空気」には付けない）。差の文字は、作るときに線や札と重なりにくい場所を選ぶ。
+    - 4：ページの上に転機ごとの天気の帯（build_yoho() の strip()）。押すとそのカードへ移る（ページ内リンクと `:target`）。
+  - 探すページ（`assets/search.js`）
+    - 5：探した言葉と、言い換え表で一緒に探した言葉に、太字と空色の下線（`.hit`）。黄色の蛍光ペンは使わない。
+    - 6：絞り込みや並び順を変えたとき、カードがなめらかに入れ替わる（同じページの View Transitions。キーワードを打っている途中は動かさない）。
+    - 7（A）：カードの段階の言葉（準備・遭遇・順応・安定）は説明の小窓を開くボタン（popover。説明文は `config/tenki.json` の stages の short と about）。このためにカードの形を変え、カード全体を1つのリンクにせず、題名のリンク（`.card-link`）の範囲を `::after` でカード全体に広げている。箱は `.card-box`（`sitegen/parts.py` の card()、site.js と search.js の cardHtml の3か所が同じ形）。
+  - 一覧と棚（`assets/style.css`）
+    - 9：棚の、まだ先がある側の端を薄くする（mask とスクロール連動。動きではないので、動きを減らす設定でも出す）。
+    - 10：あとで見るを押したとき、しおりが跳ね、ヘッダーの数がぽんと動く。外すときは静かに。
+    - 11（A）：カードが画面に入るとき、1枚ずつ少し下から上がって濃くなる（opacity 0.4 から、14px まで。見出しは動かさない）。
+  - 文字組み（`sitegen/typeset.py`）
+    - 14：見出しの約物（。、「」（）など）を `<span class="yk">` で包んで半分ほど詰める。見出しの書体 Zen Kaku Gothic New（Google Fonts 版）には palt も約物の半角詰めもないため（2026-11-15 に実測）。
+    - 15：題名と見出しを、BudouX で文節に分けて `<wbr>` を入れ、keep-all で折り返す（Safari・Firefox でも言葉の途中で折り返さない）。BudouX は中黒（・）で切らないので、中黒のあとも切れ目にする。JS で作るカードは search.json の `wb`（切れ目の位置）を使う。BudouX は毎朝の更新で .venv に入れる（`budoux==0.7.0`）。入らなかったときは文節に分けずに作る。14 と 15 は一緒に入れる（約物を span で包むと Chrome の auto-phrase が効かなくなるため）。
+    - 16（A）：観測ノートの記事で、広い画面では右に目次を固定し、いま読んでいる節に空色の線。狭い画面では本文の上に畳んだ目次（`sitegen/notes.py` の note_toc()）。
+- 不採用：8 カードの画像と題名が紹介ページへ移る（ページをまたぐ View Transitions）／12 件数の数字の動きを変える（今の数え上げのまま）／13 転機の流れを線でつないだ図にする。
+- 動きはすべて `@media (prefers-reduced-motion: no-preference)` の中に書き、スクロール連動は `@supports (animation-timeline: …)` で囲む。止まった姿で全部見えていること（JS がないとき・非対応のブラウザでも）。
+
 ## ファイルの役割
 
 | ファイル | 中身 |
@@ -94,7 +119,7 @@ https://ashitano-tenki.github.io/
 | `config/tenki.json` | 転機の種類と段階の名前・URL・ページの文面 |
 | `config/tenki_notes.json` | 転機別ページと、転機×段階のページに載せる解説文 |
 | `config/synonyms.json` | 検索の言い換え表（毎朝の更新で、言葉と掲載に漢字の読みを足すので、ひらがなでも探せる） |
-| `build.py`・`sitegen/` | サイトを作るスクリプト。build.py は入口と全体の流れで、ページの作り方は sitegen/ に分けてあります（core：設定とデータの読み込み、parts：ヘッダー・カードなどの部品、pages：トップ・転機・紹介ページ・探すなど、notes・voices・project：観測ノート・転機の声・あしたの転機、output：検索用データ・RSS・サイトマップなど）。ページの文面の多くもここにあります |
+| `build.py`・`sitegen/` | サイトを作るスクリプト。build.py は入口と全体の流れで、ページの作り方は sitegen/ に分けてあります（core：設定とデータの読み込み、parts：ヘッダー・カードなどの部品、pages：トップ・転機・紹介ページ・探すなど、notes・voices・project：観測ノート・転機の声・あしたの転機、output：検索用データ・RSS・サイトマップなど、typeset：見出しの文節改行と約物の詰め）。ページの文面の多くもここにあります |
 | `check/index.html`・`check/check.js`・`config/check.json` | 転機の段階セルフチェック（/check/）。ページの枠が index.html、動きが check.js、質問・判定・結果の文章が config/check.json です。結果画面のおすすめは、サイトを作るたびに書き出す `/check/picks.json` から選びます。2026-11-06 からメニューには出していません（ページと入口の一部は残す） |
 | `assets/` | 見た目（style.css）、探すページの動き（search.js。一覧は `/search.json`、キーワード検索用の文字は `/search-text.json` から）、転機の声の動き（voices.js）、全ページ共通の動き（site.js）、アクセス解析（count.js）、アイコン、SNS共有用の画像 |
 | `notes/` | 観測ノートの記事と、書き方の決めごと |

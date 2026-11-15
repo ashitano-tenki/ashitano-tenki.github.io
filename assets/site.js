@@ -19,6 +19,89 @@
   });
 })();
 
+// 段階の言葉（準備・遭遇・順応・安定）の説明の小窓（2026-11-15 見本の案7のA）。
+// 小窓はページの下に段階ごとに1つずつある（sitegen/parts.py の stage_pops）。カードの段階の言葉はボタンで、
+// マウスでは当てると開き、外すと閉じる。指では押すと開き、ほかの場所を押すか Esc で閉じる（popover の light dismiss）。
+// アンカー配置が使えるブラウザでは押した言葉のすぐ下に、使えないブラウザでは画面の下に出す
+(function () {
+  var slugs = {};
+  Array.prototype.forEach.call(document.querySelectorAll(".stage-pop"), function (pop) {
+    var b = pop.querySelector(".stage-pop-name b");
+    if (b) slugs[b.textContent] = pop.id;
+  });
+  function escH(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  // JS で作るカード（探す・あとで見る・ほかの情報をチェック）の「誰の・いつの」一行
+  window.TenkiWhen = function (it) {
+    var tenki = it.tenki.indexOf("共通") >= 0 ? "どの転機にも" : it.tenki.join("、");
+    var stages = it.stages.map(function (n) {
+      return slugs[n] ? '<button type="button" class="stage-term" popovertarget="' + slugs[n] + '">' + escH(n) + "</button>" : escH(n);
+    }).join("、");
+    return [escH(tenki), stages].filter(Boolean).join("｜");
+  };
+  var probe = document.querySelector(".stage-pop");
+  if (!probe || !probe.showPopover) return;
+  var canAnchor = !!(window.CSS && CSS.supports && CSS.supports("position-area: block-end") && CSS.supports("anchor-name: --a"));
+  var current = {}, timers = {}, pinned = null;
+  function isOpen(pop) { try { return pop.matches(":popover-open"); } catch (e) { return false; } }
+  function hide(pop) { if (isOpen(pop)) pop.hidePopover(); }
+  function popOf(btn) { return document.getElementById(btn.getAttribute("popovertarget")); }
+  function show(btn, pop, viaHover) {
+    clearTimeout(timers[pop.id]);
+    if (isOpen(pop)) {
+      if (current[pop.id] === btn) { if (!viaHover) pop.removeAttribute("data-hover"); return; }
+      hide(pop);
+    }
+    if (current[pop.id]) { current[pop.id].style.removeProperty("anchor-name"); current[pop.id].removeAttribute("data-open"); }
+    if (canAnchor) {
+      btn.style.setProperty("anchor-name", "--" + pop.id);
+      pop.style.setProperty("position-anchor", "--" + pop.id);
+      pop.classList.add("anchored");
+    }
+    current[pop.id] = btn;
+    if (viaHover) pop.setAttribute("data-hover", ""); else pop.removeAttribute("data-hover");
+    try { pop.showPopover({ source: btn }); } catch (e) { pop.showPopover(); }
+  }
+  function later(pop) {
+    clearTimeout(timers[pop.id]);
+    timers[pop.id] = setTimeout(function () { if (pop.hasAttribute("data-hover")) hide(pop); }, 200);
+  }
+  function isPinned(btn, pop) { return isOpen(pop) && current[pop.id] === btn && !pop.hasAttribute("data-hover"); }
+  document.addEventListener("pointerdown", function (ev) {
+    var btn = ev.target.closest && ev.target.closest(".stage-term");
+    pinned = btn ? isPinned(btn, popOf(btn)) : null;
+  });
+  document.addEventListener("click", function (ev) {
+    var btn = ev.target.closest && ev.target.closest(".stage-term");
+    if (!btn) return;
+    var pop = popOf(btn);
+    if (!pop) return;
+    ev.preventDefault();  // popovertarget の開け閉めの代わりに、ここで開け閉めする（JS がないときは popovertarget だけで開く）
+    var was = pinned === null ? isPinned(btn, pop) : pinned;
+    pinned = null;
+    if (was) { hide(pop); return; }
+    show(btn, pop, false);
+  });
+  document.addEventListener("pointerover", function (ev) {
+    if (ev.pointerType !== "mouse") return;
+    var btn = ev.target.closest && ev.target.closest(".stage-term");
+    if (btn && !btn.contains(ev.relatedTarget)) show(btn, popOf(btn), true);
+    var pop = ev.target.closest && ev.target.closest(".stage-pop");
+    if (pop) clearTimeout(timers[pop.id]);
+  });
+  document.addEventListener("pointerout", function (ev) {
+    if (ev.pointerType !== "mouse") return;
+    var el = ev.target.closest && (ev.target.closest(".stage-term") || ev.target.closest(".stage-pop"));
+    if (!el || el.contains(ev.relatedTarget)) return;
+    later(el.classList.contains("stage-pop") ? el : popOf(el));
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".stage-pop"), function (pop) {
+    pop.addEventListener("toggle", function (ev) {
+      var btn = current[pop.id];
+      if (btn) { if (ev.newState === "open") btn.setAttribute("data-open", ""); else btn.removeAttribute("data-open"); }
+    });
+  });
+})();
+
 // ヘッダーの検索：虫めがねを押すとキーワード欄を開く（JavaScriptが使えないときは探すページへ移る）
 (function () {
   var btn = document.getElementById("header-search-btn");
@@ -104,8 +187,10 @@
   function paintAll() {
     Array.prototype.forEach.call(document.querySelectorAll("[data-save]"), paint);
     var n = load().length, h = document.getElementById("saved-count-h");
-    if (h) { h.textContent = n > 99 ? "99+" : String(n); h.hidden = !n; }
+    if (h) { h.innerHTML = '<span class="saved-n">' + (n > 99 ? "99+" : String(n)) + "</span>"; h.hidden = !n; }
   }
+
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 
   window.TenkiSaved = {
     button: function (id, title) {
@@ -119,8 +204,16 @@
     var btn = ev.target.closest("[data-save]");
     if (!btn) return;
     ev.preventDefault();
+    var h = document.getElementById("saved-count-h"), wasHidden = !h || h.hidden;
     toggle(btn.getAttribute("data-save"));
     paintAll();
+    // 残したときの手応え（2026-11-15 見本の案10）：しおりが跳ね、ヘッダーの数がぽんと動く。外すときは静かに（動きは style.css）
+    if (btn.getAttribute("aria-pressed") === "true") {
+      restart(btn, "save-pop");
+      if (h) { restart(h, wasHidden ? "saved-in" : "saved-bump"); restart(h.parentNode, "saved-flash"); }
+    } else {
+      btn.classList.remove("save-pop");
+    }
     if (document.getElementById("saved-list")) renderSaved();
   });
   paintAll();
@@ -140,16 +233,27 @@
     if (img.src) return '<div class="card-media media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
     return '<div class="card-media media-none" aria-hidden="true"><span>' + emoImg(img.emoji) + "</span></div>";
   }
+  // カードの形は sitegen/parts.py の card() と同じ（題名のリンクの範囲をカード全体に広げ、段階の言葉は説明を開くボタン。2026-11-15）
+  // 題名：文節の切れ目（search.json の wb）に <wbr>、約物を <span class="yk"> で包む（sitegen/typeset.py と同じ。2026-11-15 見本の案14・15）
+  function titleHtml(it) {
+    var pts = {}, OPEN = "「『（［【〔〈《“‘", CLOSE = "」』）］】〕〉》”’", PUNCT = "、。，．";
+    (it.wb || []).forEach(function (p) { pts[p] = true; });
+    return '<span class="wb">' + Array.from(it.title || "").map(function (ch, i) {
+      var c = CLOSE.indexOf(ch) >= 0 ? "yk" : PUNCT.indexOf(ch) >= 0 ? "yk yk-p" : OPEN.indexOf(ch) >= 0 ? "yk yk-o" : "";
+      return (pts[i] ? "<wbr>" : "") + (c ? '<span class="' + c + '">' + esc(ch) + "</span>" : esc(ch));
+    }).join("") + "</span>";
+  }
   function cardHtml(it) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when">' +
-      esc(whenLine(it)) + "</p><h3>" + esc(it.title) + '</h3><p class="card-line">' + esc(it.line) + '</p><div class="card-foot"><div class="tags">' + tags +
-      "</div></div></div></a>" +
+    return '<li class="card"><div class="card-box">' + mediaHtml(it.img) + '<div class="card-body"><p class="card-when" title="' + esc(whenLine(it)) + '">' +
+      window.TenkiWhen(it) + '</p><h3><a class="card-link" href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' +
+      titleHtml(it) + '</a></h3><p class="card-line">' + esc(it.line) + '</p><div class="card-foot"><div class="tags">' + tags +
+      "</div></div></div></div>" +
       window.TenkiSaved.button(it.id, it.title) + "</li>";
   }
   window.TenkiCard = cardHtml;  // 紹介ページの「ほかの情報をチェック」でも同じカードを使う
   function endedHtml(id) {
-    return '<li class="card"><a href="/item/' + encodeURIComponent(id) + '/"><h3>掲載を終えた情報（' + esc(id) + '）</h3><p class="card-line">提供が終わったか、掲載を終えました。</p></a>' +
+    return '<li class="card"><div class="card-box"><div class="card-body"><h3><a class="card-link" href="/item/' + encodeURIComponent(id) + '/">掲載を終えた情報（' + esc(id) + '）</a></h3><p class="card-line">提供が終わったか、掲載を終えました。</p></div></div>' +
       window.TenkiSaved.button(id, id) + "</li>";
   }
   // 送られてきたリスト（/saved/?ids=R0001,R0002）。自分の保存は変えずに表示し、「入れる」を押したら自分の保存に足す
@@ -477,4 +581,111 @@
       cardEl.innerHTML = '<li class="pick-error">読み込めませんでした。時間をおいてもう一度押してください。</li>';
     }).then(function () { btn.disabled = false; });
   });
+})();
+
+// 転機の天気予報のグラフ（2026-11-15 の改善の見本で採用）
+// 案1のB：グラフが画面に入ったら一度だけ、今年の線を左から描く（.play を付ける。動きは style.css。動きを減らす設定では描かない）
+// 案2のB：グラフをなぞる（Tab で入って左右の矢印キーでも）と、その月の縦線と各年の点、吹き出しの数字が出る。値は spark() が data-yoho に書く
+(function () {
+  var figs = document.querySelectorAll(".yoho-years");
+  if (!figs.length) return;
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("play"); io.unobserve(en.target); } });
+    }, { threshold: 0.5 });
+    Array.prototype.forEach.call(figs, function (f) { io.observe(f); });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".yoho-plot[data-yoho]"), function (plot) {
+    var D;
+    try { D = JSON.parse(plot.getAttribute("data-yoho")); } catch (err) { return; }
+    var svg = plot.querySelector("svg"), vline = plot.querySelector(".yoho-vline"), pts = plot.querySelectorAll(".yoho-pt");
+    var tip = plot.querySelector(".yoho-tip"), live = plot.parentNode.querySelector(".yoho-live");
+    var cur = D.latest, on = false, touching = false;
+    function rows(m) {
+      return D.years.map(function (y) { var p = y.pts[m - 1]; return { year: y.year, cls: y.cls, y: p ? p[0] : null, v: p ? p[1] : null }; });
+    }
+    function draw(m, active) {
+      cur = m; on = active;
+      plot.classList.toggle("yoho-on", active);
+      if (!active) { tip.hidden = true; return; }
+      var x = D.x[m - 1], rs = rows(m), sum = 0, n = 0;
+      vline.setAttribute("x1", x); vline.setAttribute("x2", x);
+      tip.textContent = "";
+      var h = document.createElement("b"); h.textContent = m + "月"; tip.appendChild(h);
+      rs.forEach(function (r, i) {
+        var c = pts[i];
+        if (r.y === null) c.setAttribute("visibility", "hidden");
+        else { c.removeAttribute("visibility"); c.setAttribute("cx", x); c.setAttribute("cy", r.y); sum += r.y; n++; }
+        var row = document.createElement("span"), sw = document.createElement("i"), em = document.createElement("em");
+        sw.className = "yoho-sw " + r.cls; em.textContent = r.v || "—";
+        row.appendChild(sw); row.appendChild(document.createTextNode(r.year + "年")); row.appendChild(em);
+        tip.appendChild(row);
+      });
+      // 右寄りの月では線の左に、点が上のほうにあるときは吹き出しを下に置く
+      var px = x / D.w * 100, right = m > 7, high = n && sum / n < (D.h - D.b) / 2;
+      tip.style.left = right ? "auto" : "calc(" + px + "% + 10px)";
+      tip.style.right = right ? "calc(" + (100 - px) + "% + 10px)" : "auto";
+      tip.style.top = high ? "auto" : "0";
+      tip.style.bottom = high ? (D.b / D.h * 100) + "%" : "auto";
+      tip.hidden = false;
+    }
+    function reset() { draw(D.latest, false); }
+    function monthAt(clientX) {
+      var r = svg.getBoundingClientRect(), vx = (clientX - r.left) / r.width * D.w, step = (D.x[11] - D.x[0]) / 11;
+      return Math.max(1, Math.min(12, Math.round((vx - D.x[0]) / step) + 1));
+    }
+    plot.addEventListener("pointerdown", function (ev) { if (ev.pointerType !== "mouse") touching = true; draw(monthAt(ev.clientX), true); });
+    plot.addEventListener("pointermove", function (ev) { if (ev.pointerType === "mouse" || touching) draw(monthAt(ev.clientX), true); });
+    function lift(ev) { if (ev.pointerType !== "mouse") { touching = false; reset(); } }
+    plot.addEventListener("pointerup", lift);
+    plot.addEventListener("pointercancel", lift);
+    plot.addEventListener("pointerleave", function (ev) { if (ev.pointerType === "mouse") reset(); });
+    plot.addEventListener("keydown", function (ev) {
+      var m = on ? cur : D.latest;
+      if (ev.key === "ArrowLeft") m -= 1;
+      else if (ev.key === "ArrowRight") m += 1;
+      else if (ev.key === "Home") m = 1;
+      else if (ev.key === "End") m = 12;
+      else if (ev.key === "Escape") { reset(); return; }
+      else return;
+      ev.preventDefault();
+      m = Math.max(1, Math.min(12, m));
+      draw(m, true);
+      if (live) live.textContent = rows(m).map(function (r) { return r.year + "年" + m + "月 " + (r.v || "データなし"); }).join("、");
+    });
+    plot.addEventListener("focus", function () {
+      var kb = false;
+      try { kb = plot.matches(":focus-visible"); } catch (err) {}
+      if (kb && !touching) draw(D.latest, true);
+    });
+    plot.addEventListener("blur", function () { reset(); if (live) live.textContent = ""; });
+  });
+})();
+
+// 観測ノートの目次：いま読んでいる節に印を付ける（2026-11-15 見本の案16のA）。
+// 見出し（h2）が画面の上から3割の線より上に出たら、その節を読んでいるとみなす。上側の余白を大きく取り、速くスクロールしても取りこぼさない。
+// 畳んだ目次（狭い画面）は、押したら閉じる
+(function () {
+  var links = document.querySelectorAll(".note-toc a");
+  if (!links.length) return;
+  Array.prototype.forEach.call(document.querySelectorAll(".note-toc-fold a"), function (a) {
+    a.addEventListener("click", function () { var d = a.closest("details"); if (d) d.open = false; });
+  });
+  if (!("IntersectionObserver" in window)) return;
+  var heads = Array.prototype.slice.call(document.querySelectorAll(".note-layout .prose h2[id]"));
+  var passed = heads.map(function () { return false; }), cur = -2;
+  function render() {
+    var idx = passed.lastIndexOf(true);
+    if (idx === cur) return;
+    cur = idx;
+    var id = idx >= 0 ? "#" + heads[idx].id : "";
+    Array.prototype.forEach.call(links, function (a) {
+      if (a.getAttribute("href") === id) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
+    });
+  }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (en) { passed[heads.indexOf(en.target)] = en.isIntersecting; });
+    render();
+  }, { rootMargin: "100000px 0px -70% 0px" });
+  heads.forEach(function (h) { io.observe(h); });
 })();

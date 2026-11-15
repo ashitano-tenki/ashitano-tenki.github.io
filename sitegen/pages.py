@@ -9,6 +9,7 @@ from sitegen.core import BASE, COMMON, CONF, KINDS, KIND_BY_NAME, NOTES, NOTES_L
 from sitegen.parts import emoji_img, SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, breadcrumb, card, e, emoji, image_credit, image_info, item_media, kind_emoji, kind_sections, kind_shelves, more_link, og_image, page, search_url, sm_shelf, tenki_url
 from sitegen.notes import note_band, note_list, notes_for_tenki
 from sitegen.voices import voice_band
+from sitegen.typeset import heading as headline
 
 __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN_WORDS", "ai_help_html", "build_404", "build_about", "build_combo", "build_guide", "build_home", "build_item", "build_report", "build_saved", "build_search", "build_tenki", "collection_ld", "combo_guide", "combo_lead", "combo_title", "common_section", "intro_html", "item_kind_phrase", "kind_tabs", "own_and_common", "own_section", "pick_box", "popular_words", "related_choices", "report_cards", "report_link", "stage_band", "start_words_html", "tenki_flow", "tenki_heading"]
 
@@ -401,12 +402,12 @@ def build_item(item, listed, ctx):
         body = """
 {crumbs}
 <article class="detail ended">
-  <h1>{title}</h1>
+  <h1>{title_h}</h1>
   <p class="ended-note">このサービスは提供を終了したか、掲載を終えました。</p>
   <p class="note">ほかのサービスは<a href="/search/">一覧ページ</a>から探せます。</p>
 </article>
 {note_band}{voice_band}{similar}
-""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), title=e(item["title"]), similar=similar_html)
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), title=e(item["title"]), title_h=headline(item["title"]), similar=similar_html)
         page("/item/%s/" % item["id"], item["title"], "このサービスは提供を終了したか、掲載を終えました。", body, noindex=True, ctx=ctx)
         return
 
@@ -427,7 +428,7 @@ def build_item(item, listed, ctx):
 {crumbs}
 <article class="detail">
   {hero}{credit}
-  <h1>{title}</h1>
+  <h1>{title_h}</h1>
   <div class="detail-side">
   <div class="memo"><h2 class="visually-hidden">観測メモ</h2><p>{memo}</p></div>
   {official}
@@ -446,7 +447,7 @@ def build_item(item, listed, ctx):
   </dl>
 </article>
 {note_band}{voice_band}{similar}
-""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]),
+""".format(crumbs=crumbs, note_band=note_band(item, listed, ctx), voice_band=voice_band(item, ctx), kind_url=e(search_url(kind=item["kind"])), kind=e(item["kind"]), title=e(item["title"]), title_h=headline(item["title"]),
            memo=e(item["memo"]), id=e(item["id"]),
            hero=item_media(item, "detail-hero", False), credit=image_credit(item), official=official, tenki=tenki_links, stages=stage_links,
            provider=e(item["provider"] or "―"), report=report_link(item),

@@ -212,14 +212,48 @@
     if (img.src) return '<div class="card-media media-' + esc(img.fit) + '" aria-hidden="true"><img src="' + esc(img.src) + '" alt="" loading="lazy" decoding="async"></div>';
     return '<div class="card-media media-none" aria-hidden="true"><span>' + emoImg(img.emoji) + "</span></div>";
   }
-  function cardHtml(it) {
+  // 探した言葉が当たったところを <strong class="hit"> で包む（2026-11-15 見本の案5。太字と空色の下線。黄色の蛍光ペンは使わない）。
+  // 元の文字を1字ずつ normalize し、そろえた文字の位置を元の文字の位置に対応させて包む
+  var hlWords = [];
+  // 題名（head=true）は、文節の切れ目（search.json の wb）に <wbr> を入れ、約物を <span class="yk"> で包む（sitegen/typeset.py と同じ。案14・15）
+  var OPEN = "「『（［【〔〈《“‘", CLOSE = "」』）］】〕〉》”’", PUNCT = "、。，．";
+  function ykChar(ch) {
+    if (CLOSE.indexOf(ch) >= 0) return '<span class="yk">' + esc(ch) + "</span>";
+    if (PUNCT.indexOf(ch) >= 0) return '<span class="yk yk-p">' + esc(ch) + "</span>";
+    if (OPEN.indexOf(ch) >= 0) return '<span class="yk yk-o">' + esc(ch) + "</span>";
+    return esc(ch);
+  }
+  function mark(s, head, wb) {
+    var points = {};
+    (wb || []).forEach(function (p) { points[p] = true; });
+    if (!hlWords.length && !head) return esc(s);
+    var chars = Array.from(s || ""), norm = "", map = [], on = [];
+    chars.forEach(function (ch, i) { var n = normalize(ch); for (var k = 0; k < n.length; k++) map.push(i); norm += n; on.push(false); });
+    hlWords.forEach(function (w) {
+      var p = norm.indexOf(w);
+      while (p >= 0) { for (var k = p; k < p + w.length; k++) on[map[k]] = true; p = norm.indexOf(w, p + w.length); }
+    });
+    var out = "", open = false;
+    chars.forEach(function (ch, i) {
+      if (!on[i] && open) { out += "</strong>"; open = false; }
+      if (head && points[i]) out += "<wbr>";
+      if (on[i] && !open) { out += '<strong class="hit">'; open = true; }
+      out += head ? ykChar(ch) : esc(ch);
+    });
+    out += open ? "</strong>" : "";
+    return head ? '<span class="wb">' + out + "</span>" : out;
+  }
+  function cardHtml(it, idx) {
     var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
-    return '<li class="card"><a href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mediaHtml(it.img) + '<div class="card-body">' +
-      '<p class="card-when">' + esc(whenLine(it)) + "</p>" +
-      "<h3>" + esc(it.title) + "</h3>" +
-      '<p class="card-line">' + esc(it.line) + "</p>" +
+    // 絞り込みを変えたときに、画面の上のほうのカードがなめらかに動くよう、名前（--vt）を付けておく（使うのは入れ替えのあいだだけ）
+    var vt = idx < 40 ? ' style="--vt: c-' + esc(it.id) + '"' : "";
+    // カードの形は sitegen/parts.py の card() と同じ（題名のリンクの範囲をカード全体に広げ、段階の言葉は説明を開くボタン。2026-11-15）
+    return '<li class="card"' + vt + '><div class="card-box">' + mediaHtml(it.img) + '<div class="card-body">' +
+      '<p class="card-when" title="' + esc(whenLine(it)) + '">' + (window.TenkiWhen ? window.TenkiWhen(it) : esc(whenLine(it))) + "</p>" +
+      '<h3><a class="card-link" href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mark(it.title, true, it.wb) + "</a></h3>" +
+      '<p class="card-line">' + mark(it.line) + "</p>" +
       '<div class="card-foot"><div class="tags">' + tags + "</div>" + (byNew ? '<span class="card-date">' + esc(addedLabel(it.added)) + "</span>" : "") + "</div>" +
-      "</div></a>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
+      "</div></div>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
   }
 
   // 選んでいる条件を「×で外せる札」として並べる
@@ -255,7 +289,7 @@
     if (reset) { list.innerHTML = ""; shown = 0; }
     var next = results.slice(shown, shown + PAGE);
     list.insertAdjacentHTML("beforeend", next.map(function (it, j) {
-      return (shown + j === ownCount ? '<li class="list-divider" role="presentation">どの転機にも役立つもの</li>' : "") + cardHtml(it);
+      return (shown + j === ownCount ? '<li class="list-divider" role="presentation"' + (shown + j < 40 ? ' style="--vt: c-divider"' : "") + '>どの転機にも役立つもの</li>' : "") + cardHtml(it, shown + j);
     }).join(""));
     shown += next.length;
     moreBtn.hidden = shown >= results.length;
@@ -284,10 +318,10 @@
     var parts = [];
     normalize(state.q).split(/\s+/).filter(Boolean).forEach(function (t) {
       var alts = alternatives(t).filter(function (w) { return w !== t; });
-      if (alts.length) parts.push("「" + t + "」と同じ意味の言葉（" + alts.slice(0, 3).join("・") + (alts.length > 3 ? "など" : "") + "）");
+      if (alts.length) parts.push("「" + esc(t) + "」と同じ意味の言葉（" + alts.slice(0, 3).map(function (w) { return '<strong class="hit">' + esc(w) + "</strong>"; }).join("・") + (alts.length > 3 ? "など" : "") + "）");
     });
     synNote.hidden = !parts.length || !results.length;
-    synNote.textContent = parts.length ? parts.join("、") + "も含めて探しています。" : "";
+    synNote.innerHTML = parts.length ? parts.join("、") + "も含めて探しています。" : "";
   }
 
   // 入力中の候補：言い換え表の言葉から、入力した文字（ひらがなは読み）を含むものを最大5つ
@@ -317,6 +351,11 @@
     }
     results = filter(state);
     byNew = state.sort === "new";
+    hlWords = [];
+    normalize(state.q).split(/\s+/).filter(Boolean).forEach(function (t) {
+      alternatives(t).forEach(function (w) { w = normalize(w); if (w && hlWords.indexOf(w) < 0) hlWords.push(w); });
+    });
+    hlWords.sort(function (a, b) { return b.length - a.length; });
     renderChips(state);
     updateCounts(state);
     renderZeroHelp(state);
@@ -345,9 +384,22 @@
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
   }
 
+  // 絞り込みや並び順を変えたとき：残るカードは新しい位置へ滑り、外れるカードは薄くなって消え、入るカードはそっと現れる
+  // （2026-11-15 見本の案6。同じページの View Transitions。対応していないブラウザ・動きを減らす設定では今までどおり一瞬で入れ替える）。
+  // キーワードを打っている途中は動かさない（1文字ごとに動くと落ち着かないため）
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  function runMoving() {
+    if (!document.startViewTransition || (reduce && reduce.matches) || document.hidden) { run(); return; }
+    list.classList.add("vt-moving"); countEl.classList.add("vt-moving");
+    var t = document.startViewTransition(run);
+    var done = function () { list.classList.remove("vt-moving"); countEl.classList.remove("vt-moving"); };
+    t.finished.then(done, done);
+  }
+
   var timer;
   form.addEventListener("input", function (ev) {
-    if (ev.target === qInput) renderSuggest();
+    if (ev.target !== qInput) return;  // ボタン・並び順は change で受ける
+    renderSuggest();
     clearTimeout(timer); timer = setTimeout(run, 200);
   });
   // こんな言葉で探せます：押すと、ページを読み直さずにその言葉で探す（選んでいる条件はそのまま）。もう一度押すと外れる
@@ -379,7 +431,7 @@
     if (input && input === wasChecked && ev.target === input) {
       setRadio(input.name, "");
       wasChecked = null;
-      run();
+      runMoving();
     }
   });
   // カード／一覧の表示の切り替え（パソコン）。選んだ表示はこのブラウザに覚えておく
@@ -397,7 +449,7 @@
       try { localStorage.setItem("tenki-view", b.getAttribute("data-view")); } catch (e) {}
     });
   }
-  form.addEventListener("change", run);
+  form.addEventListener("change", function (ev) { if (ev.target === qInput) run(); else runMoving(); });
   form.addEventListener("submit", function (ev) { ev.preventDefault(); run(); });
   moreBtn.addEventListener("click", function () { render(false); });
   toggle.addEventListener("click", function () { setPanel(!panel.classList.contains("open")); });
@@ -411,7 +463,7 @@
     if (!b) return;
     var f = b.getAttribute("data-field");
     (f === "all" ? ["q"].concat(FILTERS) : [f]).forEach(clearField);
-    run();
+    runMoving();
   }
   chipsEl.addEventListener("click", onRemove);
   zeroHelp.addEventListener("click", onRemove);

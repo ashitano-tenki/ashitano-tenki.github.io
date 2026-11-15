@@ -49,7 +49,7 @@ jobs:
           JP_FONT_READY: ${{ steps.jpfont.outcome == 'success' }}
         run: |
           python3 -m venv .venv
-          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0"
+          .venv/bin/pip install --quiet --disable-pip-version-check "pillow==11.3.0" "pykakasi==2.3.0" "budoux==0.7.0"
           .venv/bin/python tools/fetch_images.py
 
       # 紹介ページごとの共有画像（タイトル・タイプ・転機を載せた 1200×630）を作る。失敗しても観測所共通の画像のまま更新は続ける

@@ -6,7 +6,8 @@ import os
 import re
 import unicodedata
 from urllib.parse import quote, urlencode
-from sitegen.core import BASE, COMMON, CONF, IMAGES, KIND_BY_NAME, NOTES_LABEL, OTHER, OUT, ROOT, VOICES_LABEL, by_kind
+from sitegen.typeset import heading
+from sitegen.core import BASE, COMMON, CONF, IMAGES, KIND_BY_NAME, NOTES_LABEL, OTHER, OUT, ROOT, STAGES, STAGE_BY_NAME, VOICES_LABEL, by_kind
 
 __all__ = ["EMOJI_RE", "emoji_name", "emoji_file", "emoji_img", "emoji_images", "prepare_emoji", "HEAD_SCRIPT", "NAV", "SAVE_ICON", "SHARE_ICON", "TENKI_AI", "WEEKDAYS", "_CRUMBS", "_KAKASI", "added_label", "ai_link", "analytics_tag", "breadcrumb", "card", "cards", "e", "emoji", "fmt_date", "image_credit", "image_info", "image_ref", "item_media", "jsonld_tag", "kind_emoji", "kind_sections", "kind_shelves", "more_link", "nav_links", "normalize", "og_image", "page", "reading", "save_button", "search_url", "site_footer", "site_header", "sm_shelf", "tag_list", "tenki_url", "when_line", "write"]
 
@@ -42,6 +43,26 @@ def when_line(item):
     return "｜".join(x for x in [tenki, "、".join(item["stages"])] if x)
 
 
+def when_html(item):
+    """カードの「誰の・いつの」一行の HTML。段階の言葉は、押す（マウスでは当てる）と説明の小窓が開くボタン（2026-11-15 見本の案7のA）"""
+    tenki = "どの転機にも" if COMMON in item["tenki"] else "、".join(item["tenki"])
+    stages = "、".join(stage_term(n) for n in item["stages"])
+    return "｜".join(x for x in [e(tenki), stages] if x)
+
+
+def stage_term(name):
+    st = STAGE_BY_NAME.get(name)
+    if not st:
+        return e(name)
+    return '<button type="button" class="stage-term" popovertarget="stage-pop-%s">%s</button>' % (e(st["slug"]), e(name))
+
+
+def stage_pops():
+    """段階の説明の小窓（ページに1つの段階につき1つ。どのカードの段階の言葉からも同じ小窓を開く）。JS がなくても popovertarget で開く"""
+    return "".join('<div class="stage-pop" id="stage-pop-%s" popover><p class="stage-pop-name"><b>%s</b><span>%s</span></p><p class="stage-pop-text">%s</p></div>'
+                   % (e(st["slug"]), e(st["name"]), e(st.get("short", "")), e(st.get("about", ""))) for st in STAGES)
+
+
 def added_label(d, today):
     if not d:
         return ""
@@ -66,10 +87,11 @@ def save_button(item):
 def card(item, today, kind=True, date=False):
     """カード1枚。kind=False はタイプのまとまりの中（タイプは見出しでわかる）、date=True は新着の一覧で使う。"""
     added = '<span class="card-date">%s</span>' % e(added_label(item["added"], today)) if date else ""
-    # 読み上げではタイトルから聞こえるように、リンクの名前を「タイトル（転機｜段階）」にする
-    return ('<li class="card"><a href="/item/%s/" aria-label="%s（%s）">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
-            '<h3>%s</h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></a>%s</li>'
-            % (e(item["id"]), e(item["title"]), e(when_line(item)), item_media(item, "card-media", True), e(when_line(item)), e(when_line(item)), e(item["title"]),
+    # 読み上げではタイトルから聞こえるように、リンクの名前を「タイトル（転機｜段階）」にする。
+    # 2026-11-15 からカード全体を1つのリンクにせず、題名のリンク（card-link）の範囲をカード全体に広げる（中に段階の言葉のボタンを置くため）
+    return ('<li class="card"><div class="card-box">%s<div class="card-body"><p class="card-when" title="%s">%s</p>'
+            '<h3><a class="card-link" href="/item/%s/" aria-label="%s（%s）">%s</a></h3><p class="card-line">%s</p><div class="card-foot">%s%s</div></div></div>%s</li>'
+            % (item_media(item, "card-media", True), e(when_line(item)), when_html(item), e(item["id"]), e(item["title"]), e(when_line(item)), heading(item["title"]),
                e(item["line"]), tag_list(item, kind), added, save_button(item)))
 
 
@@ -176,7 +198,8 @@ def site_footer(ctx):
     </div>
   </div>
 </footer>
-<script src="/assets/site.js?v={ver}"></script>""".format(contact=e(CONF["contact_form_url"]), operator=e(CONF.get("operator_url", "")),
+{pops}
+<script src="/assets/site.js?v={ver}"></script>""".format(pops=stage_pops(), contact=e(CONF["contact_form_url"]), operator=e(CONF.get("operator_url", "")),
                          updated=fmt_date(ctx["today"]), ver=ctx["version"],
                          notes='・<a href="/notes/">%s</a>' % NOTES_LABEL if any(not n["draft"] for n in ctx.get("notes", [])) else "") + analytics_tag(ctx)
 

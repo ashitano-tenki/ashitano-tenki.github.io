@@ -5,6 +5,7 @@ import os
 import re
 import sys
 from sitegen.core import BASE, CONF, KIND_BY_NAME, NOTES_DIR, NOTES_LABEL, TENKI_BY_NAME, parse_date, split_list
+from sitegen.typeset import heading
 from sitegen.parts import breadcrumb, e, fmt_date, item_media, kind_emoji, og_image, page, tenki_url, write
 
 __all__ = ["build_notes", "load_notes", "note_band", "note_blocks", "note_data", "note_emoji", "note_html", "note_inline", "note_list", "note_meta_line", "note_pick", "note_plain", "note_strip", "note_url", "notes_for_item", "notes_for_tenki", "parse_note_file", "write_notes_json"]
@@ -133,6 +134,23 @@ def note_emoji(n):
     return t.get("emoji", "") if t else ""
 
 
+def note_toc(main_html):
+    """記事の見出し（h2）に id を付け、目次を作る（2026-11-15 見本の案16のA）。
+    戻り値は（id を付けた本文, 狭い画面で本文の上に畳んで置く目次, 広い画面で右に固定する目次）。見出しが2つ未満なら目次は作らない"""
+    heads = []
+
+    def add_id(m):
+        heads.append(m.group(1))
+        return '<h2 id="s%d">%s</h2>' % (len(heads), m.group(1))
+    main_html = re.sub(r"<h2>(.*?)</h2>", add_id, main_html)
+    if len(heads) < 2:
+        return main_html, "", ""
+    items = "".join('<li><a href="#s%d">%s</a></li>' % (i + 1, re.sub(r"<[^>]+>", "", h)) for i, h in enumerate(heads))
+    fold = '<details class="note-toc-fold"><summary>この記事の目次</summary><nav class="note-toc" aria-label="この記事の目次"><ol>%s</ol></nav></details>' % items
+    side = '<aside class="note-toc-side"><nav class="note-toc" aria-label="この記事の目次"><p class="note-toc-title">この記事の目次</p><ol>%s</ol></nav></aside>' % items
+    return main_html, fold, side
+
+
 def note_list(notes, by_id=None, cls="note-list"):
     """記事のカード。上に記事ごとの共有画像、下に題名と説明、紹介している数。"""
     def li(n):
@@ -141,7 +159,7 @@ def note_list(notes, by_id=None, cls="note-list"):
         return ('<li><a href="%s"><span class="note-card-img"><img src="%s" alt="" loading="lazy" width="1200" height="630"></span>'
                 '<span class="note-card-body"><span class="note-list-title">%s</span><span class="note-list-desc">%s</span>'
                 '<span class="note-card-meta">%s</span></span></a></li>'
-                % (e(note_url(n)), e(og_image("note-" + n["slug"])), e(n["title"]), e(n["description"]), meta))
+                % (e(note_url(n)), e(og_image("note-" + n["slug"])), heading(n["title"]), e(n["description"]), meta))
     return '<ul class="%s">%s</ul>' % (cls, "".join(li(n) for n in notes))
 
 
@@ -199,6 +217,7 @@ def build_notes(notes, listed, ctx):
         more = ""
         if others:
             more += '<h2>ほかの観測ノート</h2>' + note_list(others, by_id)
+        main, toc_fold, toc_side = note_toc(note_html(n, by_id))
         body = """
 {crumbs}
 <header class="note-hero">
@@ -207,6 +226,8 @@ def build_notes(notes, listed, ctx):
   <h1>{title}</h1>
   <p class="note-by">文：<a href="{operator}" rel="noopener" target="_blank">黒田悠介</a>（キャリア研究家）<span class="note-date">{date}</span></p>
 </header>
+<div class="note-layout">
+{toc_fold}
 <article class="prose note">
 {strip}
 {main}
@@ -216,11 +237,13 @@ def build_notes(notes, listed, ctx):
 </div>
 {more}
 </article>
-""".format(crumbs=breadcrumb([(NOTES_LABEL, "/notes/"), (n["title"], None)]), label=e(NOTES_LABEL),
+{toc_side}
+</div>
+""".format(crumbs=breadcrumb([(NOTES_LABEL, "/notes/"), (n["title"], None)]), label=e(NOTES_LABEL), toc_fold=toc_fold, toc_side=toc_side,
            tenki="｜" + "・".join(e(t) for t in n["tenki"]) if n["tenki"] else "",
-           # 「。」と「、」のところで区切り、言葉の途中で折り返さないようにする
-           title="".join("<span>%s</span>" % e(x) for x in re.findall(r"[^。、]+[。、]?", n["title"])),
-           operator=e(operator), date=note_meta_line(n), main=note_html(n, by_id), emoji=note_emoji(n), strip=note_strip(n, by_id),
+           # 「。」と「、」のところで区切り、言葉の途中で折り返さないようにする。区切りの中は文節で改行し、約物を詰める（2026-11-15 見本の案14・15）
+           title="".join("<span>%s</span>" % heading(x, wrap=False) for x in re.findall(r"[^。、]+[。、]?", n["title"])),
+           operator=e(operator), date=note_meta_line(n), main=main, emoji=note_emoji(n), strip=note_strip(n, by_id),
            tenki_more='<p>%sのサービスと情報は、%sのページにまとめています。</p>' % ("・".join(e(t) for t in n["tenki"]), tenki_links) if tenki_links else "",
            more=more)
         ld = {"@context": "https://schema.org", "@type": "Article", "headline": n["title"], "description": n["description"],

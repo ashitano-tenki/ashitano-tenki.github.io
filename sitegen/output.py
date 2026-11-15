@@ -7,6 +7,7 @@ import json
 import os
 import shutil
 from sitegen.core import BASE, BuildError, CONF, JST, OUT, ROOT, STAGES, load_json
+from sitegen.typeset import break_points
 from sitegen.parts import HEAD_SCRIPT, e, image_info, image_ref, normalize, reading, site_footer, site_header, when_line, write
 
 __all__ = ["assets_version", "build_check", "build_feed", "build_meta_files", "build_search_json", "check_counts", "feed_image", "save_snapshot", "write_items_json"]
@@ -31,6 +32,8 @@ def build_search_json(listed, ctx):
             "tenki": it["tenki"], "stages": it["stages"],
             "added": it["added"].isoformat() if it["added"] else "",
             "rank": it["rank"], "srank": it["score_rank"], "img": image_ref(it),
+            # 題名の文節の切れ目の位置（JS で作るカードの題名に <wbr> を入れる。2026-11-15 見本の案15）
+            **({"wb": break_points(it["title"])} if break_points(it["title"]) else {}),
         } for it in listed],
         # 言い換え表。読みは「どのグループに当たるか」の判定にだけ使う（「ふくぎょう」でも 副業・兼業 などが一緒に見つかるように）。
         # 読みで本文を探すと、同じ読みの別の言葉（障害と生涯）まで見つかるため、本文を探すのは words だけ
