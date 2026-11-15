@@ -19,6 +19,7 @@ __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN
 
 # トップの見出しの右側（パソコンの幅だけ）：観測ノートの新しい3本の目次。
 # 2026-11-15 観測ノートの入口の見本の案B。転機の絵文字・題名・転機と公開日を並べ、右上に観測ノートの一覧へのリンク。
+# 見出しは「新着の観測ノート」（「新しい順」だと並び替えられそうに見えるため。2026-11-15 黒田さん）
 # もとは種類の絵文字をレーダーの形に並べた飾り（同じ日の案A。その前は 2026-11-08 の散らした絵文字）。押しても何も起きず、
 # 実用のある中身にしたいという判断で置き換えた。ノートがまだなければ何も出さない
 def hero_notes(notes):
@@ -33,7 +34,7 @@ def hero_notes(notes):
            headline(n["title"]), e("どの転機にも" if n["tenki"] == [COMMON] else "・".join(n["tenki"])),
            n["published"].isoformat(), n["published"].month, n["published"].day)
         for i, n in enumerate(notes))
-    return ('<nav class="hero-notes" aria-label="%sの新着"><p class="hero-notes-head"><span>%s・新しい順</span>'
+    return ('<nav class="hero-notes" aria-label="新着の%s"><p class="hero-notes-head"><span>新着の%s</span>'
             '<a href="/notes/">すべて見る<span>（%d本）</span></a></p><ol>%s</ol></nav>' % (NOTES_LABEL, NOTES_LABEL, total, rows))
 
 
