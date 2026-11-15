@@ -42,10 +42,14 @@ def build_search_json(listed, ctx):
     }
     # キーワード検索に使う文字（説明の全文と読み）は、データの4分の3を占めるので別のファイル /search-text.json に分ける。
     # 探すページは search.json だけで一覧を先に出し、キーワードで探すときだけ search-text.json を待つ（探せる言葉や結果は変わらない）
-    text_by_id = {it["id"]: normalize(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["for"]),
+    # 説明（memo）はそのままの文字で渡し、ブラウザで「題名 説明」をそろえて残り（rest）の前につなぐ。
+    # カードに出ていない説明の文で当たったとき、その文をカードに添えるため（2026-11-15）。探せる言葉は前と同じ
+    rest_by_id = {it["id"]: normalize(" ".join([it["provider"], it["kind"], " ".join(it["for"]),
                                                  " ".join(it["tenki"]), " ".join(it["stages"])]))
                              + " " + reading(" ".join([it["title"], it["memo"], it["provider"], it["kind"], " ".join(it["tenki"])])) for it in listed}
-    write("/search-text.json", json.dumps({"text": text_by_id}, ensure_ascii=False, separators=(",", ":")))
+    memo_by_id = {it["id"]: it["memo"] for it in listed}
+    text_by_id = {it["id"]: normalize(it["title"] + " " + it["memo"]) + " " + rest_by_id[it["id"]] for it in listed}
+    write("/search-text.json", json.dumps({"memo": memo_by_id, "rest": rest_by_id}, ensure_ascii=False, separators=(",", ":")))
     # 入力中の候補（言い換え表の言葉のうち、掲載に1件以上あるもの）。読みを添えて、ひらがなでも候補に出す
     texts = list(text_by_id.values())
     words = list(dict.fromkeys(w.strip() for g in synonyms if isinstance(g, list) for w in g if w.strip()))

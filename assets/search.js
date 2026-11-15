@@ -243,15 +243,52 @@
     out += open ? "</strong>" : "";
     return head ? '<span class="wb">' + out + "</span>" : out;
   }
+  // カードに出ている題名と説明の1文目とタイプの札に、探した言葉（言い換えを含む）が1つも見えないとき、説明の中で当たった文を短く添える。
+  // 当たった理由がカードから分かるように（2026-11-15）。言葉ごとに見て、見えない言葉があれば、その言葉が最初に出る文を使う
+  var hlGroups = [];
+  var SNIP_MAX = 64, SNIP_BEFORE = 20;
+  function snippet(it) {
+    if (!it.memo || !hlGroups.length) return "";
+    var shown = normalize(it.title + " " + String(it.line || "").replace(/…$/, "") + " " + it.kind);
+    var hidden = [];
+    hlGroups.forEach(function (g) {
+      if (!g.some(function (w) { return shown.indexOf(w) >= 0; })) hidden = hidden.concat(g);
+    });
+    if (!hidden.length) return "";
+    var chars = Array.from(it.memo), norm = "", map = [];
+    chars.forEach(function (ch, i) { var n = normalize(ch); for (var k = 0; k < n.length; k++) map.push(i); norm += n; });
+    var best = -1, bestLen = 0;
+    hidden.forEach(function (w) {
+      var p = norm.indexOf(w);
+      if (p >= 0 && (best < 0 || p < best)) { best = p; bestLen = w.length; }
+    });
+    if (best < 0) return "";  // 説明の外（運営元や読みなど）で当たったときは添えない
+    var hs = map[best], he = map[best + bestLen - 1] + 1;
+    // 当たった語を含む1文（「。」で区切る）。長いときは前後を切って「…」を付ける
+    var ss = hs, se = he;
+    while (ss > 0 && chars[ss - 1] !== "。") ss--;
+    while (se < chars.length && chars[se - 1] !== "。") se++;
+    var a = ss, b = se;
+    if (b - a > SNIP_MAX) {
+      a = Math.max(ss, hs - SNIP_BEFORE);
+      b = Math.min(se, a + SNIP_MAX);
+      if (b < he) { b = he; a = Math.max(ss, b - SNIP_MAX); }
+      // 語の途中で切れないよう、切る所の近くに読点があればそこで切る
+      for (var i = a; a > ss && i < hs - 4; i++) if (chars[i] === "、") { a = i + 1; break; }
+      for (var j = b - 1; b < se && j > he + 8; j--) if (chars[j] === "、") { b = j + 1; break; }
+    }
+    var text = (a > ss ? "…" : "") + chars.slice(a, b).join("") + (b < se ? "…" : "");
+    return '<p class="card-snip"><span class="visually-hidden">説明の中で当たった文：</span>' + mark(text) + "</p>";
+  }
   function cardHtml(it, idx) {
-    var tags = '<span class="tag tag-kind">' + esc(it.kind) + "</span>";
+    var tags = '<span class="tag tag-kind">' + mark(it.kind) + "</span>";
     // 絞り込みを変えたときに、画面の上のほうのカードがなめらかに動くよう、名前（--vt）を付けておく（使うのは入れ替えのあいだだけ）
     var vt = idx < 40 ? ' style="--vt: c-' + esc(it.id) + '"' : "";
     // カードの形は sitegen/parts.py の card() と同じ（題名のリンクの範囲をカード全体に広げ、段階の言葉は説明を開くボタン。2026-11-15）
     return '<li class="card"' + vt + '><div class="card-box">' + mediaHtml(it.img) + '<div class="card-body">' +
       '<p class="card-when" title="' + esc(whenLine(it)) + '">' + (window.TenkiWhen ? window.TenkiWhen(it) : esc(whenLine(it))) + "</p>" +
       '<h3><a class="card-link" href="/item/' + encodeURIComponent(it.id) + '/" aria-label="' + esc(it.title + "（" + whenLine(it) + "）") + '">' + mark(it.title, true, it.wb) + "</a></h3>" +
-      '<p class="card-line">' + mark(it.line) + "</p>" +
+      '<p class="card-line">' + mark(it.line) + "</p>" + snippet(it) +
       '<div class="card-foot"><div class="tags">' + tags + "</div>" + (byNew ? '<span class="card-date">' + esc(addedLabel(it.added)) + "</span>" : "") + "</div>" +
       "</div></div>" + (window.TenkiSaved ? window.TenkiSaved.button(it.id, it.title) : "") + "</li>";
   }
@@ -276,13 +313,13 @@
     if (barBtn) barBtn.textContent = "絞り込む" + (n ? "（" + n + "）" : "");
   }
 
-  function countText(state) {
-    var parts = [];
-    if (state.q) parts.push("「" + state.q + "」");
-    FILTERS.forEach(function (f) { if (state[f]) parts.push(state[f]); });
-    var cond = parts.length ? "（" + parts.join("・") + "）" : "";
-    if (!results.length) return "見つかりませんでした" + cond + "。条件を外すか、別の言葉で探してみてください。";
-    return results.length + "件" + cond;
+  // 件数は「全N件中 M件」の形で、数字だけ大きく出す（コミュニティ図鑑と同じ形。2026-11-15）。
+  // 選んでいる条件はすぐ下の札に出ているので、ここには書かない（条件で文の長さが変わり、横のボタンが動かないように）
+  function countHtml() {
+    var total = data.items.length;
+    if (!results.length) return '<span class="count-total">' + total + "件中</span> <b>0</b>件。条件を外すか、別の言葉で探してみてください。";
+    if (results.length === total) return '<span class="count-total">全</span><b>' + total + "</b>件";
+    return '<span class="count-total">' + total + "件中</span> <b>" + results.length + "</b>件";
   }
 
   function render(reset) {
@@ -352,8 +389,11 @@
     results = filter(state);
     byNew = state.sort === "new";
     hlWords = [];
+    hlGroups = [];
     normalize(state.q).split(/\s+/).filter(Boolean).forEach(function (t) {
-      alternatives(t).forEach(function (w) { w = normalize(w); if (w && hlWords.indexOf(w) < 0) hlWords.push(w); });
+      var g = [];
+      alternatives(t).forEach(function (w) { w = normalize(w); if (w && g.indexOf(w) < 0) g.push(w); if (w && hlWords.indexOf(w) < 0) hlWords.push(w); });
+      hlGroups.push(g);
     });
     hlWords.sort(function (a, b) { return b.length - a.length; });
     renderChips(state);
@@ -364,7 +404,7 @@
     Array.prototype.forEach.call(startHelp.querySelectorAll(".start-word"), function (a) {
       if (a.textContent === state.q) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
     });
-    countEl.textContent = countText(state);
+    countEl.innerHTML = countHtml();
     render(true);
     renderAiHelp();
     reportZero(state);
@@ -390,9 +430,9 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
   function runMoving() {
     if (!document.startViewTransition || (reduce && reduce.matches) || document.hidden) { run(); return; }
-    list.classList.add("vt-moving"); countEl.classList.add("vt-moving");
+    list.classList.add("vt-moving");
     var t = document.startViewTransition(run);
-    var done = function () { list.classList.remove("vt-moving"); countEl.classList.remove("vt-moving"); };
+    var done = function () { list.classList.remove("vt-moving"); };
     t.finished.then(done, done);
   }
 
@@ -479,11 +519,20 @@
       writeForm(readParams());
       run();
       return fetch("/search-text.json").then(function (r) { return r.json(); })
-        .then(function (json) { return json.text || {}; }, function () { return null; })
-        .then(function (text) {
+        .then(function (json) { return json || {}; }, function () { return null; })
+        .then(function (json) {
           data.items.forEach(function (it) {
-            // 前の形の search.json（text 入り）がブラウザに残っていればそれを使う。検索用の文字が読めなければタイトルと説明の1文目で探す
-            if (it.text === undefined) it.text = text && text[it.id] !== undefined ? text[it.id] : normalize(it.title + " " + it.line);
+            // 説明（memo）はそのままの文字で届くので、「題名 説明」をそろえて残り（rest）の前につなぐ（sitegen/output.py と同じ並び）。
+            // 前の形の search-text.json（text だけ）がブラウザに残っていればそれを使う。どちらも読めなければタイトルと説明の1文目で探す
+            if (it.text !== undefined) return;
+            if (json && json.memo && json.memo[it.id] !== undefined) {
+              it.memo = json.memo[it.id];
+              it.text = normalize(it.title + " " + it.memo) + " " + ((json.rest || {})[it.id] || "");
+            } else if (json && json.text && json.text[it.id] !== undefined) {
+              it.text = json.text[it.id];
+            } else {
+              it.text = normalize(it.title + " " + it.line);
+            }
           });
           textReady = true;
           if (readForm().q) run();

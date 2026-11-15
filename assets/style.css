@@ -160,28 +160,32 @@ main.wrap { padding-bottom: var(--space-16); }
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 40px) left bottom / 100% 12px no-repeat,
     repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 8px) left bottom / 100% 5px no-repeat; }
 .hero .lead { color: var(--text-body); margin: 0 0 var(--space-4); }
-/* 見出しの右側の種類の絵文字（パソコンの幅だけ）。2026-11-15 見本の案A「観測のレーダー」：目盛りと同じ色の同心円と十字の上に、同じ大きさの絵文字を白い丸に入れて置く */
-.hero-floats { display: none; }
+/* 見出しの右側（パソコンの幅だけ）：観測ノートの新しい3本の目次（2026-11-15 観測ノートの入口の見本の案B。sitegen/pages.py の hero_notes()）。
+   白い箱に3行。行ごとに転機の絵文字・題名（2行まで）・転機と公開日。目盛りと同じ色の線で区切る */
+.hero-notes { display: none; }
 @media (min-width: 900px) {
-  .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 34%); gap: var(--space-6); align-items: center; margin-bottom: var(--space-4); }
+  .hero-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 36%); gap: var(--space-6); align-items: center; margin-bottom: var(--space-4); }
   .hero-main { min-width: 0; }
-  .hero-floats { display: block; position: relative; height: 240px; }
-  .hero-rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .hero-rings circle, .hero-rings line { fill: none; stroke: var(--tick); stroke-width: 1; }
-  .hero-rings .dash { stroke-dasharray: 2 4; }
-  .hero-rings .c { fill: var(--sky); stroke: none; }
-  .hero-sweep { position: absolute; left: 50%; top: 50%; width: 224px; height: 224px; margin: -112px 0 0 -112px; border-radius: 50%; pointer-events: none;
-    background: conic-gradient(from 0deg, rgba(47, 149, 214, 0) 0deg, rgba(47, 149, 214, .16) 50deg, rgba(47, 149, 214, 0) 52deg); }
-  .hero-floats > span:not(.hero-sweep) { position: absolute; width: 40px; height: 40px; margin: -20px 0 0 -20px; padding: 6px; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: 50%; box-shadow: var(--shadow-card); user-select: none; }
-  .hero-floats img.emo { display: block; width: 100%; height: 100%; }
+  .hero-notes { display: block; min-width: 0; }
+  .hero-notes-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); margin: 0 0 var(--space-2); font-size: 13px; }
+  .hero-notes-head > span { font-weight: 600; color: var(--sky); letter-spacing: .02em; }
+  .hero-notes-head a { color: var(--text-body); white-space: nowrap; }
+  .hero-notes-head a:hover { color: var(--sky); }
+  .hero-notes-head a span { color: var(--text-sub); }
+  .hero-notes ol { list-style: none; margin: 0; padding: 0; background: var(--card); border: var(--border-hairline) solid var(--line); border-radius: var(--radius-card); box-shadow: var(--shadow-card); }
+  .hero-notes li + li { border-top: var(--border-hairline) solid var(--line); }
+  .hero-notes li a { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: var(--space-3); row-gap: 2px; padding: 12px var(--space-4); color: var(--ink); text-decoration: none; }
+  .hero-note-e { grid-row: span 2; align-self: start; width: 34px; height: 34px; padding: 5px; border: var(--border-hairline) solid var(--line); border-radius: 50%; background: var(--base); }
+  .hero-note-e img.emo { display: block; width: 100%; height: 100%; }
+  .hero-note-t { font-weight: 600; font-size: 14px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .hero-notes li a:hover .hero-note-t { color: var(--sky); text-decoration: underline; }
+  .hero-note-d { font-size: 12px; color: var(--text-sub); }
 }
-/* 空色の光が9秒で1周する。開いたとき、絵文字が順にぽんと現れる（動きを減らす設定では、光は止まり、絵文字は最初から見えている） */
+/* 開いたとき、3行が上から順に下からそっと現れる（動きを減らす設定では最初から見えている） */
 @media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
-  .hero-sweep { animation: hero-spin 9s linear infinite; }
-  .hero-floats > span:not(.hero-sweep) { animation: hero-ping .5s cubic-bezier(.2, .8, .3, 1.2) calc(.2s + var(--i) * 90ms) both; }
+  .hero-notes li { animation: hero-note-in .45s cubic-bezier(.2, .7, .2, 1) calc(.15s + var(--i) * 90ms) both; }
 }
-@keyframes hero-spin { to { transform: rotate(1turn); } }
-@keyframes hero-ping { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes hero-note-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 /* 掲載件数（毎朝の更新で変わる）。見出しのすぐ下に大きな数字で */
 .hero-count { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 var(--space-1); margin: 0 0 var(--space-4); color: var(--text-body); font-size: 16px; }
 /* 件数の大きな数字。読み込むと0から数え上がる（site.js） */
@@ -310,6 +314,9 @@ button, .button {
 .card-box:hover h3 { color: var(--sky); }
 .card .card-when { font-size: 13px; font-weight: 600; line-height: 1.5; color: var(--sky); margin: 0 0 var(--space-1); }
 .card .card-line { font-size: 14px; line-height: 1.7; color: var(--text-body); margin: 0 0 var(--space-3); }
+/* 探すページで、カードに出ていない説明の文で当たったときに添える文（search.js の snippet。2026-11-15） */
+.card .card-line:has(+ .card-snip) { margin-bottom: var(--space-2); }
+.card .card-snip { font-size: 13px; line-height: 1.7; color: var(--text-sub); margin: 0 0 var(--space-3); padding-left: var(--space-2); border-left: var(--border-rule) solid var(--line); overflow-wrap: anywhere; }
 .card-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); }
 .card-date { font-size: 12px; color: var(--text-sub); }
 /* 掲載先の公式ページのシェア用画像（tools/fetch_images.py が取得・縮小）。カードは上に横長の枠、紹介ページはタイトルの上。
@@ -397,7 +404,7 @@ button, .button {
   .list-compact .card-body { padding: 0; }
   .list-compact .card-when { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 30px; margin-bottom: 2px; }
   .list-compact .card h3 { font-size: 16px; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .list-compact .card-line { display: none; }
+  .list-compact .card-line, .list-compact .card-snip { display: none; }
   .list-compact .card-foot { margin-top: 6px; }
   .list-compact .save-btn { top: 6px; right: 6px; width: 28px; height: 28px; }
 }
@@ -594,6 +601,7 @@ button, .button {
   .view-list .card-when { font-size: 12px; margin-bottom: 2px; }
   .view-list .card h3 { font-size: 16px; margin-bottom: 2px; }
   .view-list .card-line { margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .view-list .card-snip { margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
   .view-list .card-foot { margin-top: 0; }
   .view-list .save-btn { top: 8px; right: 8px; width: 28px; height: 28px; }
 }
@@ -622,6 +630,10 @@ button, .button {
 .active-chip:hover span { color: var(--ink); }
 .result-bar p { margin: 0; }
 .bar-count { display: flex; align-items: center; gap: 16px; }
+/* 件数（search.js の countHtml）。全体の件数は小さく薄く、絞った件数だけ大きく。数字の幅がそろうよう等幅の数字 */
+#result-count { font-variant-numeric: tabular-nums; }
+#result-count .count-total { font-size: 14px; color: var(--text-sub); }
+#result-count b { font-size: 24px; font-weight: 600; color: var(--ink); margin: 0 2px; letter-spacing: .01em; }
 .more-wrap { text-align: center; margin-top: var(--space-4); }
 
 /* 読み物 */
@@ -1046,19 +1058,13 @@ button:active, .button:active, .chip:active, .stage-chips a:active, .stage-nav a
 .syn-note .hit { color: var(--ink); text-decoration-thickness: 1.5px; }
 /* 絞り込みを変えたときの入れ替え（案6）。入れ替えのあいだだけカードと件数に名前を付ける（search.js の runMoving） */
 .vt-moving .card, .vt-moving .list-divider { view-transition-name: var(--vt, none); view-transition-class: vt-card; }
-#result-count.vt-moving { view-transition-name: result-count; }
 @media (prefers-reduced-motion: no-preference) {
   ::view-transition-group(*.vt-card) { animation-duration: .36s; animation-timing-function: cubic-bezier(.2, .7, .2, 1); }
   ::view-transition-old(*.vt-card):only-child { animation: vt-out .24s ease both; }
   ::view-transition-new(*.vt-card):only-child { animation: vt-in .32s cubic-bezier(.2, .7, .2, 1) .08s both; }
-  ::view-transition-group(result-count) { animation-duration: .36s; }
-  ::view-transition-old(result-count) { animation: vt-num-out .2s ease-in both; }
-  ::view-transition-new(result-count) { animation: vt-num-in .3s cubic-bezier(.2, .7, .2, 1) .06s both; }
 }
 @keyframes vt-out { to { opacity: 0; transform: scale(.97); } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
-@keyframes vt-num-out { to { opacity: 0; transform: translateY(-6px); } }
-@keyframes vt-num-in { from { opacity: 0; transform: translateY(6px); } }
 
 /* 段階の言葉の説明（2026-11-15 見本の案7のA）。カードの段階の言葉は点線の下線のボタンで、題名のリンクの範囲（::after）より上に重ねる */
 .stage-term { position: relative; z-index: 1; appearance: none; display: inline; margin: 0; padding: 0; border: 0; border-radius: 2px; background: none;

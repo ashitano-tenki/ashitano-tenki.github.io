@@ -7,7 +7,7 @@ import random
 from urllib.parse import quote
 from sitegen.core import BASE, COMMON, CONF, KINDS, KIND_BY_NAME, NOTES, NOTES_LABEL, OTHER, ROOT, STAGES, STAGE_BY_NAME, TENKI, TENKI_BY_NAME, by_kind, kinds_of, load_json, matches_tenki
 from sitegen.parts import emoji_img, SAVE_ICON, SHARE_ICON, TENKI_AI, WEEKDAYS, ai_link, breadcrumb, card, e, emoji, image_credit, image_info, item_media, kind_emoji, kind_sections, kind_shelves, more_link, og_image, page, search_url, sm_shelf, tenki_url
-from sitegen.notes import note_band, note_list, notes_for_tenki
+from sitegen.notes import note_band, note_emoji, note_list, note_url, notes_for_tenki
 from sitegen.voices import voice_band
 from sitegen.typeset import heading as headline
 
@@ -17,25 +17,25 @@ __all__ = ["ANALYTICS_ABOUT", "CHECK_TEXT", "KIND_ACTION", "KIND_PHRASE", "SHOWN
 # ---------------------------------------------------------------- ページ
 
 
-# トップの見出しの右側の、種類の絵文字（パソコンの幅だけ）。
-# 2026-11-15 見本の案A「観測のレーダー」：サイト名の下の目盛りと同じ色の同心円と十字の上に、同じ大きさの絵文字を白い丸に入れて置く。
-# 空色の光がゆっくり回るだけで、絵文字そのものは動かさない（もとは 2026-11-08 の案A。位置・大きさ・傾きを手で決めて散らしていた）。
-# 置き場所は（円の半径, 角度）。内側の円から順に3つずつ。種類が増えたら、ここに足す
-HERO_RADAR_POS = [(46, -100), (46, 140), (46, 20), (84, -35), (84, -150), (84, 85), (112, -80), (112, 190), (112, 10)]
+# トップの見出しの右側（パソコンの幅だけ）：観測ノートの新しい3本の目次。
+# 2026-11-15 観測ノートの入口の見本の案B。転機の絵文字・題名・転機と公開日を並べ、右上に観測ノートの一覧へのリンク。
+# もとは種類の絵文字をレーダーの形に並べた飾り（同じ日の案A。その前は 2026-11-08 の散らした絵文字）。押しても何も起きず、
+# 実用のある中身にしたいという判断で置き換えた。ノートがまだなければ何も出さない
+def hero_notes(notes):
+    public = [n for n in notes if not n.get("draft")]  # 下書きを見る作り方（--drafts）でも、ここには公開したものだけ
+    if not public:
+        return ""
+    total, notes = len(public), public[:3]
+    rows = "".join(
+        '<li style="--i:%d"><a href="%s"><span class="hero-note-e" aria-hidden="true">%s</span><span class="hero-note-t">%s</span>'
+        '<span class="hero-note-d">%s｜<time datetime="%s">%d月%d日</time></span></a></li>'
+        % (i, e(note_url(n)), emoji_img(note_emoji(n) or (TENKI_BY_NAME.get(COMMON) or {}).get("emoji", "")).replace("<img ", '<img loading="lazy" ', 1),
+           headline(n["title"]), e("どの転機にも" if n["tenki"] == [COMMON] else "・".join(n["tenki"])),
+           n["published"].isoformat(), n["published"].month, n["published"].day)
+        for i, n in enumerate(notes))
+    return ('<nav class="hero-notes" aria-label="%sの新着"><p class="hero-notes-head"><span>%s・新しい順</span>'
+            '<a href="/notes/">すべて見る<span>（%d本）</span></a></p><ol>%s</ol></nav>' % (NOTES_LABEL, NOTES_LABEL, total, rows))
 
-
-def hero_floats():
-    import math
-    cx, cy, w, h = 160, 120, 320, 240
-    spans = []
-    for i, (k, (r, a)) in enumerate(zip([k for k in KINDS if k.get("emoji")], HERO_RADAR_POS)):
-        x = (cx + r * math.cos(math.radians(a))) / w * 100
-        y = (cy + r * math.sin(math.radians(a))) / h * 100
-        spans.append('<span style="left:%.1f%%;top:%.1f%%;--i:%d">%s</span>' % (x, y, i, emoji_img(k["emoji"]).replace("<img ", '<img loading="lazy" ', 1)))
-    rings = ('<svg class="hero-rings" viewBox="0 0 320 240"><circle cx="160" cy="120" r="46"/><circle cx="160" cy="120" r="84"/>'
-             '<circle class="dash" cx="160" cy="120" r="112"/><line x1="160" y1="4" x2="160" y2="236"/><line x1="44" y1="120" x2="276" y2="120"/>'
-             '<circle class="c" cx="160" cy="120" r="3"/></svg><span class="hero-sweep"></span>')
-    return '<div class="hero-floats" aria-hidden="true">%s%s</div>' % (rings, "".join(spans))
 
 def build_home(listed, ctx):
     new_items = sorted(ctx["new_items"], key=lambda it: (it["added"], -it["rank"]), reverse=True)
@@ -102,7 +102,7 @@ def build_home(listed, ctx):
   <p class="note">タイプごとに、おすすめ順で上位のものを紹介しています。並び順の考え方は<a href="/about/#order">観測所について</a>に書いています。</p>
   {kinds}
 </section>
-""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), floats=hero_floats(), count=len(listed), tenki_links=tenki_links,
+""".format(e_tenki=emoji(CONF.get("entrance_emoji", {}).get("転機")), e_kind=emoji(CONF.get("entrance_emoji", {}).get("タイプ")), site=e(CONF["site_name"]), lead=e(CONF["lead"]), floats=hero_notes(ctx["notes"]), count=len(listed), tenki_links=tenki_links,
            kind_links=kind_links, news=news,
            news_more=("観測レポートで今週の新着をすべて見る（%d件）" % len(new_items)) if len(new_items) > 6 else "観測レポートを見る",
            kinds=kind_shelves(listed, ctx),
