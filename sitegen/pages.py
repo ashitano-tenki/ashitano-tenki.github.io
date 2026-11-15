@@ -41,7 +41,7 @@ def build_home(listed, ctx):
         for t in TENKI if t["past"] and ctx["tenki_count"][t["name"]])
     common_t = next((t for t in TENKI if t["name"] == COMMON), None)
     if common_t and ctx["tenki_count"][COMMON]:
-        tenki_links += '<li><a href="%s">全般%s</a></li>' % (tenki_url(common_t), num(ctx["tenki_count"][COMMON]))
+        tenki_links += '<li><a href="%s">%s全般%s</a></li>' % (tenki_url(common_t), emoji(common_t.get("emoji", "")), num(ctx["tenki_count"][COMMON]))
     kind_links = "".join(
         '<li><a href="%s">%s%s%s</a></li>' % (e(search_url(kind=k)), kind_emoji(k), e(k), num(len(g)))
         for k, g in by_kind(listed))
