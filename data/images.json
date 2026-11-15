@@ -11403,6 +11403,14 @@
   "w": 960,
   "h": 504
  },
+ "R1389": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784911064108",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49110/4911064102.jpg",
+  "w": 731,
+  "h": 1000
+ },
  "R1390": {
   "page": "https://books.rakuten.co.jp/rb/17644685/",
   "checked": "2026-11-08",
@@ -12659,5 +12667,53 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47849/4784949119.jpg",
   "w": 726,
   "h": 1000
+ },
+ "R1545": {
+  "page": "https://flags-mv.jp/about",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://image.osiro.it/pass/site_settings/365/ogp_images/original/ogp.png?1764917846=&format=png",
+  "w": 960,
+  "h": 504
+ },
+ "R1546": {
+  "page": "https://kagyoinnovationlabo.com/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://kagyoinnovationlabo.com/wp-content/uploads/2021/03/ogp_image-scaled.jpg",
+  "w": 960,
+  "h": 315
+ },
+ "R1547": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1615234693",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts122/v4/53/1e/0e/531e0e64-a73a-b8da-565e-4ab1eedf162c/mza_16260007978987069495.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1548": {
+  "page": "https://www.j-cda.jp/member/notification.php",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://www.j-cda.jp/wp-content/uploads/2021/03/jcdaicon.jpg",
+  "w": 960,
+  "h": 503
+ },
+ "R1549": {
+  "page": "https://www.a-co-labo.co.jp/researcher",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/cc2d11e6-2339-4838-ab5a-e549514758c4",
+  "w": 960,
+  "h": 540
+ },
+ "R1550": {
+  "page": "https://www.online-shiyakusho.jp/",
+  "checked": "2026-11-15",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/94d0be_27134960edbe4da3be147dbf0c9abae9~mv2.jpg/v1/fill/w_1200,h_630,al_c/94d0be_27134960edbe4da3be147dbf0c9abae9~mv2.jpg",
+  "w": 960,
+  "h": 504
  }
 }
