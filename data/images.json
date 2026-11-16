@@ -12855,5 +12855,78 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41819/4181959155.jpg",
   "w": 700,
   "h": 1000
+ },
+ "R1571": {
+  "page": "https://hairsalon-design.com/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "capture:https://hairsalon-design.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1572": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784756925060",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47569/4756925065.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1573": {
+  "page": "https://ikumado.net/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://ikumado.net/wp-content/uploads/2020/05/サブタイトルあり-1.jpg",
+  "w": 960,
+  "h": 398
+ },
+ "R1574": {
+  "page": "https://career.yourpatronum.jp/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://career.yourpatronum.jp/wp-content/uploads/2025/06/career-patronum-main.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1575": {
+  "page": "https://minna.designmemo.jp/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://minna.designmemo.jp/assets/images/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1576": {
+  "page": "https://books.rakuten.co.jp/rb/17531424/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/8689/9784478118689_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 868
+ },
+ "R1577": {
+  "page": "https://books.rakuten.co.jp/rb/18160066/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44910/4491057664.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1578": {
+  "page": "https://books.rakuten.co.jp/rb/18310887/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/6533/9784065406533_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 979
+ },
+ "R1579": {
+  "page": "https://gratuna.com/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://gratuna.com/ogp.png",
+  "w": 960,
+  "h": 504
  }
 }
