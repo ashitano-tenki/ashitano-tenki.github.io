@@ -12928,5 +12928,70 @@
   "src": "https://gratuna.com/ogp.png",
   "w": 960,
   "h": 504
+ },
+ "R1580": {
+  "page": "https://lp.catapult-career.jp/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://lp.catapult-career.jp/wp-content/themes/child/image/ogp_image.png",
+  "w": 960,
+  "h": 479
+ },
+ "R1582": {
+  "page": "https://heygood.jp/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/3841e395-70a5-44f1-84c1-45cf99fa8dcd",
+  "w": 960,
+  "h": 504
+ },
+ "R1583": {
+  "page": "https://beyondnextventures.com/jp/startupcareers/ilp/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://beyondnextventures.com/wp/wp-content/uploads/2023/06/ILPOGP.png",
+  "w": 960,
+  "h": 540
+ },
+ "R1584": {
+  "page": "https://books.rakuten.co.jp/rb/17659730/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45024/4502481211.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1585": {
+  "page": "https://books.rakuten.co.jp/rb/16655009/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48627/4862762948.jpg",
+  "w": 692,
+  "h": 1000
+ },
+ "R1586": {
+  "page": "https://books.rakuten.co.jp/rb/18141606/",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534061889.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R1587": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1856789463",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts211/v4/a1/5c/10/a15c101d-0e4d-a7fb-c3ff-5411921cc562/mza_1079509595902206921.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
+ },
+ "R1588": {
+  "page": "https://lp.carefle.jp/index.html",
+  "checked": "2026-11-17",
+  "status": "ok",
+  "src": "capture:https://lp.carefle.jp/index.html",
+  "capture": true,
+  "w": 960,
+  "h": 547
  }
 }
