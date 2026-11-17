@@ -12937,6 +12937,15 @@
   "w": 960,
   "h": 479
  },
+ "R1581": {
+  "page": "https://purposedock.com/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "capture:https://purposedock.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
  "R1582": {
   "page": "https://heygood.jp/",
   "checked": "2026-11-17",
@@ -12993,5 +13002,95 @@
   "capture": true,
   "w": 960,
   "h": 547
+ },
+ "R1589": {
+  "page": "https://note.com/jobmagazine/n/nbe3b6b9e8f79",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://assets.st-note.com/production/uploads/images/224732674/rectangle_large_type_2_ac1cb5808c044733bce443d9e8829f15.png?fit=bounds&quality=85&width=1280",
+  "w": 960,
+  "h": 502
+ },
+ "R1590": {
+  "page": "https://sugarinc.co.jp/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "capture:https://sugarinc.co.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1591": {
+  "page": "https://www.tis-home.com/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "http://www.tis-home.com/img/common/share.png",
+  "w": 960,
+  "h": 560
+ },
+ "R1592": {
+  "page": "https://creator.kiyosuru.co.jp/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "capture:https://creator.kiyosuru.co.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1593": {
+  "page": "https://career-session.jp/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://career-session.jp/session/assets/images/ogp_career-session-v2.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1594": {
+  "page": "https://tobiba.jp",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://tobiba.jp/assets/ogp-lp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1595": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000002.000194113.html",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/194113/2/194113-2-29cffbec1b7832df7ac97e8db7c4b3a0-2400x1260.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1596": {
+  "page": "https://prtimes.jp/main/html/rd/p/000001283.000000725.html",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/725/1283/725-1283-02e2acf9546058072ba3a1e63e881224-1122x601.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 514
+ },
+ "R1597": {
+  "page": "https://p4rl.com/komuin.alumni/psalmn_lp.html",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://p4rl.com/komuin.alumni/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1601": {
+  "page": "https://books.rakuten.co.jp/rb/17002430/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/46205/4620550000.jpg",
+  "w": 662,
+  "h": 1000
+ },
+ "R1602": {
+  "page": "https://books.rakuten.co.jp/rb/17952976/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49112/4911287004.jpg",
+  "w": 680,
+  "h": 1000
  }
 }
