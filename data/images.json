@@ -13153,5 +13153,72 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478124760.jpg",
   "w": 696,
   "h": 1000
+ },
+ "R1611": {
+  "page": "https://www.interschool.jp/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "capture:https://www.interschool.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1612": {
+  "page": "http://www.yamaneko.org/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://yamaneko.org/yamaneko_wp/wp-content/uploads/2025/04/catcolr.jpg",
+  "w": 659,
+  "h": 345
+ },
+ "R1613": {
+  "page": "https://www.jvta.net/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "capture:https://www.jvta.net/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1614": {
+  "page": "https://ab-u.co.jp/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://ab-u.co.jp/images/img_ogp.png",
+  "w": 382,
+  "h": 200
+ },
+ "R1615": {
+  "page": "https://rannohana.net/service/consultation/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://rannohana.net/wp/wp-content/uploads/2023/09/4X2A0293-scaled-e1693636310641.jpg",
+  "w": 960,
+  "h": 480
+ },
+ "R1616": {
+  "page": "https://uncap.co.jp/recruiting-candidate",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://uncap.co.jp/assets/ogp-1114.jpg",
+  "w": 960,
+  "h": 504,
+  "suspect": true
+ },
+ "R1617": {
+  "page": "https://unitas.cc/hershift",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://unitas.cc/wp-content/themes/unitas/assets/img/facebook.png",
+  "w": 960,
+  "h": 501
+ },
+ "R1618": {
+  "page": "https://www.1planet.jp/koukeishasindan",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "http://static1.squarespace.com/static/67ece8a53ba1c624c515c8e4/t/67f33fc35e428964aae8cc9e/1743994819271/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88+2025-04-07+11.15.09.png?format=1500w",
+  "w": 960,
+  "h": 484
  }
 }
