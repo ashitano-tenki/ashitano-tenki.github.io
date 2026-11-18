@@ -13129,14 +13129,23 @@
  },
  "R1607": {
   "page": "https://jsdf-support.com/career-coaching/",
-  "checked": "2026-11-18",
-  "status": "none"
+  "checked": "2026-11-19",
+  "manual": true,
+  "fsize": 96140,
+  "status": "ok",
+  "src": "file:images/manual/R1607.jpg",
+  "w": 960,
+  "h": 382
  },
  "R1608": {
   "page": "https://g3-mzn.co.jp/",
-  "checked": "2026-11-18",
-  "status": "error",
-  "note": "URLError: <urlopen error _ssl.c:1112: The handshake operation timed out>"
+  "checked": "2026-11-19",
+  "manual": true,
+  "fsize": 114612,
+  "status": "ok",
+  "src": "file:images/manual/R1608.jpg",
+  "w": 960,
+  "h": 547
  },
  "R1609": {
   "page": "https://books.rakuten.co.jp/rb/17412356/",
