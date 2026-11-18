@@ -12996,12 +12996,13 @@
  },
  "R1588": {
   "page": "https://lp.carefle.jp/index.html",
-  "checked": "2026-11-17",
+  "checked": "2026-11-18",
+  "manual": true,
+  "fsize": 69922,
   "status": "ok",
-  "src": "capture:https://lp.carefle.jp/index.html",
-  "capture": true,
+  "src": "file:images/manual/R1588.jpg",
   "w": 960,
-  "h": 547
+  "h": 424
  },
  "R1589": {
   "page": "https://note.com/jobmagazine/n/nbe3b6b9e8f79",
@@ -13091,6 +13092,66 @@
   "status": "ok",
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49112/4911287004.jpg",
   "w": 680,
+  "h": 1000
+ },
+ "R1603": {
+  "page": "https://www.amelia.ne.jp/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "capture:https://www.amelia.ne.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1604": {
+  "page": "https://translationcafe.chillout.jp/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://translationcafe.chillout.jp/wp-content/uploads/2021/06/Main.png",
+  "w": 960,
+  "h": 541
+ },
+ "R1605": {
+  "page": "https://www.creators-complex.com/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://www.creators-complex.com/images/og-complex-min.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1606": {
+  "page": "https://note.com/ihara_voice/n/n7b2a1a4abf7b",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://assets.st-note.com/production/uploads/images/284142265/rectangle_large_type_2_85901fa8ab72dad9ae8f25c049f07779.jpeg?fit=bounds&quality=85&width=1280",
+  "w": 960,
+  "h": 502
+ },
+ "R1607": {
+  "page": "https://jsdf-support.com/career-coaching/",
+  "checked": "2026-11-18",
+  "status": "none"
+ },
+ "R1608": {
+  "page": "https://g3-mzn.co.jp/",
+  "checked": "2026-11-18",
+  "status": "error",
+  "note": "URLError: <urlopen error _ssl.c:1112: The handshake operation timed out>"
+ },
+ "R1609": {
+  "page": "https://books.rakuten.co.jp/rb/17412356/",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/3993/9784479393993.jpg?downsize=600:*",
+  "w": 600,
+  "h": 868
+ },
+ "R1610": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784478124765",
+  "checked": "2026-11-18",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44781/4478124760.jpg",
+  "w": 696,
   "h": 1000
  }
 }
