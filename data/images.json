@@ -13319,5 +13319,109 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534047576.jpg",
   "w": 346,
   "h": 500
+ },
+ "R1630": {
+  "page": "https://cbt-counseling.jp/succession/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://cbt-counseling.jp/succession/wp/wp-content/themes/cbt-mental-lp/images/common/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1631": {
+  "page": "https://workhida.com/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "capture:https://workhida.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1632": {
+  "page": "https://japanuni.co.jp/workshop",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://japanuni.co.jp/cms/wp-content/uploads/2024/01/jua_ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1633": {
+  "page": "https://doda.jp/guide/ranking/111.html",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "capture:https://doda.jp/guide/ranking/111.html",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1634": {
+  "page": "https://tenshoku.mynavi.jp/knowhow/careertrend/35/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://prod-cf-static-2025.satellite.tenshoku.mynavi.jp/thumb/knowhow/careertrend/caritore_ogp35.png",
+  "w": 600,
+  "h": 315
+ },
+ "R1635": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000160.000046760.html",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/46760/160/46760-160-65c8435227fc4de01b1e6046e93255ec-1345x748.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 534
+ },
+ "R1636": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000045.000068613.html",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/68613/45/68613-45-aa2e53bf7b2991226f892c3953566022-1920x1329.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 665
+ },
+ "R1637": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000129.000022432.html",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/22432/129/22432-129-b94b13acc4f698eb58bd97a0477d618a-1000x667.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1638": {
+  "page": "https://doctorschart.co.jp/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://doctorschart.co.jp/wp-content/uploads/2021/05/dc-logo-w2400.jpg",
+  "w": 960,
+  "h": 252
+ },
+ "R1639": {
+  "page": "https://tunagarizumo.site/salon/",
+  "checked": "2026-11-20",
+  "status": "error",
+  "note": "HTTPError: HTTP Error 404: Not Found"
+ },
+ "R1640": {
+  "page": "https://books.rakuten.co.jp/rb/16940771/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45024/4502401315.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1641": {
+  "page": "https://books.rakuten.co.jp/rb/18471813/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40654/4065422612.jpg",
+  "w": 677,
+  "h": 1000
+ },
+ "R1642": {
+  "page": "https://books.rakuten.co.jp/rb/16823465/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42971/4297122995.jpg",
+  "w": 702,
+  "h": 1000
  }
 }
