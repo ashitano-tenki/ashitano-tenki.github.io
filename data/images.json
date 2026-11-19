@@ -13256,12 +13256,13 @@
  },
  "R1622": {
   "page": "https://carraria-jp.com/lp/jinzaisyokai/",
-  "checked": "2026-11-19",
+  "checked": "2026-11-20",
+  "manual": true,
+  "fsize": 92572,
   "status": "ok",
-  "src": "https://carraria-jp.com/wp-content/uploads/2026/04/%EF%BC%88%E8%83%8C%E6%99%AF%E7%84%A1%E8%89%B2%EF%BC%89%E4%BC%9A%E7%A4%BE%E3%83%AD%E3%82%B4.png",
-  "w": 356,
-  "h": 115,
-  "small": true
+  "src": "file:images/manual/R1622.jpg",
+  "w": 960,
+  "h": 469
  },
  "R1623": {
   "page": "https://tensyokudodesyo.com/",
@@ -13273,12 +13274,13 @@
  },
  "R1624": {
   "page": "https://nagano-jinji.jp/",
-  "checked": "2026-11-19",
+  "checked": "2026-11-20",
+  "manual": true,
+  "fsize": 39580,
   "status": "ok",
-  "src": "capture:https://nagano-jinji.jp/",
-  "capture": true,
+  "src": "file:images/manual/R1624.jpg",
   "w": 960,
-  "h": 547
+  "h": 543
  },
  "R1625": {
   "page": "https://books.rakuten.co.jp/rb/18714545/",
@@ -13348,11 +13350,12 @@
  "R1633": {
   "page": "https://doda.jp/guide/ranking/111.html",
   "checked": "2026-11-20",
+  "manual": true,
+  "fsize": 149411,
   "status": "ok",
-  "src": "capture:https://doda.jp/guide/ranking/111.html",
-  "capture": true,
+  "src": "file:images/manual/R1633.jpg",
   "w": 960,
-  "h": 547
+  "h": 504
  },
  "R1634": {
   "page": "https://tenshoku.mynavi.jp/knowhow/careertrend/35/",
