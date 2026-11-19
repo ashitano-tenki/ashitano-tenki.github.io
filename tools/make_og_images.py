@@ -2,7 +2,7 @@
 """共有画像（1200×630）を assets/og/ に作るスクリプト。
 転機別ページ・掛け合わせページの画像と、セルフチェックの画像（全体用1枚と、結果の段階ごとの4枚）を作る。
 
-Mac 専用（画像にするのに Mac の qlmanage を使う）。見出しの文面は config/tenki.json と check/check.js（段階のひとこと説明）から作るので、
+Mac 専用（画像にするのに Mac の qlmanage を使う。観測ノートの画像は Mac の Google Chrome で書き出す）。見出しの文面は config/tenki.json と check/check.js（段階のひとこと説明）から作るので、
 それらの名前や文面を変えたときにだけ実行し直して、できた画像をリポジトリに入れる。
 
   python3 tools/make_og_images.py
@@ -190,44 +190,101 @@ def antenna_svg():
     return re.search(r"<svg[^>]*>(.*)</svg>", src, re.S).group(1)
 
 
-def svg_note(note, fonts, antenna):
-    """観測ノートの共有画像。黄色の地に、転機の絵文字と記事タイトル。"""
-    title = note["title"]
+CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+# 観測ノートの共有画像の重ねる画像の位置（左, 上, 傾き, 幅）。2026-11-20 黒田さんが見本の案B「中身を見せる」を選んだ
+NOTE_CARDS = [(690, 70, -7, 300), (860, 150, 5, 300), (720, 300, 3, 300), (900, 340, -5, 260)]
 
-    def lines_for(width):  # 「。」のあとでは必ず改行し、右上の絵文字の円にかからない幅で折り返す
-        out = []
-        for part in [p for p in title.replace("。", "。\n").split("\n") if p]:
-            out += wrap(part, width)
-        return out
-    size, width = 56, 15
-    lines = lines_for(width)
-    if len(lines) > 3:
-        size, width = 50, 16
-        lines = lines_for(width)
-    line_h = int(size * 1.4)
-    block = line_h * (len(lines) - 1)
-    top = int(345 - block / 2 + size * 0.35)  # 見出しの塊を、上のラベルと下の署名の間の真ん中に置く
-    # 2026-11-10 unslop の見直しでサイトの見出しを太さ500にしたので、画像の題名も 500（Medium）にそろえる（もとは 900）
-    title_svg = "".join('<text x="96" y="%d" font-family="ZK" font-weight="500" font-size="%d" fill="#1a1d23">%s</text>'
-                        % (top + i * line_h, size, esc(line)) for i, line in enumerate(lines))
+
+def split_title(title):
+    """題名を「。」（または「？」）の前（大きく出す）と後ろ（小さく出す）に分ける"""
+    for mark in ("。", "？"):
+        if mark in title:
+            head, rest = title.split(mark, 1)
+            return head + ("？" if mark == "？" else ""), rest
+    return title, ""
+
+
+def data_uri(path, mime):
+    with open(path, "rb") as f:
+        return "data:%s;base64,%s" % (mime, base64.b64encode(f.read()).decode())
+
+
+def two_lines(text):
+    """題名を2行に分ける。「、」のあと、次に助詞のあと（次がひらがなのときは言葉の途中なので切らない。「たら」のあとは切る）を選び、なるべく真ん中に近いところで切る"""
+    n, best = len(text), None
+    for i in range(2, n - 1):
+        prev, nxt = text[i - 1], text[i]
+        if prev in "、・":
+            score = 0
+        elif text[i - 2:i] == "たら" or (prev in "のをにはでとがもへ" and not ("\u3041" <= nxt <= "\u309f")):
+            score = 1
+        else:
+            score = 6
+        cost = score * 10 + abs(i - n / 2)
+        if best is None or cost < best[0]:
+            best = (cost, i)
+    i = best[1] if best else n // 2
+    return [text[:i], text[i:]]
+
+
+def html_note(note):
+    """観測ノートの共有画像（案B「中身を見せる」）。黄色の地の左に題名、右に記事で紹介している本やサービスの画像を4枚まで重ねる。
+    画像がない記事は、題名を横いっぱいに使う。題名は「。」の前を1行に収まる大きさで大きく、後ろを小さく出す。"""
+    head, rest = split_title(note["title"])
+    imgs = [i for i in note.get("ids", []) if i in build.IMAGES and os.path.exists(os.path.join(ROOT, "images", "items", i + ".webp"))][:4]
+    text_w = 560 if imgs else 1040  # 右の画像（左端 690px、傾きで少し左へはみ出す）にかからない幅
+    n = max(len(head), 1)
+    if text_w // n >= 44:  # 1行に収まるなら1行で大きく
+        size, per = min(62, text_w // n), n
+    else:  # 2行に分ける（折り返しは言葉の切れ目で）
+        lines = two_lines(head)
+        per = max(len(l) for l in lines)
+        size = min(58, text_w // per)
+    head_html = "<br>".join(esc(l) for l in (wrap(head, per) if per == n else two_lines(head)))
+    rest_html = "<br>".join(esc(l) for l in (two_lines(rest) if len(rest) > text_w // 30 else [rest]))
+    cards = "".join(
+        '<div style="position:absolute;left:%dpx;top:%dpx;width:%dpx;height:%dpx;transform:rotate(%ddeg);'
+        'background:#fff url(%s) center/cover;border-radius:10px;box-shadow:0 10px 30px rgba(26,29,35,.25);border:6px solid #fff"></div>'
+        % (x, y, w, int(w * 0.62), r, data_uri(os.path.join(ROOT, "images", "items", i + ".webp"), "image/webp"))
+        for (x, y, r, w), i in zip(NOTE_CARDS, imgs))
     names = [t for t in note["tenki"] if t in build.TENKI_BY_NAME]
-    emo = build.TENKI_BY_NAME[names[0]].get("emoji", "") if names else ""
+    emo = ""
+    if names and build.TENKI_BY_NAME[names[0]].get("emoji"):
+        name = build.emoji_file(build.TENKI_BY_NAME[names[0]]["emoji"])
+        if name:
+            emo = '<img src="%s" style="width:34px;height:34px">' % data_uri(os.path.join(ROOT, "assets", "emoji", name + ".svg"), "image/svg+xml")
     label = "観測ノート" + ("｜" + "・".join(names) if names else "")
-    pill_w = 40 + int(len(label) * 30)
-    return """<svg xmlns="http://www.w3.org/2000/svg" width="750" height="393.75" viewBox="0 0 1200 630">
-<style>
-@font-face{{font-family:ZK;font-weight:500;src:url(data:font/ttf;base64,{black}) format("truetype");}}
-@font-face{{font-family:ZK;font-weight:700;src:url(data:font/ttf;base64,{bold}) format("truetype");}}
+    count = len(note.get("ids", []))
+    font = "file://" + FONTS
+    return """<!doctype html><meta charset=utf-8><style>
+@font-face{{font-family:ZK;font-weight:500;src:url({font}/ZenKakuGothicNew-Medium.ttf)}}
+@font-face{{font-family:ZK;font-weight:700;src:url({font}/ZenKakuGothicNew-Bold.ttf)}}
+@font-face{{font-family:ZK;font-weight:900;src:url({font}/ZenKakuGothicNew-Black.ttf)}}
+html,body{{margin:0;width:1200px;height:630px;overflow:hidden}}
 </style>
-<rect width="1200" height="630" fill="#f5c518"/>
-<circle cx="1070" cy="140" r="170" fill="#fbfaf5" opacity="0.55"/>
-<text x="1070" y="198" text-anchor="middle" font-family="Apple Color Emoji" font-size="150">{emo}</text>
-<rect x="96" y="96" width="{pill_w}" height="56" rx="12" fill="#1a1d23"/>
-<text x="{pill_x}" y="135" font-family="ZK" font-weight="700" font-size="30" fill="#f5c518">{label}</text>
-{title}
-<text x="96" y="560" font-family="ZK" font-weight="500" font-size="28" fill="#1a1d23">文：黒田悠介（キャリア研究家）</text>
-<text x="1104" y="560" text-anchor="end" font-family="ZK" font-weight="700" font-size="28" fill="#1a1d23">あしたの転機観測所</text>
-</svg>""".format(black=fonts[0], bold=fonts[1], emo=esc(emo), pill_w=pill_w, pill_x=116, label=esc(label), title=title_svg)
+<div style="position:relative;width:1200px;height:630px;background:#f5c518;color:#1a1d23;font-family:ZK,sans-serif;overflow:hidden">
+{cards}
+<div style="position:absolute;left:80px;top:80px;width:{text_w}px">
+ <div style="display:inline-flex;align-items:center;gap:10px;background:#1a1d23;color:#f5c518;font-weight:700;font-size:26px;padding:8px 18px;border-radius:8px">{emo}{label}</div>
+ <div style="margin-top:40px;font-weight:900;font-size:{size}px;line-height:1.28">{head}</div>
+ <div style="margin-top:20px;font-weight:500;font-size:30px;line-height:1.5">{rest}</div></div>
+<div style="position:absolute;left:80px;bottom:60px;font-size:26px;font-weight:700">{count_text}あしたの転機観測所</div>
+</div>""".format(font=font, cards=cards, text_w=text_w, emo=emo, label=esc(label), size=size, head=head_html, rest=rest_html,
+                 count_text=("本・サービス %d件　｜　" % count) if count else "")
+
+
+def render_html(pages):
+    """HTML の共有画像を Chrome（画面なし）で 1200×630 の PNG にする"""
+    os.makedirs(OUT, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, title, body in pages:
+            src = os.path.join(tmp, name + ".html")
+            with open(src, "w", encoding="utf-8") as f:
+                f.write(body)
+            subprocess.run([CHROME, "--headless=new", "--hide-scrollbars", "--allow-file-access-from-files", "--window-size=1200,630",
+                            "--virtual-time-budget=3000", "--screenshot=" + os.path.join(OUT, name + ".png"), "file://" + src],
+                           check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            print("作成:", name, "／", title)
 
 
 def render(pages):
@@ -244,16 +301,15 @@ def render(pages):
 
 
 def main_notes():
-    """観測ノートの共有画像（assets/og/note-<スラッグ>.png）を、下書きも含めて全記事ぶん作り直す。
-    題名と署名は Medium（500）、札とサイト名は Bold（700）。札の角は小さく（サイトの札と同じ考え方。2026-11-10）"""
-    fonts = (font_b64("ZenKakuGothicNew-Medium"), font_b64("ZenKakuGothicNew-Bold"))
-    antenna = antenna_svg()
+    """観測ノートの共有画像（assets/og/note-<スラッグ>.png）を、下書きも含めて全記事ぶん作り直す（案B、Chrome で書き出す）。"""
+    for name in ("ZenKakuGothicNew-Medium", "ZenKakuGothicNew-Bold", "ZenKakuGothicNew-Black"):
+        font_b64(name)  # なければ tools/fonts/ へダウンロードしておく
     pages = []
     for name in sorted(os.listdir(build.NOTES_DIR)):
         if name.endswith(".md") and not name.startswith("_"):
             n = build.parse_note_file(os.path.join(build.NOTES_DIR, name))
-            pages.append(("note-" + n["slug"], n["title"], svg_note(n, fonts, antenna)))
-    render(pages)
+            pages.append(("note-" + n["slug"], n["title"], html_note(n)))
+    render_html(pages)
 
 
 def main():
