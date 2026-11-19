@@ -14,7 +14,7 @@
 2. 「〜によく聞く迷い」：面談記録の「型」から、当てはまる迷いを箇条書きで3〜4個
 3. 掲載の紹介：見出しで分け、各見出しに説明1段落＋ :::item を1〜3件
 4. 選ぶとき・読むときに確かめたいこと（必要なときだけ）
-5. 「次の一歩」：転機のページ /tenki/<slug>/、転機×段階のページ /tenki/<slug>/<段階slug>/、セルフチェック /check/ へのリンク
+5. 「次の一歩」：転機のページ /tenki/<slug>/、転機×段階のページ /tenki/<slug>/<段階slug>/（「共通」には段階のページがないので、探すページの絞り込み /search/?tenki=共通&stage=<段階> へリンクする）、セルフチェック /check/ へのリンク
 
 段階の slug：準備 junbi、遭遇 sogu、順応 junno、安定 antei。
 転機の slug：転職 tenshoku、独立 dokuritsu、起業 kigyo、副業・複業 fukugyo、退職・休職 taishoku、定年 teinen、学び直し manabinaoshi、共通 kyotsu。
