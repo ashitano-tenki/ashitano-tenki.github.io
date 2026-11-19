@@ -13430,5 +13430,79 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/42971/4297122995.jpg",
   "w": 702,
   "h": 1000
+ },
+ "R1643": {
+  "page": "https://tottori-shimane-kyujin.com/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "capture:https://tottori-shimane-kyujin.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1644": {
+  "page": "https://job-score.jp/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://job-score.jp/files/5217/8237/6313/jobscore_top_202606.jpg",
+  "w": 960,
+  "h": 469
+ },
+ "R1645": {
+  "page": "https://satsumahayato.jp/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://satsumahayato.jp//images/satsuma/common/ogp.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1646": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000028.000170307.html",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/170307/28/170307-28-dc835c8586ae967c76eb7363d25251a5-1672x941.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1647": {
+  "page": "https://www.j-jitsugaku.org/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/06372e_b55ab0c584e44d4c8c69c34fdab5fa93~mv2.png/v1/fill/w_2500,h_1115,al_c/06372e_b55ab0c584e44d4c8c69c34fdab5fa93~mv2.png",
+  "w": 960,
+  "h": 428
+ },
+ "R1649": {
+  "page": "https://note.com/marble_school/n/nb3fe3d213d85",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://assets.st-note.com/production/uploads/images/116236767/rectangle_large_type_2_672dcc601f24147d280ecbf75949b267.png?fit=bounds&quality=85&width=1280",
+  "w": 960,
+  "h": 503
+ },
+ "R1650": {
+  "page": "https://manabi-nt.jp/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "capture:https://manabi-nt.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1651": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784772662871",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47726/4772662871.jpg",
+  "w": 690,
+  "h": 1000
+ },
+ "R1652": {
+  "page": "https://katsuyaku.jp/",
+  "checked": "2026-11-20",
+  "status": "ok",
+  "src": "https://katsuyaku.jp/images/top/kv.webp",
+  "w": 850,
+  "h": 525
  }
 }
