@@ -13397,8 +13397,12 @@
  "R1639": {
   "page": "https://tunagarizumo.site/salon/",
   "checked": "2026-11-20",
-  "status": "error",
-  "note": "HTTPError: HTTP Error 404: Not Found"
+  "manual": true,
+  "fsize": 302485,
+  "status": "ok",
+  "src": "file:images/manual/R1639.jpg",
+  "w": 960,
+  "h": 540
  },
  "R1640": {
   "page": "https://books.rakuten.co.jp/rb/16940771/",
