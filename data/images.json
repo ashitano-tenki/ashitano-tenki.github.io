@@ -13228,5 +13228,96 @@
   "src": "http://static1.squarespace.com/static/67ece8a53ba1c624c515c8e4/t/67f33fc35e428964aae8cc9e/1743994819271/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88+2025-04-07+11.15.09.png?format=1500w",
   "w": 960,
   "h": 484
+ },
+ "R1619": {
+  "page": "https://www.issnet.co.jp/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.issnet.co.jp/img/top/iss_twitter_2027_winter_short.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1620": {
+  "page": "https://www.sunflare.com/academy/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "capture:https://www.sunflare.com/academy/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1621": {
+  "page": "https://www.jobantenna.jp/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.jobantenna.jp/og-image.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1622": {
+  "page": "https://carraria-jp.com/lp/jinzaisyokai/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://carraria-jp.com/wp-content/uploads/2026/04/%EF%BC%88%E8%83%8C%E6%99%AF%E7%84%A1%E8%89%B2%EF%BC%89%E4%BC%9A%E7%A4%BE%E3%83%AD%E3%82%B4.png",
+  "w": 356,
+  "h": 115,
+  "small": true
+ },
+ "R1623": {
+  "page": "https://tensyokudodesyo.com/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.tensyokudodesyo.com/assets/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1624": {
+  "page": "https://nagano-jinji.jp/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "capture:https://nagano-jinji.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1625": {
+  "page": "https://books.rakuten.co.jp/rb/18714545/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49113/4911362626.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R1626": {
+  "page": "https://note.com/firekenkyujo2025",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://assets.st-note.com/production/uploads/images/318422874/e095fb223ccb3ad52732c548f8429e2e.png?fit=bounds&format=jpeg&height=1024&quality=85&width=1024",
+  "w": 960,
+  "h": 502
+ },
+ "R1627": {
+  "page": "https://books.rakuten.co.jp/rb/17623383/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534060572.jpg",
+  "w": 704,
+  "h": 1000
+ },
+ "R1628": {
+  "page": "https://books.rakuten.co.jp/rb/17525168/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/2412/9784502462412.jpg?downsize=600:*",
+  "w": 600,
+  "h": 851
+ },
+ "R1629": {
+  "page": "https://books.rakuten.co.jp/rb/13011882/",
+  "checked": "2026-11-19",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45340/4534047576.jpg",
+  "w": 346,
+  "h": 500
  }
 }
