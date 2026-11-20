@@ -13504,5 +13504,120 @@
   "src": "https://katsuyaku.jp/images/top/kv.webp",
   "w": 850,
   "h": 525
+ },
+ "R1653": {
+  "page": "https://ibaraki-tenshoku.com/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://ibaraki-tenshoku.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1654": {
+  "page": "https://jobchan.net/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://jobchan.net/archives/og.png",
+  "w": 640,
+  "h": 360
+ },
+ "R1655": {
+  "page": "https://shigoto-madoguchi.com/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://shigoto-madoguchi.com/assets/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1656": {
+  "page": "https://japanwonderguide.com/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://japanwonderguide.com/wp-content/uploads/2019/12/ロゴ_フッター.png",
+  "w": 960,
+  "h": 599
+ },
+ "R1657": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000025.000035559.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/35559/25/35559-25-74582dc21d733e1303de9eed3d0f9d6d-2919x1532.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 504
+ },
+ "R1658": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000046.000005100.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/5100/46/5100-46-58453506f985ef0d8acac4f19e3774d6-1999x1125.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 540
+ },
+ "R1659": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000003.000187081.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/187081/3/187081-3-627fa65d491affd899dd2fb385b87d03-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1660": {
+  "page": "https://indonesiascout.jp/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://indonesiascout.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1661": {
+  "page": "https://wakkaeizouhonyaku.wixsite.com/wakkaweb",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://static.wixstatic.com/media/f80a79_0c76a7749e564405a90a726cee5a16e3~mv2.png/v1/fill/w_2500,h_2430,al_c/f80a79_0c76a7749e564405a90a726cee5a16e3~mv2.png",
+  "w": 960,
+  "h": 503
+ },
+ "R1662": {
+  "page": "https://successful-aging-support.com/phn_community_yui/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://successful-aging-support.com/phn_community_yui/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1663": {
+  "page": "https://books.rakuten.co.jp/rb/18731482/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45025/4502589314.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1664": {
+  "page": "https://books.rakuten.co.jp/rb/16243303/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/45023/450233491X.jpg",
+  "w": 705,
+  "h": 1000
+ },
+ "R1665": {
+  "page": "https://books.rakuten.co.jp/rb/18600018/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48635/4863545134.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1666": {
+  "page": "https://prtimes.jp/main/html/rd/p/000001311.000000725.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/725/1311/725-1311-33bea92050f710da5cbd9e600215f787-1398x752.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 516
  }
 }
