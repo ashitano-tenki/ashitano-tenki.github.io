@@ -13827,12 +13827,22 @@
  "R1692": {
   "page": "https://www.amazon.co.jp/dp/B0HQBVNMSW",
   "checked": "2026-11-22",
-  "status": "none"
+  "manual": true,
+  "fsize": 28444,
+  "status": "ok",
+  "src": "file:images/manual/R1692.jpg",
+  "w": 340,
+  "h": 500
  },
  "R1693": {
   "page": "https://www.amazon.co.jp/dp/B0GNWSSHN3",
   "checked": "2026-11-22",
-  "status": "none"
+  "manual": true,
+  "fsize": 44357,
+  "status": "ok",
+  "src": "file:images/manual/R1693.jpg",
+  "w": 312,
+  "h": 500
  },
  "R1694": {
   "page": "https://iratsu.com/",
