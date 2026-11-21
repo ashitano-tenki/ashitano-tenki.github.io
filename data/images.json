@@ -13663,6 +13663,14 @@
   "w": 960,
   "h": 547
  },
+ "R1672": {
+  "page": "https://kyoto-com.net/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://kyoto-com.net/wp2021/wp-content/themes/kyotocom/images/common/ogp_image.jpg",
+  "w": 960,
+  "h": 504
+ },
  "R1673": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784495532628",
   "checked": "2026-11-21",
@@ -13710,5 +13718,128 @@
   "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/58/45/ef/5845ef85-1bc6-bc26-27f8-9eb8ba1173d2/mza_12243384853175180519.jpg/1200x1200bf-60.jpg",
   "w": 960,
   "h": 960
+ },
+ "R1679": {
+  "page": "https://en-hyouban.com/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://en-hyouban.com/ogp_en_hyoban.png",
+  "w": 892,
+  "h": 467
+ },
+ "R1680": {
+  "page": "https://grow.google/intl/ja_jp/certificates/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "capture:https://grow.google/intl/ja_jp/certificates/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1681": {
+  "page": "https://tsumetogi.com",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://tsumetogi.com/og-image.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1682": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784862763945",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48627/4862763944.jpg",
+  "w": 670,
+  "h": 1000
+ },
+ "R1683": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000040.000101675.html",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/101675/40/101675-40-58b8577884466d7d4ea127029e82e306-1200x628.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 502
+ },
+ "R1684": {
+  "page": "https://www.c-sagaseru.com/kikuyosakai",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.c-sagaseru.com/user_img/401/1720360247.jpg",
+  "w": 613,
+  "h": 321
+ },
+ "R1685": {
+  "page": "https://www.reservestock.jp/page/index/47293",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.reservestock.jp/pictures/47293_iconimage.png",
+  "w": 401,
+  "h": 210
+ },
+ "R1686": {
+  "page": "https://books.rakuten.co.jp/rb/17615789/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48334/483342519X.jpg",
+  "w": 686,
+  "h": 1000
+ },
+ "R1687": {
+  "page": "https://kominka.sennominato.com/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://kominka.sennominato.com/_assets/images/971c157bb96b71b293bf65c76068aa27.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1688": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784885106408",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48851/4885106400.jpg",
+  "w": 706,
+  "h": 1000
+ },
+ "R1689": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-08-EK-0539539",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44780/4478065721.jpg",
+  "w": 702,
+  "h": 1000
+ },
+ "R1690": {
+  "page": "https://books.rakuten.co.jp/rb/15939801/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44955/4495540424.jpg",
+  "w": 676,
+  "h": 1000
+ },
+ "R1691": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784765021364",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47650/476502136X.jpg",
+  "w": 700,
+  "h": 1000
+ },
+ "R1692": {
+  "page": "https://www.amazon.co.jp/dp/B0HQBVNMSW",
+  "checked": "2026-11-22",
+  "status": "none"
+ },
+ "R1693": {
+  "page": "https://www.amazon.co.jp/dp/B0GNWSSHN3",
+  "checked": "2026-11-22",
+  "status": "none"
+ },
+ "R1694": {
+  "page": "https://iratsu.com/",
+  "checked": "2026-11-22",
+  "status": "ok",
+  "src": "https://iratsu.com/wp-content/uploads/kanri/iratsu-ogp.png",
+  "w": 960,
+  "h": 480
  }
 }
