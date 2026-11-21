@@ -13619,5 +13619,96 @@
   "src": "https://prcdn.freetls.fastly.net/release_image/725/1311/725-1311-33bea92050f710da5cbd9e600215f787-1398x752.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
   "w": 960,
   "h": 516
+ },
+ "R1667": {
+  "page": "https://www.jacca.jp/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://www.jacca.jp/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1668": {
+  "page": "https://archcareer.org/personal/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://archcareer.org/personal/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1669": {
+  "page": "https://www.voicemarche.jp/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://www.voicemarche.jp/assets/logo-92275218696c59f02e46fbf440afffbf785f285fa3994f78e076c53d8617547c.jpg",
+  "w": 960,
+  "h": 503
+ },
+ "R1670": {
+  "page": "https://career.josanshi.jp/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://career.josanshi.jp/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1671": {
+  "page": "https://kumanokoboy.com/online/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "capture:https://kumanokoboy.com/online/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1673": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784495532628",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/44955/4495532626.jpg",
+  "w": 682,
+  "h": 1000
+ },
+ "R1674": {
+  "page": "https://books.rakuten.co.jp/rb/17801606/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/9735/9784419069735_1_6.jpg?downsize=600:*",
+  "w": 600,
+  "h": 851
+ },
+ "R1675": {
+  "page": "https://prtimes.jp/main/html/rd/p/000002346.000016751.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/16751/2346/16751-2346-8211e0ffca3dc3222e60d763449a3bff-621x439.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 621,
+  "h": 439
+ },
+ "R1676": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000033.000069234.html",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/69234/33/69234-33-eb133b9a0fc580798da4f7cbd9b2d69d-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1677": {
+  "page": "https://books.rakuten.co.jp/rb/18457615/",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/1255/9784868011255_1_2.jpg?downsize=600:*",
+  "w": 600,
+  "h": 943
+ },
+ "R1678": {
+  "page": "https://podcasts.apple.com/jp/podcast/id1513847583",
+  "checked": "2026-11-21",
+  "status": "ok",
+  "src": "https://is1-ssl.mzstatic.com/image/thumb/Podcasts115/v4/58/45/ef/5845ef85-1bc6-bc26-27f8-9eb8ba1173d2/mza_12243384853175180519.jpg/1200x1200bf-60.jpg",
+  "w": 960,
+  "h": 960
  }
 }
