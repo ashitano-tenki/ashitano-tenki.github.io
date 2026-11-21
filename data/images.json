@@ -13656,12 +13656,13 @@
  },
  "R1671": {
   "page": "https://kumanokoboy.com/online/",
-  "checked": "2026-11-21",
+  "checked": "2026-11-22",
+  "manual": true,
+  "fsize": 42764,
   "status": "ok",
-  "src": "capture:https://kumanokoboy.com/online/",
-  "capture": true,
+  "src": "file:images/manual/R1671.jpg",
   "w": 960,
-  "h": 547
+  "h": 480
  },
  "R1672": {
   "page": "https://kyoto-com.net/",
