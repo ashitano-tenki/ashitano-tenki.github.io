@@ -290,11 +290,12 @@
  "R0040": {
   "page": "https://www.shigoto-ryokou.com/",
   "checked": "2026-11-23",
+  "manual": true,
+  "fsize": 134224,
   "status": "ok",
-  "src": "capture:https://www.shigoto-ryokou.com/",
-  "capture": true,
+  "src": "file:images/manual/R0040.jpg",
   "w": 960,
-  "h": 547
+  "h": 466
  },
  "R0041": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121024312",
@@ -2834,8 +2835,8 @@
   "h": 1000
  },
  "R0330": {
-  "page": "https://www.visasq.co.jp/",
-  "checked": "2026-10-25",
+  "page": "https://visasq.co.jp/",
+  "checked": "2026-11-23",
   "manual": true,
   "fsize": 16816,
   "status": "ok",
@@ -3224,8 +3225,8 @@
   "h": 497
  },
  "R0379": {
-  "page": "https://sketter.jp/",
-  "checked": "2026-10-26",
+  "page": "https://www.sketter.jp/",
+  "checked": "2026-11-23",
   "manual": true,
   "fsize": 117419,
   "status": "ok",
@@ -3882,8 +3883,8 @@
   "h": 504
  },
  "R0459": {
-  "page": "https://keieishaterrace.jp",
-  "checked": "2026-10-28",
+  "page": "https://www.keieishaterrace.com/",
+  "checked": "2026-11-23",
   "manual": true,
   "fsize": 149399,
   "status": "ok",
@@ -13892,6 +13893,14 @@
   "w": 960,
   "h": 504
  },
+ "R1700": {
+  "page": "https://tsumugi-yarigaiba.studio.site/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://storage.googleapis.com/production-os-assets/assets/7c8dd1b4-8627-4f54-9a6b-f79237ef038e",
+  "w": 960,
+  "h": 537
+ },
  "R1701": {
   "page": "https://books.rakuten.co.jp/rb/18539670/",
   "checked": "2026-11-23",
@@ -13939,5 +13948,13 @@
   "src": "https://prcdn.freetls.fastly.net/release_image/16751/2267/16751-2267-5e05bc7c78a5b813d6a4a62962743f01-1166x245.jpg?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
   "w": 960,
   "h": 202
+ },
+ "R1708": {
+  "page": "https://lifull-fam.com/partner/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://lifull-fam.com/wp-content/uploads/2025/10/ogp-partner.png",
+  "w": 960,
+  "h": 504
  }
 }
