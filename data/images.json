@@ -4387,12 +4387,12 @@
   "h": 504
  },
  "R0519": {
-  "page": "https://tabippo.net/poolo/",
-  "checked": "2026-10-30",
+  "page": "https://poolo.jp/",
+  "checked": "2026-11-23",
   "status": "ok",
-  "src": "https://tabippo.net/wp-content/uploads/20250108132827/ogp_a.jpg",
+  "src": "https://poolo.jp/assets/hero.webp",
   "w": 960,
-  "h": 504
+  "h": 488
  },
  "R0520": {
   "page": "https://www.yell4u.jp/supporter",
@@ -4775,8 +4775,8 @@
   "h": 504
  },
  "R0564": {
-  "page": "https://web-camp.io/",
-  "checked": "2026-11-01",
+  "page": "https://teracam.jp/",
+  "checked": "2026-11-23",
   "manual": true,
   "fsize": 30579,
   "status": "ok",
@@ -11715,12 +11715,12 @@
   "h": 285
  },
  "R1428": {
-  "page": "https://emo.evem-management.com/",
-  "checked": "2026-11-08",
+  "page": "https://evem.co.jp/emo/",
+  "checked": "2026-11-23",
   "status": "ok",
-  "src": "https://storage.googleapis.com/production-os-assets/assets/d9e5af09-1c62-4ea9-bbb5-1ec66321a60d",
+  "src": "https://evem.co.jp/emo/assets/emo-ogp-human-ai-v4.png",
   "w": 960,
-  "h": 504
+  "h": 503
  },
  "R1429": {
   "page": "https://product-manager-kansai.connpass.com/",
@@ -13956,5 +13956,46 @@
   "src": "https://lifull-fam.com/wp-content/uploads/2025/10/ogp-partner.png",
   "w": 960,
   "h": 504
+ },
+ "R1709": {
+  "page": "https://restory-career.com/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "capture:https://restory-career.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1710": {
+  "page": "https://techplay.jp/community/tp_girls",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://techplay.jp/webv2/assets/bca2d95/image/thumbnail.png",
+  "w": 960,
+  "h": 503
+ },
+ "R1711": {
+  "page": "https://www.kanjifumi.jp/shinoken-registered-jlt-course/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://www.kanjifumi.jp/wp/wp-content/uploads/2026/10/f0c9013ce4f2b644f9fd02a234dc9ced.jpg",
+  "w": 960,
+  "h": 503
+ },
+ "R1712": {
+  "page": "https://yururework.net/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://yururework.net/wp-content/uploads/2025/04/yuru-rework.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1713": {
+  "page": "https://8eight8.jp/1step/",
+  "checked": "2026-11-23",
+  "status": "ok",
+  "src": "https://8eight8.jp/wp-content/uploads/2021/09/1-2.png",
+  "w": 960,
+  "h": 462
  }
 }
