@@ -53,6 +53,7 @@ https://ashitano-tenki.github.io/
 - 転機ごとのよくある迷いと、役立つ掲載を紹介する記事のページ（/notes/）です。記事は `notes/*.md`（名前が「_」で始まるファイルは公開しない）。書き方の決めごとは `notes/_guide.md`、テーマの一覧は `notes/_themes.md` です。
 - 定期作業（tenki-kansoku-notes-draft）が 2026-11-15 から毎週日曜と木曜に1本ずつ書き、確認なしで公開します（2026-11-05 黒田さんの判断。2026-11-07 のふりかえりでも、このままと決まりました）。
 - 記事のシェア画像は `python3 tools/make_og_images.py --notes` で `assets/og/note-<スラッグ>.png` に作ります。
+- サイト全体の共有画像 `assets/ogp.png` は `python3 tools/make_site_og.py` で作り、リポジトリに入れます。載っているサービスの名前のカード（頭に種類の絵）を敷き詰め、まん中の白い箱に📡・サイト名・副題を置く形です（2026-11-23 に黒田さんが3案から案Aを選んだ。見本 https://claude.ai/artifact/FQqXgLxrqeVRxdFUt8N9np 。コミュニティ図鑑の共有画像と同じ形。件数は入れない。書体は Noto Sans CJK で初回に `tools/fonts/` へ取ってくる。絵は `tools/emoji/`。戻し先のタグ tenki-before-site-ogp-2026-11-23）。ページの og:image には `sitegen/parts.py` の `SITE_OG` が画像の中身から `?v=` の版の印を付けます。`--note-cover 出力先.png` で同じ形の note の見出し画像（1280×670）を作れます。
 - サイトを作るたびに `/notes/index.json`（転機AIが読む）も書き出します。紹介ページには、その掲載が出てくるノートへの帯が出ます。
 
 ## 転機AIとのつなぎ目

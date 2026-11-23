@@ -147,11 +147,16 @@ def breadcrumb(parts):
     return '<nav class="crumbs" aria-label="現在地">%s</nav>' % ' <span aria-hidden="true">›</span> '.join(links)
 
 
+# サイト全体の共有画像（tools/make_site_og.py で作る）。中身から版の印を付け、SNSが古い画像を覚えたままにならないようにする（2026-11-23）
+with open(os.path.join(ROOT, "assets", "ogp.png"), "rb") as _f:
+    SITE_OG = "/assets/ogp.png?v=" + hashlib.md5(_f.read()).hexdigest()[:8]
+
+
 def og_image(name):
     """assets/og/ に専用の共有画像があればそれを、なければサイト共通の画像を使う。"""
     if name and os.path.exists(os.path.join(ROOT, "assets", "og", name + ".png")):
         return "/assets/og/%s.png" % name
-    return "/assets/ogp.png"
+    return SITE_OG
 
 
 def jsonld_tag(data):
@@ -268,7 +273,7 @@ def page(path, title, description, body, *, full_title=None, noindex=False, ctx,
 </html>
 """.format(doc_title=e(doc_title), desc=e(description), robots=robots, url=e(url),
            og_type="website" if path == "/" else "article", site=e(site),
-           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or "/assets/ogp.png"), ld=ld, ver=ctx["version"], body=body,
+           og_title=e(full_title or title), base=e(BASE), header=site_header(next((h for h in [h for h, _ in NAV] + ["/saved/"] if path.startswith(h)), None)), footer=site_footer(ctx), head_script=HEAD_SCRIPT, image=e(image or SITE_OG), ld=ld, ver=ctx["version"], body=body,
            contact=e(CONF["contact_form_url"]),
            updated=fmt_date(ctx["today"]), extra_head=extra_head)
     write(path, html_text)
