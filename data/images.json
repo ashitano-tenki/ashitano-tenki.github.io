@@ -2694,8 +2694,13 @@
  },
  "R0313": {
   "page": "https://www.amazon.co.jp/dp/4864902380",
-  "checked": "2026-11-24",
-  "status": "none"
+  "checked": "2026-11-25",
+  "manual": true,
+  "fsize": 44105,
+  "status": "ok",
+  "src": "file:images/manual/R0313.jpg",
+  "w": 682,
+  "h": 1000
  },
  "R0314": {
   "page": "https://jikorikai.com/details/",
