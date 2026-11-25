@@ -3304,8 +3304,13 @@
  },
  "R0388": {
   "page": "https://www.amazon.co.jp/dp/4805113685",
-  "checked": "2026-11-25",
-  "status": "none"
+  "checked": "2026-11-26",
+  "manual": true,
+  "fsize": 40833,
+  "status": "ok",
+  "src": "file:images/manual/R0388.jpg",
+  "w": 690,
+  "h": 1000
  },
  "R0389": {
   "page": "https://sokudan.work/",
@@ -3483,7 +3488,7 @@
  },
  "R0412": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784167904951",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41679/4167904950.jpg",
   "w": 693,
@@ -3501,23 +3506,23 @@
  },
  "R0414": {
   "page": "https://finance.techbiz.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://finance.techbiz.com/src/img/ogp_image.jpg",
-  "w": 489,
-  "h": 256
+  "w": 908,
+  "h": 475
  },
  "R0415": {
   "page": "https://hr.techbiz.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://hr.techbiz.com/src/img/ogp_image.jpg",
-  "w": 524,
-  "h": 274
+  "w": 960,
+  "h": 503
  },
  "R0416": {
   "page": "https://freelance.levtech.jp/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "manual": true,
   "fsize": 23017,
   "status": "ok",
@@ -3527,7 +3532,7 @@
  },
  "R0417": {
   "page": "https://mid-works.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://mid-works.com/asset/img/common/ogp.png",
   "w": 960,
@@ -3535,7 +3540,7 @@
  },
  "R0418": {
   "page": "https://flxy.jp/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "manual": true,
   "fsize": 76689,
   "status": "ok",
@@ -3545,7 +3550,7 @@
  },
  "R0419": {
   "page": "https://www.geechs-job.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://geechs-job.com/images/common/posse_ogp.png",
   "w": 960,
@@ -3553,7 +3558,7 @@
  },
  "R0420": {
   "page": "https://freelance.techcareer.jp",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://cdn-freelance.techcareer.jp/assets/ogp/banner-48fae4c87bb796fe9e65af6ee65f5f7a2462b674e798954c583737760d19faec.png",
   "w": 960,
@@ -3561,7 +3566,7 @@
  },
  "R0421": {
   "page": "https://tech.coconala.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://tech.coconala.com/images/open-graph-20260820.png",
   "w": 960,
@@ -3569,7 +3574,7 @@
  },
  "R0422": {
   "page": "https://freelance.findy-code.io/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://freelance.findy-code.io/images/ogimage.png",
   "w": 960,
@@ -3577,7 +3582,7 @@
  },
  "R0423": {
   "page": "https://www.bigdata-navi.com",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "manual": true,
   "fsize": 14184,
   "status": "ok",
@@ -3587,7 +3592,7 @@
  },
  "R0424": {
   "page": "https://pe-bank.co.jp/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://pe-bank.co.jp/wp-content/uploads/2022/03/ogp-1.png",
   "w": 960,
@@ -3595,7 +3600,7 @@
  },
  "R0425": {
   "page": "https://tech.hipro-job.jp",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://tech.hipro-job.jp/sites/default/files/2023-08/hpt_ogp_kojin.webp",
   "w": 960,
@@ -3603,7 +3608,7 @@
  },
  "R0426": {
   "page": "https://tech-stock.com/",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://tech-stock.com/wp-content/uploads/2024/12/TSogp.png",
   "w": 960,
@@ -3611,23 +3616,23 @@
  },
  "R0427": {
   "page": "https://www.engineer-factory.com/freelance",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://www.engineer-factory.com/img/freelance/common/ogp_ef-f.webp",
-  "w": 597,
-  "h": 313
+  "w": 743,
+  "h": 389
  },
  "R0428": {
   "page": "https://freelance.potepan.com",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
-  "src": "https://freelance.potepan.com/assets/common/potepan-freelance-ogp.png",
+  "src": "https://freelance.potepan.com/assets/common/ogp-3d14396406f6c05ff61694159e979ceb46fe5d75a73881f457690fc0149e91fd.jpg",
   "w": 960,
   "h": 504
  },
  "R0429": {
   "page": "https://creator.levtech.jp",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://lt-prd-ownd-images.s3.ap-northeast-1.amazonaws.com/common/ltcr/ogp_ltcr.png",
   "w": 960,
@@ -3645,7 +3650,7 @@
  },
  "R0431": {
   "page": "https://engineer-style.jp",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://engineer-style.jp/img/common/enstyle_OGP.png",
   "w": 960,
@@ -3653,7 +3658,7 @@
  },
  "R0432": {
   "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784799114209",
-  "checked": "2026-10-27",
+  "checked": "2026-11-26",
   "status": "ok",
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/47991/4799114204.jpg",
   "w": 692,
@@ -14127,17 +14132,23 @@
  },
  "R1729": {
   "page": "https://kousei-labo.com/",
-  "checked": "2026-11-25",
-  "status": "generic",
-  "src": "https://app.notion.com/images/meta/default.png",
-  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
+  "checked": "2026-11-26",
+  "manual": true,
+  "fsize": 71984,
+  "status": "ok",
+  "src": "file:images/manual/R1729.jpg",
+  "w": 960,
+  "h": 400
  },
  "R1730": {
   "page": "https://uneven-taxicab-bee.notion.site/eat-community-fb0ebf6c0b974813815597b44037ff5d",
-  "checked": "2026-11-25",
-  "status": "generic",
-  "src": "https://app.notion.com/images/meta/default.png",
-  "note": "ほかの掲載と同じ画像（サイト共通の画像）"
+  "checked": "2026-11-26",
+  "manual": true,
+  "fsize": 15400,
+  "status": "ok",
+  "src": "file:images/manual/R1730.jpg",
+  "w": 960,
+  "h": 320
  },
  "R1731": {
   "page": "https://dietician-labo.hp.peraichi.com/",
@@ -14243,5 +14254,79 @@
   "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/40460/4046061057.jpg",
   "w": 681,
   "h": 1000
+ },
+ "R1744": {
+  "page": "https://ishiki-emo.com/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://ishiki-emo.com/assets/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1745": {
+  "page": "https://career.moss-psy.com/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "capture:https://career.moss-psy.com/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1746": {
+  "page": "https://career.niigata-job.ne.jp/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://career.niigata-job.ne.jp/img/ogp.png",
+  "w": 960,
+  "h": 504
+ },
+ "R1747": {
+  "page": "https://okan.co.jp/news/261113/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "capture:https://okan.co.jp/news/261113/",
+  "capture": true,
+  "w": 960,
+  "h": 547
+ },
+ "R1748": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784910286532",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/49102/4910286535.jpg",
+  "w": 681,
+  "h": 1000
+ },
+ "R1749": {
+  "page": "https://books.rakuten.co.jp/rb/13152746/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/48443/4844373986.jpg",
+  "w": 688,
+  "h": 1000
+ },
+ "R1750": {
+  "page": "https://books.rakuten.co.jp/rb/18322067/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/1376/9784295411376_1_3.jpg?downsize=600:*",
+  "w": 500,
+  "h": 723
+ },
+ "R1751": {
+  "page": "https://books.rakuten.co.jp/rb/17289724/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/9635/9784534059635_1_4.jpg?downsize=600:*",
+  "w": 600,
+  "h": 867
+ },
+ "R1752": {
+  "page": "https://books.rakuten.co.jp/rb/12086740/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://tshop.r10s.jp/book/cabinet/0236/9784534050236.jpg?downsize=600:*",
+  "w": 430,
+  "h": 640
  }
 }
