@@ -14328,5 +14328,53 @@
   "src": "https://tshop.r10s.jp/book/cabinet/0236/9784534050236.jpg?downsize=600:*",
   "w": 430,
   "h": 640
+ },
+ "R1753": {
+  "page": "https://ip-guild.com/business/40s-self-discovery/",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://ip-guild.com/wp-guild/wp-content/uploads/2025/01/OGP-1.jpg",
+  "w": 960,
+  "h": 504
+ },
+ "R1754": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000057.000061567.html",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/61567/57/61567-57-de6d6aeb430eedad1890dceb6aac6af1-1920x1280.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 960,
+  "h": 640
+ },
+ "R1755": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000022.000149282.html",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/149282/22/149282-22-8be3e77142972b3827018d601a8e8551-830x431.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 830,
+  "h": 431
+ },
+ "R1756": {
+  "page": "https://prtimes.jp/main/html/rd/p/000000459.000072123.html",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://prcdn.freetls.fastly.net/release_image/72123/459/72123-459-8ca93538df8e017dfe64cd54dc74b766-922x490.png?format=jpeg&auto=webp&fit=bounds&width=2400&height=1260",
+  "w": 922,
+  "h": 490
+ },
+ "R1757": {
+  "page": "https://doomo.jp/event/freelance",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://doomo.jp/wp-content/uploads/2022/02/freelance-meetup-ec.jpg",
+  "w": 960,
+  "h": 640
+ },
+ "R1758": {
+  "page": "https://www.kinokuniya.co.jp/f/dsg-01-9784121508294",
+  "checked": "2026-11-26",
+  "status": "ok",
+  "src": "https://www.kinokuniya.co.jp/images/goods/ar2/web/imgdata2/large/41215/4121508297.jpg",
+  "w": 630,
+  "h": 1000
  }
 }
